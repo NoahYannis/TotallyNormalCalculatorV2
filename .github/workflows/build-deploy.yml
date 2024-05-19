@@ -8,7 +8,7 @@ on:
 
 env:
   PROJECT_PATH: TotallyNormalCalculator/TotallyNormalCalculator.csproj
-  PROJECT_PATH_TESTS: TotallyNormalCalculator.Tests/TotallyNormalCalculator.Tests.csproj
+  PROJECT_PATH_TESTS: TotallyNormalCalculator.UnitTests/TotallyNormalCalculator.UnitTests.csproj
 
 jobs:
   build:
