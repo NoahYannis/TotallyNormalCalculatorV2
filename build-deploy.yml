@@ -1,0 +1,29 @@
+name: build-deploy
+
+on:
+  push:
+    branches: [ "master" ]
+
+  workflow_dispatch:
+
+env:
+  PROJECT_PATH: TotallyNormalCalculator/TotallyNormalCalculator.csproj
+
+jobs:
+  deploy:
+    name: Deploy to Windows
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '8.0.x'
+      - name: Restore NuGet packages
+        run: dotnet restore ${{ env.PROJECT_PATH }}
+      - name: Build project
+        run: dotnet build ${{ env.PROJECT_PATH }} -c Release --no-restore
+      - name: Publish project
+        run: dotnet publish ${{ env.PROJECT_PATH }} -c Release --self-contained -r win-x64 -p:PublishSingleFile=true --no-build

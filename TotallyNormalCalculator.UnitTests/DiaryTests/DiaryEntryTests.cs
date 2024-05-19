@@ -1,13 +1,7 @@
-﻿using Autofac.Extras.Moq;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using TotallyNormalCalculator.MVVM.Model;
-using TotallyNormalCalculator.MVVM.ViewModels;
 using Xunit;
 
 namespace TotallyNormalCalculator.UnitTests.DiaryTests
@@ -27,7 +21,7 @@ namespace TotallyNormalCalculator.UnitTests.DiaryTests
             Assert.True(Entries[0].Title is "Day 1");
         }
 
-
+        [Fact]
         public void InsertDiaryEntry(string title, string message, string date)
         {
             try
@@ -52,9 +46,9 @@ namespace TotallyNormalCalculator.UnitTests.DiaryTests
 
             for (int i = 0; i < Entries.Count; i++)
             {
-                Assert.Equal(Entries[0].Title, "One");
-                Assert.Equal(Entries[1].Title, "Two");
-                Assert.Equal(Entries[2].Title, "Three");
+                Assert.Equal("One", Entries[0].Title);
+                Assert.Equal("Two", Entries[1].Title);
+                Assert.Equal("Three", Entries[2].Title);
             }
         }
 
