@@ -4,62 +4,61 @@ using System.Windows;
 using TotallyNormalCalculator.MVVM.Model;
 using Xunit;
 
-namespace TotallyNormalCalculator.UnitTests.DiaryTests
+namespace TotallyNormalCalculator.UnitTests.DiaryTests;
+
+public class DiaryEntryTests
 {
-    public class DiaryEntryTests
+    ObservableCollection<DiaryEntryModel> Entries;
+
+    [Theory]
+    [InlineData("Day 1", "My message", "7.4.22")]
+    public void EntryShouldBeAddedCorrectly(string title, string message, string date)
     {
-        ObservableCollection<DiaryEntryModel> Entries;
+        Entries = new();
+        InsertDiaryEntry(title, message, date);
 
-        [Theory]
-        [InlineData("Day 1", "My message", "7.4.22")]
-        public void EntryShouldBeAddedCorrectly(string title, string message, string date)
+        Assert.True(Entries.Count is not 0);
+        Assert.True(Entries[0].Title is "Day 1");
+    }
+
+
+    public void InsertDiaryEntry(string title, string message, string date)
+    {
+        try
         {
-            Entries = new();
-            InsertDiaryEntry(title, message, date);
-
-            Assert.True(Entries.Count is not 0);
-            Assert.True(Entries[0].Title is "Day 1");
+            Entries.Add(new DiaryEntryModel { Title = title, Message = message, Date = date });
+            //connection.Execute("dbo.spInsertDiaryEntry @Title, @Message, @Date", new { Title = title, Message = message, Date = date });
         }
-
-
-        public void InsertDiaryEntry(string title, string message, string date)
+        catch (Exception exc)
         {
-            try
-            {
-                Entries.Add(new DiaryEntryModel { Title = title, Message = message, Date = date });
-                //connection.Execute("dbo.spInsertDiaryEntry @Title, @Message, @Date", new { Title = title, Message = message, Date = date });
-            }
-            catch (Exception exc)
-            {
-                MessageBox.Show($"There was an error: {exc.Message}");
-            }
+            MessageBox.Show($"There was an error: {exc.Message}");
         }
+    }
 
-        [Fact]
-        public void EntryShouldGetReadCorrectly()
+    [Fact]
+    public void EntryShouldGetReadCorrectly()
+    {
+        Entries = new();
+
+        Entries.Add(new DiaryEntryModel { Title = "One" });
+        Entries.Add(new DiaryEntryModel { Title = "Two" });
+        Entries.Add(new DiaryEntryModel { Title = "Three" });
+
+        for (int i = 0; i < Entries.Count; i++)
         {
-            Entries = new();
-
-            Entries.Add(new DiaryEntryModel { Title = "One" });
-            Entries.Add(new DiaryEntryModel { Title = "Two" });
-            Entries.Add(new DiaryEntryModel { Title = "Three" });
-
-            for (int i = 0; i < Entries.Count; i++)
-            {
-                Assert.Equal(Entries[0].Title, "One");
-                Assert.Equal(Entries[1].Title, "Two");
-                Assert.Equal(Entries[2].Title, "Three");
-            }
+            Assert.Equal(Entries[0].Title, "One");
+            Assert.Equal(Entries[1].Title, "Two");
+            Assert.Equal(Entries[2].Title, "Three");
         }
+    }
 
-        [Fact]
-        public void EntryShouldGetDeleted()
-        {
-            Entries = new();
-            Entries.Add(new DiaryEntryModel { Title = "Hi", Message = "Ho", Date = "Hu" });
-            Entries.RemoveAt(0);
+    [Fact]
+    public void EntryShouldGetDeleted()
+    {
+        Entries = new();
+        Entries.Add(new DiaryEntryModel { Title = "Hi", Message = "Ho", Date = "Hu" });
+        Entries.RemoveAt(0);
 
-            Assert.True(Entries.Count is 0);
-        }
+        Assert.True(Entries.Count is 0);
     }
 }

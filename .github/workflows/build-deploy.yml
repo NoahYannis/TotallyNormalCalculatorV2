@@ -13,8 +13,11 @@ env:
 
 jobs:
   build:
-    permissions: write-all
-    runs-on: windows-latest
+    runs-on: windows-latest  
+    permissions:
+      contents: write
+      pull-requests: write
+      repository-projects: write
 
     steps:
       - uses: actions/checkout@v4
