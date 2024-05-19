@@ -22,7 +22,9 @@ jobs:
           dotnet-version: '8.x'
           include-prerelease: true
 
-  
+      - name: Restore dependencies
+        run: dotnet restore ${{env.PROJECT_PATH}}
+
       - name: Build with dotnet
         run: dotnet build --configuration Release
 
