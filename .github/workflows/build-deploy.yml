@@ -43,7 +43,7 @@ jobs:
         tag_name: ${{ github.sha }}
         release_name: Release ${{ github.sha }}
        
-    - uses: csexton/release-asset.action@v1
+    - uses: csexton/release-asset-action@v2
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         pattern: TotallyNormalCalculator/bin/release/net8.0-windows/win-x64/publish/*.exe
