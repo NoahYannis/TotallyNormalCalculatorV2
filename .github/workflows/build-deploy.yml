@@ -2,7 +2,8 @@ name: build-deploy
 
 on:
   push:
-    branches: [ "master" ]
+    tags:
+      - "totally-normal-calculator/v*"
 
   workflow_dispatch:
 
@@ -36,9 +37,8 @@ jobs:
       - name: dotnet publish
         run: dotnet publish ${{env.PROJECT_PATH }} -c Release --self-contained -r win-x64 -p:PublishSingleFile=true
 
-      - name: Create GitHub Release
-        if: startsWith(github.ref, 'refs/tags/')
-        uses: actions/create-release@v1
+
+      - uses: actions/create-release@v1
         id: create_release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
