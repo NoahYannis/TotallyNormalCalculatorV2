@@ -45,12 +45,14 @@ jobs:
         id: create_release
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
+          # Bei privaten Repositories Personal Access Token statt GITHUB_TOKEN verwenden
         with:
           tag_name: ${{ github.ref }}
           release_name: ${{ github.ref }}
        
       - uses: csexton/release-asset-action@v2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           pattern: TotallyNormalCalculator/bin/release/net8.0-windows/win-x64/publish/*.exe
           release-url: ${{ steps.create_release.outputs.upload_url }}
+          
