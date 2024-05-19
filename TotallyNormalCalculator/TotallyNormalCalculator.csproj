@@ -8,6 +8,7 @@
     <Win32Resource />
     <StartupObject></StartupObject>
     <UserSecretsId>09a0ff11-cf90-4ca7-8fca-f11a6659a644</UserSecretsId>
+    <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
   </PropertyGroup>
 
   <ItemGroup>
