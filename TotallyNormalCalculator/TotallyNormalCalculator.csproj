@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>CalculatorIcon.ico</ApplicationIcon>
     <Win32Resource />
@@ -12,11 +12,6 @@
 
   <ItemGroup>
     <Compile Remove="MVVM\Model\CalculationModel.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="DiaryEntryDB.mdf" />
-    <None Remove="DiaryEntryDB_log.ldf" />
   </ItemGroup>
 
   <ItemGroup>

@@ -21,7 +21,7 @@ namespace TotallyNormalCalculator.UnitTests.DiaryTests
             Assert.True(Entries[0].Title is "Day 1");
         }
 
-        [Fact]
+
         public void InsertDiaryEntry(string title, string message, string date)
         {
             try
@@ -46,9 +46,9 @@ namespace TotallyNormalCalculator.UnitTests.DiaryTests
 
             for (int i = 0; i < Entries.Count; i++)
             {
-                Assert.Equal("One", Entries[0].Title);
-                Assert.Equal("Two", Entries[1].Title);
-                Assert.Equal("Three", Entries[2].Title);
+                Assert.Equal(Entries[0].Title, "One");
+                Assert.Equal(Entries[1].Title, "Two");
+                Assert.Equal(Entries[2].Title, "Three");
             }
         }
 

@@ -5,7 +5,7 @@ namespace TotallyNormalCalculator.UnitTests
     public class SimpleValuesShouldCalculate
     {
         [Theory]
-        [InlineData(3, 4, 7)]
+        [InlineData(3,4,7)]
         [InlineData(13, 14, 27)]
         [InlineData(300, 400, 700)]
         public void Add_SimpleValuesShouldCalculate(double firstNumber, double secondNumber, double expected)
