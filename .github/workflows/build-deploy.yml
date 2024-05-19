@@ -8,6 +8,7 @@ on:
 
 env:
   PROJECT_PATH: TotallyNormalCalculator/TotallyNormalCalculator.csproj
+  PROJECT_PATH_TESTS: TotallyNormalCalculator.Tests/TotallyNormalCalculator.Tests.csproj
 
 jobs:
   build:
@@ -29,7 +30,7 @@ jobs:
         run: dotnet build --configuration Release
 
       - name: Execute unit tests
-        run: dotnet test
+        run: dotnet test ${{ env.PROJECT_PATH_TESTS }} --no-build --verbosity normal
 
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}} --self-contained -r win-x64 p:PublishSingleFile=true --no-build
