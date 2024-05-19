@@ -26,25 +26,22 @@ jobs:
       - name: Build with dotnet
         run: dotnet build --configuration Release
 
+      - name: Execute unit tests
+        run: dotnet test
+
       - name: dotnet publish
-        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}} --self-contained -r win-x64 p:PublishSingleFile=true --no-build
 
-  deploy:
-    runs-on: windows-latest
-
-    needs: build
-
-    steps:
-    - uses: actions/create-release@v1
-      id: create_release
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ github.sha }}
-        release_name: Release ${{ github.sha }}
+      - uses: actions/create-release@v1
+        id: create_release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
        
-    - uses: csexton/release-asset-action@v2
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        pattern: TotallyNormalCalculator/bin/release/net8.0-windows/win-x64/publish/*.exe
-        release-url: ${{ steps.create_release.outputs.upload_url }}
+      - uses: csexton/release-asset-action@v2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          pattern: TotallyNormalCalculator/bin/release/net8.0-windows/win-x64/publish/*.exe
+          release-url: ${{ steps.create_release.outputs.upload_url }}
