@@ -27,7 +27,7 @@ jobs:
         run: dotnet restore ${{env.PROJECT_PATH}}
 
       - name: Build with dotnet
-        run: dotnet build --configuration Release --no-restore -p:PublishSingleFile=true
+        run: dotnet build --configuration Release -p:PublishSingleFile=true
 
       - name: Execute unit tests
         run: dotnet test ${{ env.PROJECT_PATH_TESTS }} 
