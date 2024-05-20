@@ -12,7 +12,7 @@ env:
   PROJECT_PATH_TESTS: TotallyNormalCalculator.UnitTests/TotallyNormalCalculator.UnitTests.csproj
 
 jobs:
-  build:
+  Build:
     runs-on: windows-latest  
 
     steps:
@@ -30,11 +30,21 @@ jobs:
       - name: Build
         run: dotnet build -c Release -p:PublishSingleFile=true 
 
+  Test:
+    needs: build
+    runs-on: windows-latest
+
+    steps:
       - name: Execute unit tests
         run: dotnet test ${{ env.PROJECT_PATH_TESTS }} 
 
+  Release:
+    needs: test
+    runs-on: windows-latest
+
+    steps:
       - name: Publish # Anwendung als einzelne ausführbare Datei veröffentlichen
-        run: dotnet publish ${{env.PROJECT_PATH }} -r win-x64 -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:UseAppHost=true --self-contained --no-build
+        run: dotnet publish ${{env.PROJECT_PATH }} -r win-x64 -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:UseAppHost=true --self-contained
 
       - name: Create Release
         uses: actions/create-release@v1
