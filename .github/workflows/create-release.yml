@@ -12,7 +12,7 @@ env:
   PROJECT_PATH_TESTS: TotallyNormalCalculator.UnitTests/TotallyNormalCalculator.UnitTests.csproj
 
 jobs:
-  Build:
+  prepare-release:
     runs-on: windows-latest  
 
     steps:
@@ -30,16 +30,11 @@ jobs:
       - name: Build
         run: dotnet build -c Release -p:PublishSingleFile=true 
 
-  Test:
-    needs: build
-    runs-on: windows-latest
-
-    steps:
       - name: Execute unit tests
         run: dotnet test ${{ env.PROJECT_PATH_TESTS }} 
 
-  Release:
-    needs: test
+  create-release:
+    needs: prepare-release
     runs-on: windows-latest
 
     steps:
