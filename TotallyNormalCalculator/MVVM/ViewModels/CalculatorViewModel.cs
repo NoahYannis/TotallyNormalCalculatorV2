@@ -6,7 +6,7 @@ using TotallyNormalCalculator.Core;
 
 namespace TotallyNormalCalculator.MVVM.ViewModels;
 
-public class CalculatorViewModel : ObservableObject
+public partial class CalculatorViewModel : ObservableObject
 {
     public RelayCommand SwitchViewCommand { get; set; }
     public RelayCommand MinimizeCommand { get; set; }
@@ -17,72 +17,30 @@ public class CalculatorViewModel : ObservableObject
     public RelayCommand CalculateCommand { get; set; }
     public RelayCommand AllClearCommand { get; set; }
 
+
+    [ObservableProperty]
     private ObservableObject _selectedViewModel;
-    public ObservableObject SelectedViewModel
-    {
-        get { return _selectedViewModel; }
-        set
-        {
-            _selectedViewModel = value;
-            OnPropertyChanged(nameof(SelectedViewModel));
-        }
-    }
 
-    private string _calculatorText = "";
-    public string CalculatorText
-    {
-        get { return _calculatorText; }
-        set
-        {
-            _calculatorText = value;
-            OnPropertyChanged(nameof(CalculatorText));
-        }
-    }
+    [ObservableProperty]
+    private string _calculatorText = string.Empty;
 
+    [ObservableProperty]
     private double _firstNumber;
-    public double FirstNumber
-    {
-        get { return _firstNumber; }
-        set
-        {
-            _firstNumber = value;
-            OnPropertyChanged(nameof(FirstNumber));
-        }
-    }
 
+    [ObservableProperty]
     private double _secondNumber;
-    public double SecondNumber
-    {
-        get { return _secondNumber; }
-        set
-        {
-            _secondNumber = value;
-            OnPropertyChanged(nameof(SecondNumber));
-        }
-    }
 
+    [ObservableProperty]
     private string _operation;
-    public string Operation
+
+    [ObservableProperty]
+    private double _result;
+
+    partial void OnResultChanging(double oldValue, double newValue)
     {
-        get { return _operation; }
-        set
-        {
-            _operation = value;
-            OnPropertyChanged(nameof(Operation));
-        }
+        CalculatorText = newValue.ToString();   
     }
 
-    private double _result;
-    public double Result
-    {
-        get { return _result; }
-        set
-        {
-            _result = value;
-            OnPropertyChanged(nameof(Result));
-            CalculatorText = Result.ToString();
-        }
-    }
 
     private int switchViewCounter;
     private string firstPart;
