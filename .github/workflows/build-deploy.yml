@@ -32,7 +32,7 @@ jobs:
         run: dotnet restore ${{env.PROJECT_PATH}}
 
       - name: Build
-        run: dotnet build ${{env.PROJECT_PATH}} -c Release --no-restore
+        run: dotnet build ${{env.PROJECT_PATH}} -c Release
         # -p:PublishSingleFile=true --self-contained -r win-x64 
 
       - name: Execute unit tests
