@@ -2,41 +2,40 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace TotallyNormalCalculator.Core
+namespace TotallyNormalCalculator.Core;
+
+public class CornerRadiusSetter
 {
-    public class CornerRadiusSetter
+    public static CornerRadius GetCornerRadius(DependencyObject obj) => (CornerRadius)obj.GetValue(CornerRadiusProperty);
+
+    public static void SetCornerRadius(DependencyObject obj, CornerRadius value) => obj.SetValue(CornerRadiusProperty, value);
+
+    public static readonly DependencyProperty CornerRadiusProperty =
+        DependencyProperty.RegisterAttached(nameof(Border.CornerRadius), typeof(CornerRadius),
+            typeof(CornerRadiusSetter), new UIPropertyMetadata(new CornerRadius(), CornerRadiusChangedCallback));
+
+    public static void CornerRadiusChangedCallback(object sender, DependencyPropertyChangedEventArgs e)
     {
-        public static CornerRadius GetCornerRadius(DependencyObject obj) => (CornerRadius)obj.GetValue(CornerRadiusProperty);
+        Control control = sender as Control;
 
-        public static void SetCornerRadius(DependencyObject obj, CornerRadius value) => obj.SetValue(CornerRadiusProperty, value);
+        if (control == null) return;
 
-        public static readonly DependencyProperty CornerRadiusProperty =
-            DependencyProperty.RegisterAttached(nameof(Border.CornerRadius), typeof(CornerRadius),
-                typeof(CornerRadiusSetter), new UIPropertyMetadata(new CornerRadius(), CornerRadiusChangedCallback));
+        control.Loaded -= Control_Loaded;
+        control.Loaded += Control_Loaded;
+    }
 
-        public static void CornerRadiusChangedCallback(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            Control control = sender as Control;
+    private static void Control_Loaded(object sender, EventArgs e)
+    {
+        Control control = sender as Control;
 
-            if (control == null) return;
+        if (control == null || control.Template == null) return;
 
-            control.Loaded -= Control_Loaded;
-            control.Loaded += Control_Loaded;
-        }
+        control.ApplyTemplate();
 
-        private static void Control_Loaded(object sender, EventArgs e)
-        {
-            Control control = sender as Control;
+        Border border = control.Template.FindName("border", control) as Border;
 
-            if (control == null || control.Template == null) return;
+        if (border == null) return;
 
-            control.ApplyTemplate();
-
-            Border border = control.Template.FindName("border", control) as Border;
-
-            if (border == null) return;
-
-            border.CornerRadius = GetCornerRadius(control);
-        }
+        border.CornerRadius = GetCornerRadius(control);
     }
 }

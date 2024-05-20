@@ -1,12 +1,11 @@
 ﻿using System.Windows.Controls;
 
-namespace TotallyNormalCalculator.MVVM.Views
+namespace TotallyNormalCalculator.MVVM.Views;
+
+public partial class CalculatorView : UserControl
 {
-    public partial class CalculatorView : UserControl
+    public CalculatorView()
     {
-        public CalculatorView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

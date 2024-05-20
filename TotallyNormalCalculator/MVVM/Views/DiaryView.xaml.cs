@@ -1,12 +1,11 @@
 ﻿using System.Windows.Controls;
 
-namespace TotallyNormalCalculator.MVVM.Views
+namespace TotallyNormalCalculator.MVVM.Views;
+
+public partial class DiaryView : UserControl
 {
-    public partial class DiaryView : UserControl
+    public DiaryView()
     {
-        public DiaryView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

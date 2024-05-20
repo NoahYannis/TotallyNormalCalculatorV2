@@ -1,12 +1,11 @@
 ﻿using System.Configuration;
 
-namespace TotallyNormalCalculator.Core
+namespace TotallyNormalCalculator.Core;
+
+public static class Helper
 {
-    public static class Helper
+    public static string CnnVal(string name)
     {
-        public static string CnnVal(string name)
-        {
-            return ConfigurationManager.ConnectionStrings[name].ConnectionString;
-        }
+        return ConfigurationManager.ConnectionStrings[name].ConnectionString;
     }
 }
