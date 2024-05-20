@@ -12,7 +12,7 @@ env:
   PROJECT_PATH_TESTS: TotallyNormalCalculator.UnitTests/TotallyNormalCalculator.UnitTests.csproj
 
 jobs:
-  build-deploy:
+  build:
     runs-on: windows-latest  
     permissions:
       contents: write
@@ -31,9 +31,8 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore ${{env.PROJECT_PATH}}
 
-      - name: Build
-        run: dotnet build ${{env.PROJECT_PATH}} -c Release
-        # -p:PublishSingleFile=true --self-contained -r win-x64 
+      - name: Build with dotnet
+        run: dotnet build --configuration Release -p:PublishSingleFile=true 
 
       - name: Execute unit tests
         run: dotnet test ${{ env.PROJECT_PATH_TESTS }} 
@@ -53,7 +52,7 @@ jobs:
        
       - uses: csexton/release-asset-action@v2
         with:
-          github-token: ${{ secrets.PAT }}
-          pattern: TotallyNormalCalculator/bin/Release/net8.0-windows/win-x64/publish/*.exe
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          pattern: TotallyNormalCalculator/bin/release/net8.0-windows/win-x64/publish/*.exe
           release-url: ${{ steps.create_release.outputs.upload_url }}
           
