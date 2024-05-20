@@ -14,10 +14,6 @@ env:
 jobs:
   build:
     runs-on: windows-latest  
-    permissions:
-      contents: write
-      pull-requests: write
-      repository-projects: write
 
     steps:
       - uses: actions/checkout@v4
@@ -32,19 +28,18 @@ jobs:
         run: dotnet restore ${{env.PROJECT_PATH}}
 
       - name: Build with dotnet
-        run: dotnet build --configuration Release -p:PublishSingleFile=true 
+        run: dotnet build -c Release -p:PublishSingleFile=true 
 
       - name: Execute unit tests
         run: dotnet test ${{ env.PROJECT_PATH_TESTS }} 
 
-      - name: dotnet publish
-        run: dotnet publish ${{env.PROJECT_PATH }} -r win-x64 -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:UseAppHost=true --self-contained 
+      - name: dotnet publish # Anwendung als einzelne ausführbare Datei veröffentlichen
+        run: dotnet publish ${{env.PROJECT_PATH }} -r win-x64 -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:UseAppHost=true --self-contained # --no-build
 
       - uses: actions/create-release@v1
         id: create_release
         env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}
-          # Bei privaten Repositories Personal Access Token statt GITHUB_TOKEN verwenden
+          GITHUB_TOKEN: ${{ secrets.PAT }}  # Bei privaten Repositories Personal Access Token statt GITHUB_TOKEN verwenden
         with:
           tag_name: ${{ github.ref }}
           release_name: ${{ github.ref }}
@@ -52,5 +47,5 @@ jobs:
       - uses: csexton/release-asset-action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          pattern: TotallyNormalCalculator/bin/Release/net8.0-windows/win-x64/publish/*.exe
+          pattern: TotallyNormalCalculator/bin/Release/net8.0-windows/win-x64/publish/*.exe # Exe-Datei dem Release hinzufügen
           release-url: ${{ steps.create_release.outputs.upload_url }}
