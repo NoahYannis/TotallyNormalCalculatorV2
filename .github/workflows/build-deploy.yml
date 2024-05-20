@@ -12,7 +12,7 @@ env:
   PROJECT_PATH_TESTS: TotallyNormalCalculator.UnitTests/TotallyNormalCalculator.UnitTests.csproj
 
 jobs:
-  build:
+  build-deploy:
     runs-on: windows-latest  
     permissions:
       contents: write
@@ -52,7 +52,7 @@ jobs:
        
       - uses: csexton/release-asset-action@v2
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          pattern: TotallyNormalCalculator/bin/release/net8.0-windows/win-x64/publish/*.exe
+          github-token: ${{ secrets.PAT }}
+          pattern: TotallyNormalCalculator/bin/Release/net8.0-windows/win-x64/publish/*.exe
           release-url: ${{ steps.create_release.outputs.upload_url }}
           
