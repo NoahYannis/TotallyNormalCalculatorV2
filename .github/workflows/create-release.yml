@@ -30,7 +30,7 @@ jobs:
       - name: Build
         run: dotnet build -c Release -p:PublishSingleFile=true 
 
-      - name: Execute unit tests
+      - name: Execute Unit Tests
         run: dotnet test ${{ env.PROJECT_PATH_TESTS }}
 
       - name: Publish # Anwendung als einzelne ausführbare Datei veröffentlichen
