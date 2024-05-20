@@ -1,11 +1,13 @@
 ﻿
 
+using CommunityToolkit.Mvvm.ComponentModel;
+
 namespace TotallyNormalCalculator.MVVM.ViewModels;
 
-public class MainViewModel : BaseViewModel
+public class MainViewModel : ObservableObject
 {
-    private BaseViewModel _selectedViewModel = new CalculatorViewModel();
-    public BaseViewModel SelectedViewModel
+    private ObservableObject _selectedViewModel = new CalculatorViewModel();
+    public ObservableObject SelectedViewModel
     {
         get { return _selectedViewModel; }
     }

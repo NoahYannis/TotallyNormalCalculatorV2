@@ -7,7 +7,7 @@ using System.Windows.Controls;
 
 namespace TotallyNormalCalculator.Core;
 
-public class ListBoxBehavior
+public class ListBoxScrollOnNewEntry
 {
     static readonly Dictionary<ListBox, Capture> Associations =
            new Dictionary<ListBox, Capture>();
@@ -26,7 +26,7 @@ public class ListBoxBehavior
         DependencyProperty.RegisterAttached(
             "ScrollOnNewItem",
             typeof(bool),
-            typeof(ListBoxBehavior),
+            typeof(ListBoxScrollOnNewEntry),
             new UIPropertyMetadata(false, OnScrollOnNewItemChanged));
 
     public static void OnScrollOnNewItemChanged(

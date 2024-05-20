@@ -1,6 +1,8 @@
-﻿namespace TotallyNormalCalculator;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-public class CalculatorModel
+namespace TotallyNormalCalculator;
+
+public class CalculatorModel : ObservableObject
 {
     public static double Add(double x, double y)
     {

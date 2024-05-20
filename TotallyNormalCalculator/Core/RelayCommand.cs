@@ -1,11 +1,11 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System;
 using System.Windows.Input;
-using TotallyNormalCalculator.MVVM.ViewModels;
 
 
 namespace TotallyNormalCalculator.Core;
 
-public class RelayCommand : BaseViewModel, ICommand
+public class RelayCommand : ObservableObject, ICommand
 {
     private Action<object> execute;
     private Func<object, bool> canExecute;

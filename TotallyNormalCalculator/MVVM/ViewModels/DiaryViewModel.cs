@@ -1,4 +1,5 @@
-﻿using Dapper;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Dapper;
 using System;
 using System.Collections.ObjectModel;
 using System.Data;
@@ -10,7 +11,7 @@ using TotallyNormalCalculator.MVVM.Model;
 
 namespace TotallyNormalCalculator.MVVM.ViewModels;
 
-public class DiaryViewModel : BaseViewModel
+public class DiaryViewModel : ObservableObject
 {
     public RelayCommand MinimizeCommand { get; set; }
     public RelayCommand MaximizeCommand { get; set; }
@@ -75,8 +76,8 @@ public class DiaryViewModel : BaseViewModel
         }
     }
 
-    private BaseViewModel _selectedViewModel;
-    public BaseViewModel SelectedViewModel
+    private ObservableObject _selectedViewModel;
+    public ObservableObject SelectedViewModel
     {
         get { return _selectedViewModel; }
         set

@@ -1,11 +1,12 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System;
 using System.Linq;
 using System.Windows;
 using TotallyNormalCalculator.Core;
 
 namespace TotallyNormalCalculator.MVVM.ViewModels;
 
-public class CalculatorViewModel : BaseViewModel
+public class CalculatorViewModel : ObservableObject
 {
     public RelayCommand SwitchViewCommand { get; set; }
     public RelayCommand MinimizeCommand { get; set; }
@@ -16,8 +17,8 @@ public class CalculatorViewModel : BaseViewModel
     public RelayCommand CalculateCommand { get; set; }
     public RelayCommand AllClearCommand { get; set; }
 
-    private BaseViewModel _selectedViewModel;
-    public BaseViewModel SelectedViewModel
+    private ObservableObject _selectedViewModel;
+    public ObservableObject SelectedViewModel
     {
         get { return _selectedViewModel; }
         set
