@@ -11,7 +11,7 @@ using TotallyNormalCalculator.MVVM.Model;
 
 namespace TotallyNormalCalculator.MVVM.ViewModels;
 
-public class DiaryViewModel : ObservableObject
+public partial class DiaryViewModel : ObservableObject
 {
     public RelayCommand MinimizeCommand { get; set; }
     public RelayCommand MaximizeCommand { get; set; }
@@ -21,71 +21,25 @@ public class DiaryViewModel : ObservableObject
     public RelayCommand DeleteEntryCommand { get; set; }
     public RelayCommand SwitchViewCommand { get; set; }
 
+
+    [ObservableProperty]
     private ObservableCollection<DiaryEntryModel> _entries;
-    public ObservableCollection<DiaryEntryModel> Entries
-    {
-        get { return _entries; }
-        set
-        {
-            _entries = value;
-            OnPropertyChanged(nameof(Entries));
-        }
-    }
 
+    [ObservableProperty]
     private DiaryEntryModel _selectedEntry;
-    public DiaryEntryModel SelectedEntry
-    {
-        get { return _selectedEntry; }
-        set
-        {
-            _selectedEntry = value;
-            OnPropertyChanged(nameof(SelectedEntry));
-        }
-    }
 
+    [ObservableProperty]
     private string _message;
-    public string Message
-    {
-        get { return _message; }
-        set
-        {
-            _message = value;
-            OnPropertyChanged(nameof(Message));
-        }
-    }
 
+    [ObservableProperty]
     private string _title;
-    public string Title
-    {
-        get { return _title; }
-        set
-        {
-            _title = value;
-            OnPropertyChanged(nameof(Title));
-        }
-    }
 
+    [ObservableProperty]
     private string _date;
-    public string Date
-    {
-        get { return _date; }
-        set
-        {
-            _date = value;
-            OnPropertyChanged(nameof(Date));
-        }
-    }
 
+    [ObservableProperty]
     private ObservableObject _selectedViewModel;
-    public ObservableObject SelectedViewModel
-    {
-        get { return _selectedViewModel; }
-        set
-        {
-            _selectedViewModel = value;
-            OnPropertyChanged(nameof(SelectedViewModel));
-        }
-    }
+
 
     string appRoot = Directory.GetCurrentDirectory();
 

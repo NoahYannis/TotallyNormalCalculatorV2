@@ -30,7 +30,7 @@ namespace TotallyNormalCalculator.UnitTests
         [InlineData(20, 13, 260)]
         public void Multiply_SimpleValuesShouldCalculate(double firstNumber, double secondNumber, double expected)
         {
-            double actual = CalculatorModel.Mulitply(firstNumber, secondNumber);
+            double actual = CalculatorModel.Multiply(firstNumber, secondNumber);
             Assert.Equal(expected, actual);
         }
 

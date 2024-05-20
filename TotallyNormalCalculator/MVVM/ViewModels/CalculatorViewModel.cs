@@ -292,7 +292,7 @@ public partial class CalculatorViewModel : ObservableObject
                     break;
 
                 case "×":
-                    Result = CalculatorModel.Mulitply(FirstNumber, SecondNumber);
+                    Result = CalculatorModel.Multiply(FirstNumber, SecondNumber);
                     break;
 
                 case "÷":
