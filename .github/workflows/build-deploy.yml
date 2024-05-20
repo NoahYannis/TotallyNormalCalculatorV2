@@ -31,14 +31,15 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore ${{env.PROJECT_PATH}}
 
-      - name: Build with dotnet
-        run: dotnet build ${{env.PROJECT_PATH}} --configuration Release -p:PublishSingleFile=true --self-contained -r win-x64 
+      - name: Build
+        run: dotnet build ${{env.PROJECT_PATH}} -c Release --no-restore
+        # -p:PublishSingleFile=true --self-contained -r win-x64 
 
       - name: Execute unit tests
         run: dotnet test ${{ env.PROJECT_PATH_TESTS }} 
 
       - name: dotnet publish
-        run: dotnet publish ${{env.PROJECT_PATH }} -c Release --self-contained -r win-x64 -p:PublishSingleFile=true
+        run: dotnet publish ${{env.PROJECT_PATH }} -c Release --self-contained -r win-x64 -p:PublishSingleFile=true --no-build
 
 
       - uses: actions/create-release@v1
