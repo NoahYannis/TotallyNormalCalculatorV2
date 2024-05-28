@@ -97,6 +97,20 @@ public partial class CalculatorViewModel : ObservableObject
     }
 
     [RelayCommand]
+    public void SetOperation(string newCharacter)
+    {
+        Operation = newCharacter;
+
+        if (newCharacter == "√")
+        {
+            CalculatorText = "√";
+            return;
+        }
+
+        CalculatorText = string.Empty;
+    }
+
+    [RelayCommand]
     public void Calculate()
     {
         switch (Operation)
@@ -169,11 +183,6 @@ public partial class CalculatorViewModel : ObservableObject
         if (CalculatorText.Length == 0 && IsValidFirstCharacter(newCharacter))
         {
             CalculatorText = newCharacter;
-
-            if (newCharacter == "√")
-            {
-                Operation = CalculatorText.Length == 1 ? "√" : null;
-            }
         }
         else if (CalculatorText.Length > 0 && newCharacter == "." && !CalculatorText.Contains('.'))
         {
@@ -196,14 +205,8 @@ public partial class CalculatorViewModel : ObservableObject
     {
         CalculatorText = newValue.ToString();
     }
-
     private void ProcessNewCharacter(string newCharacter)
     {
-        if (CalculatorText.Length > 1)
-        {
-            SetOperation(newCharacter);
-        }
-
         try
         {
             if (Operation == null)
@@ -223,27 +226,8 @@ public partial class CalculatorViewModel : ObservableObject
 
     private bool IsValidFirstCharacter(string newCharacter)
     {
-        return double.TryParse(newCharacter, out double _) || newCharacter == "-" || newCharacter == "√";
+        return double.TryParse(newCharacter, out double _) || newCharacter == "-" ;
     }
-
-    private void SetOperation(string newCharacter)
-    {
-        switch (newCharacter)
-        {
-            case "+":
-            case "-":
-            case "×":
-            case "÷":
-            case "^":
-                Operation = newCharacter;
-                CalculatorText = string.Empty;
-                break;
-
-            default:
-                break;
-        }
-    }
-
 
 
     private double SetCalculationNumber(string newCharacter, double numberToSet)
