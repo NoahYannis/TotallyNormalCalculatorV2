@@ -27,7 +27,7 @@
 
                     <Button
                         x:Name="btnMinimize" 
-                        Command="{Binding MinimizeCommand}"
+                        Command="{Binding MinimizeWindowCommand}"
                         Height="20" Width="20" Background="Gray"
                         Content="🗕" FontWeight="Bold"
                         BorderThickness="0"
@@ -37,7 +37,7 @@
 
                     <Button 
                         x:Name="btnMaximize"
-                        Command="{Binding MaximizeCommand}"
+                        Command="{Binding MaximizeWindowCommand}"
                         Height="20" Width="20" Background="Gray"
                         Content="□" FontWeight="ExtraBold"
                         BorderThickness="0"
