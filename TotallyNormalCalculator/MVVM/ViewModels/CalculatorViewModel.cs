@@ -43,27 +43,10 @@ public partial class CalculatorViewModel : ObservableObject
     [RelayCommand]
     public void MaximizeWindow()
     {
-        if (Application.Current.MainWindow.WindowState != WindowState.Maximized)
-        {
-            Application.Current.MainWindow.WindowState = WindowState.Maximized;
-        }
-        else
-        {
-            Application.Current.MainWindow.WindowState = WindowState.Normal;
-        }
+        Application.Current.MainWindow.WindowState =
+            Application.Current.MainWindow.WindowState != WindowState.Maximized ? WindowState.Maximized : WindowState.Normal;
     }
 
-    [RelayCommand]
-    public void SwitchView()
-    {
-        switchViewCounter++;
-
-        if (switchViewCounter == 4)
-        {
-            SelectedViewModel = new DiaryViewModel();
-            switchViewCounter = 0;
-        }
-    }
 
     [RelayCommand]
     public void MinimizeWindow()
@@ -78,14 +61,32 @@ public partial class CalculatorViewModel : ObservableObject
         Application.Current.Shutdown();
     }
 
+
     [RelayCommand]
-    public void RemoveCharacters()
+    public void SwitchView()
     {
+        switchViewCounter++;
+
+        if (switchViewCounter == 4)
+        {
+            SelectedViewModel = new DiaryViewModel();
+            switchViewCounter = 0;
+        }
+    }
+
+    [RelayCommand]
+    public void RemoveCharacter()
+    {
+        if (CalculatorText.Length == 0)
+        {
+            return;
+        }
+
         try
         {
             CalculatorText = CalculatorText.Remove(CalculatorText.Length - 1, 1);
 
-            if (Operation is null) // It's still the first Number
+            if (Operation is null) // First number hasn't been entered yet
             {
                 FirstNumber = Convert.ToDouble(CalculatorText);
             }
@@ -156,12 +157,12 @@ public partial class CalculatorViewModel : ObservableObject
         SecondNumber = 0;
         Operation = null;
         Result = 0;
-        CalculatorText = "";
+        CalculatorText = string.Empty;
         switchViewCounter = 0;
     }
 
     [RelayCommand]
-    public void AddCharacters(object commandParam)
+    public void AddCharacter(object commandParam)
     {
         string character = commandParam.ToString();
         string charTest = character;
