@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
-using System.Linq;
 using System.Windows;
 
 namespace TotallyNormalCalculator.MVVM.ViewModels;
@@ -22,21 +21,17 @@ public partial class CalculatorViewModel : ObservableObject
     private double _secondNumber;
 
     [ObservableProperty]
-    private string _operation = string.Empty;
+    private string _operation;
 
     [ObservableProperty]
     private double _result;
 
-    partial void OnResultChanging(double oldValue, double newValue)
-    {
-        CalculatorText = newValue.ToString();
-    }
 
 
     private int switchViewCounter;
     private string firstPartOfNumber;
     private string secondPartOfNumber;
-
+    private bool calculationHasError;
 
     #region Commands
 
@@ -77,7 +72,7 @@ public partial class CalculatorViewModel : ObservableObject
     [RelayCommand]
     public void RemoveCharacter()
     {
-        if (string.IsNullOrEmpty(CalculatorText))
+        if (CalculatorText.Length == 0)
         {
             return;
         }
@@ -86,7 +81,7 @@ public partial class CalculatorViewModel : ObservableObject
         {
             CalculatorText = CalculatorText.Remove(CalculatorText.Length - 1, 1);
 
-            if (Operation is null) // First number hasn't been entered yet
+            if (Operation is null)
             {
                 FirstNumber = Convert.ToDouble(CalculatorText);
             }
@@ -133,6 +128,7 @@ public partial class CalculatorViewModel : ObservableObject
             default:
                 AllClear();
                 CalculatorText = "Invalid operation";
+                calculationHasError = true;
                 return;
         }
 
@@ -156,90 +152,79 @@ public partial class CalculatorViewModel : ObservableObject
         FirstNumber = SecondNumber = Result = switchViewCounter = 0;
         Operation = null;
         CalculatorText = string.Empty;
+        calculationHasError = false;
     }
 
     [RelayCommand]
     public void AddCharacter(object commandParam)
     {
         string newCharacter = commandParam.ToString();
-        bool IsValidInput = newCharacter.All(x => char.IsDigit(x) || '-' == x || '√' == x);
 
-        if (CalculatorText is "Invalid operation")
+        if (calculationHasError)
         {
             AllClear();
+            return;
         }
 
-        if (IsValidInput && !string.IsNullOrEmpty(CalculatorText))
+        if (CalculatorText.Length == 0 && IsValidFirstCharacter(newCharacter))
         {
             CalculatorText = newCharacter;
+
+            if (newCharacter == "√")
+            {
+                Operation = CalculatorText.Length == 1 ? "√" : null;
+            }
         }
-        else if (newCharacter is "." && !CalculatorText.Contains('.'))
+        else if (CalculatorText.Length > 0 && newCharacter == "." && !CalculatorText.Contains('.'))
         {
             CalculatorText += ".";
         }
         else
         {
-            if (newCharacter is not "√")
-            {
-                CalculatorText += newCharacter;
-            }
-            else
-            {
-                Operation = null;
-            }
+            CalculatorText += newCharacter;
         }
 
-
-        if (CalculatorText.Length > 1)
-        {
-            SetOperation(newCharacter);
-        }
-        else if (CalculatorText.Length == 1 && newCharacter is "√")
-        {
-            Operation = "√";
-        }
-
-        if (Operation is null)
-        {
-            if (CalculatorText.Length is 0)
-            {
-                try
-                {
-                    FirstNumber = Convert.ToInt64(newCharacter);
-                }
-                catch (Exception)
-                {
-                    FirstNumber = 0;
-                }
-            }
-            else
-            {
-                FirstNumber = SetCalculationNumber(newCharacter);
-            }
-        }
-        else // operation not null -> second number
-        {
-            if (string.IsNullOrEmpty(CalculatorText))
-            {
-                try
-                {
-                    SecondNumber = Convert.ToInt64(newCharacter);
-                }
-                catch (Exception)
-                {
-                    SecondNumber = 0;
-                }
-            }
-            else
-            {
-                SecondNumber = SetCalculationNumber(newCharacter);
-            }
-        }
+        ProcessNewCharacter(newCharacter);
     }
+
+
 
 
     #endregion
 
+    partial void OnResultChanging(double oldValue, double newValue)
+    {
+        CalculatorText = newValue.ToString();
+    }
+
+    private void ProcessNewCharacter(string newCharacter)
+    {
+        if (CalculatorText.Length > 1)
+        {
+            SetOperation(newCharacter);
+        }
+
+        try
+        {
+            if (Operation == null)
+            {
+                FirstNumber = SetCalculationNumber(newCharacter, numberToSet: FirstNumber);
+            }
+            else
+            {
+                SecondNumber = SetCalculationNumber(newCharacter, numberToSet: SecondNumber);
+            }
+        }
+        catch (Exception)
+        {
+            CalculatorText = "An error occurred";
+        }
+    }
+
+    private bool IsValidFirstCharacter(string newCharacter)
+    {
+        return double.TryParse(newCharacter, out double _) || newCharacter == "-" || newCharacter == "√";
+    }
 
     private void SetOperation(string newCharacter)
     {
@@ -260,39 +245,32 @@ public partial class CalculatorViewModel : ObservableObject
     }
 
 
-    private double SetCalculationNumber(string newCharacter)
+
+    private double SetCalculationNumber(string newCharacter, double numberToSet)
     {
         double number = 0;
 
         try
         {
-            if (newCharacter is not "." && !CalculatorText.Contains('.') && !CalculatorText.StartsWith("-"))  // positive integer
+            if (CalculatorText.Length == 0)
             {
-                number = (number * 10) + Convert.ToInt64(newCharacter);
+                return Convert.ToDouble(newCharacter);
             }
-            else if (CalculatorText.StartsWith("-"))
+
+            if (!CalculatorText.Contains('.'))
             {
-                number = Convert.ToDouble(CalculatorText.Substring(0, CalculatorText.Length));
-
-                if (CalculatorText.Contains("."))
-                {
-                    firstPartOfNumber = CalculatorText.Substring(0, CalculatorText.IndexOf("."));
-                    secondPartOfNumber = CalculatorText.Substring(CalculatorText.IndexOf("."), CalculatorText.Length - CalculatorText.IndexOf("."));
-
-                    number = Convert.ToDouble(firstPartOfNumber + secondPartOfNumber);
-                }
+                number = (numberToSet * 10) + Convert.ToDouble(newCharacter);
+                return number;
             }
-            else // number is a decimal and is not negative
-            {
-                firstPartOfNumber = CalculatorText.Substring(0, CalculatorText.IndexOf("."));
-                secondPartOfNumber = CalculatorText.Substring(CalculatorText.IndexOf("."), CalculatorText.Length - CalculatorText.IndexOf("."));
 
-                number = Convert.ToDouble(firstPartOfNumber + secondPartOfNumber);
-            }
+            int decimalIndex = CalculatorText.IndexOf(".");
+            firstPartOfNumber = CalculatorText.Substring(0, decimalIndex);
+            secondPartOfNumber = CalculatorText.Substring(decimalIndex, CalculatorText.Length - decimalIndex);
+            return Convert.ToDouble(firstPartOfNumber + secondPartOfNumber);
         }
+
         catch (Exception)
         {
-            number = 0;
         }
 
         return number;
