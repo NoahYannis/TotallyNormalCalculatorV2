@@ -26,8 +26,6 @@ public partial class CalculatorViewModel : ObservableObject
     [ObservableProperty]
     private double _result;
 
-
-
     private int switchViewCounter;
     private string firstPartOfNumber;
     private string secondPartOfNumber;
@@ -81,27 +79,26 @@ public partial class CalculatorViewModel : ObservableObject
         {
             CalculatorText = CalculatorText.Remove(CalculatorText.Length - 1, 1);
 
-            if (Operation is null)
+            if (Operation == null)
             {
-                FirstNumber = Convert.ToDouble(CalculatorText);
+                FirstNumber = double.Parse(CalculatorText);
             }
             else
             {
-                SecondNumber = Convert.ToDouble(CalculatorText);
+                SecondNumber = double.Parse(CalculatorText);
             }
         }
         catch (Exception)
         {
-
         }
     }
 
     [RelayCommand]
-    public void SetOperation(string newCharacter)
+    public void SetOperation(string calcOperation)
     {
-        Operation = newCharacter;
+        Operation = calcOperation;
 
-        if (newCharacter == "√")
+        if (calcOperation == "√")
         {
             CalculatorText = "√";
             return;
@@ -193,10 +190,8 @@ public partial class CalculatorViewModel : ObservableObject
             CalculatorText += newCharacter;
         }
 
-        ProcessNewCharacter(newCharacter);
+        UpdateCalculationNumber(newCharacter);
     }
-
-
 
 
     #endregion
@@ -205,17 +200,18 @@ public partial class CalculatorViewModel : ObservableObject
     {
         CalculatorText = newValue.ToString();
     }
-    private void ProcessNewCharacter(string newCharacter)
+
+    private void UpdateCalculationNumber(string newNumber)
     {
         try
         {
             if (Operation == null)
             {
-                FirstNumber = SetCalculationNumber(newCharacter, numberToSet: FirstNumber);
+                FirstNumber = SetCalculationNumber(newNumber, numberToSet: FirstNumber);
             }
             else
             {
-                SecondNumber = SetCalculationNumber(newCharacter, numberToSet: SecondNumber);
+                SecondNumber = SetCalculationNumber(newNumber, numberToSet: SecondNumber);
             }
         }
         catch (Exception)
@@ -226,7 +222,7 @@ public partial class CalculatorViewModel : ObservableObject
 
     private bool IsValidFirstCharacter(string newCharacter)
     {
-        return double.TryParse(newCharacter, out double _) || newCharacter == "-" ;
+        return double.TryParse(newCharacter, out double _) || newCharacter == "-";
     }
 
 
