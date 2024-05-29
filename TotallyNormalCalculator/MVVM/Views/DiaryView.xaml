@@ -27,7 +27,6 @@
         </Grid.ColumnDefinitions>
 
         <Border
-            x:Name="BlueBar"
             Grid.ColumnSpan="2"
             Height="25"
             VerticalAlignment="Top"
@@ -41,7 +40,6 @@
                 HorizontalAlignment="Right">
 
                 <Button
-                    x:Name="btnMinimize"
                     Width="18"
                     Height="18"
                     Margin="470,0,0,0"
@@ -53,7 +51,6 @@
                     FontWeight="Bold" />
 
                 <Button
-                    x:Name="btnMaximize"
                     Width="18"
                     Height="18"
                     Margin="500,0,0,0"
@@ -64,7 +61,6 @@
                     FontWeight="ExtraBold" />
 
                 <Button
-                    x:Name="btnClose"
                     Width="18"
                     Height="18"
                     Margin="530,0,0,0"
@@ -84,7 +80,6 @@
             Background="LightGreen" />
 
         <ListView
-            x:Name="ListViewEntries"
             Grid.Column="0"
             Margin="0,25,0,0"
             core:ListBoxScrollOnNewEntry.ScrollOnNewItem="True"
@@ -228,7 +223,6 @@
                 VerticalAlignment="Center">
 
                 <Button
-                    x:Name="btnDelete"
                     Width="80"
                     Height="30"
                     MinWidth="80"
@@ -239,7 +233,6 @@
                     Style="{StaticResource DiaryButtons}" />
 
                 <Button
-                    x:Name="btnRead"
                     Width="80"
                     Height="30"
                     MinWidth="80"
@@ -250,7 +243,6 @@
                     Style="{StaticResource DiaryButtons}" />
 
                 <Button
-                    x:Name="btnAdd"
                     Width="80"
                     Height="30"
                     MinWidth="80"
@@ -261,7 +253,6 @@
                     Style="{StaticResource DiaryButtons}" />
 
                 <Button
-                    x:Name="btnCalculator"
                     Width="100"
                     Margin="325,0,0,0"
                     Background="BurlyWood"
