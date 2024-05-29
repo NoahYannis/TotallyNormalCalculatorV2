@@ -91,6 +91,14 @@ internal class Commands
             Assert.Equal(8, viewModel.FirstNumber);
             Assert.Equal(0, viewModel.SecondNumber);
             Assert.Null(viewModel.Operation);
+
+            viewModel.FirstNumber = 2.5;
+            viewModel.SecondNumber = 2;
+            viewModel.SetOperation("x");
+            viewModel.CalculateCommand.Execute(null);
+
+            Assert.Equal(5, viewModel.Result);
+            Assert.Equal(5, viewModel.FirstNumber);
         }
 
         [Fact]

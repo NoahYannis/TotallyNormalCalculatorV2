@@ -239,8 +239,7 @@ public partial class CalculatorViewModel : ObservableObject
 
             if (!CalculatorText.Contains('.'))
             {
-                number = (numberToSet * 10) + Convert.ToDouble(newCharacter);
-                return number;
+                return (numberToSet * 10) + Convert.ToDouble(newCharacter);
             }
 
             int decimalIndex = CalculatorText.IndexOf(".");
