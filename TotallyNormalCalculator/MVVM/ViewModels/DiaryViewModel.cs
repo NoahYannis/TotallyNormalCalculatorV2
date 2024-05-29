@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Dapper;
 using System;
 using System.Collections.ObjectModel;
@@ -13,14 +14,6 @@ namespace TotallyNormalCalculator.MVVM.ViewModels;
 
 public partial class DiaryViewModel : ObservableObject
 {
-    public RelayCommand MinimizeCommand { get; set; }
-    public RelayCommand MaximizeCommand { get; set; }
-    public RelayCommand CloseWindowCommand { get; set; }
-    public RelayCommand AddEntryCommand { get; set; }
-    public RelayCommand ReadEntryCommand { get; set; }
-    public RelayCommand DeleteEntryCommand { get; set; }
-    public RelayCommand SwitchViewCommand { get; set; }
-
 
     [ObservableProperty]
     private ObservableCollection<DiaryEntryModel> _entries;
@@ -45,61 +38,71 @@ public partial class DiaryViewModel : ObservableObject
 
     public DiaryViewModel()
     {
-
-        Entries = new ObservableCollection<DiaryEntryModel>();
-
+        Entries = [];
         GetAllEntries(Title, Message, Date);
+    }
 
-        MinimizeCommand = new RelayCommand(o =>
-        {
-            Application.Current.MainWindow.WindowState = WindowState.Minimized;
-        });
 
-        MaximizeCommand = new RelayCommand(o =>
+    [RelayCommand]
+    public void MaximizeWindow()
+    {
+        Application.Current.MainWindow.WindowState =
+            Application.Current.MainWindow.WindowState != WindowState.Maximized ? WindowState.Maximized : WindowState.Normal;
+    }
+
+
+    [RelayCommand]
+    public void MinimizeWindow()
+    {
+        Application.Current.MainWindow.WindowState = WindowState.Minimized;
+    }
+
+
+    [RelayCommand]
+    public void CloseWindow()
+    {
+        Application.Current.Shutdown();
+    }
+
+
+    [RelayCommand]
+    public void SwitchView()
+    {
+        SelectedViewModel = new CalculatorViewModel();
+    }
+
+
+    [RelayCommand]
+    public void AddEntry()
+    {
+        InsertDiaryEntry(Title, Message, Date);
+    }
+
+    [RelayCommand]
+    public void ReadEntry()
+    {
+        if (Entries.Count > 0)
         {
-            if (Application.Current.MainWindow.WindowState != WindowState.Maximized)
+            if (SelectedEntry is not null)  // user has selected an entry
             {
-                Application.Current.MainWindow.WindowState = WindowState.Maximized;
+                Title = SelectedEntry.Title;
+                Message = SelectedEntry.Message;
+                Date = SelectedEntry.Date;
             }
             else
             {
-                Application.Current.MainWindow.WindowState = WindowState.Normal;
+                MessageBox.Show("Please select an entry to read.", "TotallyNormalCalculator", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-        });
-
-        CloseWindowCommand = new RelayCommand(o =>
+        }
+        else
         {
-            Application.Current.Shutdown();
-        });
+            var result = MessageBox.Show("There is no entry to read. You should create one!", "TotallyNormalCalculator", MessageBoxButton.YesNo, MessageBoxImage.Information);
+        }
+    }
 
-        AddEntryCommand = new RelayCommand(o =>
-        {
-            InsertDiaryEntry(Title, Message, Date);
-        });
-
-        ReadEntryCommand = new RelayCommand(o =>
-        {
-            if (Entries.Count > 0)
-            {
-                if (SelectedEntry is not null)  // user has selected an entry
-                {
-                    Title = SelectedEntry.Title;
-                    Message = SelectedEntry.Message;
-                    Date = SelectedEntry.Date;
-                }
-                else
-                {
-                    MessageBox.Show("Please select an entry to read.", "TotallyNormalCalculator", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-            }
-            else
-            {
-                var result = MessageBox.Show("There is no entry to read. You should create one!", "TotallyNormalCalculator", MessageBoxButton.YesNo, MessageBoxImage.Information);
-            }
-        });
-
-        DeleteEntryCommand = new RelayCommand(o =>
-        {
+    [RelayCommand]
+    public void DeleteEntry()
+    {
             if (Entries.Count > 0) // if there is an entry to delete
             {
                 var wantsToDeleteEntry = MessageBox.Show("Do you want to permanently delete this entry?", "TotallyNormalCalculator", MessageBoxButton.YesNo, MessageBoxImage.Question);
@@ -120,14 +123,8 @@ public partial class DiaryViewModel : ObservableObject
             {
                 MessageBox.Show("There is no entry to delete.", "TotallyNormalCalculator", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-
-        });
-
-        SwitchViewCommand = new RelayCommand(o =>
-        {
-            SelectedViewModel = new CalculatorViewModel();
-        });
     }
+
 
     public void GetAllEntries(string title, string message, string date)
     {
