@@ -46,7 +46,6 @@ public class DiaryEntryTests
 
         for (int i = 0; i < Entries.Count; i++)
         {
-            Assert.Equal(Entries[0].Title, "One");
             Assert.Equal("One", Entries[0].Title);
             Assert.Equal("Two", Entries[1].Title);
             Assert.Equal("Three", Entries[2].Title);
