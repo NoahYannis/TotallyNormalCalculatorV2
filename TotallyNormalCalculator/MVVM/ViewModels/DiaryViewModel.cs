@@ -4,7 +4,7 @@ using Dapper;
 using System;
 using System.Collections.ObjectModel;
 using System.Data;
-using System.IO;
+using System.Linq;
 using System.Windows;
 using TotallyNormalCalculator.Core;
 using TotallyNormalCalculator.MVVM.Model;
@@ -51,54 +51,50 @@ public partial class DiaryViewModel : BaseViewModel
     [RelayCommand]
     public void ReadEntry()
     {
-        if (Entries.Count > 0)
+        if (!Entries.Any())
         {
-            if (SelectedEntry is not null)  // user has selected an entry
-            {
-                Title = SelectedEntry.Title;
-                Message = SelectedEntry.Message;
-                Date = SelectedEntry.Date;
-            }
-            else
-            {
-                MessageBox.Show("Please select an entry to read.", "TotallyNormalCalculator", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
+            MessageBox.Show("There are no entries to read. You should create one!", "TotallyNormalCalculator", MessageBoxButton.YesNo, MessageBoxImage.Information);
+            return;
         }
-        else
+
+        if (SelectedEntry is null)
         {
-            var result = MessageBox.Show("There is no entry to read. You should create one!", "TotallyNormalCalculator", MessageBoxButton.YesNo, MessageBoxImage.Information);
+            MessageBox.Show("Please select an entry to read.", "TotallyNormalCalculator", MessageBoxButton.OK, MessageBoxImage.Information);
+            return;
         }
+
+        Title = SelectedEntry.Title;
+        Message = SelectedEntry.Message;
+        Date = SelectedEntry.Date;
     }
 
     [RelayCommand]
     public void DeleteEntry()
     {
-        if (Entries.Count > 0) // if there is an entry to delete
+        if (!Entries.Any())
         {
-            var wantsToDeleteEntry = MessageBox.Show("Do you want to permanently delete this entry?", "TotallyNormalCalculator", MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-            if (wantsToDeleteEntry is MessageBoxResult.Yes)
-            {
-                if (SelectedEntry is not null) // user has selected an entry to delete
-                {
-                    DeleteDiaryEntry(SelectedEntry.Title, SelectedEntry.Message, SelectedEntry.Date);
-                }
-                else
-                {
-                    MessageBox.Show("Please select an entry to delete.", "TotallyNormalCalculator", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-            }
+            MessageBox.Show("Please select an entry to delete.", "TotallyNormalCalculator", MessageBoxButton.OK, MessageBoxImage.Information);
+            return;
         }
-        else
+
+        if (SelectedEntry is null)
         {
-            MessageBox.Show("There is no entry to delete.", "TotallyNormalCalculator", MessageBoxButton.OK, MessageBoxImage.Warning);
+            MessageBox.Show("Please select an entry to delete.", "TotallyNormalCalculator", MessageBoxButton.OK, MessageBoxImage.Information);
+            return;
+        }
+
+        var delete = MessageBox.Show("Do you want to permanently delete this entry?", "TotallyNormalCalculator", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+        if (delete is MessageBoxResult.Yes)
+        {
+            ExecuteDeleteEntry(SelectedEntry.Title, SelectedEntry.Message, SelectedEntry.Date);
         }
     }
 
 
     private ObservableCollection<DiaryEntryModel> GetAllEntries(string title, string message, string date)
     {
-        ObservableCollection<DiaryEntryModel> entries = new ObservableCollection<DiaryEntryModel>();
+        var entries = new ObservableCollection<DiaryEntryModel>();
 
         try
         {
@@ -140,7 +136,7 @@ public partial class DiaryViewModel : BaseViewModel
         }
     }
 
-    private void DeleteDiaryEntry(string title, string message, string date)
+    private void ExecuteDeleteEntry(string title, string message, string date)
     {
         using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(@$"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=DiaryEntryDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;"))
         {
