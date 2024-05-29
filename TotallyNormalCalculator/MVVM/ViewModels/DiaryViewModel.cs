@@ -30,8 +30,6 @@ public partial class DiaryViewModel : BaseViewModel
     [ObservableProperty]
     private string _date;
 
-    string appRoot = Directory.GetCurrentDirectory();
-
     public DiaryViewModel()
     {
         Entries = GetAllEntries(Title, Message, Date);
@@ -75,30 +73,30 @@ public partial class DiaryViewModel : BaseViewModel
     [RelayCommand]
     public void DeleteEntry()
     {
-            if (Entries.Count > 0) // if there is an entry to delete
-            {
-                var wantsToDeleteEntry = MessageBox.Show("Do you want to permanently delete this entry?", "TotallyNormalCalculator", MessageBoxButton.YesNo, MessageBoxImage.Question);
+        if (Entries.Count > 0) // if there is an entry to delete
+        {
+            var wantsToDeleteEntry = MessageBox.Show("Do you want to permanently delete this entry?", "TotallyNormalCalculator", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-                if (wantsToDeleteEntry is MessageBoxResult.Yes)
+            if (wantsToDeleteEntry is MessageBoxResult.Yes)
+            {
+                if (SelectedEntry is not null) // user has selected an entry to delete
                 {
-                    if (SelectedEntry is not null) // user has selected an entry to delete
-                    {
-                        DeleteDiaryEntry(SelectedEntry.Title, SelectedEntry.Message, SelectedEntry.Date);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Please select an entry to delete.", "TotallyNormalCalculator", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
+                    DeleteDiaryEntry(SelectedEntry.Title, SelectedEntry.Message, SelectedEntry.Date);
+                }
+                else
+                {
+                    MessageBox.Show("Please select an entry to delete.", "TotallyNormalCalculator", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
-            else
-            {
-                MessageBox.Show("There is no entry to delete.", "TotallyNormalCalculator", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
+        }
+        else
+        {
+            MessageBox.Show("There is no entry to delete.", "TotallyNormalCalculator", MessageBoxButton.OK, MessageBoxImage.Warning);
+        }
     }
 
 
-    public ObservableCollection<DiaryEntryModel> GetAllEntries(string title, string message, string date)
+    private ObservableCollection<DiaryEntryModel> GetAllEntries(string title, string message, string date)
     {
         ObservableCollection<DiaryEntryModel> entries = new ObservableCollection<DiaryEntryModel>();
 
@@ -122,7 +120,7 @@ public partial class DiaryViewModel : BaseViewModel
         return entries;
     }
 
-    public void InsertDiaryEntry(string title, string message, string date)
+    private void InsertDiaryEntry(string title, string message, string date)
     {
         using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(@$"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=DiaryEntryDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;"))
         {
@@ -138,13 +136,11 @@ public partial class DiaryViewModel : BaseViewModel
                 Entries.Remove(SelectedEntry);
             }
 
-            Title = "";
-            Message = "";
-            Date = "";
+            ClearInputFields();
         }
     }
 
-    public void DeleteDiaryEntry(string title, string message, string date)
+    private void DeleteDiaryEntry(string title, string message, string date)
     {
         using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(@$"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=DiaryEntryDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;"))
         {
@@ -152,8 +148,11 @@ public partial class DiaryViewModel : BaseViewModel
             Entries.Remove(SelectedEntry);
         }
 
-        Title = "";
-        Message = "";
-        Date = "";
+        ClearInputFields();
+    }
+
+    private void ClearInputFields()
+    {
+        Title = Message = Date = string.Empty;
     }
 }
