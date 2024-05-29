@@ -12,7 +12,7 @@ using TotallyNormalCalculator.MVVM.Model;
 
 namespace TotallyNormalCalculator.MVVM.ViewModels;
 
-public partial class DiaryViewModel : ObservableObject
+public partial class DiaryViewModel : BaseViewModel
 {
 
     [ObservableProperty]
@@ -30,40 +30,12 @@ public partial class DiaryViewModel : ObservableObject
     [ObservableProperty]
     private string _date;
 
-    [ObservableProperty]
-    private ObservableObject _selectedViewModel;
-
-
     string appRoot = Directory.GetCurrentDirectory();
 
     public DiaryViewModel()
     {
-        Entries = [];
-        GetAllEntries(Title, Message, Date);
+        Entries = GetAllEntries(Title, Message, Date);
     }
-
-
-    [RelayCommand]
-    public void MaximizeWindow()
-    {
-        Application.Current.MainWindow.WindowState =
-            Application.Current.MainWindow.WindowState != WindowState.Maximized ? WindowState.Maximized : WindowState.Normal;
-    }
-
-
-    [RelayCommand]
-    public void MinimizeWindow()
-    {
-        Application.Current.MainWindow.WindowState = WindowState.Minimized;
-    }
-
-
-    [RelayCommand]
-    public void CloseWindow()
-    {
-        Application.Current.Shutdown();
-    }
-
 
     [RelayCommand]
     public void SwitchView()
@@ -126,8 +98,10 @@ public partial class DiaryViewModel : ObservableObject
     }
 
 
-    public void GetAllEntries(string title, string message, string date)
+    public ObservableCollection<DiaryEntryModel> GetAllEntries(string title, string message, string date)
     {
+        ObservableCollection<DiaryEntryModel> entries = new ObservableCollection<DiaryEntryModel>();
+
         try
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(@$"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=DiaryEntryDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;"))
@@ -136,7 +110,7 @@ public partial class DiaryViewModel : ObservableObject
 
                 foreach (var item in output)
                 {
-                    Entries.Add(item);
+                    entries.Add(item);
                 }
             }
         }
@@ -144,6 +118,8 @@ public partial class DiaryViewModel : ObservableObject
         {
             MessageBox.Show(exc.Message);
         }
+
+        return entries;
     }
 
     public void InsertDiaryEntry(string title, string message, string date)
