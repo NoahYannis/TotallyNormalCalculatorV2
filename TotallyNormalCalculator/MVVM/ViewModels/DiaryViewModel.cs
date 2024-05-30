@@ -145,7 +145,8 @@ public partial class DiaryViewModel : BaseViewModel
     {
         using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.GetConnectionString("DiaryEntryDB")))
         {
-            connection.Execute("DELETE FROM dbo.Entries WHERE Title = @Title AND Message = @Message AND Date = @Date", new { Title = title, Message = message, Date = date });
+            connection.Execute("DELETE FROM dbo.Entries WHERE Title = @Title AND Message = @Message AND Date = @Date",
+                new { Title = title, Message = message, Date = date });
             Entries.Remove(SelectedEntry);
         }
 
