@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 using System.Windows;
+using System.Windows.Data;
 using TotallyNormalCalculator.Core;
 using TotallyNormalCalculator.MVVM.Model;
 
@@ -46,6 +47,27 @@ public partial class DiaryViewModel : BaseViewModel
     public void AddEntry()
     {
         InsertDiaryEntry(Title, Message, Date);
+    }
+
+    [RelayCommand]
+    public void UpdateEntry()
+    {
+        using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.GetConnectionString("DiaryEntryDB")))
+        {
+            try
+            {   
+                string sqlStatement = "UPDATE dbo.Entries SET Title = @Title, Message = @Message, Date = @Date WHERE Title = @Title";
+                connection.Execute(sqlStatement, new { SelectedEntry.Title, SelectedEntry.Message, SelectedEntry.Date });
+                SelectedEntry.Title = Title;
+                SelectedEntry.Message = Message;
+                SelectedEntry.Date = Date;
+                CollectionViewSource.GetDefaultView(Entries).Refresh();
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show($"There was an error: {exc.Message}");
+            }
+        }
     }
 
     [RelayCommand]

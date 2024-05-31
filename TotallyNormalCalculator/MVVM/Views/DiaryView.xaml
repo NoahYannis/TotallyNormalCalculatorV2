@@ -69,10 +69,10 @@
         <ListView
             Margin="0,25,0,0"
             core:ListBoxScrollOnNewEntry.ScrollOnNewItem="True"
-            DataContext="{Binding}"
             ItemContainerStyle="{StaticResource DiaryEntries}"
-            ItemsSource="{Binding Entries}"
-            SelectedItem="{Binding SelectedEntry}" />
+            ItemsSource="{Binding Entries, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            SelectedItem="{Binding SelectedEntry, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            SelectionMode="Single" />
 
         <Grid Grid.Column="1">
             <Grid.ColumnDefinitions>
@@ -207,13 +207,13 @@
                     Style="{StaticResource DiaryButtons}" />
 
                 <Button
-                    Command="{Binding ReadEntryCommand}"
-                    Content="Read"
+                    Command="{Binding AddEntryCommand}"
+                    Content="Add"
                     Style="{StaticResource DiaryButtons}" />
 
                 <Button
-                    Command="{Binding AddEntryCommand}"
-                    Content="Add"
+                    Command="{Binding UpdateEntryCommand}"
+                    Content="Update"
                     Style="{StaticResource DiaryButtons}" />
 
                 <Button

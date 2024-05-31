@@ -27,13 +27,13 @@
                             <StackPanel>
                                 <Label
                                     Name="EntryTitle"
-                                    Content="{Binding Title}"
+                                    Content="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     FontSize="12"
                                     FontWeight="DemiBold"
                                     Foreground="Black" />
                                 <Label
                                     Name="EntryMessage"
-                                    Content="{Binding Message}"
+                                    Content="{Binding Message, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     FontSize="10"
                                     Foreground="Black" />
                             </StackPanel>
