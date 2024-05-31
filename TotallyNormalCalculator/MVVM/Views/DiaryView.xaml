@@ -10,6 +10,7 @@
     xmlns:viewmodels="clr-namespace:TotallyNormalCalculator.MVVM.ViewModels"
     d:DesignHeight="600"
     d:DesignWidth="650"
+    FontSize="15"
     mc:Ignorable="d">
 
 
@@ -148,7 +149,6 @@
                     VerticalAlignment="Bottom"
                     VerticalContentAlignment="Center"
                     core:CornerRadiusSetter.CornerRadius="5"
-                    FontSize="15"
                     Text="{Binding Date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                 <TextBlock
@@ -156,7 +156,6 @@
                     Margin="0,0,123,16"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
-                    FontSize="15"
                     Foreground="DarkGray"
                     IsHitTestVisible="False"
                     Text="Date">
@@ -182,7 +181,6 @@
                 core:CornerRadiusSetter.CornerRadius="5"
                 AcceptsReturn="True"
                 AcceptsTab="True"
-                FontSize="15"
                 Text="{Binding Message, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 TextWrapping="Wrap"
                 VerticalScrollBarVisibility="Auto" />
@@ -195,7 +193,6 @@
                 Margin="10,5,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                FontSize="15"
                 Foreground="DarkGray"
                 IsHitTestVisible="False"
                 Text="Message">
