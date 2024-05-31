@@ -55,9 +55,10 @@ public partial class DiaryViewModel : BaseViewModel
         using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.GetConnectionString("DiaryEntryDB")))
         {
             try
-            {   
-                string sqlStatement = "UPDATE dbo.Entries SET Title = @Title, Message = @Message, Date = @Date WHERE Title = @Title";
-                connection.Execute(sqlStatement, new { SelectedEntry.Title, SelectedEntry.Message, SelectedEntry.Date });
+            {
+                string sqlStatement = "UPDATE dbo.Entries SET Title = @Title, Message = @Message, Date = @Date WHERE Id = @Id";
+                connection.Execute(sqlStatement, new { SelectedEntry.Id, Title, Message, Date });
+
                 SelectedEntry.Title = Title;
                 SelectedEntry.Message = Message;
                 SelectedEntry.Date = Date;
@@ -154,9 +155,9 @@ public partial class DiaryViewModel : BaseViewModel
         {
             try
             {
-                Entries.Add(new DiaryEntryModel { Title = title, Message = message, Date = date });
                 string sqlStatement = "INSERT INTO dbo.Entries (Title, Message, Date) VALUES (@Title, @Message, @Date)";
                 connection.Execute(sqlStatement, new { Title = title, Message = message, Date = date });
+                Entries.Add(new DiaryEntryModel { Title = title, Message = message, Date = date });
             }
             catch (Exception exc)
             {
