@@ -1,22 +1,24 @@
-﻿<Application x:Class="TotallyNormalCalculator.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:viewmodels="clr-namespace:TotallyNormalCalculator.MVVM.ViewModels"
-             xmlns:views="clr-namespace:TotallyNormalCalculator.MVVM.Views"
-             StartupUri="\MVVM\Views\MainWindow.xaml">
+﻿<Application
+    x:Class="TotallyNormalCalculator.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:viewmodels="clr-namespace:TotallyNormalCalculator.MVVM.ViewModels"
+    xmlns:views="clr-namespace:TotallyNormalCalculator.MVVM.Views"
+    StartupUri="\MVVM\Views\MainWindow.xaml">
 
-    <Application.Resources> 
-        <ResourceDictionary >
+    <Application.Resources>
+        <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary x:Name="CalculatorButton" Source="./Themes/CalculatorButtons.xaml"/>
-                <ResourceDictionary x:Name="DiaryEntry" Source="./Themes/DiaryEntries.xaml"/>
-                <ResourceDictionary x:Name="DiaryButtons" Source="./Themes/DiaryButtons.xaml"/>
+                <ResourceDictionary x:Name="CalculatorButton" Source="./Themes/CalculatorButtons.xaml" />
+                <ResourceDictionary x:Name="DiaryEntry" Source="./Themes/DiaryEntries.xaml" />
+                <ResourceDictionary x:Name="DiaryButtons" Source="./Themes/DiaryButtons.xaml" />
+                <ResourceDictionary x:Name="WindowControlButtons" Source="./Themes/WindowControlButtons.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <DataTemplate DataType="{x:Type viewmodels:DiaryViewModel}">
-                <views:DiaryView DataContext="{x:Type viewmodels:DiaryViewModel}"/>
+                <views:DiaryView DataContext="{x:Type viewmodels:DiaryViewModel}" />
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:CalculatorViewModel}">
-                <views:CalculatorView DataContext="{x:Type viewmodels:CalculatorViewModel}"/>
+                <views:CalculatorView DataContext="{x:Type viewmodels:CalculatorViewModel}" />
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>

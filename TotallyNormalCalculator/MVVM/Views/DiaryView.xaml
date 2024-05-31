@@ -5,8 +5,6 @@
     xmlns:core="clr-namespace:TotallyNormalCalculator.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-    xmlns:i1="clr-namespace:Microsoft.VisualBasic;assembly=Microsoft.VisualBasic"
-    xmlns:i2="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:model="clr-namespace:TotallyNormalCalculator.MVVM.Model"
     xmlns:viewmodels="clr-namespace:TotallyNormalCalculator.MVVM.ViewModels"
@@ -23,6 +21,8 @@
         <model:DiaryEntryModel x:Key="DiaryEntryModel" />
     </UserControl.Resources>
 
+
+
     <Grid Background="LightGreen">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150" />
@@ -37,42 +37,30 @@
             AllowDrop="True"
             Background="SkyBlue">
 
-            <Grid
+            <StackPanel
                 MinHeight="25"
                 Margin="0,0,20,0"
-                HorizontalAlignment="Right">
+                HorizontalAlignment="Right"
+                Orientation="Horizontal">
 
                 <Button
-                    Width="18"
-                    Height="18"
-                    Margin="470,0,0,0"
-                    VerticalContentAlignment="Top"
                     Background="LightGreen"
-                    BorderThickness="0"
                     Command="{Binding MinimizeWindowCommand}"
                     Content="🗕"
-                    FontWeight="Bold" />
+                    Style="{StaticResource WindowControlButton}" />
 
                 <Button
-                    Width="18"
-                    Height="18"
-                    Margin="500,0,0,0"
                     Background="LightGreen"
-                    BorderThickness="0"
                     Command="{Binding MaximizeWindowCommand}"
                     Content="□"
-                    FontWeight="ExtraBold" />
+                    Style="{StaticResource WindowControlButton}" />
 
                 <Button
-                    Width="18"
-                    Height="18"
-                    Margin="530,0,0,0"
                     Background="LightGreen"
-                    BorderThickness="0"
                     Command="{Binding CloseWindowCommand}"
                     Content="X"
-                    FontWeight="Bold" />
-            </Grid>
+                    Style="{StaticResource WindowControlButton}" />
+            </StackPanel>
         </Border>
 
         <Grid
@@ -233,7 +221,6 @@
                 Orientation="Horizontal">
 
                 <Button
-                    VerticalAlignment="Center"
                     Command="{Binding DeleteEntryCommand}"
                     Content="Delete"
                     Style="{StaticResource DiaryButtons}" />
@@ -254,7 +241,6 @@
                     Command="{Binding SwitchViewCommand}"
                     Content="Calculator ⭯"
                     Style="{StaticResource DiaryButtons}" />
-
             </StackPanel>
         </Grid>
         <ContentControl Grid.ColumnSpan="2" Content="{Binding SelectedViewModel}" />
