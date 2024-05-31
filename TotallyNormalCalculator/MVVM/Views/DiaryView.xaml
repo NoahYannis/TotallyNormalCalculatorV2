@@ -64,18 +64,11 @@
             </StackPanel>
         </Border>
 
-        <Grid
-            Grid.Column="0"
-            Grid.ColumnSpan="2"
-            Height="0"
-            VerticalAlignment="Center"
-            Background="LightGreen" />
+        <Grid VerticalAlignment="Center" Background="LightGreen" />
 
         <ListView
-            Grid.Column="0"
             Margin="0,25,0,0"
             core:ListBoxScrollOnNewEntry.ScrollOnNewItem="True"
-            BorderThickness="0"
             DataContext="{Binding}"
             ItemContainerStyle="{StaticResource DiaryEntries}"
             ItemsSource="{Binding Entries}"
@@ -115,14 +108,12 @@
                     VerticalAlignment="Bottom"
                     VerticalContentAlignment="Center"
                     core:CornerRadiusSetter.CornerRadius="5"
-                    FontSize="15"
                     Text="{Binding Path=Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                 <TextBlock
                     Margin="15,0,0,16"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Bottom"
-                    FontSize="15"
                     Foreground="DarkGray"
                     IsHitTestVisible="False"
                     Text="Title">
@@ -159,7 +150,6 @@
                     Foreground="DarkGray"
                     IsHitTestVisible="False"
                     Text="Date">
-
                     <TextBlock.Style>
                         <Style TargetType="TextBlock">
                             <Setter Property="Visibility" Value="Collapsed" />
