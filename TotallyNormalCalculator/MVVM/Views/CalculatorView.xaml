@@ -19,211 +19,204 @@
 
 
     <Grid>
-        <Grid>
-            <Border
-                Grid.ColumnSpan="2"
-                core:EnableDragHelper.EnableDrag="True"
-                Background="#252525">
+        <Border core:EnableDragHelper.EnableDrag="True" Background="#252525">
 
-                <StackPanel
-                    Margin="0,20,50,0"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Top"
-                    Orientation="Horizontal">
-
-                    <Button
-                        Background="Gray"
-                        Command="{Binding MinimizeWindowCommand}"
-                        Content="🗕"
-                        Style="{StaticResource WindowControlButton}" />
-
-                    <Button
-                        Background="Gray"
-                        Command="{Binding MaximizeWindowCommand}"
-                        Content="□"
-                        Style="{StaticResource WindowControlButton}" />
-
-                    <Button
-                        Background="Gray"
-                        Command="{Binding CloseWindowCommand}"
-                        Content="X"
-                        Style="{StaticResource WindowControlButton}" />
-                </StackPanel>
-            </Border>
-
-            <Grid
-                Grid.ColumnSpan="2"
-                Margin="0,70,0,0"
-                HorizontalAlignment="Center"
+            <StackPanel
+                Margin="0,20,50,0"
+                HorizontalAlignment="Right"
                 VerticalAlignment="Top"
-                Background="Gray">
-                <Label
-                    Width="500"
-                    Height="75"
-                    Margin="30,0,30,0"
-                    HorizontalAlignment="Stretch"
-                    HorizontalContentAlignment="Right"
-                    VerticalContentAlignment="Center"
-                    Content="{Binding CalculatorText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                    FontSize="40"
-                    FontWeight="DemiBold" />
-            </Grid>
-
-            <Grid Grid.ColumnSpan="2" Margin="50,175,50,50">
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-
+                Orientation="Horizontal">
 
                 <Button
-                    Command="{Binding AllClearCommand}"
-                    Content="AC"
-                    Style="{StaticResource CalculatorButtons}" />
+                    Background="Gray"
+                    Command="{Binding MinimizeWindowCommand}"
+                    Content="🗕"
+                    Style="{StaticResource WindowControlButton}" />
 
                 <Button
-                    Grid.Column="1"
-                    Command="{Binding RemoveCharacterCommand}"
-                    Content="✄"
-                    Style="{StaticResource CalculatorButtons}" />
+                    Background="Gray"
+                    Command="{Binding MaximizeWindowCommand}"
+                    Content="□"
+                    Style="{StaticResource WindowControlButton}" />
 
                 <Button
-                    Grid.Column="2"
-                    Command="{Binding SetOperationCommand}"
-                    Content="√"
-                    Style="{StaticResource CalculatorButtons}" />
+                    Background="Gray"
+                    Command="{Binding CloseWindowCommand}"
+                    Content="X"
+                    Style="{StaticResource WindowControlButton}" />
+            </StackPanel>
+        </Border>
 
-                <Button
-                    Grid.Column="3"
-                    Command="{Binding SetOperationCommand}"
-                    Content="÷"
-                    Style="{StaticResource CalculatorButtons}" />
+        <Grid
+            Margin="0,70,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Background="Gray">
+            <Label
+                Width="500"
+                Height="75"
+                Margin="0,0,10,0"
+                HorizontalContentAlignment="Right"
+                VerticalContentAlignment="Center"
+                Content="{Binding CalculatorText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                FontSize="40"
+                FontWeight="DemiBold" />
+        </Grid>
 
-                <Button
-                    Grid.Row="1"
-                    Command="{Binding AddCharacterCommand}"
-                    Content="7"
-                    Style="{StaticResource CalculatorButtons}" />
+        <Grid Margin="50,175,50,50">
 
-                <Button
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    Command="{Binding AddCharacterCommand}"
-                    Content="8"
-                    Style="{StaticResource CalculatorButtons}" />
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
 
-                <Button
-                    Grid.Row="1"
-                    Grid.Column="2"
-                    Command="{Binding AddCharacterCommand}"
-                    Content="9"
-                    Style="{StaticResource CalculatorButtons}" />
 
-                <Button
-                    Grid.Row="1"
-                    Grid.Column="3"
-                    Command="{Binding SetOperationCommand}"
-                    Content="×"
-                    Style="{StaticResource CalculatorButtons}" />
+            <Button
+                Command="{Binding AllClearCommand}"
+                Content="AC"
+                Style="{StaticResource CalculatorButtons}" />
 
-                <Button
-                    Grid.Row="2"
-                    Command="{Binding AddCharacterCommand}"
-                    Content="4"
-                    Style="{StaticResource CalculatorButtons}" />
+            <Button
+                Grid.Column="1"
+                Command="{Binding RemoveCharacterCommand}"
+                Content="✄"
+                Style="{StaticResource CalculatorButtons}" />
 
-                <Button
-                    Grid.Row="2"
-                    Grid.Column="1"
-                    Command="{Binding AddCharacterCommand}"
-                    Content="5"
-                    Style="{StaticResource CalculatorButtons}" />
+            <Button
+                Grid.Column="2"
+                Command="{Binding SetOperationCommand}"
+                Content="√"
+                Style="{StaticResource CalculatorButtons}" />
 
-                <Button
-                    Grid.Row="2"
-                    Grid.Column="2"
-                    Command="{Binding AddCharacterCommand}"
-                    Content="6"
-                    Style="{StaticResource CalculatorButtons}" />
+            <Button
+                Grid.Column="3"
+                Command="{Binding SetOperationCommand}"
+                Content="÷"
+                Style="{StaticResource CalculatorButtons}" />
 
-                <Button
-                    Grid.Row="2"
-                    Grid.Column="3"
-                    Command="{Binding SetOperationCommand}"
-                    Content="-"
-                    Style="{StaticResource CalculatorButtons}" />
+            <Button
+                Grid.Row="1"
+                Command="{Binding AddCharacterCommand}"
+                Content="7"
+                Style="{StaticResource CalculatorButtons}" />
 
-                <Button
-                    Grid.Row="3"
-                    Command="{Binding AddCharacterCommand}"
-                    Content="1"
-                    Style="{StaticResource CalculatorButtons}" />
+            <Button
+                Grid.Row="1"
+                Grid.Column="1"
+                Command="{Binding AddCharacterCommand}"
+                Content="8"
+                Style="{StaticResource CalculatorButtons}" />
 
-                <Button
-                    Grid.Row="3"
-                    Grid.Column="1"
-                    Command="{Binding AddCharacterCommand}"
-                    Content="2"
-                    Style="{StaticResource CalculatorButtons}" />
+            <Button
+                Grid.Row="1"
+                Grid.Column="2"
+                Command="{Binding AddCharacterCommand}"
+                Content="9"
+                Style="{StaticResource CalculatorButtons}" />
 
-                <Button
-                    Grid.Row="3"
-                    Grid.Column="2"
-                    Command="{Binding AddCharacterCommand}"
-                    Content="3"
-                    Style="{StaticResource CalculatorButtons}" />
+            <Button
+                Grid.Row="1"
+                Grid.Column="3"
+                Command="{Binding SetOperationCommand}"
+                Content="×"
+                Style="{StaticResource CalculatorButtons}" />
 
-                <Button
-                    Grid.Row="3"
-                    Grid.Column="3"
-                    Command="{Binding SetOperationCommand}"
-                    Content="+"
-                    Style="{StaticResource CalculatorButtons}" />
+            <Button
+                Grid.Row="2"
+                Command="{Binding AddCharacterCommand}"
+                Content="4"
+                Style="{StaticResource CalculatorButtons}" />
 
-                <Button
-                    Grid.Row="4"
-                    Command="{Binding AddCharacterCommand}"
-                    Content="0"
-                    Style="{StaticResource CalculatorButtons}" />
+            <Button
+                Grid.Row="2"
+                Grid.Column="1"
+                Command="{Binding AddCharacterCommand}"
+                Content="5"
+                Style="{StaticResource CalculatorButtons}" />
 
-                <Button
-                    Grid.Row="4"
-                    Grid.Column="1"
-                    Content="."
-                    Style="{StaticResource CalculatorButtons}">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="Click">
-                            <i:InvokeCommandAction Command="{Binding AddCharacterCommand}" CommandParameter="." />
-                            <i:InvokeCommandAction Command="{Binding SwitchViewCommand}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </Button>
+            <Button
+                Grid.Row="2"
+                Grid.Column="2"
+                Command="{Binding AddCharacterCommand}"
+                Content="6"
+                Style="{StaticResource CalculatorButtons}" />
 
-                <Button
-                    Grid.Row="4"
-                    Grid.Column="2"
-                    Command="{Binding SetOperationCommand}"
-                    CommandParameter="^"
-                    Content="xⁿ"
-                    Style="{StaticResource CalculatorButtons}" />
+            <Button
+                Grid.Row="2"
+                Grid.Column="3"
+                Command="{Binding SetOperationCommand}"
+                Content="-"
+                Style="{StaticResource CalculatorButtons}" />
 
-                <Button
-                    Grid.Row="4"
-                    Grid.Column="4"
-                    Command="{Binding CalculateCommand}"
-                    Content="="
-                    Style="{StaticResource CalculatorButtons}" />
-            </Grid>
+            <Button
+                Grid.Row="3"
+                Command="{Binding AddCharacterCommand}"
+                Content="1"
+                Style="{StaticResource CalculatorButtons}" />
+
+            <Button
+                Grid.Row="3"
+                Grid.Column="1"
+                Command="{Binding AddCharacterCommand}"
+                Content="2"
+                Style="{StaticResource CalculatorButtons}" />
+
+            <Button
+                Grid.Row="3"
+                Grid.Column="2"
+                Command="{Binding AddCharacterCommand}"
+                Content="3"
+                Style="{StaticResource CalculatorButtons}" />
+
+            <Button
+                Grid.Row="3"
+                Grid.Column="3"
+                Command="{Binding SetOperationCommand}"
+                Content="+"
+                Style="{StaticResource CalculatorButtons}" />
+
+            <Button
+                Grid.Row="4"
+                Command="{Binding AddCharacterCommand}"
+                Content="0"
+                Style="{StaticResource CalculatorButtons}" />
+
+            <Button
+                Grid.Row="4"
+                Grid.Column="1"
+                Content="."
+                Style="{StaticResource CalculatorButtons}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <i:InvokeCommandAction Command="{Binding AddCharacterCommand}" CommandParameter="." />
+                        <i:InvokeCommandAction Command="{Binding SwitchViewCommand}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
+
+            <Button
+                Grid.Row="4"
+                Grid.Column="2"
+                Command="{Binding SetOperationCommand}"
+                CommandParameter="^"
+                Content="xⁿ"
+                Style="{StaticResource CalculatorButtons}" />
+
+            <Button
+                Grid.Row="4"
+                Grid.Column="4"
+                Command="{Binding CalculateCommand}"
+                Content="="
+                Style="{StaticResource CalculatorButtons}" />
         </Grid>
         <ContentControl Content="{Binding SelectedViewModel}" />
     </Grid>
