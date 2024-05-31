@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Data;
 using TotallyNormalCalculator.Core;
 using TotallyNormalCalculator.MVVM.Model;
+using System.Data.SqlClient;
 
 
 namespace TotallyNormalCalculator.MVVM.ViewModels;
@@ -52,7 +53,7 @@ public partial class DiaryViewModel : BaseViewModel
     [RelayCommand]
     public void UpdateEntry()
     {
-        using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.GetConnectionString("DiaryEntryDB")))
+        using (IDbConnection connection = new SqlConnection(Helper.GetConnectionString("DiaryEntryDB")))
         {
             try
             {
@@ -126,7 +127,7 @@ public partial class DiaryViewModel : BaseViewModel
 
         try
         {
-            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.GetConnectionString("DiaryEntryDB")))
+            using (IDbConnection connection = new SqlConnection(Helper.GetConnectionString("DiaryEntryDB")))
             {
                 var output = connection.Query<DiaryEntryModel>("select * from dbo.Entries", new { Title = title, Message = message, Date = date });
 
@@ -151,13 +152,13 @@ public partial class DiaryViewModel : BaseViewModel
 
     private void InsertDiaryEntry(string title, string message, string date)
     {
-        using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.GetConnectionString("DiaryEntryDB")))
+        using (IDbConnection connection = new SqlConnection(Helper.GetConnectionString("DiaryEntryDB")))
         {
             try
             {
                 string sqlStatement = "INSERT INTO dbo.Entries (Title, Message, Date) VALUES (@Title, @Message, @Date)";
                 connection.Execute(sqlStatement, new { Title = title, Message = message, Date = date });
-                Entries.Add(new DiaryEntryModel { Title = title, Message = message, Date = date });
+                Entries.Add(new DiaryEntryModel {Title = title, Message = message, Date = date });
             }
             catch (Exception exc)
             {
@@ -171,7 +172,7 @@ public partial class DiaryViewModel : BaseViewModel
 
     private void ExecuteDeleteEntry(string title, string message, string date)
     {
-        using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.GetConnectionString("DiaryEntryDB")))
+        using (IDbConnection connection = new SqlConnection(Helper.GetConnectionString("DiaryEntryDB")))
         {
             connection.Execute("DELETE FROM dbo.Entries WHERE Title = @Title AND Message = @Message AND Date = @Date",
                 new { Title = title, Message = message, Date = date });
