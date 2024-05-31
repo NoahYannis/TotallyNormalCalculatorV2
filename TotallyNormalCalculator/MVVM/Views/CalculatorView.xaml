@@ -24,41 +24,31 @@
                 Grid.ColumnSpan="2"
                 core:EnableDragHelper.EnableDrag="True"
                 Background="#252525">
-                <Grid
-                    Margin="0,20,0,0"
+
+                <StackPanel
+                    Margin="0,20,50,0"
                     HorizontalAlignment="Right"
-                    VerticalAlignment="Top">
+                    VerticalAlignment="Top"
+                    Orientation="Horizontal">
 
                     <Button
-                        Width="20"
-                        Height="20"
-                        Margin="0,0,80,0"
-                        VerticalContentAlignment="Top"
                         Background="Gray"
-                        BorderThickness="0"
                         Command="{Binding MinimizeWindowCommand}"
                         Content="🗕"
-                        FontWeight="Bold" />
+                        Style="{StaticResource WindowControlButton}" />
 
                     <Button
-                        Width="20"
-                        Height="20"
-                        Margin="0,0,40,0"
                         Background="Gray"
-                        BorderThickness="0"
                         Command="{Binding MaximizeWindowCommand}"
                         Content="□"
-                        FontWeight="ExtraBold" />
+                        Style="{StaticResource WindowControlButton}" />
 
                     <Button
-                        Width="20"
-                        Height="20"
                         Background="Gray"
-                        BorderThickness="0"
                         Command="{Binding CloseWindowCommand}"
                         Content="X"
-                        FontWeight="Bold" />
-                </Grid>
+                        Style="{StaticResource WindowControlButton}" />
+                </StackPanel>
             </Border>
 
             <Grid
