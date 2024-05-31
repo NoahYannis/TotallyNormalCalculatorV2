@@ -72,13 +72,7 @@
             DataContext="{Binding}"
             ItemContainerStyle="{StaticResource DiaryEntries}"
             ItemsSource="{Binding Entries}"
-            SelectedItem="{Binding SelectedEntry}">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="MouseDoubleClick">
-                    <i:InvokeCommandAction Command="{Binding ReadEntryCommand}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </ListView>
+            SelectedItem="{Binding SelectedEntry}" />
 
         <Grid Grid.Column="1">
             <Grid.ColumnDefinitions>

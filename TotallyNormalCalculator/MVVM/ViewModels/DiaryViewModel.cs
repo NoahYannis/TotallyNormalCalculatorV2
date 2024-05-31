@@ -49,7 +49,7 @@ public partial class DiaryViewModel : BaseViewModel
     }
 
     [RelayCommand]
-    public void ReadEntry()
+    public void ReadEntry(DiaryEntryModel diaryEntry)
     {
         if (!Entries.Any())
         {
@@ -58,16 +58,16 @@ public partial class DiaryViewModel : BaseViewModel
             return;
         }
 
-        if (SelectedEntry is null)
+        if (diaryEntry is null)
         {
             MessageBox.Show("Please select an entry to read.", "TotallyNormalCalculator",
                 MessageBoxButton.OK, MessageBoxImage.Information);
             return;
         }
 
-        Title = SelectedEntry.Title;
-        Message = SelectedEntry.Message;
-        Date = SelectedEntry.Date;
+        Title = diaryEntry.Title;
+        Message = diaryEntry.Message;
+        Date = diaryEntry.Date;
     }
 
     [RelayCommand]
@@ -119,6 +119,11 @@ public partial class DiaryViewModel : BaseViewModel
         }
 
         return entries;
+    }
+
+    partial void OnSelectedEntryChanged(DiaryEntryModel value)
+    {
+        ReadEntry(value);
     }
 
     private void InsertDiaryEntry(string title, string message, string date)
