@@ -17,7 +17,6 @@
         <viewmodels:CalculatorViewModel />
     </UserControl.DataContext>
 
-
     <Grid>
         <Border core:EnableDragHelper.EnableDrag="True" Background="#252525">
 
