@@ -131,7 +131,7 @@ public partial class DiaryViewModel : BaseViewModel
 
         if (delete is MessageBoxResult.Yes)
         {
-            ExecuteDeleteEntry(SelectedEntry.Title, SelectedEntry.Message, SelectedEntry.Date);
+            ExecuteDeleteEntry();
         }
     }
 
@@ -162,16 +162,27 @@ public partial class DiaryViewModel : BaseViewModel
 
     partial void OnSelectedEntryChanged(DiaryEntryModel value)
     {
-        ReadEntry(value);
+        if (value is not null)
+        {
+            ReadEntry(value);
+        }
     }
 
-    private void ExecuteDeleteEntry(string title, string message, string date)
+    private void ExecuteDeleteEntry()
     {
         using (IDbConnection connection = new SqlConnection(Helper.GetConnectionString("DiaryEntryDB")))
         {
-            connection.Execute("DELETE FROM dbo.Entries WHERE Title = @Title AND Message = @Message AND Date = @Date",
-                new { Title = title, Message = message, Date = date });
-            Entries.Remove(SelectedEntry);
+            try
+            {
+                connection.Execute("DELETE FROM dbo.Entries WHERE Id = @Id",
+                    new { SelectedEntry.Id });
+
+                Entries.Remove(SelectedEntry);
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show($"There was an error: {exc.Message}");
+            }
         }
 
         ClearInputFields();
