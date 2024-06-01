@@ -34,7 +34,7 @@ public partial class DiaryViewModel : BaseViewModel
 
     public DiaryViewModel()
     {
-        Entries = GetAllEntries(Title, Message, Date);
+        Entries = GetAllEntries();
     }
 
     [RelayCommand]
@@ -43,11 +43,25 @@ public partial class DiaryViewModel : BaseViewModel
         SelectedViewModel = new CalculatorViewModel();
     }
 
-
     [RelayCommand]
     public void AddEntry()
     {
-        InsertDiaryEntry(Title, Message, Date);
+        using (IDbConnection connection = new SqlConnection(Helper.GetConnectionString("DiaryEntryDB")))
+        {
+            try
+            {
+                string sqlStatement = "INSERT INTO dbo.Entries (Title, Message, Date) VALUES (@Title, @Message, @Date)";
+                connection.Execute(sqlStatement, new { Title, Message, Date });
+                Entries.Add(new DiaryEntryModel { Title = Title, Message = Message, Date = Date });
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show($"There was an error: {exc.Message}");
+                Entries.Remove(SelectedEntry);
+            }
+
+            ClearInputFields();
+        }
     }
 
     [RelayCommand]
@@ -63,6 +77,7 @@ public partial class DiaryViewModel : BaseViewModel
                 SelectedEntry.Title = Title;
                 SelectedEntry.Message = Message;
                 SelectedEntry.Date = Date;
+
                 CollectionViewSource.GetDefaultView(Entries).Refresh();
             }
             catch (Exception exc)
@@ -121,7 +136,7 @@ public partial class DiaryViewModel : BaseViewModel
     }
 
 
-    private ObservableCollection<DiaryEntryModel> GetAllEntries(string title, string message, string date)
+    private ObservableCollection<DiaryEntryModel> GetAllEntries()
     {
         var entries = new ObservableCollection<DiaryEntryModel>();
 
@@ -129,7 +144,7 @@ public partial class DiaryViewModel : BaseViewModel
         {
             using (IDbConnection connection = new SqlConnection(Helper.GetConnectionString("DiaryEntryDB")))
             {
-                var output = connection.Query<DiaryEntryModel>("select * from dbo.Entries", new { Title = title, Message = message, Date = date });
+                var output = connection.Query<DiaryEntryModel>("select * from dbo.Entries", new { Title, Message, Date });
 
                 foreach (var item in output)
                 {
@@ -148,26 +163,6 @@ public partial class DiaryViewModel : BaseViewModel
     partial void OnSelectedEntryChanged(DiaryEntryModel value)
     {
         ReadEntry(value);
-    }
-
-    private void InsertDiaryEntry(string title, string message, string date)
-    {
-        using (IDbConnection connection = new SqlConnection(Helper.GetConnectionString("DiaryEntryDB")))
-        {
-            try
-            {
-                string sqlStatement = "INSERT INTO dbo.Entries (Title, Message, Date) VALUES (@Title, @Message, @Date)";
-                connection.Execute(sqlStatement, new { Title = title, Message = message, Date = date });
-                Entries.Add(new DiaryEntryModel {Title = title, Message = message, Date = date });
-            }
-            catch (Exception exc)
-            {
-                MessageBox.Show($"There was an error: {exc.Message}");
-                Entries.Remove(SelectedEntry);
-            }
-
-            ClearInputFields();
-        }
     }
 
     private void ExecuteDeleteEntry(string title, string message, string date)
