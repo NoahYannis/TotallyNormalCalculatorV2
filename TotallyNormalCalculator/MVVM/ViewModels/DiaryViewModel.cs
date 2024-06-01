@@ -188,7 +188,7 @@ public partial class DiaryViewModel : BaseViewModel
         ClearInputFields();
     }
 
-    private void ClearInputFields()
+    internal void ClearInputFields()
     {
         Title = Message = Date = string.Empty;
     }
