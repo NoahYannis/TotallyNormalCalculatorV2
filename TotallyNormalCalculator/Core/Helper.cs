@@ -11,7 +11,6 @@ public static class Helper
     {
         try
         {
-
             return ConfigurationManager.ConnectionStrings[0].ConnectionString;
         }
         catch (Exception exc)
