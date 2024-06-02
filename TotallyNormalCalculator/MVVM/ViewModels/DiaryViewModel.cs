@@ -71,6 +71,9 @@ public partial class DiaryViewModel : BaseViewModel
     [RelayCommand]
     public void UpdateEntry()
     {
+        if (SelectedEntry is null)
+            return;
+
         using (IDbConnection connection = new SqlConnection(Helper.GetConnectionString("DiaryEntryDB")))
         {
             try
@@ -119,7 +122,7 @@ public partial class DiaryViewModel : BaseViewModel
     {
         if (!Entries.Any())
         {
-            MessageBox.Show("Please select an entry to delete.", "TotallyNormalCalculator",
+            MessageBox.Show("There are no entries to delete.", "TotallyNormalCalculator",
                 MessageBoxButton.OK, MessageBoxImage.Information);
             return;
         }
