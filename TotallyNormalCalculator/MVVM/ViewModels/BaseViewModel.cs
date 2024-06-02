@@ -8,7 +8,6 @@ public partial class BaseViewModel : ObservableObject
     [ObservableProperty]
     private ObservableObject _selectedViewModel;
 
-
     [RelayCommand]
     public void MaximizeWindow()
     {
@@ -16,13 +15,11 @@ public partial class BaseViewModel : ObservableObject
             Application.Current.MainWindow.WindowState != WindowState.Maximized ? WindowState.Maximized : WindowState.Normal;
     }
 
-
     [RelayCommand]
     public void MinimizeWindow()
     {
         Application.Current.MainWindow.WindowState = WindowState.Minimized;
     }
-
 
     [RelayCommand]
     public void CloseWindow()

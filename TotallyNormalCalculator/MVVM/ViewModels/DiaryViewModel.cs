@@ -10,6 +10,7 @@ using System.Windows.Data;
 using TotallyNormalCalculator.Core;
 using TotallyNormalCalculator.MVVM.Model;
 using System.Data.SqlClient;
+using TotallyNormalCalculator.Logging;
 
 
 namespace TotallyNormalCalculator.MVVM.ViewModels;
@@ -31,6 +32,8 @@ public partial class DiaryViewModel : BaseViewModel
 
     [ObservableProperty]
     private string _date;
+
+    private readonly TotallyNormalCalculatorLogger _diaryLogger = new();
 
     public DiaryViewModel()
     {
@@ -56,7 +59,8 @@ public partial class DiaryViewModel : BaseViewModel
             }
             catch (Exception exc)
             {
-                MessageBox.Show($"There was an error: {exc.Message}");
+                MessageBox.Show($"Ein Fehler ist aufgetreten: {exc.Message}");
+                _diaryLogger.LogExceptionToTempFile(exc);
                 Entries.Remove(SelectedEntry);
             }
 
@@ -82,7 +86,8 @@ public partial class DiaryViewModel : BaseViewModel
             }
             catch (Exception exc)
             {
-                MessageBox.Show($"There was an error: {exc.Message}");
+                MessageBox.Show($"Ein Fehler ist aufgetreten: {exc.Message}");
+                _diaryLogger.LogExceptionToTempFile(exc);
             }
         }
     }
@@ -142,10 +147,10 @@ public partial class DiaryViewModel : BaseViewModel
 
         try
         {
+            throw new Exception("Hey Vsauce, michael here!");
             using (IDbConnection connection = new SqlConnection(Helper.GetConnectionString("DiaryEntryDB")))
             {
                 var output = connection.Query<DiaryEntryModel>("select * from dbo.Entries", new { Title, Message, Date });
-
                 foreach (var item in output)
                 {
                     entries.Add(item);
@@ -154,7 +159,8 @@ public partial class DiaryViewModel : BaseViewModel
         }
         catch (Exception exc)
         {
-            MessageBox.Show(exc.Message);
+            MessageBox.Show($"Ein Fehler ist aufgetreten: {exc.Message}");
+            _diaryLogger.LogExceptionToTempFile(exc);
         }
 
         return entries;
@@ -181,7 +187,8 @@ public partial class DiaryViewModel : BaseViewModel
             }
             catch (Exception exc)
             {
-                MessageBox.Show($"There was an error: {exc.Message}");
+                MessageBox.Show($"Ein Fehler ist aufgetreten: {exc.Message}");
+                _diaryLogger.LogExceptionToTempFile(exc);
             }
         }
 

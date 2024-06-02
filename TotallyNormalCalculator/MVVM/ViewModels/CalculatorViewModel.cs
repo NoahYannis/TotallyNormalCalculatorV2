@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
+using TotallyNormalCalculator.Logging;
 
 namespace TotallyNormalCalculator.MVVM.ViewModels;
 
@@ -20,6 +21,8 @@ public partial class CalculatorViewModel : BaseViewModel
 
     [ObservableProperty]
     private double _result;
+
+    private readonly TotallyNormalCalculatorLogger _calculatorLogger = new();
 
     private int switchViewCounter;
     private string firstPartOfNumber;
@@ -62,8 +65,9 @@ public partial class CalculatorViewModel : BaseViewModel
                 SecondNumber = double.Parse(CalculatorText);
             }
         }
-        catch (Exception)
+        catch (Exception exc)
         {
+            _calculatorLogger.LogExceptionToTempFile(exc);
         }
     }
 
@@ -121,9 +125,10 @@ public partial class CalculatorViewModel : BaseViewModel
         {
             FirstNumber = Convert.ToDouble(Result); // Continue calculation with the result as the first number
         }
-        catch (Exception)
+        catch (Exception exc)
         {
             AllClear();
+            _calculatorLogger.LogExceptionToTempFile(exc);
         }
 
         SecondNumber = 0;
@@ -188,9 +193,9 @@ public partial class CalculatorViewModel : BaseViewModel
                 SecondNumber = SetCalculationNumber(newNumber, numberToSet: SecondNumber);
             }
         }
-        catch (Exception)
+        catch (Exception exc)
         {
-            CalculatorText = "An error occurred";
+            _calculatorLogger.LogExceptionToTempFile(exc);
         }
     }
 
@@ -221,9 +226,9 @@ public partial class CalculatorViewModel : BaseViewModel
             secondPartOfNumber = CalculatorText.Substring(decimalIndex, CalculatorText.Length - decimalIndex);
             return Convert.ToDouble(firstPartOfNumber + secondPartOfNumber);
         }
-
-        catch (Exception)
+        catch (Exception exc)
         {
+            _calculatorLogger.LogExceptionToTempFile(exc);
         }
 
         return number;
