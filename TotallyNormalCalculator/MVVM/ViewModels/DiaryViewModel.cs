@@ -147,7 +147,6 @@ public partial class DiaryViewModel : BaseViewModel
 
         try
         {
-            throw new Exception("Hey Vsauce, michael here!");
             using (IDbConnection connection = new SqlConnection(Helper.GetConnectionString("DiaryEntryDB")))
             {
                 var output = connection.Query<DiaryEntryModel>("select * from dbo.Entries", new { Title, Message, Date });
