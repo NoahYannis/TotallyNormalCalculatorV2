@@ -1,17 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<OutputType>WinExe</OutputType>
-		<TargetFramework>net8.0-windows</TargetFramework>
-		<UseWPF>true</UseWPF>
-		<ApplicationIcon>CalculatorIcon.ico</ApplicationIcon>
-		<Win32Resource />
-		<StartupObject></StartupObject>
-		<UserSecretsId>09a0ff11-cf90-4ca7-8fca-f11a6659a644</UserSecretsId>
-		<RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
-		<IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
-		<PublishSingleFile>true</PublishSingleFile>
-	</PropertyGroup>
+		<PropertyGroup>
+			<OutputType>WinExe</OutputType>
+			<TargetFramework>net8.0-windows</TargetFramework>
+			<UseWPF>true</UseWPF>
+			<ApplicationIcon>CalculatorIcon.ico</ApplicationIcon>
+			<Win32Resource />
+			<StartupObject></StartupObject>
+			<UserSecretsId>09a0ff11-cf90-4ca7-8fca-f11a6659a644</UserSecretsId>
+			<SelfContained>true</SelfContained>
+			<RuntimeIdentifier>win-x64</RuntimeIdentifier>
+			<IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+			<PublishSingleFile>true</PublishSingleFile>
+			<UseAppHost>true</UseAppHost>
+		</PropertyGroup>
 
 	<ItemGroup>
 		<Compile Remove="MVVM\Model\CalculationModel.cs" />
@@ -42,13 +44,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Update="App.config">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </None>
-	  <None Update="App.Release.config">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </None>
+   <None Update="App.config">
+     <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+   </None>
+   <None Update="App.Release.config">
+     <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+   </None>
 	</ItemGroup>
-
 
 </Project>

@@ -5,9 +5,8 @@ using System.Windows;
 namespace TotallyNormalCalculator.Logging;
 public class TotallyNormalCalculatorLogger : ILogger
 {
-    private static readonly string logFolderPath = Path.Combine(Path.GetTempPath(), "TotallyNormalCalculator_Logs");
-    private static readonly string logFilePath = Path.Combine(logFolderPath, "tnc-exception.log");
-
+    private static readonly string logFolderPath = Path.Combine(Path.GetTempPath(), "_TotallyNormalCalculator_Logs");
+    private static readonly string logFilePath = Path.Combine(logFolderPath, "tnc.log");
     public void LogExceptionToTempFile(Exception exc)
     {
 
