@@ -18,8 +18,6 @@ public static class Helper
     {
         try
         {
-            var s = CheckIfDatabaseExists(ConfigurationManager.ConnectionStrings[name]?.ConnectionString);
-
             return ConfigurationManager.ConnectionStrings[name]?.ConnectionString;
         }
         catch (Exception exc)
@@ -43,7 +41,7 @@ public static class Helper
         }
         catch (Exception e)
         {
-            _logger.LogMessageToTempFile($"Fehler beim Verbindungsaufbau zur Datenbank in CheckIfDatabaseExists(): {e.Message}\n");
+            _logger.LogMessageToTempFile($"Fehler beim Verbindungsaufbau zur Datenbank in CheckIfDatabaseExists(): {e.Message} - {DateTime.Now}\n");
             return false;
         }
     }
@@ -64,7 +62,7 @@ public static class Helper
         }
         catch (Exception e)
         {
-            _logger.LogMessageToTempFile($"Fehler beim Erstellen der Datenbank in CreateDB(): {e.Message} \n");
+            _logger.LogMessageToTempFile($"Fehler beim Erstellen der Datenbank in CreateDB(): {e.Message} - {DateTime.Now}\n");
             _logger.LogExceptionToTempFile(e);
         }
     }
