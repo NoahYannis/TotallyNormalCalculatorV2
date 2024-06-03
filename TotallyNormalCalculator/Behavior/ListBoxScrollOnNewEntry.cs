@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace TotallyNormalCalculator.Core;
+namespace TotallyNormalCalculator.Behavior;
 
 public class ListBoxScrollOnNewEntry
 {

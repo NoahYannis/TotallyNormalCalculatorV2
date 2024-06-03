@@ -2,7 +2,7 @@
     x:Class="TotallyNormalCalculator.MVVM.Views.DiaryView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:core="clr-namespace:TotallyNormalCalculator.Core"
+    xmlns:behavior="clr-namespace:TotallyNormalCalculator.Behavior"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -34,7 +34,7 @@
             Grid.ColumnSpan="2"
             Height="25"
             VerticalAlignment="Top"
-            core:EnableDragHelper.EnableDrag="True"
+            behavior:EnableDragHelper.EnableDrag="True"
             AllowDrop="True"
             Background="SkyBlue">
 
@@ -68,13 +68,13 @@
 
         <ListView
             Margin="0,25,0,0"
-            core:ListBoxScrollOnNewEntry.ScrollOnNewItem="True"
+            behavior:ListBoxScrollOnNewEntry.ScrollOnNewItem="True"
             ItemContainerStyle="{StaticResource DiaryEntries}"
             ItemsSource="{Binding Entries, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             SelectedItem="{Binding SelectedEntry, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             SelectionMode="Single">
             <i:Interaction.Behaviors>
-                <core:DeselectCurrentListViewEntry />
+                <behavior:DeselectCurrentListViewEntry />
             </i:Interaction.Behaviors>
         </ListView>
 
@@ -105,7 +105,7 @@
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Bottom"
                     VerticalContentAlignment="Center"
-                    core:CornerRadiusSetter.CornerRadius="5"
+                    behavior:CornerRadiusSetter.CornerRadius="5"
                     Text="{Binding Path=Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                 <TextBlock
@@ -137,7 +137,7 @@
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
                     VerticalContentAlignment="Center"
-                    core:CornerRadiusSetter.CornerRadius="5"
+                    behavior:CornerRadiusSetter.CornerRadius="5"
                     Text="{Binding Date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                 <TextBlock
@@ -166,7 +166,7 @@
                 Grid.Row="1"
                 Grid.Column="1"
                 Margin="5,0,25,0"
-                core:CornerRadiusSetter.CornerRadius="5"
+                behavior:CornerRadiusSetter.CornerRadius="5"
                 AcceptsReturn="True"
                 AcceptsTab="True"
                 Text="{Binding Message, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"

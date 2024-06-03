@@ -5,7 +5,7 @@ using System.Windows.Media;
 using Microsoft.Xaml.Behaviors;
 using TotallyNormalCalculator.MVVM.ViewModels;
 
-namespace TotallyNormalCalculator.Core;
+namespace TotallyNormalCalculator.Behavior;
 
 /// <summary>
 /// A behavior to deselect the current item in a ListView when clicking outside of the items.
@@ -29,7 +29,7 @@ public class DeselectCurrentListViewEntry : Behavior<ListView>
         var listView = sender as ListView;
         var hitTestResult = VisualTreeHelper.HitTest(listView, e.GetPosition(listView));
 
-        
+
         // Check if click was outside of the ListView
         if (hitTestResult == null)
             return;
