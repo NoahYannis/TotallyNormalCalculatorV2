@@ -10,6 +10,7 @@
 			<UserSecretsId>09a0ff11-cf90-4ca7-8fca-f11a6659a644</UserSecretsId>
 			<SelfContained>true</SelfContained>
 			<RuntimeIdentifier>win-x64</RuntimeIdentifier>
+			<IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
 			<IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
 			<PublishSingleFile>true</PublishSingleFile>
 			<UseAppHost>true</UseAppHost>
