@@ -12,18 +12,13 @@
 			<RuntimeIdentifier>win-x64</RuntimeIdentifier>
 			<IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
 			<IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+			<IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
 			<PublishSingleFile>true</PublishSingleFile>
 			<UseAppHost>true</UseAppHost>
 		</PropertyGroup>
 
 	<ItemGroup>
 		<Compile Remove="MVVM\Model\CalculationModel.cs" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Content Include="appsettings.json">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </Content>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -59,9 +54,6 @@
 
 	<ItemGroup>
    <None Update="App.config">
-     <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-   </None>
-   <None Update="App.Release.config">
      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
    </None>
    <None Update="Properties\Settings.settings">

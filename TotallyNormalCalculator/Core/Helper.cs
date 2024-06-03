@@ -1,25 +1,17 @@
-﻿using Microsoft.Extensions.Configuration;
-using System;
+﻿using System;
 using TotallyNormalCalculator.Logging;
+using System.Configuration;
 
 namespace TotallyNormalCalculator.Core;
 public static class Helper
 {
     private static readonly TotallyNormalCalculatorLogger _logger = new TotallyNormalCalculatorLogger();
-    private static readonly IConfiguration _configuration;
-
-    static Helper()
-    {
-        _configuration = new ConfigurationBuilder()
-            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-            .Build();
-    }
 
     public static string GetConnectionString(string name)
     {
         try
         {
-            return _configuration.GetConnectionString(name);
+            return ConfigurationManager.ConnectionStrings[name].ConnectionString;
         }
         catch (Exception exc)
         {
