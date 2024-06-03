@@ -12,7 +12,7 @@ namespace TotallyNormalCalculator.Core;
 /// </summary>
 public static class Helper
 {
-    private static readonly TotallyNormalCalculatorLogger _logger = new();
+    private static readonly TotallyNormalCalculatorLogger _logger = new TotallyNormalCalculatorLogger();
 
     public static string GetConnectionString(string name)
     {
@@ -22,7 +22,7 @@ public static class Helper
         }
         catch (Exception exc)
         {
-            _logger.LogMessageToTempFile($"Fehler beim Laden des Connection Strings '{name}': {exc.Message}");
+            _logger.LogMessageToTempFile($"Error loading connection string '{name}': {exc.Message}");
             _logger.LogExceptionToTempFile(exc);
         }
 
@@ -36,13 +36,13 @@ public static class Helper
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                _logger.LogMessageToTempFile($"Verbindung zur Datenbank erfolgreich hergestellt - {DateTime.Now}\n");
+                _logger.LogMessageToTempFile($"Successfully connected to the database - {DateTime.Now:dd.MM.yyyy HH:mm:ss}\n");
             }
             return true;
         }
         catch (Exception e)
         {
-            _logger.LogMessageToTempFile($"Fehler beim Verbindungsaufbau zur Datenbank in CheckIfDatabaseExists(): {e.Message} - {DateTime.Now}\n");
+            _logger.LogMessageToTempFile($"Error connecting to the database in CheckIfDatabaseExists(): {e.Message} - {DateTime.Now:dd.MM.yyyy HH:mm:ss}\n");
             return false;
         }
     }
@@ -58,13 +58,13 @@ public static class Helper
                 connection.Open();
                 SqlCommand command = new SqlCommand(script, connection);
                 command.ExecuteNonQuery();
-                _logger.LogMessageToTempFile($"Datenbank DiaryEntryDB erfolgreich erstellt - {DateTime.Now}\n");
+                _logger.LogMessageToTempFile($"Database DiaryEntryDB created successfully - {DateTime.Now:dd.MM.yyyy HH:mm:ss}\n");
             }
 
         }
         catch (Exception e)
         {
-            _logger.LogMessageToTempFile($"Fehler beim Erstellen der Datenbank in CreateDB(): {e.Message} - {DateTime.Now}\n");
+            _logger.LogMessageToTempFile($"Error creating the database in CreateDB(): {e.Message} - {DateTime.Now:dd.MM.yyyy HH:mm:ss}\n");
             _logger.LogExceptionToTempFile(e);
         }
     }

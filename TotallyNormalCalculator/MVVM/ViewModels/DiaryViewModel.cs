@@ -152,7 +152,6 @@ public partial class DiaryViewModel : BaseViewModel
         {
             using (IDbConnection connection = new SqlConnection(Helper.GetConnectionString("DiaryEntryDB")))
             {
-                _diaryLogger.LogMessageToTempFile($"Connection to database established: {connection.ConnectionString} ");
                 var output = connection.Query<DiaryEntryModel>("select * from dbo.Entries", new { Title, Message, Date });
                 foreach (var item in output)
                 {
