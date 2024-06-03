@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Windows;
 using System.Windows.Markup;
+using TotallyNormalCalculator.Core;
 
 namespace TotallyNormalCalculator;
 
@@ -16,6 +17,12 @@ public partial class App : Application
           typeof(FrameworkElement),
           new FrameworkPropertyMetadata(
                 XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
+
+        var connectionString = Helper.GetConnectionString("DiaryEntryDB");
+        if (!Helper.CheckIfDatabaseExists(connectionString))
+        {
+            Helper.CreateDB(connectionString);
+        }
 
         base.OnStartup(e);
     }

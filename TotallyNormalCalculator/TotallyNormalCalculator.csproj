@@ -22,6 +22,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Content Include="Core\dbo.Entries_CREATE.sql">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
+
+	<ItemGroup>
 		<None Include="..\.editorconfig" Link=".editorconfig" />
 	</ItemGroup>
 
@@ -30,7 +36,6 @@
 		<PackageReference Include="Dapper" Version="2.1.35" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.0" />
-		<PackageReference Include="Microsoft.SqlServer.SqlManagementObjects" Version="171.30.0" />
 		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.77" />
 		<PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
 		<PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
@@ -56,9 +61,6 @@
 	<ItemGroup>
    <None Update="App.config">
      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-   </None>
-   <None Update="Core\dbo.Entries_CREATE.sql">
-     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
    </None>
    <None Update="Properties\Settings.settings">
      <Generator>SettingsSingleFileGenerator</Generator>

@@ -3,23 +3,24 @@ using TotallyNormalCalculator.Logging;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Data;
-using Dapper;
 using System.IO;
-using System.Windows;
-using Microsoft.SqlServer.Management.Smo;
-using Microsoft.SqlServer.Management.Common;
 
 namespace TotallyNormalCalculator.Core;
+
+/// <summary>
+/// A helper class to retrieve the DB connection strings and to create the database if it doesn't exist.
+/// </summary>
 public static class Helper
 {
     private static readonly TotallyNormalCalculatorLogger _logger = new TotallyNormalCalculatorLogger();
-
 
     public static string GetConnectionString(string name)
     {
         try
         {
-            return ConfigurationManager.ConnectionStrings[name].ConnectionString;
+            var s = CheckIfDatabaseExists(ConfigurationManager.ConnectionStrings[name]?.ConnectionString);
+
+            return ConfigurationManager.ConnectionStrings[name]?.ConnectionString;
         }
         catch (Exception exc)
         {
@@ -30,26 +31,41 @@ public static class Helper
         return string.Empty;
     }
 
-    public static void CreateDBIfNotExists(string connectionString)
+    public static bool CheckIfDatabaseExists(string connectionString)
     {
-        using (IDbConnection connection = new SqlConnection(connectionString))
+        try
         {
-            try
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
             }
-            catch (SqlException)
+            return true;
+        }
+        catch (Exception e)
+        {
+            _logger.LogMessageToTempFile($"Fehler beim Verbindungsaufbau zur Datenbank in CheckIfDatabaseExists(): {e.Message}\n");
+            return false;
+        }
+    }
+
+    public static void CreateDB(string connectionString)
+    {
+        string script = File.ReadAllText("dbo.Entries_CREATE.sql");
+
+        try
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-
-                FileInfo file = new FileInfo("dbo.Entries_CREATE.sql");
-                string script = file.OpenText().ReadToEnd();
-
-                SqlConnection conn = new SqlConnection(connectionString);
-                Server server = new Server(new ServerConnection(connectionString));
-
-                server.ConnectionContext.ExecuteNonQuery(script);
-                file.OpenText().Close();
+                connection.Open();
+                SqlCommand command = new SqlCommand(script, connection);
+                command.ExecuteNonQuery();
             }
+
+        }
+        catch (Exception e)
+        {
+            _logger.LogMessageToTempFile($"Fehler beim Erstellen der Datenbank in CreateDB(): {e.Message} \n");
+            _logger.LogExceptionToTempFile(e);
         }
     }
 }
