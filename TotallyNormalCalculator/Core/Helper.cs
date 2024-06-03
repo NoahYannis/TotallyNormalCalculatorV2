@@ -12,7 +12,7 @@ namespace TotallyNormalCalculator.Core;
 /// </summary>
 public static class Helper
 {
-    private static readonly TotallyNormalCalculatorLogger _logger = new TotallyNormalCalculatorLogger();
+    private static readonly TotallyNormalCalculatorLogger _logger = new();
 
     public static string GetConnectionString(string name)
     {
@@ -36,6 +36,7 @@ public static class Helper
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
+                _logger.LogMessageToTempFile($"Verbindung zur Datenbank erfolgreich hergestellt - {DateTime.Now}\n");
             }
             return true;
         }
@@ -57,6 +58,7 @@ public static class Helper
                 connection.Open();
                 SqlCommand command = new SqlCommand(script, connection);
                 command.ExecuteNonQuery();
+                _logger.LogMessageToTempFile($"Datenbank DiaryEntryDB erfolgreich erstellt - {DateTime.Now}\n");
             }
 
         }
