@@ -7,7 +7,7 @@ env:
   PROJECT_PATH: TotallyNormalCalculator/TotallyNormalCalculator.csproj
 
 jobs:
-  create-release:
+  create-test-version:
     runs-on: windows-latest  
 
     steps:
