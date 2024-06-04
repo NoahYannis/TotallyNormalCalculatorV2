@@ -32,4 +32,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: build-output
-          path: TotallyNormalCalculator/bin/Release/net8.0/win-x64/publish/*.exe
+          path: TotallyNormalCalculator/bin/Release/net8.0-windows/win-x64/publish/*.exe
