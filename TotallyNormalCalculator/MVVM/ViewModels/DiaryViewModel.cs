@@ -49,7 +49,7 @@ public partial class DiaryViewModel : BaseViewModel
     [RelayCommand]
     public void AddEntry()
     {
-        using (IDbConnection connection = new SqlConnection(Helper.GetConnectionString("DiaryEntryDB")))
+        using (IDbConnection connection = new SqlConnection(DBHelper.GetConnectionString("DiaryEntryDB")))
         {
             try
             {
@@ -74,7 +74,7 @@ public partial class DiaryViewModel : BaseViewModel
         if (SelectedEntry is null)
             return;
 
-        using (IDbConnection connection = new SqlConnection(Helper.GetConnectionString("DiaryEntryDB")))
+        using (IDbConnection connection = new SqlConnection(DBHelper.GetConnectionString("DiaryEntryDB")))
         {
             try
             {
@@ -150,7 +150,7 @@ public partial class DiaryViewModel : BaseViewModel
 
         try
         {
-            using (IDbConnection connection = new SqlConnection(Helper.GetConnectionString("DiaryEntryDB")))
+            using (IDbConnection connection = new SqlConnection(DBHelper.GetConnectionString("DiaryEntryDB")))
             {
                 var output = connection.Query<DiaryEntryModel>("select * from dbo.Entries", new { Title, Message, Date });
                 foreach (var item in output)
@@ -178,7 +178,7 @@ public partial class DiaryViewModel : BaseViewModel
 
     private void ExecuteDeleteEntry()
     {
-        using (IDbConnection connection = new SqlConnection(Helper.GetConnectionString("DiaryEntryDB")))
+        using (IDbConnection connection = new SqlConnection(DBHelper.GetConnectionString("DiaryEntryDB")))
         {
             try
             {

@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Data.SqlClient;
+using System.Globalization;
 using System.Threading;
 using System.Windows;
 using System.Windows.Markup;
@@ -18,11 +19,15 @@ public partial class App : Application
           new FrameworkPropertyMetadata(
                 XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
 
-        var connectionString = Helper.GetConnectionString("DiaryEntryDB");
+        var connectionString = DBHelper.GetConnectionString("DiaryEntryDB");
 
         if (!string.IsNullOrEmpty(connectionString))
         {
-            Helper.CreateDBIfNotExists(connectionString);
+            DBHelper.CreateDBIfNotExists(connectionString);
+            if (!DBHelper.TableExists(connectionString))
+            { 
+                DBHelper.CreateTable(new SqlConnection(connectionString));
+            }
         }
 
         base.OnStartup(e);
