@@ -1,0 +1,35 @@
+name: create-test-version
+
+on:
+  workflow_dispatch:
+
+env:
+  PROJECT_PATH: TotallyNormalCalculator/TotallyNormalCalculator.csproj
+
+jobs:
+  create-release:
+    runs-on: windows-latest  
+
+    steps:
+      - uses: actions/checkout@v4
+  
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '8.x'
+          include-prerelease: true
+
+      - name: Restore dependencies
+        run: dotnet restore ${{ env.PROJECT_PATH }}
+
+      - name: Build
+        run: dotnet build -c Release -p:PublishSingleFile=true ${{ env.PROJECT_PATH }}
+
+      - name: Publish
+        run: dotnet publish ${{ env.PROJECT_PATH }} -c Release -r win-x64 -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:UseAppHost=true --self-contained
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-output
+          path: TotallyNormalCalculator/bin/Release/net8.0/win-x64/publish/*.exe
