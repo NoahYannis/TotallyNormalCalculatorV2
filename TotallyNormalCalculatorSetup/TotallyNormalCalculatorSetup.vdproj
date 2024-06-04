@@ -3,7 +3,7 @@
 "VSVersion" = "3:800"
 "ProjectType" = "8:{978C614F-708E-4E1A-B201-565925725DBA}"
 "IsWebType" = "8:FALSE"
-"ProjectName" = "8:TotallyNormalCalculatorSetup"
+"ProjectName" = "8:TotallyNormalCalculator.Install"
 "LanguageId" = "3:1031"
 "CodePage" = "3:1252"
 "UILanguageId" = "3:1031"
@@ -50,6 +50,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
         "Release"
@@ -217,7 +225,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:TotallyNormalCalculatorSetup"
         "ProductCode" = "8:{E48E4DC3-9EFB-4231-97B0-5F1416CDBEF8}"
-        "PackageCode" = "8:{F0D8DBCF-0C42-43CF-9791-E579AA5F0C26}"
+        "PackageCode" = "8:{B2E4F6BD-E954-441A-A1C8-B6EFAAA263FE}"
         "UpgradeCode" = "8:{32A0ABA8-40FF-4D8E-8097-AB3C49E465FE}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
