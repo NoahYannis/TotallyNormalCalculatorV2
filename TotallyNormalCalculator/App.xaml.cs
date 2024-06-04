@@ -20,9 +20,9 @@ public partial class App : Application
 
         var connectionString = Helper.GetConnectionString("DiaryEntryDB");
 
-        if (!Helper.CheckIfDatabaseExists(connectionString) && !string.IsNullOrEmpty(connectionString))
+        if (!string.IsNullOrEmpty(connectionString))
         {
-            Helper.CreateDB(connectionString);
+            Helper.CreateDBIfNotExists(connectionString);
         }
 
         base.OnStartup(e);

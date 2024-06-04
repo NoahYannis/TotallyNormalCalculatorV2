@@ -29,28 +29,10 @@ public static class Helper
         return string.Empty;
     }
 
-    public static bool CheckIfDatabaseExists(string connectionString)
+   
+    public static void CreateDBIfNotExists(string connectionString)
     {
-        try
-        {
-            using (IDbConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-                _logger.LogMessageToTempFile($"Successfully connected to the database - {DateTime.Now:dd.MM.yyyy HH:mm:ss}\n");
-            }
-            return true;
-        }
-        catch (Exception e)
-        {
-            _logger.LogMessageToTempFile($"Error connecting to the database in CheckIfDatabaseExists() with connection string '{connectionString}': {e.Message} - {DateTime.Now:dd.MM.yyyy HH:mm:ss}\n");
-            return false;
-        }
-    }
-
-
-    public static void CreateDB(string connectionString)
-    {
-        string script = File.ReadAllText("dbo.Entries_CREATE.sql");
+        string script = File.ReadAllText("Core\\dbo.Entries_CREATE_IF_NOT_EXISTS.sql");
 
         try
         {
@@ -59,13 +41,13 @@ public static class Helper
                 connection.Open();
                 SqlCommand command = new SqlCommand(script, connection);
                 command.ExecuteNonQuery();
-                _logger.LogMessageToTempFile($"Database DiaryEntryDB created successfully - {DateTime.Now:dd.MM.yyyy HH:mm:ss}\n");
+                _logger.LogMessageToTempFile($"Database DiaryEntryDB exists or has been created - {DateTime.Now:dd.MM.yyyy HH:mm:ss}\n");
             }
 
         }
         catch (Exception e)
         {
-            _logger.LogMessageToTempFile($"Error creating the database in CreateDB(): {e.Message} - {DateTime.Now:dd.MM.yyyy HH:mm:ss}\n");
+            _logger.LogMessageToTempFile($"Error creating the database in CreateDBIfNotExists(): {e.Message} - {DateTime.Now:dd.MM.yyyy HH:mm:ss}\n");
             _logger.LogExceptionToTempFile(e);
         }
     }
