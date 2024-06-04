@@ -47,6 +47,7 @@ public static class Helper
         }
     }
 
+
     public static void CreateDB(string connectionString)
     {
         string script = File.ReadAllText("dbo.Entries_CREATE.sql");

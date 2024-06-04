@@ -19,7 +19,8 @@ public partial class App : Application
                 XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
 
         var connectionString = Helper.GetConnectionString("DiaryEntryDB");
-        if (!Helper.CheckIfDatabaseExists(connectionString))
+
+        if (!Helper.CheckIfDatabaseExists(connectionString) && !string.IsNullOrEmpty(connectionString))
         {
             Helper.CreateDB(connectionString);
         }
