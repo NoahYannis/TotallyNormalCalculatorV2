@@ -42,7 +42,7 @@ public static class Helper
         }
         catch (Exception e)
         {
-            _logger.LogMessageToTempFile($"Error connecting to the database in CheckIfDatabaseExists(): {e.Message} - {DateTime.Now:dd.MM.yyyy HH:mm:ss}\n");
+            _logger.LogMessageToTempFile($"Error connecting to the database in CheckIfDatabaseExists() with connection string '{connectionString}': {e.Message} - {DateTime.Now:dd.MM.yyyy HH:mm:ss}\n");
             return false;
         }
     }
