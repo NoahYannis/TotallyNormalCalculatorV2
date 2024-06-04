@@ -31,7 +31,7 @@ public static class DBHelper
     {
         try
         {
-            string query = "IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'DiaryEntryDB') CREATE DATABASE DiaryEntryDB";
+        string query = "IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'DiaryEntryDB') CREATE DATABASE DiaryEntryDB";
             using (var connection = new SqlConnection(connectionString))
             {
                 connection.Open();
