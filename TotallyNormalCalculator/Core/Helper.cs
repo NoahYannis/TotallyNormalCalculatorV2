@@ -29,13 +29,13 @@ public static class Helper
         return string.Empty;
     }
 
-   
+
     public static void CreateDBIfNotExists(string connectionString)
     {
-        string script = File.ReadAllText("Core\\dbo.Entries_CREATE_IF_NOT_EXISTS.sql");
-
         try
         {
+            string script = File.ReadAllText("Core\\dbo.Entries_CREATE_IF_NOT_EXISTS.sql");
+
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
