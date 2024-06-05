@@ -28,7 +28,31 @@ public static class DBHelper
         return string.Empty;
     }
 
-    public static bool CheckIfAppDBExists(string connectionString)
+
+    /// <summary>
+    /// Checks if the application database exists and creates it if necessary.
+    /// </summary>
+    /// <param name="masterConnectionString">The connection string for the master database.</param>
+    public static void EnsureDatabaseExists()
+    {
+        try
+        {
+            // Check if the database exists within the master database (sys.databases)
+            string masterConnectionString = GetConnectionString("master");
+
+            if (!CheckIfAppDbExists(masterConnectionString))
+            {
+                CreateDatabase(masterConnectionString);
+            }
+        }
+        catch (Exception e)
+        {
+            _logger.LogMessageToTempFile($"Error ensuring database exists: {e.Message}");
+            _logger.LogExceptionToTempFile(e);
+        }
+    }
+
+    private static bool CheckIfAppDbExists(string connectionString)
     {
         string query = "SELECT COUNT(*) FROM sys.databases WHERE name = 'DiaryEntryDB'";
 
@@ -43,71 +67,42 @@ public static class DBHelper
         }
     }
 
-    public static void CreateDiaryEntryDB(string connectionString)
+    private static void CreateDatabase(string connectionString)
     {
-        string path = "Database\\CreateDiaryEntryDB_Script.sql";
+        string createDBScriptPath = "Database\\CreateDiaryEntryDB_Script.sql";
+        string createTableScriptPath = "Database\\CreateEntriesTable_Script.sql";
 
         try
         {
-            string createDBscript = File.ReadAllText(path);
+            string createDBScript = File.ReadAllText(createDBScriptPath);
+            string createTableScript = File.ReadAllText(createTableScriptPath);
 
             using (var connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                using (var command = new SqlCommand(createDBscript, connection))
+
+                using (var command = new SqlCommand(createDBScript, connection))
                 {
                     command.ExecuteNonQuery();
-                    _logger.LogMessageToTempFile("Database DiaryEntryDB was created successfully");
+                    _logger.LogMessageToTempFile("Successfully created DiaryEntryDB");
                 }
-                connection.Close();
-            }
-        }
-        catch (Exception exc)
-        {
-            _logger.LogMessageToTempFile($"Error creating the database: {exc.Message}");
-            _logger.LogExceptionToTempFile(exc);
-        }
-    }
 
-    public static void CreateEntriesTable(string connectionString)
-    {
-        try
-        {
-            string scriptPath = "Database\\CreateEntriesTable_Script.sql";
-            string createTableScript = File.ReadAllText(scriptPath);
-            using (var connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
+                // Create the Entries table within the newly created DiaryEntryDB
+                connection.ChangeDatabase("DiaryEntryDB");
+
                 using (var command = new SqlCommand(createTableScript, connection))
                 {
                     command.ExecuteNonQuery();
                     _logger.LogMessageToTempFile("Successfully created Entries table");
                 }
+
                 connection.Close();
             }
         }
         catch (Exception exc)
         {
-            _logger.LogMessageToTempFile($"Error creating the entries table: {exc.Message}");
+            _logger.LogMessageToTempFile($"Error creating the database and entries table: {exc.Message}");
             _logger.LogExceptionToTempFile(exc);
-        }
-    }
-
-    public static void EnsureDatabaseExists(string databaseName)
-    {
-        string masterConnectionString = GetConnectionString("master");
-        string diaryEntryConnectionString = GetConnectionString(databaseName);
-      
-        if (string.IsNullOrEmpty(diaryEntryConnectionString))
-        {
-            _logger.LogMessageToTempFile("Connection string for DiaryEntryDB is empty");
-            return;
-        }
-
-        if (!CheckIfAppDBExists(masterConnectionString))
-        {
-            CreateDiaryEntryDB(masterConnectionString);
-            CreateEntriesTable(diaryEntryConnectionString);
         }
     }
 }

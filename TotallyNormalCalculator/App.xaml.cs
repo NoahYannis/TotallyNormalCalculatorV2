@@ -19,7 +19,7 @@ public partial class App : Application
           new FrameworkPropertyMetadata(
                 XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
 
-        DBHelper.EnsureDatabaseExists("DiaryEntryDB");
+        DBHelper.EnsureDatabaseExists();
 
         base.OnStartup(e);
     }
