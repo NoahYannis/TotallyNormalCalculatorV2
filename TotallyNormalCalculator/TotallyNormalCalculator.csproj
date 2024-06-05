@@ -22,7 +22,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Content Include="Core\dbo.Entries_CREATE_IF_NOT_EXISTS.sql">
+	  <Content Include="Database\dbo.Entries_CREATE_IF_NOT_EXISTS.sql">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
 	</ItemGroup>

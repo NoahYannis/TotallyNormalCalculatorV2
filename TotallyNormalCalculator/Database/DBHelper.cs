@@ -31,13 +31,15 @@ public static class DBHelper
     {
         try
         {
-        string query = "IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'DiaryEntryDB') CREATE DATABASE DiaryEntryDB";
+            connectionString = connectionString.Replace("DiaryEntryDB", "master");
+            string query = "IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'DiaryEntryDB') CREATE DATABASE DiaryEntryDB";
             using (var connection = new SqlConnection(connectionString))
             {
                 connection.Open();
                 using (var command = new SqlCommand(query, connection))
                 {
                     command.ExecuteNonQuery();
+                    connectionString = connectionString.Replace("master", "DiaryEntryDB");
                 }
             }
         }
@@ -83,6 +85,7 @@ public static class DBHelper
                         )";
             using (var command = new SqlCommand(query, connection))
             {
+                connection.Open();
                 command.ExecuteNonQuery();
             }
         }
