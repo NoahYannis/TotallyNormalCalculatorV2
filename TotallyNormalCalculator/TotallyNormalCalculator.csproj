@@ -26,12 +26,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Content Include="Database\CreateDiaryEntryDB_Script.sql">
+	  <EmbeddedResource Include="Database\CreateDiaryEntryDB_Script.sql">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </Content>
-	  <Content Include="Database\CreateEntriesTable_Script.sql">
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Database\CreateEntriesTable_Script.sql">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </Content>
+	  </EmbeddedResource>
 	</ItemGroup>
 
 	<ItemGroup>
