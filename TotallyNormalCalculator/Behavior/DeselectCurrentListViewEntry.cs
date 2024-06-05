@@ -1,8 +1,8 @@
-﻿using System.Windows;
+﻿using Microsoft.Xaml.Behaviors;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using Microsoft.Xaml.Behaviors;
 using TotallyNormalCalculator.MVVM.ViewModels;
 
 namespace TotallyNormalCalculator.Behavior;

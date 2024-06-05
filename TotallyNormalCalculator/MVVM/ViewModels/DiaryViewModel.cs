@@ -4,13 +4,13 @@ using Dapper;
 using System;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Windows;
 using System.Windows.Data;
 using TotallyNormalCalculator.Core;
-using TotallyNormalCalculator.MVVM.Model;
-using System.Data.SqlClient;
 using TotallyNormalCalculator.Logging;
+using TotallyNormalCalculator.MVVM.Model;
 
 
 namespace TotallyNormalCalculator.MVVM.ViewModels;
