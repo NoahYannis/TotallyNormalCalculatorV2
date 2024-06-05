@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.IO;
 using TotallyNormalCalculator.Logging;
 
 namespace TotallyNormalCalculator.Core;
@@ -27,20 +28,38 @@ public static class DBHelper
         return string.Empty;
     }
 
-    public static void CreateDBIfNotExists(string connectionString)
+    public static bool CheckIfAppDBExists(string connectionString)
     {
+        string query = "SELECT COUNT(*) FROM sys.databases WHERE name = 'DiaryEntryDB'";
+
+        using (var connection = new SqlConnection(connectionString))
+        {
+            connection.Open();
+            using (var command = new SqlCommand(query, connection))
+            {
+                int count = (int)command.ExecuteScalar();
+                return count > 0;
+            }
+        }
+    }
+
+    public static void CreateDiaryEntryDB(string connectionString)
+    {
+        string path = "Database\\CreateDiaryEntryDB_Script.sql";
+
         try
         {
-            connectionString = connectionString.Replace("DiaryEntryDB", "master");
-            string query = "IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'DiaryEntryDB') CREATE DATABASE DiaryEntryDB";
+            string createDBscript = File.ReadAllText(path);
+
             using (var connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                using (var command = new SqlCommand(query, connection))
+                using (var command = new SqlCommand(createDBscript, connection))
                 {
                     command.ExecuteNonQuery();
-                    connectionString = connectionString.Replace("master", "DiaryEntryDB");
+                    _logger.LogMessageToTempFile("Database DiaryEntryDB was created successfully");
                 }
+                connection.Close();
             }
         }
         catch (Exception exc)
@@ -50,50 +69,45 @@ public static class DBHelper
         }
     }
 
-    public static bool TableExists(string connectionString)
+    public static void CreateEntriesTable(string connectionString)
     {
         try
         {
-            string query = $"SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Entries]') AND type in (N'U')";
+            string scriptPath = "Database\\CreateEntriesTable_Script.sql";
+            string createTableScript = File.ReadAllText(scriptPath);
             using (var connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                using (var command = new SqlCommand(query, connection))
+                using (var command = new SqlCommand(createTableScript, connection))
                 {
-                    int count = Convert.ToInt32(command.ExecuteScalar());
-                    return count > 0;
+                    command.ExecuteNonQuery();
+                    _logger.LogMessageToTempFile("Successfully created Entries table");
                 }
+                connection.Close();
             }
         }
         catch (Exception exc)
         {
-            _logger.LogMessageToTempFile($"Error checking if table exists: {exc.Message}");
+            _logger.LogMessageToTempFile($"Error creating the entries table: {exc.Message}");
             _logger.LogExceptionToTempFile(exc);
-            return false;
         }
     }
 
-    public static void CreateTable(SqlConnection connection)
+    public static void EnsureDatabaseExists(string databaseName)
     {
-        try
+        string masterConnectionString = GetConnectionString("master");
+        string diaryEntryConnectionString = GetConnectionString(databaseName);
+      
+        if (string.IsNullOrEmpty(diaryEntryConnectionString))
         {
-            string query = $@"CREATE TABLE [dbo].[Entries] (
-                            [Id] INT IDENTITY (1, 1) NOT NULL,
-                            [Title] NVARCHAR(50) NULL,
-                            [Message] NVARCHAR(MAX) NULL,
-                            [Date] NVARCHAR(50) NULL
-                        )";
-            using (var command = new SqlCommand(query, connection))
-            {
-                connection.Open();
-                command.ExecuteNonQuery();
-            }
+            _logger.LogMessageToTempFile("Connection string for DiaryEntryDB is empty");
+            return;
         }
-        catch (Exception exc)
+
+        if (!CheckIfAppDBExists(masterConnectionString))
         {
-            _logger.LogMessageToTempFile($"Error creating the table: {exc.Message}");
-            _logger.LogExceptionToTempFile(exc);
+            CreateDiaryEntryDB(masterConnectionString);
+            CreateEntriesTable(diaryEntryConnectionString);
         }
     }
-
 }

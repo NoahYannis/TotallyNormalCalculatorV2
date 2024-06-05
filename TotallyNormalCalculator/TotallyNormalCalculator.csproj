@@ -22,7 +22,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Content Include="Database\dbo.Entries_CREATE_IF_NOT_EXISTS.sql">
+	  <None Remove="Database\CreateDiaryEntryDB_Script.sql" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="Database\CreateDiaryEntryDB_Script.sql">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Database\CreateEntriesTable_Script.sql">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
 	</ItemGroup>

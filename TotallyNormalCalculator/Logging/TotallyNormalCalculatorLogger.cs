@@ -11,8 +11,7 @@ public class TotallyNormalCalculatorLogger : ILogger
     {
 
         string logMessage =
-                $"{DateTime.Now:dd.MM.yyyy HH:mm:ss}" +
-                $"\n Exception: {exc.GetType()} " +
+                $"Exception: {exc.GetType()} " +
                 $"\n Error Message: {exc.Message}" +
                 $"\n Stack Trace: {exc.StackTrace} " +
                 $"\n\n";
@@ -36,7 +35,9 @@ public class TotallyNormalCalculatorLogger : ILogger
 
             using (StreamWriter writer = new StreamWriter(logFilePath, true))
             {
+                writer.Write($"{DateTime.Now:dd.MM.yyyy HH:mm:ss}\n");
                 writer.WriteLine(logMessage);
+                writer.WriteLine("\n");
             }
         }
         catch (Exception ex)

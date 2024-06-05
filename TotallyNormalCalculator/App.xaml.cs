@@ -19,16 +19,7 @@ public partial class App : Application
           new FrameworkPropertyMetadata(
                 XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
 
-        var connectionString = DBHelper.GetConnectionString("DiaryEntryDB");
-
-        if (!string.IsNullOrEmpty(connectionString))
-        {
-            DBHelper.CreateDBIfNotExists(connectionString);
-            if (!DBHelper.TableExists(connectionString))
-            { 
-                DBHelper.CreateTable(new SqlConnection(connectionString));
-            }
-        }
+        DBHelper.EnsureDatabaseExists("DiaryEntryDB");
 
         base.OnStartup(e);
     }
