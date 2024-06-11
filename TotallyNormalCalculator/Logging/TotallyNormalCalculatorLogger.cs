@@ -3,7 +3,7 @@ using System.IO;
 using System.Windows;
 
 namespace TotallyNormalCalculator.Logging;
-public class TotallyNormalCalculatorLogger : ILogger
+public class TotallyNormalCalculatorLogger : ITotallyNormalCalculatorLogger
 {
     private static readonly string logFolderPath = Path.Combine(Path.GetTempPath(), "_TotallyNormalCalculator_Logs");
     private static readonly string logFilePath = Path.Combine(logFolderPath, "tnc.log");

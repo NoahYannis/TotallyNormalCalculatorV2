@@ -33,17 +33,18 @@ public partial class DiaryViewModel : BaseViewModel
     [ObservableProperty]
     private string _date;
 
-    private readonly TotallyNormalCalculatorLogger _diaryLogger = new();
+    private readonly ITotallyNormalCalculatorLogger _diaryLogger;
 
-    public DiaryViewModel()
+    public DiaryViewModel(ITotallyNormalCalculatorLogger logger)
     {
+        _diaryLogger = logger;
         Entries = GetAllEntries();
     }
 
     [RelayCommand]
     public void SwitchView()
     {
-        SelectedViewModel = new CalculatorViewModel();
+        SelectedViewModel = new CalculatorViewModel(_diaryLogger);
     }
 
     [RelayCommand]

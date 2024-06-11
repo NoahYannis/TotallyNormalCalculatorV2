@@ -2,7 +2,7 @@
 
 namespace TotallyNormalCalculator.Logging;
 
-public interface ILogger
+public interface ITotallyNormalCalculatorLogger
 {
     void LogExceptionToTempFile(Exception exc);
 }

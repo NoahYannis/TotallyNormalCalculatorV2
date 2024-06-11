@@ -9,7 +9,7 @@ internal class Commands
     public class CalculatorViewModelTests
     {
 
-        public CalculatorViewModel viewModel = new();
+        public CalculatorViewModel viewModel = new CalculatorViewModel(logger: null);
 
         [Fact]
         public void MaximizeWindowCommand_ShouldMaximizeWindow()

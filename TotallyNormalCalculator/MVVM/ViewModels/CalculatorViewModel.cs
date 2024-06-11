@@ -5,7 +5,7 @@ using TotallyNormalCalculator.Logging;
 
 namespace TotallyNormalCalculator.MVVM.ViewModels;
 
-public partial class CalculatorViewModel : BaseViewModel
+public partial class CalculatorViewModel(ITotallyNormalCalculatorLogger logger) : BaseViewModel
 {
     [ObservableProperty]
     private string _calculatorText = string.Empty;
@@ -22,8 +22,6 @@ public partial class CalculatorViewModel : BaseViewModel
     [ObservableProperty]
     private double _result;
 
-    private readonly TotallyNormalCalculatorLogger _calculatorLogger = new();
-
     private int switchViewCounter;
     private string firstPartOfNumber;
     private string secondPartOfNumber;
@@ -39,7 +37,7 @@ public partial class CalculatorViewModel : BaseViewModel
 
         if (switchViewCounter == 4)
         {
-            SelectedViewModel = new DiaryViewModel();
+            SelectedViewModel = new DiaryViewModel(logger);
             switchViewCounter = 0;
         }
     }
@@ -67,7 +65,7 @@ public partial class CalculatorViewModel : BaseViewModel
         }
         catch (Exception exc)
         {
-            _calculatorLogger.LogExceptionToTempFile(exc);
+            logger.LogExceptionToTempFile(exc);
         }
     }
 
@@ -128,7 +126,7 @@ public partial class CalculatorViewModel : BaseViewModel
         catch (Exception exc)
         {
             AllClear();
-            _calculatorLogger.LogExceptionToTempFile(exc);
+            logger.LogExceptionToTempFile(exc);
         }
 
         SecondNumber = 0;
@@ -195,7 +193,7 @@ public partial class CalculatorViewModel : BaseViewModel
         }
         catch (Exception exc)
         {
-            _calculatorLogger.LogExceptionToTempFile(exc);
+            logger.LogExceptionToTempFile(exc);
         }
     }
 
@@ -228,7 +226,7 @@ public partial class CalculatorViewModel : BaseViewModel
         }
         catch (Exception exc)
         {
-            _calculatorLogger.LogExceptionToTempFile(exc);
+            logger.LogExceptionToTempFile(exc);
         }
 
         return number;

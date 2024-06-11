@@ -1,25 +1,42 @@
-﻿using System.Globalization;
-using System.Threading;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System.Windows;
-using System.Windows.Markup;
 using TotallyNormalCalculator.Core;
+using TotallyNormalCalculator.Logging;
+using TotallyNormalCalculator.Views;
 
 namespace TotallyNormalCalculator;
 
 public partial class App : Application
 {
+    public static IHost AppHost { get; private set; }
+
+    public App()
+    {
+        AppHost = Host.CreateDefaultBuilder()
+         .ConfigureServices((context, services) =>
+         {
+             services.AddSingleton<MainWindow>();
+             services.AddSingleton<ITotallyNormalCalculatorLogger, TotallyNormalCalculatorLogger>();
+         })
+         .Build();
+    }
     protected override void OnStartup(StartupEventArgs e)
     {
-        Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US"); ;
-        Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US"); ;
-
-        FrameworkElement.LanguageProperty.OverrideMetadata(
-          typeof(FrameworkElement),
-          new FrameworkPropertyMetadata(
-                XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
-
         DBHelper.EnsureDatabaseExists();
+
+        var mainWindow = AppHost.Services.GetRequiredService<MainWindow>();
+        mainWindow.Show();
 
         base.OnStartup(e);
     }
+
+    protected override async void OnExit(ExitEventArgs e)
+    {
+        await AppHost!.StopAsync();
+        AppHost.Dispose();
+        base.OnExit(e);
+    }
+
+
 }
