@@ -12,7 +12,7 @@ namespace TotallyNormalCalculator.Core;
 /// </summary>
 public static class DBHelper
 {
-    private static readonly TotallyNormalCalculatorLogger _logger = new TotallyNormalCalculatorLogger();
+    private static readonly TotallyNormalCalculatorLogger _logger = new();
 
     public static string GetConnectionString(string name)
     {

@@ -13,16 +13,9 @@
     FontSize="15"
     mc:Ignorable="d">
 
-
-    <UserControl.DataContext>
-        <viewmodels:DiaryViewModel />
-    </UserControl.DataContext>
-
     <UserControl.Resources>
         <model:DiaryEntryModel x:Key="DiaryEntryModel" />
     </UserControl.Resources>
-
-
 
     <Grid Background="LightGreen">
         <Grid.ColumnDefinitions>

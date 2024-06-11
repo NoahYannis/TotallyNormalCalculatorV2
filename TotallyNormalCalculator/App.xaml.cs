@@ -3,6 +3,7 @@ using Microsoft.Extensions.Hosting;
 using System.Windows;
 using TotallyNormalCalculator.Core;
 using TotallyNormalCalculator.Logging;
+using TotallyNormalCalculator.MVVM.ViewModels;
 using TotallyNormalCalculator.Views;
 
 namespace TotallyNormalCalculator;
@@ -18,6 +19,9 @@ public partial class App : Application
          {
              services.AddSingleton<MainWindow>();
              services.AddSingleton<ITotallyNormalCalculatorLogger, TotallyNormalCalculatorLogger>();
+             services.AddTransient<CalculatorViewModel>();
+             services.AddTransient<DiaryViewModel>();
+             services.AddTransient<MainViewModel>();
          })
          .Build();
     }
@@ -37,6 +41,4 @@ public partial class App : Application
         AppHost.Dispose();
         base.OnExit(e);
     }
-
-
 }

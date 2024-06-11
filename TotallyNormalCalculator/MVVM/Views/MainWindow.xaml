@@ -22,9 +22,5 @@
         </DataTemplate>
     </Window.Resources>
 
-    <Window.DataContext>
-        <viewmodels:MainViewModel />
-    </Window.DataContext>
-
     <ContentControl Content="{Binding SelectedViewModel}" DataContext="{Binding}" />
 </Window>
