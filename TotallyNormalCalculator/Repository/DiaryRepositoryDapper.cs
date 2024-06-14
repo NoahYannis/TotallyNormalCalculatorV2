@@ -44,9 +44,24 @@ public class DiaryRepositoryDapper(ITotallyNormalCalculatorLogger logger) : IDia
         }
     }
 
-    public IList<DiaryEntryModel> GetAllDiaryEntries()
+    public IEnumerable<DiaryEntryModel> GetAllDiaryEntries()
     {
-        throw new NotImplementedException();
+        IEnumerable<DiaryEntryModel> entries = null;
+
+        try
+        {
+            using (IDbConnection connection = new SqlConnection(DBHelper.GetConnectionString("DiaryEntryDB")))
+            {
+                entries = connection.Query<DiaryEntryModel>("select * from dbo.Entries");
+            }
+        }
+        catch (Exception exc)
+        {
+            MessageBox.Show($"Ein Fehler ist aufgetreten: {exc.Message}");
+            logger.LogExceptionToTempFile(exc);
+        }
+
+        return entries;
     }
 
     public DiaryEntryModel GetDiaryEntryById(int id)

@@ -4,7 +4,7 @@ using TotallyNormalCalculator.MVVM.Model;
 namespace TotallyNormalCalculator.Repository;
 public interface IDiaryRepository
 {
-    public IList<DiaryEntryModel> GetAllDiaryEntries();
+    public IEnumerable<DiaryEntryModel> GetAllDiaryEntries();
     public DiaryEntryModel GetDiaryEntryById(int id);
     public void AddDiaryEntry(DiaryEntryModel diaryEntry);
     public void UpdateDiaryEntry(DiaryEntryModel diaryEntry);

@@ -144,26 +144,7 @@ public partial class DiaryViewModel : BaseViewModel
 
     private ObservableCollection<DiaryEntryModel> GetAllEntries()
     {
-        var entries = new ObservableCollection<DiaryEntryModel>();
-
-        try
-        {
-            using (IDbConnection connection = new SqlConnection(DBHelper.GetConnectionString("DiaryEntryDB")))
-            {
-                var output = connection.Query<DiaryEntryModel>("select * from dbo.Entries", new { Title, Message, Date });
-                foreach (var item in output)
-                {
-                    entries.Add(item);
-                }
-            }
-        }
-        catch (Exception exc)
-        {
-            MessageBox.Show($"Ein Fehler ist aufgetreten: {exc.Message}");
-            _diaryLogger.LogExceptionToTempFile(exc);
-        }
-
-        return entries;
+        return new ObservableCollection<DiaryEntryModel>(_diaryRepository.GetAllDiaryEntries());
     }
 
     partial void OnSelectedEntryChanged(DiaryEntryModel value)
