@@ -176,22 +176,8 @@ public partial class DiaryViewModel : BaseViewModel
 
     private void ExecuteDeleteEntry()
     {
-        using (IDbConnection connection = new SqlConnection(DBHelper.GetConnectionString("DiaryEntryDB")))
-        {
-            try
-            {
-                connection.Execute("DELETE FROM dbo.Entries WHERE Id = @Id",
-                    new { SelectedEntry.Id });
-
-                Entries.Remove(SelectedEntry);
-            }
-            catch (Exception exc)
-            {
-                MessageBox.Show($"Ein Fehler ist aufgetreten: {exc.Message}");
-                _diaryLogger.LogExceptionToTempFile(exc);
-            }
-        }
-
+        _diaryRepository.DeleteDiaryEntry(SelectedEntry.Id);
+        Entries.Remove(SelectedEntry);
         ClearInputFields();
     }
 
