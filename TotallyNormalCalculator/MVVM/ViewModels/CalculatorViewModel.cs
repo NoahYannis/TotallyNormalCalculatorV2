@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using System;
 using TotallyNormalCalculator.Logging;
+using TotallyNormalCalculator.Repository;
 
 namespace TotallyNormalCalculator.MVVM.ViewModels;
 
@@ -37,7 +38,7 @@ public partial class CalculatorViewModel(ITotallyNormalCalculatorLogger logger) 
 
         if (switchViewCounter == 4)
         {
-            SelectedViewModel = new DiaryViewModel(logger);
+            SelectedViewModel = new DiaryViewModel(logger, new DiaryRepositoryDapper(logger));
             switchViewCounter = 0;
         }
     }

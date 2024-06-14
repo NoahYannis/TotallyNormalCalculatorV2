@@ -4,6 +4,7 @@ using System.Windows;
 using TotallyNormalCalculator.Core;
 using TotallyNormalCalculator.Logging;
 using TotallyNormalCalculator.MVVM.ViewModels;
+using TotallyNormalCalculator.Repository;
 using TotallyNormalCalculator.Views;
 
 namespace TotallyNormalCalculator;
@@ -19,6 +20,7 @@ public partial class App : Application
          {
              services.AddSingleton<MainWindow>();
              services.AddSingleton<ITotallyNormalCalculatorLogger, TotallyNormalCalculatorLogger>();
+             services.AddScoped<IDiaryRepository, DiaryRepositoryDapper>();
              services.AddTransient<CalculatorViewModel>();
              services.AddTransient<DiaryViewModel>();
              services.AddTransient<MainViewModel>();

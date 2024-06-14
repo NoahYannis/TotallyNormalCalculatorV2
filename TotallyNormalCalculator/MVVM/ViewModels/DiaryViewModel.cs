@@ -11,6 +11,7 @@ using System.Windows.Data;
 using TotallyNormalCalculator.Core;
 using TotallyNormalCalculator.Logging;
 using TotallyNormalCalculator.MVVM.Model;
+using TotallyNormalCalculator.Repository;
 
 
 namespace TotallyNormalCalculator.MVVM.ViewModels;
@@ -34,10 +35,12 @@ public partial class DiaryViewModel : BaseViewModel
     private string _date;
 
     private readonly ITotallyNormalCalculatorLogger _diaryLogger;
+    private readonly IDiaryRepository _diaryRepository;
 
-    public DiaryViewModel(ITotallyNormalCalculatorLogger logger)
+    public DiaryViewModel(ITotallyNormalCalculatorLogger logger, IDiaryRepository diaryRepository)
     {
         _diaryLogger = logger;
+        _diaryRepository = diaryRepository;
         Entries = GetAllEntries();
     }
 
@@ -50,24 +53,18 @@ public partial class DiaryViewModel : BaseViewModel
     [RelayCommand]
     public void AddEntry()
     {
-        using (IDbConnection connection = new SqlConnection(DBHelper.GetConnectionString("DiaryEntryDB")))
+        var entry = new DiaryEntryModel
         {
-            try
-            {
-                string sqlStatement = "INSERT INTO dbo.Entries (Title, Message, Date) VALUES (@Title, @Message, @Date)";
-                connection.Execute(sqlStatement, new { Title, Message, Date });
-                Entries.Add(new DiaryEntryModel { Title = Title, Message = Message, Date = Date });
-            }
-            catch (Exception exc)
-            {
-                MessageBox.Show($"Ein Fehler ist aufgetreten: {exc.Message}");
-                _diaryLogger.LogExceptionToTempFile(exc);
-                Entries.Remove(SelectedEntry);
-            }
+            Title = Title,
+            Message = Message,
+            Date = Date
+        };
 
-            ClearInputFields();
-        }
+        _diaryRepository.AddDiaryEntry(entry);
+        Entries.Add(entry);
+        ClearInputFields();
     }
+
 
     [RelayCommand]
     public void UpdateEntry()
