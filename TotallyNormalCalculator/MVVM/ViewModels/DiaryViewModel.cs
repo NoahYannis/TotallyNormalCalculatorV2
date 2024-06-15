@@ -67,25 +67,12 @@ public partial class DiaryViewModel : BaseViewModel
         if (SelectedEntry is null)
             return;
 
-        using (IDbConnection connection = new SqlConnection(DBHelper.GetConnectionString("DiaryEntryDB")))
-        {
-            try
-            {
-                string sqlStatement = "UPDATE dbo.Entries SET Title = @Title, Message = @Message, Date = @Date WHERE Id = @Id";
-                connection.Execute(sqlStatement, new { SelectedEntry.Id, Title, Message, Date });
+        SelectedEntry.Title = Title;
+        SelectedEntry.Message = Message;
+        SelectedEntry.Date = Date;
 
-                SelectedEntry.Title = Title;
-                SelectedEntry.Message = Message;
-                SelectedEntry.Date = Date;
-
-                CollectionViewSource.GetDefaultView(Entries).Refresh();
-            }
-            catch (Exception exc)
-            {
-                MessageBox.Show($"Ein Fehler ist aufgetreten: {exc.Message}");
-                _diaryLogger.LogExceptionToTempFile(exc);
-            }
-        }
+        _diaryRepository.UpdateDiaryEntry(SelectedEntry);
+        CollectionViewSource.GetDefaultView(Entries).Refresh();
     }
 
     [RelayCommand]
