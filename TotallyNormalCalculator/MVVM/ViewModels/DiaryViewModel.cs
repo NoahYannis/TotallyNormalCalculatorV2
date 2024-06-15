@@ -1,14 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Dapper;
-using System;
 using System.Collections.ObjectModel;
-using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Windows;
 using System.Windows.Data;
-using TotallyNormalCalculator.Core;
 using TotallyNormalCalculator.Logging;
 using TotallyNormalCalculator.MVVM.Model;
 using TotallyNormalCalculator.Repository;
