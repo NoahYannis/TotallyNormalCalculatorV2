@@ -24,10 +24,7 @@ public partial class CalculatorViewModel(ITotallyNormalCalculatorLogger logger) 
     [ObservableProperty]
     private double _result;
 
-    private int switchViewCounter;
-    private string firstPartOfNumber;
-    private string secondPartOfNumber;
-    private bool calculationHasError;
+    private int _switchViewCounter;
 
     #region Commands
 
@@ -35,12 +32,12 @@ public partial class CalculatorViewModel(ITotallyNormalCalculatorLogger logger) 
     [RelayCommand]
     public void SwitchView()
     {
-        switchViewCounter++;
+        _switchViewCounter++;
 
-        if (switchViewCounter == 4)
+        if (_switchViewCounter == 4)
         {
             SelectedViewModel = new DiaryViewModel(logger, new DiaryRepositoryDapper(logger));
-            switchViewCounter = 0;
+            _switchViewCounter = 0;
         }
     }
 
@@ -107,13 +104,13 @@ public partial class CalculatorViewModel(ITotallyNormalCalculatorLogger logger) 
         }
 
         SecondNumber = 0;
-        switchViewCounter = 0;
+        _switchViewCounter = 0;
     }
 
     [RelayCommand]
     public void AllClear()
     {
-        FirstNumber = SecondNumber = Result = switchViewCounter = 0;
+        FirstNumber = SecondNumber = Result = _switchViewCounter = 0;
         Operation = null;
         CalculatorText = string.Empty;
     }
