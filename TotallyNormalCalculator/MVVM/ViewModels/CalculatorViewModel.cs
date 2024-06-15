@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
+using System.Globalization;
 using TotallyNormalCalculator.Logging;
 using TotallyNormalCalculator.Repository;
 
@@ -75,54 +76,29 @@ public partial class CalculatorViewModel(ITotallyNormalCalculatorLogger logger) 
     {
         Operation = calcOperation;
 
-        if (calcOperation == "√")
+        if (calcOperation != "√")
         {
-            CalculatorText = "√";
-            return;
+            CalculatorText = string.Empty;
         }
-
-        CalculatorText = string.Empty;
     }
 
     [RelayCommand]
     public void Calculate()
     {
-        switch (Operation)
+        Result = Operation switch
         {
-            case "+":
-                Result = CalculatorModel.Add(FirstNumber, SecondNumber);
-                break;
-
-            case "-":
-                Result = CalculatorModel.Subtract(FirstNumber, SecondNumber);
-                break;
-
-            case "×":
-                Result = CalculatorModel.Multiply(FirstNumber, SecondNumber);
-                break;
-
-            case "÷":
-                Result = CalculatorModel.Divide(FirstNumber, SecondNumber);
-                break;
-
-            case "^":
-                Result = Math.Pow(FirstNumber, SecondNumber);
-                break;
-
-            case "√":
-                Result = Math.Sqrt(SecondNumber);
-                break;
-
-            default:
-                AllClear();
-                CalculatorText = "Invalid operation";
-                calculationHasError = true;
-                return;
-        }
+            "+" => CalculatorModel.Add(FirstNumber, SecondNumber),
+            "-" => CalculatorModel.Subtract(FirstNumber, SecondNumber),
+            "×" => CalculatorModel.Multiply(FirstNumber, SecondNumber),
+            "÷" => CalculatorModel.Divide(FirstNumber, SecondNumber),
+            "^" => Math.Pow(FirstNumber, SecondNumber),
+            "√" => Math.Sqrt(SecondNumber),
+            _ => 0
+        };
 
         try
         {
-            FirstNumber = Convert.ToDouble(Result); // Continue calculation with the result as the first number
+            FirstNumber = Result; // Continue calculation with the result as the first number
         }
         catch (Exception exc)
         {
@@ -131,7 +107,6 @@ public partial class CalculatorViewModel(ITotallyNormalCalculatorLogger logger) 
         }
 
         SecondNumber = 0;
-        Operation = null;
         switchViewCounter = 0;
     }
 
@@ -141,7 +116,6 @@ public partial class CalculatorViewModel(ITotallyNormalCalculatorLogger logger) 
         FirstNumber = SecondNumber = Result = switchViewCounter = 0;
         Operation = null;
         CalculatorText = string.Empty;
-        calculationHasError = false;
     }
 
     [RelayCommand]
@@ -149,27 +123,27 @@ public partial class CalculatorViewModel(ITotallyNormalCalculatorLogger logger) 
     {
         string newCharacter = commandParam.ToString();
 
-        if (calculationHasError)
+        if (CalculatorText.Length == 0)
         {
-            AllClear();
+            if (!IsValidFirstCharacter(newCharacter))
+            {
+                return;
+            }
+
+            CalculatorText = newCharacter;
+            UpdateCalculationNumber();
             return;
         }
 
-        if (CalculatorText.Length == 0 && IsValidFirstCharacter(newCharacter))
+        if (newCharacter == "." && CalculatorText.Contains('.'))
         {
-            CalculatorText = newCharacter;
-        }
-        else if (CalculatorText.Length > 0 && newCharacter == "." && !CalculatorText.Contains('.'))
-        {
-            CalculatorText += ".";
-        }
-        else
-        {
-            CalculatorText += newCharacter;
+            return; // Only one decimal point allowed
         }
 
-        UpdateCalculationNumber(newCharacter);
+        CalculatorText += newCharacter;
+        UpdateCalculationNumber();
     }
+
 
 
     #endregion
@@ -179,17 +153,17 @@ public partial class CalculatorViewModel(ITotallyNormalCalculatorLogger logger) 
         CalculatorText = newValue.ToString();
     }
 
-    private void UpdateCalculationNumber(string newNumber)
+    private void UpdateCalculationNumber()
     {
         try
         {
             if (Operation == null)
             {
-                FirstNumber = SetCalculationNumber(newNumber, numberToSet: FirstNumber);
+                FirstNumber =  Convert.ToDouble(CalculatorText, CultureInfo.InvariantCulture);
             }
             else
             {
-                SecondNumber = SetCalculationNumber(newNumber, numberToSet: SecondNumber);
+                SecondNumber = Convert.ToDouble(CalculatorText, CultureInfo.InvariantCulture);
             }
         }
         catch (Exception exc)
@@ -201,35 +175,5 @@ public partial class CalculatorViewModel(ITotallyNormalCalculatorLogger logger) 
     private bool IsValidFirstCharacter(string newCharacter)
     {
         return double.TryParse(newCharacter, out double _) || newCharacter == "-";
-    }
-
-
-    private double SetCalculationNumber(string newCharacter, double numberToSet)
-    {
-        double number = 0;
-
-        try
-        {
-            if (CalculatorText.Length == 0)
-            {
-                return Convert.ToDouble(newCharacter);
-            }
-
-            if (!CalculatorText.Contains('.'))
-            {
-                return (numberToSet * 10) + Convert.ToDouble(newCharacter);
-            }
-
-            int decimalIndex = CalculatorText.IndexOf(".");
-            firstPartOfNumber = CalculatorText.Substring(0, decimalIndex);
-            secondPartOfNumber = CalculatorText.Substring(decimalIndex, CalculatorText.Length - decimalIndex);
-            return Convert.ToDouble(firstPartOfNumber + secondPartOfNumber);
-        }
-        catch (Exception exc)
-        {
-            logger.LogExceptionToTempFile(exc);
-        }
-
-        return number;
     }
 }

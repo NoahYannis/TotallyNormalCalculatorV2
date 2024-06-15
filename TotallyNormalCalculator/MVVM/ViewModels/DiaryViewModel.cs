@@ -143,6 +143,7 @@ public partial class DiaryViewModel : BaseViewModel
         ClearInputFields();
     }
 
+
     partial void OnSelectedEntryChanged(DiaryEntryModel value)
     {
         if (value is not null)
