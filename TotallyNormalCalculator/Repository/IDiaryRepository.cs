@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using TotallyNormalCalculator.MVVM.Model;
 
 namespace TotallyNormalCalculator.Repository;
 public interface IDiaryRepository
 {
-    public IEnumerable<DiaryEntryModel> GetAllDiaryEntries();
-    public DiaryEntryModel GetDiaryEntryById(int id);
-    public void AddDiaryEntry(DiaryEntryModel diaryEntry);
-    public void UpdateDiaryEntry(DiaryEntryModel diaryEntry);
-    public void DeleteDiaryEntry(int id);
+    public Task<IEnumerable<DiaryEntryModel>> GetAllDiaryEntries();
+    public Task AddDiaryEntry(DiaryEntryModel diaryEntry);
+    public Task UpdateDiaryEntry(DiaryEntryModel diaryEntry);
+    public Task DeleteDiaryEntry(int id);
 }

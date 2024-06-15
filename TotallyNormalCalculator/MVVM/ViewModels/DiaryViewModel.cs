@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using TotallyNormalCalculator.Logging;
@@ -32,12 +33,13 @@ public partial class DiaryViewModel : BaseViewModel
     private readonly ITotallyNormalCalculatorLogger _diaryLogger;
     private readonly IDiaryRepository _diaryRepository;
 
+
     public DiaryViewModel(ITotallyNormalCalculatorLogger logger, IDiaryRepository diaryRepository)
     {
-        _diaryLogger = logger;
-        _diaryRepository = diaryRepository;
-        Entries = GetAllEntries();
+        (_diaryLogger, _diaryRepository) = (logger, diaryRepository);
+        Entries = Task.Run(() => this.GetAllEntries()).GetAwaiter().GetResult();
     }
+
 
     [RelayCommand]
     public void SwitchView()
@@ -45,8 +47,9 @@ public partial class DiaryViewModel : BaseViewModel
         SelectedViewModel = new CalculatorViewModel(_diaryLogger);
     }
 
+
     [RelayCommand]
-    public void AddEntry()
+    public async Task AddEntry()
     {
         var entry = new DiaryEntryModel
         {
@@ -55,14 +58,14 @@ public partial class DiaryViewModel : BaseViewModel
             Date = Date
         };
 
-        _diaryRepository.AddDiaryEntry(entry);
+        await _diaryRepository.AddDiaryEntry(entry);
         Entries.Add(entry);
         ClearInputFields();
     }
 
 
     [RelayCommand]
-    public void UpdateEntry()
+    public async Task UpdateEntry()
     {
         if (SelectedEntry is null)
             return;
@@ -71,9 +74,10 @@ public partial class DiaryViewModel : BaseViewModel
         SelectedEntry.Message = Message;
         SelectedEntry.Date = Date;
 
-        _diaryRepository.UpdateDiaryEntry(SelectedEntry);
+        await _diaryRepository.UpdateDiaryEntry(SelectedEntry);
         CollectionViewSource.GetDefaultView(Entries).Refresh();
     }
+
 
     [RelayCommand]
     public void ReadEntry(DiaryEntryModel diaryEntry)
@@ -97,8 +101,9 @@ public partial class DiaryViewModel : BaseViewModel
         Date = diaryEntry.Date;
     }
 
+
     [RelayCommand]
-    public void DeleteEntry()
+    public async Task DeleteEntry()
     {
         if (!Entries.Any())
         {
@@ -119,14 +124,23 @@ public partial class DiaryViewModel : BaseViewModel
 
         if (delete is MessageBoxResult.Yes)
         {
-            ExecuteDeleteEntry();
+            await ExecuteDeleteEntryAsync();
         }
     }
 
 
-    private ObservableCollection<DiaryEntryModel> GetAllEntries()
+    private async Task<ObservableCollection<DiaryEntryModel>> GetAllEntries()
     {
-        return new ObservableCollection<DiaryEntryModel>(_diaryRepository.GetAllDiaryEntries());
+        var entries = await _diaryRepository.GetAllDiaryEntries();
+        return new ObservableCollection<DiaryEntryModel>(entries);
+    }
+
+
+    private async Task ExecuteDeleteEntryAsync()
+    {
+        await _diaryRepository.DeleteDiaryEntry(SelectedEntry.Id);
+        Entries.Remove(SelectedEntry);
+        ClearInputFields();
     }
 
     partial void OnSelectedEntryChanged(DiaryEntryModel value)
@@ -135,13 +149,6 @@ public partial class DiaryViewModel : BaseViewModel
         {
             ReadEntry(value);
         }
-    }
-
-    private void ExecuteDeleteEntry()
-    {
-        _diaryRepository.DeleteDiaryEntry(SelectedEntry.Id);
-        Entries.Remove(SelectedEntry);
-        ClearInputFields();
     }
 
     internal void ClearInputFields()

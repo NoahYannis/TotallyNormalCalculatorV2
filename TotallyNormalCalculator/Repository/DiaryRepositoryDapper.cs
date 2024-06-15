@@ -7,18 +7,19 @@ using TotallyNormalCalculator.Core;
 using TotallyNormalCalculator.MVVM.Model;
 using TotallyNormalCalculator.Logging;
 using Dapper;
+using System.Threading.Tasks;
 
 namespace TotallyNormalCalculator.Repository;
 public class DiaryRepositoryDapper(ITotallyNormalCalculatorLogger logger) : IDiaryRepository
 {
-    public void AddDiaryEntry(DiaryEntryModel diaryEntry)
+    public async Task AddDiaryEntry(DiaryEntryModel diaryEntry)
     {
         using IDbConnection connection = new SqlConnection(DBHelper.GetConnectionString("DiaryEntryDB"));
 
         try
         {
             string sqlStatement = "INSERT INTO dbo.Entries (Title, Message, Date) VALUES (@Title, @Message, @Date)";
-            connection.Execute(sqlStatement, diaryEntry);
+            await connection.ExecuteAsync(sqlStatement, diaryEntry);
         }
         catch (Exception exc)
         {
@@ -27,13 +28,13 @@ public class DiaryRepositoryDapper(ITotallyNormalCalculatorLogger logger) : IDia
         }
     }
 
-    public void DeleteDiaryEntry(int id)
+    public async Task DeleteDiaryEntry(int id)
     {
         using (IDbConnection connection = new SqlConnection(DBHelper.GetConnectionString("DiaryEntryDB")))
         {
             try
             {
-                connection.Execute("DELETE FROM dbo.Entries WHERE Id = @Id", new { id });
+                await connection.ExecuteAsync("DELETE FROM dbo.Entries WHERE Id = @Id", new { id });
 
             }
             catch (Exception exc)
@@ -44,7 +45,7 @@ public class DiaryRepositoryDapper(ITotallyNormalCalculatorLogger logger) : IDia
         }
     }
 
-    public IEnumerable<DiaryEntryModel> GetAllDiaryEntries()
+    public async Task<IEnumerable<DiaryEntryModel>> GetAllDiaryEntries()
     {
         IEnumerable<DiaryEntryModel> entries = null;
 
@@ -52,7 +53,7 @@ public class DiaryRepositoryDapper(ITotallyNormalCalculatorLogger logger) : IDia
         {
             using (IDbConnection connection = new SqlConnection(DBHelper.GetConnectionString("DiaryEntryDB")))
             {
-                entries = connection.Query<DiaryEntryModel>("select * from dbo.Entries");
+                entries = await connection.QueryAsync<DiaryEntryModel>("select * from dbo.Entries");
             }
         }
         catch (Exception exc)
@@ -64,12 +65,7 @@ public class DiaryRepositoryDapper(ITotallyNormalCalculatorLogger logger) : IDia
         return entries;
     }
 
-    public DiaryEntryModel GetDiaryEntryById(int id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void UpdateDiaryEntry(DiaryEntryModel diaryEntry)
+    public async Task UpdateDiaryEntry(DiaryEntryModel diaryEntry)
     {
         if (diaryEntry is null)
             return;
@@ -79,7 +75,7 @@ public class DiaryRepositoryDapper(ITotallyNormalCalculatorLogger logger) : IDia
             try
             {
                 string sqlStatement = "UPDATE dbo.Entries SET Title = @Title, Message = @Message, Date = @Date WHERE Id = @Id";
-                connection.Execute(sqlStatement, diaryEntry);
+                await connection.ExecuteAsync(sqlStatement, diaryEntry);
             }
             catch (Exception exc)
             {
