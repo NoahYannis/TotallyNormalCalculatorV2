@@ -57,19 +57,36 @@
             </StackPanel>
         </Border>
 
-        <TextBox Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}" />
+        <Grid Margin="0,25,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-        <ListView
-            Margin="0,25,0,0"
-            behavior:ListBoxScrollOnNewEntry.ScrollOnNewItem="True"
-            ItemContainerStyle="{StaticResource DiaryEntries}"
-            ItemsSource="{Binding Entries, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            SelectedItem="{Binding SelectedEntry, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            SelectionMode="Single">
-            <i:Interaction.Behaviors>
-                <behavior:DeselectCurrentListViewEntry />
-            </i:Interaction.Behaviors>
-        </ListView>
+            <ComboBox Grid.Row="0">
+                <ComboBoxItem IsEnabled="False" IsSelected="True">
+                    Filter auswählen:
+                </ComboBoxItem>
+                <ComboBoxItem Content="Title" />
+                <ComboBoxItem Content="Date" />
+                <ComboBoxItem Content="Message" />
+            </ComboBox>
+
+            <TextBox Grid.Row="1" Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}" />
+
+            <ListView
+                Grid.Row="2"
+                behavior:ListBoxScrollOnNewEntry.ScrollOnNewItem="True"
+                ItemContainerStyle="{StaticResource DiaryEntries}"
+                ItemsSource="{Binding Entries, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                SelectedItem="{Binding SelectedEntry, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                SelectionMode="Single">
+                <i:Interaction.Behaviors>
+                    <behavior:DeselectCurrentListViewEntry />
+                </i:Interaction.Behaviors>
+            </ListView>
+        </Grid>
 
         <Grid Grid.Column="1" Margin="25">
             <Grid.RowDefinitions>
