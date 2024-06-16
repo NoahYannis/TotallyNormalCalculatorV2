@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Input;
 using TotallyNormalCalculator.Logging;
 using TotallyNormalCalculator.MVVM.Model;
 using TotallyNormalCalculator.Repository;
@@ -59,6 +60,23 @@ public partial class DiaryViewModel : BaseViewModel
         Entries = Task.Run(() => this.GetAllEntries()).GetAwaiter().GetResult();
     }
 
+
+        switch (pressedKey.Key)
+        {
+            case Key.X when ControlKeyIsPressed():
+                await DeleteEntry();
+                break;
+            case Key.A when ControlKeyIsPressed():
+                await AddEntry();
+                break;
+            case Key.S when ControlKeyIsPressed():
+                await UpdateEntry();
+                break;
+            case Key.Space when ControlKeyIsPressed():
+                SwitchView();
+                break;
+        }
+    }
 
     [RelayCommand]
     public void SwitchView()
@@ -208,5 +226,9 @@ public partial class DiaryViewModel : BaseViewModel
     internal void ClearInputFields()
     {
         Title = Message = Date = string.Empty;
+    }
+    public bool ControlKeyIsPressed()
+    {
+        return (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control;
     }
 }

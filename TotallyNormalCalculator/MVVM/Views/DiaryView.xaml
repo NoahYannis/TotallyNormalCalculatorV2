@@ -17,6 +17,12 @@
         <model:DiaryEntryModel x:Key="DiaryEntryModel" />
     </UserControl.Resources>
 
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="PreviewKeyDown">
+            <i:InvokeCommandAction Command="{Binding TriggerHotkeyCommand}" PassEventArgsToCommand="True" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
     <Grid Background="LightGreen">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150" />
