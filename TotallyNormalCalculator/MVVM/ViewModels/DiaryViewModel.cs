@@ -60,6 +60,9 @@ public partial class DiaryViewModel : BaseViewModel
         Entries = Task.Run(() => this.GetAllEntries()).GetAwaiter().GetResult();
     }
 
+    [RelayCommand]
+    public async Task TriggerHotkey(KeyEventArgs pressedKey)
+    {
 
         switch (pressedKey.Key)
         {
