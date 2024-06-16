@@ -16,7 +16,7 @@ namespace TotallyNormalCalculator.MVVM.ViewModels;
 public partial class DiaryViewModel : BaseViewModel
 {
 
-    private ObservableCollection<DiaryEntryModel> _entries = new();
+    private ObservableCollection<DiaryEntryModel> _entries = [];
 
     public ObservableCollection<DiaryEntryModel> Entries
     {
@@ -29,7 +29,7 @@ public partial class DiaryViewModel : BaseViewModel
     }
 
     [ObservableProperty]
-    private ObservableCollection<DiaryEntryModel> _filteredEntries = new();
+    private ObservableCollection<DiaryEntryModel> _filteredEntries = [];
 
     [ObservableProperty]
     private string _propertyFilter;

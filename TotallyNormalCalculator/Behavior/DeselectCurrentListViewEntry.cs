@@ -46,6 +46,7 @@ public class DeselectCurrentListViewEntry : Behavior<ListView>
         if (viewModel?.SelectedEntry != null)
         {
             viewModel.ClearInputFields();
+            viewModel.SelectedEntry = null; 
         }
     }
 
