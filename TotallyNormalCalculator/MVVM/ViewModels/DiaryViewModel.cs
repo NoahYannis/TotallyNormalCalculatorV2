@@ -15,8 +15,20 @@ namespace TotallyNormalCalculator.MVVM.ViewModels;
 public partial class DiaryViewModel : BaseViewModel
 {
 
+    private ObservableCollection<DiaryEntryModel> _entries = new();
+
+    public ObservableCollection<DiaryEntryModel> Entries
+    {
+        get => string.IsNullOrWhiteSpace(FilterText) ? _entries : FilteredEntries;
+        set
+        {
+            SetProperty(ref _entries, value);
+            OnPropertyChanged(nameof(Entries));
+        }
+    }
+
     [ObservableProperty]
-    private ObservableCollection<DiaryEntryModel> _entries;
+    private ObservableCollection<DiaryEntryModel> _filteredEntries = new();
 
     [ObservableProperty]
     private DiaryEntryModel _selectedEntry;
@@ -29,6 +41,9 @@ public partial class DiaryViewModel : BaseViewModel
 
     [ObservableProperty]
     private string _date;
+
+    [ObservableProperty]
+    private string _filterText;
 
     private readonly ITotallyNormalCalculatorLogger _diaryLogger;
     private readonly IDiaryRepository _diaryRepository;
@@ -128,6 +143,15 @@ public partial class DiaryViewModel : BaseViewModel
         }
     }
 
+    [RelayCommand]
+    private void FilterEntries(string text)
+    {
+        FilteredEntries = new ObservableCollection<DiaryEntryModel>
+            (_entries.Where(e => e.Title.Contains(text)));
+
+        OnPropertyChanged(nameof(Entries));
+    }
+
 
     private async Task<ObservableCollection<DiaryEntryModel>> GetAllEntries()
     {
@@ -150,6 +174,11 @@ public partial class DiaryViewModel : BaseViewModel
         {
             ReadEntry(value);
         }
+    }
+
+    partial void OnFilterTextChanged(string value)
+    {
+        FilterEntries(value);
     }
 
     internal void ClearInputFields()

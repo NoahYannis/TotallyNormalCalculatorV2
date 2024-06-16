@@ -57,6 +57,8 @@
             </StackPanel>
         </Border>
 
+        <TextBox Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}" />
+
         <ListView
             Margin="0,25,0,0"
             behavior:ListBoxScrollOnNewEntry.ScrollOnNewItem="True"
