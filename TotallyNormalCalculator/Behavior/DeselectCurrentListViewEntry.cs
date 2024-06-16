@@ -10,7 +10,7 @@ namespace TotallyNormalCalculator.Behavior;
 /// <summary>
 /// A behavior to deselect the current item in a ListView when clicking outside of the items.
 /// </summary>
-public class DeselectCurrentListViewEntry : Behavior<ListView>
+public class DeselectCurrentListViewEntry : Behavior<UserControl>
 {
     protected override void OnAttached()
     {
@@ -26,13 +26,22 @@ public class DeselectCurrentListViewEntry : Behavior<ListView>
 
     private void OnPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
-        var listView = sender as ListView;
-        var hitTestResult = VisualTreeHelper.HitTest(listView, e.GetPosition(listView));
+        var userControl = sender as UserControl;
 
+        var hitTestResult = VisualTreeHelper.HitTest(userControl, e.GetPosition(userControl));
 
-        // Check if click was outside of the ListView
-        if (hitTestResult == null)
-            return;
+        DependencyObject visualHit = hitTestResult.VisualHit;
+
+        while (visualHit != null)
+        {
+            // Don't deselect the entry if its TextBox or a button was clicked
+            if (visualHit is TextBox || visualHit is Button) 
+            {
+                return;
+            }
+
+            visualHit = VisualTreeHelper.GetParent(visualHit);
+        }
 
         // Find the clicked ListViewItem by traversing up the visual tree
         var clickedListViewItem = FindAncestor<ListViewItem>(hitTestResult.VisualHit);
@@ -41,7 +50,7 @@ public class DeselectCurrentListViewEntry : Behavior<ListView>
         if (clickedListViewItem != null)
             return;
 
-        var viewModel = listView.DataContext as DiaryViewModel;
+        var viewModel = userControl.DataContext as DiaryViewModel;
 
         if (viewModel?.SelectedEntry != null)
         {

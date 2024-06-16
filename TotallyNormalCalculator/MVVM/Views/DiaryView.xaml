@@ -23,6 +23,10 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
+    <i:Interaction.Behaviors>
+        <behavior:DeselectCurrentListViewEntry />
+    </i:Interaction.Behaviors>
+
     <Grid Background="LightGreen">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150" />
@@ -80,6 +84,7 @@
                 <ComboBoxItem Content="Filter: Title" Tag="Title" />
                 <ComboBoxItem Content="Filter: Message" Tag="Message" />
                 <ComboBoxItem Content="Filter: Date" Tag="Date" />
+                <ComboBoxItem Content="Filter: None" Tag="None" />
             </ComboBox>
             <!--  IsEditable and IsReadonly both have to be true to display the placeholder text  -->
 
@@ -91,11 +96,7 @@
                 ItemContainerStyle="{StaticResource DiaryEntries}"
                 ItemsSource="{Binding Entries, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 SelectedItem="{Binding SelectedEntry, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                SelectionMode="Single">
-                <i:Interaction.Behaviors>
-                    <behavior:DeselectCurrentListViewEntry />
-                </i:Interaction.Behaviors>
-            </ListView>
+                SelectionMode="Single" />
         </Grid>
 
         <Grid Grid.Column="1" Margin="25">
