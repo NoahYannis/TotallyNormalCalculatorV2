@@ -57,8 +57,6 @@
             </StackPanel>
         </Border>
 
-        <Grid VerticalAlignment="Center" Background="LightGreen" />
-
         <ListView
             Margin="0,25,0,0"
             behavior:ListBoxScrollOnNewEntry.ScrollOnNewItem="True"
@@ -71,27 +69,16 @@
             </i:Interaction.Behaviors>
         </ListView>
 
-        <Grid Grid.Column="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*" />
-                <ColumnDefinition Width="97*" />
-            </Grid.ColumnDefinitions>
+        <Grid Grid.Column="1" Margin="25">
             <Grid.RowDefinitions>
                 <RowDefinition Height="20*" />
                 <RowDefinition Height="80*" />
                 <RowDefinition Height="20*" />
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0" Grid.ColumnSpan="2">
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="7*" />
-                    <ColumnDefinition Width="43*" />
-                </Grid.ColumnDefinitions>
-
+            <Grid Grid.Row="0">
                 <TextBox
                     x:Name="txtTitle"
-                    Grid.ColumnSpan="2"
                     Height="30"
                     MinHeight="30"
                     Margin="10,0,180,10"
@@ -123,7 +110,6 @@
 
                 <TextBox
                     x:Name="txtDate"
-                    Grid.Column="1"
                     Width="150"
                     MinHeight="30"
                     Margin="0,0,10,10"
@@ -134,7 +120,6 @@
                     Text="{Binding Date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                 <TextBlock
-                    Grid.Column="1"
                     Margin="0,0,123,16"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
@@ -157,8 +142,6 @@
             <TextBox
                 x:Name="txtMessage"
                 Grid.Row="1"
-                Grid.Column="1"
-                Margin="5,0,25,0"
                 behavior:CornerRadiusSetter.CornerRadius="5"
                 AcceptsReturn="True"
                 AcceptsTab="True"
@@ -168,7 +151,6 @@
 
             <TextBlock
                 Grid.Row="1"
-                Grid.Column="1"
                 Width="58"
                 Height="20"
                 Margin="10,5,0,0"
@@ -193,7 +175,6 @@
 
             <StackPanel
                 Grid.Row="2"
-                Grid.ColumnSpan="2"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Orientation="Horizontal">
