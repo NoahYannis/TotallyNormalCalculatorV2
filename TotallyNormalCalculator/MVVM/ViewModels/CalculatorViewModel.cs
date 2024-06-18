@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Globalization;
 using TotallyNormalCalculator.Logging;
@@ -36,7 +37,7 @@ public partial class CalculatorViewModel(ITotallyNormalCalculatorLogger logger) 
 
         if (_switchViewCounter == 4)
         {
-            SelectedViewModel = new DiaryViewModel(logger, new DiaryRepositoryDapper(logger));
+            SelectedViewModel = App.AppHost.Services.GetRequiredService<DiaryViewModel>();
             _switchViewCounter = 0;
         }
     }

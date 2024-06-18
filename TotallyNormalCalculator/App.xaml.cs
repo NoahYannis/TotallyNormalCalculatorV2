@@ -12,7 +12,7 @@ namespace TotallyNormalCalculator;
 
 public partial class App : Application
 {
-    private static IHost AppHost { get; set; }
+    internal static IHost AppHost { get; set; }
 
     public App()
     {

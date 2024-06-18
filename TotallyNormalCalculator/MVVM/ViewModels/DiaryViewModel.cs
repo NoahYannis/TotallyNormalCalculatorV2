@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -84,7 +85,7 @@ public partial class DiaryViewModel : BaseViewModel
     [RelayCommand]
     public void SwitchView()
     {
-        SelectedViewModel = new CalculatorViewModel(_diaryLogger);
+        SelectedViewModel = App.AppHost.Services.GetRequiredService<CalculatorViewModel>();
     }
 
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.IO;
@@ -12,7 +13,7 @@ namespace TotallyNormalCalculator.Core;
 /// </summary>
 public static class DBHelper
 {
-    private static readonly TotallyNormalCalculatorLogger _logger = new();
+    private static readonly ITotallyNormalCalculatorLogger _logger = App.AppHost.Services.GetRequiredService<ITotallyNormalCalculatorLogger>();
 
     public static string GetConnectionString(string name)
     {
