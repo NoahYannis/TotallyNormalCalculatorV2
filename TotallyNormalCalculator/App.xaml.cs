@@ -1,6 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+﻿using System;
 using System.Windows;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using TotallyNormalCalculator.Core;
 using TotallyNormalCalculator.Logging;
 using TotallyNormalCalculator.MVVM.ViewModels;
@@ -18,7 +19,11 @@ public partial class App : Application
         AppHost = Host.CreateDefaultBuilder()
          .ConfigureServices((context, services) =>
          {
-             services.AddSingleton<MainWindow>();
+             services.AddSingleton(serviceProvider => new MainWindow
+             {
+                 DataContext = serviceProvider.GetRequiredService<MainViewModel>()
+             });
+
              services.AddSingleton<ITotallyNormalCalculatorLogger, TotallyNormalCalculatorLogger>();
              services.AddScoped<IDiaryRepository, DiaryRepositoryDapper>();
              services.AddTransient<CalculatorViewModel>();
