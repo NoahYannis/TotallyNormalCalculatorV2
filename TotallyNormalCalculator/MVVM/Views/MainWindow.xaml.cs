@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using TotallyNormalCalculator.MVVM.ViewModels;
 
 namespace TotallyNormalCalculator.Views;
 

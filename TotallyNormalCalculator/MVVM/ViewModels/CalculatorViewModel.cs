@@ -156,7 +156,7 @@ public partial class CalculatorViewModel(ITotallyNormalCalculatorLogger logger) 
         {
             if (Operation == null)
             {
-                FirstNumber =  Convert.ToDouble(CalculatorText, CultureInfo.InvariantCulture);
+                FirstNumber = Convert.ToDouble(CalculatorText, CultureInfo.InvariantCulture);
             }
             else
             {

@@ -12,7 +12,7 @@ namespace TotallyNormalCalculator;
 
 public partial class App : Application
 {
-    public static IHost AppHost { get; private set; }
+    private static IHost AppHost { get; set; }
 
     public App()
     {
@@ -24,11 +24,12 @@ public partial class App : Application
                  DataContext = serviceProvider.GetRequiredService<MainViewModel>()
              });
 
-             services.AddSingleton<ITotallyNormalCalculatorLogger, TotallyNormalCalculatorLogger>();
-             services.AddScoped<IDiaryRepository, DiaryRepositoryDapper>();
+             services.AddSingleton<MainViewModel>();
              services.AddTransient<CalculatorViewModel>();
              services.AddTransient<DiaryViewModel>();
-             services.AddTransient<MainViewModel>();
+
+             services.AddSingleton<ITotallyNormalCalculatorLogger, TotallyNormalCalculatorLogger>();
+             services.AddScoped<IDiaryRepository, DiaryRepositoryDapper>();
          })
          .Build();
     }

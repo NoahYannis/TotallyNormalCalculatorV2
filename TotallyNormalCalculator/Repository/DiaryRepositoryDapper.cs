@@ -1,13 +1,13 @@
-﻿using System;
+﻿using Dapper;
+using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data;
+using System.Data.SqlClient;
+using System.Threading.Tasks;
 using System.Windows;
 using TotallyNormalCalculator.Core;
-using TotallyNormalCalculator.MVVM.Model;
 using TotallyNormalCalculator.Logging;
-using Dapper;
-using System.Threading.Tasks;
+using TotallyNormalCalculator.MVVM.Model;
 
 namespace TotallyNormalCalculator.Repository;
 public class DiaryRepositoryDapper(ITotallyNormalCalculatorLogger logger) : IDiaryRepository

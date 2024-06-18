@@ -15,7 +15,7 @@ public class EnableDragHelper
     private static void OnLoaded(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
     {
         var uiElement = dependencyObject as UIElement;
-        if (uiElement == null || dependencyPropertyChangedEventArgs.NewValue is bool == false)
+        if (uiElement == null || (dependencyPropertyChangedEventArgs.NewValue is bool) == false)
         {
             return;
         }
@@ -39,7 +39,7 @@ public class EnableDragHelper
                 DependencyObject parent = uiElement;
                 int avoidInfiniteLoop = 0;
                 // Search up the visual tree to find the first parent window.
-                while (parent is Window == false)
+                while ((parent is Window) == false)
                 {
                     parent = VisualTreeHelper.GetParent(parent);
                     avoidInfiniteLoop++;

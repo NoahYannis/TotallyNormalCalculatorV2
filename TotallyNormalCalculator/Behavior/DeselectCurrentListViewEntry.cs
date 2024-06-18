@@ -35,7 +35,7 @@ public class DeselectCurrentListViewEntry : Behavior<UserControl>
         while (visualHit != null)
         {
             // Don't deselect the entry if its TextBox or a button was clicked
-            if (visualHit is TextBox || visualHit is Button) 
+            if (visualHit is TextBox || visualHit is Button)
             {
                 return;
             }
@@ -55,7 +55,7 @@ public class DeselectCurrentListViewEntry : Behavior<UserControl>
         if (viewModel?.SelectedEntry != null)
         {
             viewModel.ClearInputFields();
-            viewModel.SelectedEntry = null; 
+            viewModel.SelectedEntry = null;
         }
     }
 

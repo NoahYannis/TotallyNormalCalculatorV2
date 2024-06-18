@@ -13,11 +13,12 @@
                 <ResourceDictionary x:Name="DiaryButtons" Source="./Themes/DiaryButtons.xaml" />
                 <ResourceDictionary x:Name="WindowControlButtons" Source="./Themes/WindowControlButtons.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            
             <DataTemplate DataType="{x:Type viewmodels:DiaryViewModel}">
-                <views:DiaryView DataContext="{x:Type viewmodels:DiaryViewModel}" />
+                <views:DiaryView />
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:CalculatorViewModel}">
-                <views:CalculatorView DataContext="{x:Type viewmodels:CalculatorViewModel}" />
+                <views:CalculatorView />
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
