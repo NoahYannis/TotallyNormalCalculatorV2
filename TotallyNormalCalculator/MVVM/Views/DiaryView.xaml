@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:behavior="clr-namespace:TotallyNormalCalculator.Behavior"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:model="clr-namespace:TotallyNormalCalculator.MVVM.Model"
@@ -210,26 +211,58 @@
                 Orientation="Horizontal">
 
                 <Button
+                    Width="90"
                     Command="{Binding DeleteEntryCommand}"
-                    Content="Delete"
-                    Style="{StaticResource DiaryButtons}" />
+                    FontSize="13"
+                    Style="{StaticResource DiaryButtons}">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconBlock
+                            Margin="0,0,5,0"
+                            Foreground="Red"
+                            Icon="Trash" />
+                        <TextBlock Text="Delete" />
+                    </StackPanel>
+                </Button>
 
                 <Button
                     Command="{Binding AddEntryCommand}"
-                    Content="Add"
-                    Style="{StaticResource DiaryButtons}" />
+                    FontSize="13"
+                    Style="{StaticResource DiaryButtons}">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconBlock
+                            Margin="0,0,5,0"
+                            FontSize="16"
+                            Foreground="Green"
+                            Icon="Add" />
+                        <TextBlock Text="Add" />
+                    </StackPanel>
+                </Button>
 
                 <Button
+                    Width="90"
                     Command="{Binding UpdateEntryCommand}"
-                    Content="Update"
-                    Style="{StaticResource DiaryButtons}" />
+                    FontSize="13"
+                    Style="{StaticResource DiaryButtons}">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconBlock
+                            Margin="0,0,5,0"
+                            Foreground="Blue"
+                            Icon="Pencil" />
+                        <TextBlock Text="Update" />
+                    </StackPanel>
+                </Button>
 
                 <Button
                     Width="100"
                     Background="BurlyWood"
                     Command="{Binding SwitchViewCommand}"
-                    Content="Calculator ⭯"
-                    Style="{StaticResource DiaryButtons}" />
+                    FontSize="13"
+                    Style="{StaticResource DiaryButtons}">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconBlock Margin="0,0,5,0" Icon="Calculator" />
+                        <TextBlock Text="Calculator" />
+                    </StackPanel>
+                </Button>
             </StackPanel>
         </Grid>
         <ContentControl Grid.ColumnSpan="2" Content="{Binding SelectedViewModel}" />
