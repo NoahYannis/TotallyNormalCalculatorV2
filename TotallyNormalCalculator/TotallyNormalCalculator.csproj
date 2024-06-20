@@ -15,6 +15,7 @@
 			<IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
 			<PublishSingleFile>true</PublishSingleFile>
 			<UseAppHost>true</UseAppHost>
+			<Platforms>AnyCPU;x64</Platforms>
 		</PropertyGroup>
 
 	<ItemGroup>

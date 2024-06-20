@@ -272,6 +272,9 @@
                 </Button>
             </StackPanel>
         </Grid>
-        <ContentControl Grid.ColumnSpan="2" Content="{Binding SelectedViewModel}" />
+        <ContentControl
+            Grid.RowSpan="2"
+            Grid.ColumnSpan="2"
+            Content="{Binding SelectedViewModel}" />
     </Grid>
 </UserControl>

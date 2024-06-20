@@ -13,6 +13,8 @@
 		<StartupObject />
 
 		<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+
+		<Platforms>AnyCPU;x64</Platforms>
 	</PropertyGroup>
 
 	<ItemGroup>

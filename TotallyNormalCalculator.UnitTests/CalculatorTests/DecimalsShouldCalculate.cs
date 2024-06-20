@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using TotallyNormalCalculator.MVVM.Model;
+using Xunit;
 
 namespace TotallyNormalCalculator.UnitTests.CalculatorTests;
 

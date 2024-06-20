@@ -220,7 +220,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:TotallyNormalCalculatorInstaller"
         "ProductCode" = "8:{E48E4DC3-9EFB-4231-97B0-5F1416CDBEF8}"
-        "PackageCode" = "8:{7312F23A-8C18-4595-89D2-BDA4CF5FC94B}"
+        "PackageCode" = "8:{DF273F71-BE86-466F-AC0F-9CD92EE54863}"
         "UpgradeCode" = "8:{32A0ABA8-40FF-4D8E-8097-AB3C49E465FE}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -769,7 +769,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_1DF85CFB51854D02A9A1092BDCAFCCC9"
             {
-            "SourcePath" = "8:..\\TotallyNormalCalculator\\bin\\Release\\net8.0-windows\\win-x64\\publish\\TotallyNormalCalculator.exe"
+            "SourcePath" = "8:..\\TotallyNormalCalculator\\bin\\x64\\Release\\net8.0-windows\\win-x64\\publish\\TotallyNormalCalculator.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_9725683DDFA045ED847CCD9E7FCDCA13"
