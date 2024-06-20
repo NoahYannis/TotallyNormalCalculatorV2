@@ -12,6 +12,7 @@
                 <ResourceDictionary x:Name="DiaryEntry" Source="./Themes/DiaryEntries.xaml" />
                 <ResourceDictionary x:Name="DiaryButtons" Source="./Themes/DiaryButtons.xaml" />
                 <ResourceDictionary x:Name="WindowControlButtons" Source="./Themes/WindowControlButtons.xaml" />
+                <ResourceDictionary x:Name="ColorThemes" Source="./Themes/ColorThemes.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewmodels:DiaryViewModel}">

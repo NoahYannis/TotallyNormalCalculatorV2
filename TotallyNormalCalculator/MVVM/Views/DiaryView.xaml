@@ -38,7 +38,7 @@
 
         <Border
             Grid.ColumnSpan="2"
-            Height="25"
+            Height="40"
             VerticalAlignment="Top"
             behavior:EnableDragHelper.EnableDrag="True"
             AllowDrop="True"
@@ -50,23 +50,22 @@
                 HorizontalAlignment="Right"
                 Orientation="Horizontal">
 
+                <ToggleButton Margin="0,0,10,0" Style="{StaticResource ThemeToggleButton}" />
+
                 <Button
-                    Background="LightGreen"
                     Command="{Binding MinimizeWindowCommand}"
                     Content="🗕"
                     Style="{StaticResource WindowControlButton}" />
 
                 <Button
-                    Background="LightGreen"
                     Command="{Binding MaximizeWindowCommand}"
                     Content="□"
                     Style="{StaticResource WindowControlButton}" />
 
                 <Button
-                    Background="LightGreen"
                     Command="{Binding CloseWindowCommand}"
                     Content="X"
-                    Style="{StaticResource WindowControlButton}" />
+                    Style="{StaticResource CloseButton}" />
             </StackPanel>
         </Border>
 
