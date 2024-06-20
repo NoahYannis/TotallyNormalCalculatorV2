@@ -4,11 +4,11 @@
 
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="LawnGreen" />
+                <Setter Property="Background" Value="{DynamicResource MouseOver}" />
             </Trigger>
 
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="ForestGreen" />
+                <Setter Property="Background" Value="{DynamicResource Selected}" />
             </Trigger>
         </Style.Triggers>
 

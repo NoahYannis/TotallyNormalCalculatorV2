@@ -4,5 +4,7 @@
     <SolidColorBrush x:Key="ForegroundColor" Color="Black" />
     <SolidColorBrush x:Key="BorderBackground" Color="SkyBlue" />
     <SolidColorBrush x:Key="DiaryEntryColor" Color="SkyBlue" />
+    <SolidColorBrush x:Key="MouseOver" Color="CornflowerBlue" />
+    <SolidColorBrush x:Key="Selected" Color="RoyalBlue" />
 
 </ResourceDictionary>
