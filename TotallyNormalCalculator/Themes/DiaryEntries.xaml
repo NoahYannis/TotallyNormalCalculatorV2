@@ -12,7 +12,7 @@
             </Trigger>
         </Style.Triggers>
 
-        <Setter Property="Background" Value="LightGreen" />
+        <Setter Property="Background" Value="{DynamicResource DiaryEntryColor}" />
 
         <Setter Property="Template">
             <Setter.Value>
@@ -30,12 +30,12 @@
                                     Content="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     FontSize="12"
                                     FontWeight="DemiBold"
-                                    Foreground="Black" />
+                                    Foreground="{DynamicResource ForegroundColor}" />
                                 <Label
                                     Name="EntryMessage"
                                     Content="{Binding Message, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     FontSize="10"
-                                    Foreground="Black" />
+                                    Foreground="{DynamicResource ForegroundColor}" />
                             </StackPanel>
                         </StackPanel>
                     </Border>

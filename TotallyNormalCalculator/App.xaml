@@ -8,11 +8,13 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary x:Name="DarkTheme" Source="./Themes/DarkTheme.xaml" />
+                <ResourceDictionary x:Name="LightTheme" Source="./Themes/LightTheme.xaml" />
                 <ResourceDictionary x:Name="CalculatorButton" Source="./Themes/CalculatorButtons.xaml" />
                 <ResourceDictionary x:Name="DiaryEntry" Source="./Themes/DiaryEntries.xaml" />
                 <ResourceDictionary x:Name="DiaryButtons" Source="./Themes/DiaryButtons.xaml" />
                 <ResourceDictionary x:Name="WindowControlButtons" Source="./Themes/WindowControlButtons.xaml" />
-                <ResourceDictionary x:Name="ColorThemes" Source="./Themes/ColorThemes.xaml" />
+                <ResourceDictionary x:Name="SwitchThemeToggleButton" Source="./Themes/SwitchThemeToggleButton.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewmodels:DiaryViewModel}">

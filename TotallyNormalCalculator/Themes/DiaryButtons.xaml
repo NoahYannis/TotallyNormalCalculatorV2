@@ -2,8 +2,6 @@
 
     <Style x:Key="BaseDiaryButtons" TargetType="Button">
 
-        <Setter Property="Background" Value="White" />
-        <Setter Property="Foreground" Value="Black" />
         <Setter Property="FontSize" Value="12" />
         <Setter Property="Height" Value="30" />
         <Setter Property="Width" Value="80" />
@@ -57,7 +55,8 @@
         x:Key="ViewSwitchButton"
         BasedOn="{StaticResource BaseDiaryButtons}"
         TargetType="Button">
-        <Setter Property="Background" Value="BurlyWood" />
+        <Setter Property="Background" Value="{DynamicResource BackgroundColor}" />
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="MediumPurple" />

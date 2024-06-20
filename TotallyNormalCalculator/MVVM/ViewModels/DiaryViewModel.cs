@@ -47,6 +47,9 @@ public partial class DiaryViewModel : BaseViewModel
     [ObservableProperty]
     private string _filterText;
 
+    [ObservableProperty]
+    private bool _isLightTheme = true;
+
     private readonly ITotallyNormalCalculatorLogger _diaryLogger;
     private readonly IDiaryRepository _diaryRepository;
 
@@ -77,6 +80,18 @@ public partial class DiaryViewModel : BaseViewModel
                 break;
         }
     }
+
+    [RelayCommand]
+    public void SwitchTheme()
+    {
+        IsLightTheme = !IsLightTheme;
+
+        string newThemePath = IsLightTheme ? "Themes/LightTheme.xaml" : "Themes/DarkTheme.xaml";
+        var newTheme = (ResourceDictionary)Application.LoadComponent(new Uri(newThemePath, UriKind.Relative));
+        Application.Current.Resources.MergedDictionaries.RemoveAt(0);
+        Application.Current.Resources.MergedDictionaries.Add(newTheme);
+    }   
+
 
     [RelayCommand]
     public void SwitchView()

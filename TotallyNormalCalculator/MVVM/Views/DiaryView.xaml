@@ -30,7 +30,7 @@
         <behavior:DeselectCurrentListViewEntry />
     </i:Interaction.Behaviors>
 
-    <Grid Background="LightGreen">
+    <Grid Background="{DynamicResource BackgroundColor}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150" />
             <ColumnDefinition />
@@ -46,7 +46,7 @@
             VerticalAlignment="Top"
             behavior:EnableDragHelper.EnableDrag="True"
             AllowDrop="True"
-            Background="SkyBlue">
+            Background="{DynamicResource BorderBackground}">
 
             <StackPanel
                 MinHeight="25"
@@ -54,7 +54,10 @@
                 HorizontalAlignment="Right"
                 Orientation="Horizontal">
 
-                <ToggleButton Margin="0,0,10,0" Style="{StaticResource ThemeToggleButton}" />
+                <ToggleButton
+                    Margin="0,0,10,0"
+                    Command="{Binding SwitchThemeCommand}"
+                    Style="{StaticResource ThemeToggleButton}" />
 
                 <Button
                     Command="{Binding MinimizeWindowCommand}"
@@ -98,6 +101,7 @@
             <ListView
                 Grid.Row="2"
                 behavior:ListBoxScrollOnNewEntry.ScrollOnNewItem="True"
+                Background="{DynamicResource BackgroundColor}"
                 ItemContainerStyle="{StaticResource DiaryEntries}"
                 ItemsSource="{Binding Entries, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 SelectedItem="{Binding SelectedEntry, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -257,6 +261,7 @@
 
                 <Button
                     Width="100"
+                    Background="{DynamicResource DiaryEntryColor}"
                     Command="{Binding SwitchViewCommand}"
                     FontSize="13"
                     Style="{StaticResource ViewSwitchButton}">

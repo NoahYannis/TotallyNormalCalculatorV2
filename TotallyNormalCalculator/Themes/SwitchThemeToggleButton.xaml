@@ -6,10 +6,9 @@
     <Style x:Key="ThemeToggleButton" TargetType="ToggleButton">
         <Setter Property="Width" Value="20" />
         <Setter Property="Height" Value="20" />
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}" />
         <Style.Triggers>
             <Trigger Property="IsChecked" Value="True">
-                <Setter Property="Background" Value="Black" />
-                <Setter Property="Foreground" Value="White" />
                 <Setter Property="Content">
                     <Setter.Value>
                         <fa:IconImage Icon="Moon" />
@@ -17,7 +16,6 @@
                 </Setter>
             </Trigger>
             <Trigger Property="IsChecked" Value="False">
-                <Setter Property="Foreground" Value="Yellow" />
                 <Setter Property="Content">
                     <Setter.Value>
                         <fa:IconImage Icon="Lightbulb" />
