@@ -9,11 +9,7 @@ I initially developed this before my apprenticeship, this is the second iteratio
 To Do:
 
 - Bugfix
-- Setting Diary Entry Date with Date Picker
-- Containerization
 - More Unit Tests
 - Add Rich Text Editor To Diary
-- Add Search Function To Diary
 - Azure Integration (Blob Storage, Serverless Functions etc)
-- Shortcuts For Working With Entries
 - Localization
