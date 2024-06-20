@@ -23,11 +23,7 @@ public partial class DiaryViewModel : BaseViewModel
     public ObservableCollection<DiaryEntryModel> Entries
     {
         get => string.IsNullOrWhiteSpace(FilterText) ? _entries : FilteredEntries;
-        set
-        {
-            SetProperty(ref _entries, value);
-            OnPropertyChanged(nameof(Entries));
-        }
+        set => SetProperty(ref _entries, value);
     }
 
     [ObservableProperty]
@@ -231,6 +227,7 @@ public partial class DiaryViewModel : BaseViewModel
     {
         Title = Message = Date = string.Empty;
     }
+
     public bool ControlKeyIsPressed()
     {
         return (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control;
