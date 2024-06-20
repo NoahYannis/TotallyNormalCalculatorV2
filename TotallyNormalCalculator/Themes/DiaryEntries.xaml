@@ -10,6 +10,13 @@
             <Trigger Property="IsSelected" Value="True">
                 <Setter Property="Background" Value="{DynamicResource Selected}" />
             </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <TranslateTransform Y="-3" />
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
         </Style.Triggers>
 
         <Setter Property="Background" Value="{DynamicResource DiaryEntryColor}" />
