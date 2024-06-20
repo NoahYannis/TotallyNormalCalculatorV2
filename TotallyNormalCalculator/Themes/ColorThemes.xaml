@@ -4,8 +4,8 @@
     xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp">
 
     <Style x:Key="ThemeToggleButton" TargetType="ToggleButton">
-        <Setter Property="Width" Value="30" />
-        <Setter Property="Height" Value="30" />
+        <Setter Property="Width" Value="20" />
+        <Setter Property="Height" Value="20" />
         <Style.Triggers>
             <Trigger Property="IsChecked" Value="True">
                 <Setter Property="Background" Value="Black" />
@@ -20,7 +20,7 @@
                 <Setter Property="Foreground" Value="Yellow" />
                 <Setter Property="Content">
                     <Setter.Value>
-                        <fa:IconImage Icon="Sun" />
+                        <fa:IconImage Icon="Lightbulb" />
                     </Setter.Value>
                 </Setter>
             </Trigger>

@@ -3,8 +3,8 @@
 
     <Style x:Key="WindowControlButtonBaseStyle" TargetType="Button">
         <Setter Property="Background" Value="LightGreen" />
-        <Setter Property="Width" Value="30" />
-        <Setter Property="Height" Value="30" />
+        <Setter Property="Width" Value="20" />
+        <Setter Property="Height" Value="20" />
         <Setter Property="FontSize" Value="12" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="FontWeight" Value="Bold" />
@@ -17,7 +17,7 @@
         TargetType="Button">
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="Black" />
+                <Setter Property="Background" Value="LightGray" />
             </Trigger>
         </Style.Triggers>
     </Style>
