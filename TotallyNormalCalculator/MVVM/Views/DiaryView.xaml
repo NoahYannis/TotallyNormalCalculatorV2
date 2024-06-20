@@ -17,6 +17,7 @@
 
     <UserControl.Resources>
         <converter:SelectionToEnabledConverter x:Key="SelectionToEnabled" />
+        <Style BasedOn="{StaticResource DiaryButtons}" TargetType="Button" />
     </UserControl.Resources>
 
     <i:Interaction.Triggers>
@@ -214,8 +215,7 @@
                     Width="90"
                     Command="{Binding DeleteEntryCommand}"
                     FontSize="13"
-                    IsEnabled="{Binding SelectedEntry, Converter={StaticResource SelectionToEnabled}}"
-                    Style="{StaticResource DiaryButtons}">
+                    IsEnabled="{Binding SelectedEntry, Converter={StaticResource SelectionToEnabled}}">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconBlock
                             Margin="0,0,5,0"
@@ -225,10 +225,7 @@
                     </StackPanel>
                 </Button>
 
-                <Button
-                    Command="{Binding AddEntryCommand}"
-                    FontSize="13"
-                    Style="{StaticResource DiaryButtons}">
+                <Button Command="{Binding AddEntryCommand}" FontSize="13">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconBlock
                             Margin="0,0,5,0"
@@ -242,8 +239,7 @@
                 <Button
                     Width="90"
                     Command="{Binding UpdateEntryCommand}"
-                    FontSize="13"
-                    Style="{StaticResource DiaryButtons}">
+                    FontSize="13">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconBlock
                             Margin="0,0,5,0"
