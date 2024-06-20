@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace TotallyNormalCalculator.Views;
+namespace TotallyNormalCalculator.MVVM.Views;
 
 public partial class MainWindow : Window
 {

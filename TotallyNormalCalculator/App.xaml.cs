@@ -6,7 +6,7 @@ using TotallyNormalCalculator.Core;
 using TotallyNormalCalculator.Logging;
 using TotallyNormalCalculator.MVVM.ViewModels;
 using TotallyNormalCalculator.Repository;
-using TotallyNormalCalculator.Views;
+using TotallyNormalCalculator.MVVM.Views;
 
 namespace TotallyNormalCalculator;
 

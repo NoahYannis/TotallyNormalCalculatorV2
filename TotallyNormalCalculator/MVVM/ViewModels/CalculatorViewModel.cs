@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Globalization;
 using TotallyNormalCalculator.Logging;
+using TotallyNormalCalculator.MVVM.Model;
 using TotallyNormalCalculator.Repository;
 
 namespace TotallyNormalCalculator.MVVM.ViewModels;

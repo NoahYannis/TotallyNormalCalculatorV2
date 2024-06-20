@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace TotallyNormalCalculator;
+namespace TotallyNormalCalculator.MVVM.Model;
 
 public class CalculatorModel : ObservableObject
 {
