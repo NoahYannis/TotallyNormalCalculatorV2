@@ -6,5 +6,6 @@
     <SolidColorBrush x:Key="DiaryEntryColor" Color="Indigo" />
     <SolidColorBrush x:Key="MouseOver" Color="MediumPurple" />
     <SolidColorBrush x:Key="Selected" Color="Purple" />
+    <SolidColorBrush x:Key="BorderBrush" Color="Blue" />
 
 </ResourceDictionary>

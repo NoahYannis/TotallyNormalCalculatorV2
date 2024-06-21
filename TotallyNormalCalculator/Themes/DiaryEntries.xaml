@@ -2,6 +2,7 @@
 
     <Style x:Key="DiaryEntries" TargetType="ListViewItem">
         <Setter Property="Width" Value="100" />
+        <Setter Property="Height" Value="70" />
         <Setter Property="Background" Value="{DynamicResource DiaryEntryColor}" />
 
         <Setter Property="Template">
@@ -10,7 +11,7 @@
                     <Border
                         Margin="2,10,2,2"
                         Background="{TemplateBinding Background}"
-                        BorderBrush="Blue"
+                        BorderBrush="{DynamicResource BorderBrush}"
                         BorderThickness="2"
                         CornerRadius="4">
                         <StackPanel Margin="0,0,5,5" Orientation="Horizontal">
@@ -37,6 +38,11 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="{DynamicResource MouseOver}" />
                 <Setter Property="Height" Value="70" />
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <TranslateTransform Y="-3" />
+                    </Setter.Value>
+                </Setter>
                 <Trigger.EnterActions>
                     <BeginStoryboard>
                         <Storyboard>
@@ -88,13 +94,6 @@
                 <Setter Property="Background" Value="{DynamicResource Selected}" />
             </Trigger>
 
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="RenderTransform">
-                    <Setter.Value>
-                        <TranslateTransform Y="-3" />
-                    </Setter.Value>
-                </Setter>
-            </Trigger>
         </Style.Triggers>
     </Style>
 </ResourceDictionary>
