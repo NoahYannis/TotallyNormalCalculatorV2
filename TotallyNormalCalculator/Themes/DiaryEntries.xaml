@@ -118,10 +118,6 @@
                                     <CircleEase />
                                 </DoubleAnimation.EasingFunction>
                             </DoubleAnimation>
-                            <ColorAnimation
-                                Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
-                                To="Red"
-                                Duration="0:0:0.3" />
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.EnterActions>
