@@ -17,6 +17,7 @@
 
     <UserControl.Resources>
         <converter:SelectionToEnabledConverter x:Key="SelectionToEnabled" />
+        <converter:StringToVisibilityConverter x:Key="StringToVisibility" />
         <Style BasedOn="{StaticResource DiaryButtons}" TargetType="Button" />
     </UserControl.Resources>
 
@@ -128,7 +129,7 @@
                     VerticalAlignment="Bottom"
                     VerticalContentAlignment="Center"
                     behavior:CornerRadiusSetter.CornerRadius="5"
-                    Text="{Binding Path=Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                 <TextBlock
                     Margin="15,0,0,16"
@@ -136,8 +137,8 @@
                     VerticalAlignment="Bottom"
                     Foreground="DarkGray"
                     IsHitTestVisible="False"
-                    Style="{StaticResource TitlePlaceholder}"
-                    Text="Title" />
+                    Text="Title"
+                    Visibility="{Binding Text, ElementName=txtTitle, Converter={StaticResource StringToVisibility}}" />
 
                 <TextBox
                     x:Name="txtDate"
@@ -156,8 +157,8 @@
                     VerticalAlignment="Bottom"
                     Foreground="DarkGray"
                     IsHitTestVisible="False"
-                    Style="{StaticResource DatePlaceholder}"
-                    Text="Date" />
+                    Text="Date"
+                    Visibility="{Binding Text, ElementName=txtDate, Converter={StaticResource StringToVisibility}}" />
             </Grid>
 
             <TextBox
@@ -176,10 +177,10 @@
                 Margin="10,5,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Foreground="DarkGray" Style="{StaticResource MessagePlaceholder}"
+                Foreground="DarkGray"
                 IsHitTestVisible="False"
-                Text="Message">
-            </TextBlock>
+                Text="Message"
+                Visibility="{Binding Text, ElementName=txtMessage, Converter={StaticResource StringToVisibility}}" />
 
 
             <StackPanel

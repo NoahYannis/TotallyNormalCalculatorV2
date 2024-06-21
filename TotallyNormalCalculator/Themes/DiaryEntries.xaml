@@ -92,7 +92,6 @@
 
             <Trigger Property="IsSelected" Value="True">
                 <Setter Property="Background" Value="{DynamicResource Selected}" />
-                <Setter Property="BorderBrush" Value="{StaticResource SelectedBorderBrush}" />
                 <Setter Property="Height" Value="70" />
                 <Setter Property="RenderTransform">
                     <Setter.Value>
