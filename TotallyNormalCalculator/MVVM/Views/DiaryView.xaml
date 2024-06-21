@@ -136,19 +136,8 @@
                     VerticalAlignment="Bottom"
                     Foreground="DarkGray"
                     IsHitTestVisible="False"
-                    Text="Title">
-
-                    <TextBlock.Style>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="Visibility" Value="Collapsed" />
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Text, ElementName=txtTitle}" Value="">
-                                    <Setter Property="Visibility" Value="Visible" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBlock.Style>
-                </TextBlock>
+                    Style="{StaticResource TitlePlaceholder}"
+                    Text="Title" />
 
                 <TextBox
                     x:Name="txtDate"
@@ -167,18 +156,8 @@
                     VerticalAlignment="Bottom"
                     Foreground="DarkGray"
                     IsHitTestVisible="False"
-                    Text="Date">
-                    <TextBlock.Style>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="Visibility" Value="Collapsed" />
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Text, ElementName=txtDate}" Value="">
-                                    <Setter Property="Visibility" Value="Visible" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBlock.Style>
-                </TextBlock>
+                    Style="{StaticResource DatePlaceholder}"
+                    Text="Date" />
             </Grid>
 
             <TextBox
@@ -197,20 +176,9 @@
                 Margin="10,5,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Foreground="DarkGray"
+                Foreground="DarkGray" Style="{StaticResource MessagePlaceholder}"
                 IsHitTestVisible="False"
                 Text="Message">
-
-                <TextBlock.Style>
-                    <Style TargetType="TextBlock">
-                        <Setter Property="Visibility" Value="Collapsed" />
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Text, ElementName=txtMessage}" Value="">
-                                <Setter Property="Visibility" Value="Visible" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBlock.Style>
             </TextBlock>
 
 
