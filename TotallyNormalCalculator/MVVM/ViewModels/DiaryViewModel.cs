@@ -87,8 +87,10 @@ public partial class DiaryViewModel : BaseViewModel
         IsLightTheme = !IsLightTheme;
 
         string newThemePath = IsLightTheme ? "Themes/LightTheme.xaml" : "Themes/DarkTheme.xaml";
+        string oldThemePath = IsLightTheme ? "Themes/DarkTheme.xaml" : "Themes/LightTheme.xaml";
         var newTheme = (ResourceDictionary)Application.LoadComponent(new Uri(newThemePath, UriKind.Relative));
-        Application.Current.Resources.MergedDictionaries.RemoveAt(0);
+        var oldTheme = (ResourceDictionary)Application.LoadComponent(new Uri(oldThemePath, UriKind.Relative));
+        Application.Current.Resources.MergedDictionaries.Remove(oldTheme);
         Application.Current.Resources.MergedDictionaries.Add(newTheme);
     }   
 

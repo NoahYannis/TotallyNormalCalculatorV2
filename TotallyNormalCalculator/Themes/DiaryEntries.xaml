@@ -1,34 +1,17 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style x:Key="DiaryEntries" TargetType="ListViewItem">
-
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{DynamicResource MouseOver}" />
-            </Trigger>
-
-            <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="{DynamicResource Selected}" />
-            </Trigger>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="RenderTransform">
-                    <Setter.Value>
-                        <TranslateTransform Y="-3" />
-                    </Setter.Value>
-                </Setter>
-            </Trigger>
-        </Style.Triggers>
-
+        <Setter Property="Width" Value="100" />
         <Setter Property="Background" Value="{DynamicResource DiaryEntryColor}" />
 
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ListViewItem">
                     <Border
-                        Width="100"
-                        Height="50"
                         Margin="2,10,2,2"
                         Background="{TemplateBinding Background}"
+                        BorderBrush="Blue"
+                        BorderThickness="2"
                         CornerRadius="4">
                         <StackPanel Margin="0,0,5,5" Orientation="Horizontal">
                             <StackPanel>
@@ -49,5 +32,69 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource MouseOver}" />
+                <Setter Property="Height" Value="70" />
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="Height"
+                                To="85"
+                                Duration="0:0:0.3">
+                                <DoubleAnimation.EasingFunction>
+                                    <CircleEase />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="Width"
+                                To="120"
+                                Duration="0:0:0.3">
+                                <DoubleAnimation.EasingFunction>
+                                    <CircleEase />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="Height"
+                                To="70"
+                                Duration="0:0:0.3">
+                                <DoubleAnimation.EasingFunction>
+                                    <CircleEase />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="Width"
+                                To="100"
+                                Duration="0:0:0.3">
+                                <DoubleAnimation.EasingFunction>
+                                    <CircleEase />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="{DynamicResource Selected}" />
+            </Trigger>
+
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <TranslateTransform Y="-3" />
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 </ResourceDictionary>
