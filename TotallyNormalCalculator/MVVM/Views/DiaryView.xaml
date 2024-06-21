@@ -130,7 +130,7 @@
                     behavior:CornerRadiusSetter.CornerRadius="5"
                     Text="{Binding Path=Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-                <TextBlock
+                <TextBlock 
                     Margin="15,0,0,16"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Bottom"

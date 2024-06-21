@@ -35,6 +35,38 @@
                     </Setter.Value>
                 </Setter>
             </Trigger>
+
+            <Trigger Property="IsEnabled" Value="False">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="Opacity"
+                                To="0.5"
+                                Duration="0:0:0.3">
+                                <DoubleAnimation.EasingFunction>
+                                    <CircleEase />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="Opacity"
+                                To="1.0"
+                                Duration="0:0:0.3">
+                                <DoubleAnimation.EasingFunction>
+                                    <CircleEase />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+
         </Style.Triggers>
     </Style>
 
@@ -44,13 +76,45 @@
         BasedOn="{StaticResource BaseDiaryButtons}"
         TargetType="Button">
         <Style.Triggers>
+            
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="LightGray" />
             </Trigger>
+            
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Background" Value="LightGray" />
                 <Setter Property="Foreground" Value="Gray" />
-                <Setter Property="Opacity" Value="0.8" />
+                <Setter Property="Opacity" Value="0.5" />
+
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="Opacity"
+                                To="0.5"
+                                Duration="0:0:1.5">
+                                <DoubleAnimation.EasingFunction>
+                                    <CircleEase />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="Opacity"
+                                To="1.0"
+                                Duration="0:0:1.5">
+                                <DoubleAnimation.EasingFunction>
+                                    <CircleEase />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
             </Trigger>
         </Style.Triggers>
     </Style>
