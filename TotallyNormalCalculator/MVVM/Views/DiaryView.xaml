@@ -132,7 +132,7 @@
                     Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                 <TextBlock
-                    Margin="15,0,0,16"
+                    Margin="14,0,0,13"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Bottom"
                     Foreground="DarkGray"
@@ -152,11 +152,12 @@
                     Text="{Binding Date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                 <TextBlock
-                    Margin="0,0,123,16"
+                    Margin="0,0,122,15"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
                     Foreground="DarkGray"
                     IsHitTestVisible="False"
+                    RenderTransformOrigin="0.732,0.569"
                     Text="Date"
                     Visibility="{Binding Text, ElementName=txtDate, Converter={StaticResource StringToVisibility}}" />
             </Grid>
@@ -172,8 +173,6 @@
 
             <TextBlock
                 Grid.Row="1"
-                Width="58"
-                Height="20"
                 Margin="10,5,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"

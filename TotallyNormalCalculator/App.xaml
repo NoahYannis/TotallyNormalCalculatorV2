@@ -24,6 +24,14 @@
                 <views:CalculatorView />
             </DataTemplate>
 
+            <FontFamily x:Key="Playwrite">pack://application:,,,/Themes/Fonts/#Playwrite IS</FontFamily>
+            <FontFamily x:Key="Fondamento">pack://application:,,,/Themes/Fonts/#Fondamento</FontFamily>
+            <Style TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="{StaticResource Fondamento}" />
+            </Style>
+            <Style TargetType="TextBox">
+                <Setter Property="FontFamily" Value="{StaticResource Fondamento}" />
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

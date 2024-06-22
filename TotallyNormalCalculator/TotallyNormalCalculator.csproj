@@ -24,6 +24,7 @@
 
 	<ItemGroup>
 	  <None Remove="Database\CreateDiaryEntryDB_Script.sql" />
+	  <None Remove="Themes\Fonts\Fondamento.ttf" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -59,6 +60,13 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Resource Include="Themes\Fonts\Fondamento.ttf" />
+	  <Resource Include="Themes\Fonts\Playwrite.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
 	</ItemGroup>
 
 	<ItemGroup>
