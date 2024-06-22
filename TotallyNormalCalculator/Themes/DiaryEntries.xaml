@@ -19,14 +19,12 @@
                                 <Label
                                     Name="EntryTitle"
                                     Content="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                    FontFamily="pack://application:,,,/Themes/Fonts/#Fondamento"
                                     FontSize="14"
                                     FontWeight="DemiBold"
                                     Foreground="{DynamicResource ForegroundColor}" />
                                 <Label
                                     Name="EntryMessage"
                                     Content="{Binding Message, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                    FontFamily="pack://application:,,,/Themes/Fonts/#Fondamento"
                                     FontSize="12"
                                     Foreground="{DynamicResource ForegroundColor}" />
                             </StackPanel>
