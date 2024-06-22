@@ -2,11 +2,15 @@
 
     <SolidColorBrush x:Key="BackgroundColor" Color="LightBlue" />
     <SolidColorBrush x:Key="ForegroundColor" Color="Black" />
-    <SolidColorBrush x:Key="BorderBackground" Color="Silver" />
+    <SolidColorBrush x:Key="BorderBackground" Color="White" />
     <SolidColorBrush x:Key="MouseOver" Color="Silver" />
     <SolidColorBrush x:Key="Selected" Color="Gray" />
     <SolidColorBrush x:Key="DiaryEntryColor" Color="White" />
     <SolidColorBrush x:Key="BorderBrush" Color="Gold" />
     <SolidColorBrush x:Key="RadioButtonMenu" Color="Silver" />
+    <LinearGradientBrush x:Key="GradientBrush" StartPoint="0,1" EndPoint="1,0">
+        <GradientStop Offset="0" Color="Silver" />
+        <GradientStop Offset="1" Color="White" />
+    </LinearGradientBrush>
 
 </ResourceDictionary>

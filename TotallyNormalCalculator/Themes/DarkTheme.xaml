@@ -8,5 +8,9 @@
     <SolidColorBrush x:Key="Selected" Color="Purple" />
     <SolidColorBrush x:Key="BorderBrush" Color="Blue" />
     <SolidColorBrush x:Key="RadioButtonMenu" Color="#272B2F" />
+    <LinearGradientBrush x:Key="GradientBrush" StartPoint="0,1" EndPoint="1,0">
+        <GradientStop Offset="0" Color="#272B2F" />
+        <GradientStop Offset="1" Color="Indigo" />
+    </LinearGradientBrush>
 
 </ResourceDictionary>
