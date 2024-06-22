@@ -22,6 +22,52 @@
                     </Setter.Value>
                 </Setter>
             </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="Width"
+                                To="24"
+                                Duration="0:0:0.3">
+                                <DoubleAnimation.EasingFunction>
+                                    <CircleEase />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="Height"
+                                To="24"
+                                Duration="0:0:0.3">
+                                <DoubleAnimation.EasingFunction>
+                                    <CircleEase />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="Width"
+                                To="20"
+                                Duration="0:0:0.3">
+                                <DoubleAnimation.EasingFunction>
+                                    <CircleEase />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="Height"
+                                To="20"
+                                Duration="0:0:0.3">
+                                <DoubleAnimation.EasingFunction>
+                                    <CircleEase />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
         </Style.Triggers>
     </Style>
 
