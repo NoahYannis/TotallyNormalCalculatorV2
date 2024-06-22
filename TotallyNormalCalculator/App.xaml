@@ -15,6 +15,7 @@
                 <ResourceDictionary x:Name="DiaryButtons" Source="./Themes/DiaryButtons.xaml" />
                 <ResourceDictionary x:Name="WindowControlButtons" Source="./Themes/WindowControlButtons.xaml" />
                 <ResourceDictionary x:Name="SwitchThemeToggleButton" Source="./Themes/SwitchThemeToggleButton.xaml" />
+                <ResourceDictionary x:Name="RadioButton" Source="./Themes/RadioButton.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewmodels:DiaryViewModel}">
@@ -23,9 +24,14 @@
             <DataTemplate DataType="{x:Type viewmodels:CalculatorViewModel}">
                 <views:CalculatorView />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:SecretViewViewModel}">
+                <views:SecretView />
+            </DataTemplate>
 
             <FontFamily x:Key="Playwrite">pack://application:,,,/Themes/Fonts/#Playwrite IS</FontFamily>
             <FontFamily x:Key="Fondamento">pack://application:,,,/Themes/Fonts/#Fondamento</FontFamily>
+            <FontFamily x:Key="Arima">pack://application:,,,/Themes/Fonts/#Arima</FontFamily>
+
             <Style TargetType="TextBlock">
                 <Setter Property="FontFamily" Value="{StaticResource Fondamento}" />
             </Style>

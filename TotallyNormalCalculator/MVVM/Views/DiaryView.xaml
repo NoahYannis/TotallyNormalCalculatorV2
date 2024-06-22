@@ -41,41 +41,7 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <Border
-            Grid.ColumnSpan="2"
-            Height="30"
-            VerticalAlignment="Top"
-            behavior:EnableDragHelper.EnableDrag="True"
-            AllowDrop="True"
-            Background="{DynamicResource BorderBackground}">
-
-            <StackPanel
-                MinHeight="25"
-                Margin="0,0,20,0"
-                HorizontalAlignment="Right"
-                Orientation="Horizontal">
-
-                <ToggleButton
-                    Margin="0,0,10,0"
-                    Command="{Binding SwitchThemeCommand}"
-                    Style="{StaticResource ThemeToggleButton}" />
-
-                <Button
-                    Command="{Binding MinimizeWindowCommand}"
-                    Content="🗕"
-                    Style="{StaticResource WindowControlButton}" />
-
-                <Button
-                    Command="{Binding MaximizeWindowCommand}"
-                    Content="□"
-                    Style="{StaticResource WindowControlButton}" />
-
-                <Button
-                    Command="{Binding CloseWindowCommand}"
-                    Content="X"
-                    Style="{StaticResource CloseButton}" />
-            </StackPanel>
-        </Border>
+       
 
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
@@ -152,7 +118,7 @@
                     Text="{Binding Date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                 <TextBlock
-                    Margin="0,0,122,15"
+                    Margin="0,0,122,13"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
                     Foreground="DarkGray"
@@ -238,9 +204,5 @@
                 </Button>
             </StackPanel>
         </Grid>
-        <ContentControl
-            Grid.RowSpan="2"
-            Grid.ColumnSpan="2"
-            Content="{Binding SelectedViewModel}" />
     </Grid>
 </UserControl>

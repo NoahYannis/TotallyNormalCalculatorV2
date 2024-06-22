@@ -24,6 +24,7 @@
 
 	<ItemGroup>
 	  <None Remove="Database\CreateDiaryEntryDB_Script.sql" />
+	  <None Remove="Themes\Fonts\Arima.ttf" />
 	  <None Remove="Themes\Fonts\Fondamento.ttf" />
 	</ItemGroup>
 
@@ -63,6 +64,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Resource Include="Themes\Fonts\Arima.ttf" />
 	  <Resource Include="Themes\Fonts\Fondamento.ttf" />
 	  <Resource Include="Themes\Fonts\Playwrite.ttf">
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>

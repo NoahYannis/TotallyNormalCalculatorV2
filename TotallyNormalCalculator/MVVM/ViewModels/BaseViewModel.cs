@@ -1,12 +1,18 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+﻿using System;
 using System.Windows;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace TotallyNormalCalculator.MVVM.ViewModels;
 public partial class BaseViewModel : ObservableObject
 {
-    [ObservableProperty]
     private ObservableObject _selectedViewModel;
+    public ObservableObject SelectedViewModel
+    {
+        get => _selectedViewModel ??= App.AppHost.Services.GetRequiredService<CalculatorViewModel>();
+        set => SetProperty(ref _selectedViewModel, value);
+    }
 
     [RelayCommand]
     public void MaximizeWindow()

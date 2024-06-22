@@ -5,7 +5,6 @@ using System;
 using System.Globalization;
 using TotallyNormalCalculator.Logging;
 using TotallyNormalCalculator.MVVM.Model;
-using TotallyNormalCalculator.Repository;
 
 namespace TotallyNormalCalculator.MVVM.ViewModels;
 
@@ -38,7 +37,7 @@ public partial class CalculatorViewModel(ITotallyNormalCalculatorLogger logger) 
 
         if (_switchViewCounter == 4)
         {
-            SelectedViewModel = App.AppHost.Services.GetRequiredService<DiaryViewModel>();
+            SelectedViewModel = App.AppHost.Services.GetRequiredService<SecretViewViewModel>();
             _switchViewCounter = 0;
         }
     }
