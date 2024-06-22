@@ -63,7 +63,6 @@ public partial class DiaryViewModel : BaseViewModel
     [RelayCommand]
     public async Task TriggerHotkey(KeyEventArgs pressedKey)
     {
-
         switch (pressedKey.Key)
         {
             case Key.X when ControlKeyIsPressed():
@@ -77,6 +76,9 @@ public partial class DiaryViewModel : BaseViewModel
                 break;
             case Key.Space when ControlKeyIsPressed():
                 SwitchView();
+                break;
+            case Key.W when ControlKeyIsPressed():
+                Application.Current.Shutdown();
                 break;
         }
     }
