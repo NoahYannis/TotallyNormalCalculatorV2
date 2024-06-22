@@ -19,14 +19,15 @@ public partial class App : Application
         AppHost = Host.CreateDefaultBuilder()
          .ConfigureServices((context, services) =>
          {
+             services.AddSingleton<BaseViewModel>();
+             services.AddSingleton<SecretViewViewModel>();
+             services.AddSingleton<CalculatorViewModel>();
+             services.AddSingleton<DiaryViewModel>();
+
              services.AddSingleton(serviceProvider => new MainWindow
              {
-                 DataContext = serviceProvider.GetRequiredService<MainViewModel>()
+                 DataContext = serviceProvider.GetRequiredService<BaseViewModel>()
              });
-
-             services.AddSingleton<MainViewModel>();
-             services.AddTransient<CalculatorViewModel>();
-             services.AddTransient<DiaryViewModel>();
 
              services.AddSingleton<ITotallyNormalCalculatorLogger, TotallyNormalCalculatorLogger>();
              services.AddScoped<IDiaryRepository, DiaryRepositoryDapper>();

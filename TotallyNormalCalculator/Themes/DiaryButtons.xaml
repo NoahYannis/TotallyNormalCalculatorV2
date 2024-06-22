@@ -10,15 +10,7 @@
         <Setter Property="MinHeight" Value="30" />
         <Setter Property="Width" Value="80" />
         <Setter Property="MinWidth" Value="80" />
-        <Setter Property="Effect">
-            <Setter.Value>
-                <DropShadowEffect
-                    Direction="320"
-                    Opacity="0.5"
-                    ShadowDepth="2"
-                    Color="Gray" />
-            </Setter.Value>
-        </Setter>
+ 
 
         <Setter Property="Template">
             <Setter.Value>

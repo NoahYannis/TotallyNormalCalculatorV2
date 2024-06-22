@@ -198,6 +198,5 @@
                 Command="{Binding CalculateCommand}"
                 Content="=" />
         </Grid>
-        <ContentControl Content="{Binding SelectedViewModel}" />
     </Grid>
 </UserControl>

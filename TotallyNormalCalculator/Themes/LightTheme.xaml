@@ -1,11 +1,12 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <SolidColorBrush x:Key="BackgroundColor" Color="LightGreen" />
+    <SolidColorBrush x:Key="BackgroundColor" Color="LightBlue" />
     <SolidColorBrush x:Key="ForegroundColor" Color="Black" />
-    <SolidColorBrush x:Key="BorderBackground" Color="SkyBlue" />
-    <SolidColorBrush x:Key="DiaryEntryColor" Color="SkyBlue" />
-    <SolidColorBrush x:Key="MouseOver" Color="CornflowerBlue" />
-    <SolidColorBrush x:Key="Selected" Color="RoyalBlue" />
-    <SolidColorBrush x:Key="BorderBrush" Color="ForestGreen" />
+    <SolidColorBrush x:Key="BorderBackground" Color="Silver" />
+    <SolidColorBrush x:Key="MouseOver" Color="Silver" />
+    <SolidColorBrush x:Key="Selected" Color="Gray" />
+    <SolidColorBrush x:Key="DiaryEntryColor" Color="White" />
+    <SolidColorBrush x:Key="BorderBrush" Color="Gold" />
+    <SolidColorBrush x:Key="RadioButtonMenu" Color="Silver" />
 
 </ResourceDictionary>
