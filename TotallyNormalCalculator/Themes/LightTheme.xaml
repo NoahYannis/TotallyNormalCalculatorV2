@@ -3,8 +3,8 @@
     <SolidColorBrush x:Key="BackgroundColor" Color="LightBlue" />
     <SolidColorBrush x:Key="ForegroundColor" Color="Black" />
     <SolidColorBrush x:Key="BorderBackground" Color="White" />
-    <SolidColorBrush x:Key="MouseOver" Color="Silver" />
-    <SolidColorBrush x:Key="Selected" Color="Gray" />
+    <SolidColorBrush x:Key="MouseOver" Color="LightGray" />
+    <SolidColorBrush x:Key="Selected" Color="Silver" />
     <SolidColorBrush x:Key="DiaryEntryColor" Color="White" />
     <SolidColorBrush x:Key="BorderBrush" Color="Gold" />
     <SolidColorBrush x:Key="RadioButtonMenu" Color="Silver" />
