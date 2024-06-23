@@ -4,7 +4,7 @@
     xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp">
 
     <Style TargetType="fa:IconBlock">
-        <Setter Property="Margin" Value="0,0,15,0" />
+        <Setter Property="Margin" Value="0,0,5,0" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
@@ -51,7 +51,7 @@
                             <Setter TargetName="Indicator" Property="Visibility" Value="Visible" />
                         </Trigger>
 
-                       
+
 
                         <Trigger Property="IsChecked" Value="True">
                             <Setter TargetName="Indicator" Property="Visibility" Value="Visible" />

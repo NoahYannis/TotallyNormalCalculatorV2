@@ -12,6 +12,7 @@
     xmlns:viewmodels="clr-namespace:TotallyNormalCalculator.MVVM.ViewModels"
     d:DesignHeight="600"
     d:DesignWidth="650"
+    Background="{DynamicResource BackgroundColor}"
     FontSize="15"
     mc:Ignorable="d">
 
@@ -31,7 +32,7 @@
         <behavior:DeselectCurrentListViewEntry />
     </i:Interaction.Behaviors>
 
-    <Grid Background="{DynamicResource BackgroundColor}">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition />
@@ -155,15 +156,9 @@
                 VerticalAlignment="Center"
                 Orientation="Horizontal">
 
-                <Button
-                    Width="90"
-                    Command="{Binding DeleteEntryCommand}"
-                    FontSize="13">
+                <Button Command="{Binding DeleteEntryCommand}" FontSize="13">
                     <StackPanel Orientation="Horizontal">
-                        <fa:IconBlock
-                            Margin="0,0,5,0"
-                            Foreground="Red"
-                            Icon="Trash" />
+                        <fa:IconBlock Foreground="Red" Icon="Trash" />
                         <TextBlock Text="Delete" />
                     </StackPanel>
                 </Button>
@@ -171,7 +166,6 @@
                 <Button Command="{Binding AddEntryCommand}" FontSize="13">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconBlock
-                            Margin="0,0,5,0"
                             FontSize="16"
                             Foreground="Green"
                             Icon="Add" />
@@ -179,15 +173,9 @@
                     </StackPanel>
                 </Button>
 
-                <Button
-                    Width="90"
-                    Command="{Binding UpdateEntryCommand}"
-                    FontSize="13">
+                <Button Command="{Binding UpdateEntryCommand}" FontSize="13">
                     <StackPanel Orientation="Horizontal">
-                        <fa:IconBlock
-                            Margin="0,0,5,0"
-                            Foreground="Blue"
-                            Icon="Save" />
+                        <fa:IconBlock Foreground="Blue" Icon="Save" />
                         <TextBlock Text="Update" />
                     </StackPanel>
                 </Button>
