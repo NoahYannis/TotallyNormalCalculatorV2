@@ -65,8 +65,9 @@
 
             <TextBox Grid.Row="1" Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}" />
 
-            <ListView Width="250"
+            <ListView
                 Grid.Row="2"
+                Width="250"
                 behavior:ListBoxScrollOnNewEntry.ScrollOnNewItem="True"
                 Background="{DynamicResource BackgroundColor}"
                 ItemContainerStyle="{StaticResource DiaryEntries}"
@@ -188,18 +189,6 @@
                             Foreground="Blue"
                             Icon="Save" />
                         <TextBlock Text="Update" />
-                    </StackPanel>
-                </Button>
-
-                <Button
-                    Width="100"
-                    Background="{DynamicResource DiaryEntryColor}"
-                    Command="{Binding SwitchViewCommand}"
-                    FontSize="13"
-                    Style="{StaticResource ViewSwitchButton}">
-                    <StackPanel Orientation="Horizontal">
-                        <fa:IconBlock Margin="0,0,5,0" Icon="Calculator" />
-                        <TextBlock Text="Calculator" />
                     </StackPanel>
                 </Button>
             </StackPanel>
