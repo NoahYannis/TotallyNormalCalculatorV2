@@ -28,15 +28,13 @@
                 <views:SecretView />
             </DataTemplate>
 
-            <FontFamily x:Key="Playwrite">pack://application:,,,/Themes/Fonts/#Playwrite IS</FontFamily>
-            <FontFamily x:Key="Fondamento">pack://application:,,,/Themes/Fonts/#Fondamento</FontFamily>
-            <FontFamily x:Key="Arima">pack://application:,,,/Themes/Fonts/#Arima</FontFamily>
+            <FontFamily x:Key="Baskerville">pack://application:,,,/Themes/Fonts/#Libre Baskerville</FontFamily>
 
             <Style TargetType="TextBlock">
-                <Setter Property="FontFamily" Value="{StaticResource Fondamento}" />
+                <Setter Property="FontFamily" Value="{StaticResource Baskerville}" />
             </Style>
             <Style TargetType="TextBox">
-                <Setter Property="FontFamily" Value="{StaticResource Fondamento}" />
+                <Setter Property="FontFamily" Value="{StaticResource Baskerville}" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>
