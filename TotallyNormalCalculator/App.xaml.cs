@@ -20,9 +20,9 @@ public partial class App : Application
          .ConfigureServices((context, services) =>
          {
              services.AddSingleton<BaseViewModel>();
-             services.AddSingleton<SecretViewViewModel>();
              services.AddSingleton<CalculatorViewModel>();
              services.AddSingleton<DiaryViewModel>();
+             services.AddTransient<SecretViewViewModel>();
 
              services.AddSingleton(serviceProvider => new MainWindow
              {
