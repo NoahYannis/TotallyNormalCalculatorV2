@@ -28,4 +28,10 @@ public partial class SecretViewViewModel : BaseViewModel
         Application.Current.Resources.MergedDictionaries.Remove(oldTheme);
         Application.Current.Resources.MergedDictionaries.Add(newTheme);
     }
+
+    [RelayCommand]
+    public void SwitchView(Type newViewModel)
+    {
+        SelectedViewModel = (BaseViewModel)App.AppHost.Services.GetRequiredService(newViewModel);
+    }
 }
