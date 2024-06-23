@@ -38,7 +38,7 @@
                                 Height="35"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center"
-                                Background="White"
+                                Background="{DynamicResource BorderIndicator}"
                                 CornerRadius="2"
                                 Visibility="Collapsed" />
 
@@ -51,31 +51,7 @@
                             <Setter TargetName="Indicator" Property="Visibility" Value="Visible" />
                         </Trigger>
 
-                        <EventTrigger RoutedEvent="Border.MouseEnter" SourceName="border">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ColorAnimation
-                                        Storyboard.TargetName="border"
-                                        Storyboard.TargetProperty="Background.Color"
-                                        From="#272B2F"
-                                        To="#3E434A"
-                                        Duration="0:0:0.3" />
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-
-                        <EventTrigger RoutedEvent="Border.MouseLeave" SourceName="border">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ColorAnimation
-                                        Storyboard.TargetName="border"
-                                        Storyboard.TargetProperty="Background.Color"
-                                        From="#3E434A"
-                                        To="#272B2F"
-                                        Duration="0:0:0.3" />
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
+                       
 
                         <Trigger Property="IsChecked" Value="True">
                             <Setter TargetName="Indicator" Property="Visibility" Value="Visible" />

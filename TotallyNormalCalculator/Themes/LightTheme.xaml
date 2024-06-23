@@ -8,6 +8,7 @@
     <SolidColorBrush x:Key="DiaryEntryColor" Color="White" />
     <SolidColorBrush x:Key="BorderBrush" Color="Gold" />
     <SolidColorBrush x:Key="RadioButtonMenu" Color="Silver" />
+    <SolidColorBrush x:Key="BorderIndicator" Color="DarkGray" />
     <LinearGradientBrush x:Key="GradientBrush" StartPoint="0,1" EndPoint="1,0">
         <GradientStop Offset="0" Color="Silver" />
         <GradientStop Offset="1" Color="White" />
