@@ -5,7 +5,7 @@ using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace TotallyNormalCalculator.MVVM.ViewModels;
-public partial class BaseViewModel : ObservableObject
+internal partial class BaseViewModel : ObservableObject
 {
     private ObservableObject _selectedViewModel;
     public ObservableObject SelectedViewModel

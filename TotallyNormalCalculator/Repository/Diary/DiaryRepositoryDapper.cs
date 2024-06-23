@@ -10,7 +10,8 @@ using TotallyNormalCalculator.Logging;
 using TotallyNormalCalculator.MVVM.Model;
 
 namespace TotallyNormalCalculator.Repository;
-public class DiaryRepositoryDapper(ITotallyNormalCalculatorLogger logger) : IDiaryRepository
+
+internal class DiaryRepositoryDapper(ITotallyNormalCalculatorLogger logger) : IDiaryRepository
 {
     public async Task AddDiaryEntry(DiaryEntryModel diaryEntry)
     {

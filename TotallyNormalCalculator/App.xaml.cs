@@ -7,6 +7,7 @@ using TotallyNormalCalculator.Logging;
 using TotallyNormalCalculator.MVVM.ViewModels;
 using TotallyNormalCalculator.Repository;
 using TotallyNormalCalculator.MVVM.Views;
+using TotallyNormalCalculator.Repository.BlobStorage;
 
 namespace TotallyNormalCalculator;
 
@@ -22,6 +23,7 @@ public partial class App : Application
              services.AddSingleton<BaseViewModel>();
              services.AddSingleton<CalculatorViewModel>();
              services.AddSingleton<DiaryViewModel>();
+             services.AddSingleton<BlobStorageViewModel>();
              services.AddTransient<SecretViewViewModel>();
 
              services.AddSingleton(serviceProvider => new MainWindow
@@ -31,6 +33,7 @@ public partial class App : Application
 
              services.AddSingleton<ITotallyNormalCalculatorLogger, TotallyNormalCalculatorLogger>();
              services.AddScoped<IDiaryRepository, DiaryRepositoryDapper>();
+             services.AddScoped<IBlobStorageRepository, AzureBlobStorageRepository>();
          })
          .Build();
     }

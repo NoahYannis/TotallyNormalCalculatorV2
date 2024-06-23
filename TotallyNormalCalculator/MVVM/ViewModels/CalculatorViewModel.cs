@@ -8,7 +8,7 @@ using TotallyNormalCalculator.MVVM.Model;
 
 namespace TotallyNormalCalculator.MVVM.ViewModels;
 
-public partial class CalculatorViewModel(ITotallyNormalCalculatorLogger logger) : BaseViewModel
+internal partial class CalculatorViewModel(ITotallyNormalCalculatorLogger logger) : BaseViewModel
 {
     [ObservableProperty]
     private string _calculatorText = string.Empty;

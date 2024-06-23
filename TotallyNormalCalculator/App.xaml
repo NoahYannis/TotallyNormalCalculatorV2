@@ -15,7 +15,7 @@
                 <ResourceDictionary x:Name="DiaryButtons" Source="./Themes/DiaryButtons.xaml" />
                 <ResourceDictionary x:Name="WindowControlButtons" Source="./Themes/WindowControlButtons.xaml" />
                 <ResourceDictionary x:Name="SwitchThemeToggleButton" Source="./Themes/SwitchThemeToggleButton.xaml" />
-                <ResourceDictionary x:Name="RadioButton" Source="./Themes/RadioButton.xaml" />
+                <ResourceDictionary x:Name="RadioButton" Source="./Themes/ActivityRadioButton.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewmodels:DiaryViewModel}">
@@ -26,6 +26,9 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:SecretViewViewModel}">
                 <views:SecretView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:BlobStorageViewModel}">
+                <views:BlobStorageView />
             </DataTemplate>
 
             <FontFamily x:Key="Baskerville">pack://application:,,,/Themes/Fonts/#Libre Baskerville</FontFamily>

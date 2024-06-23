@@ -5,7 +5,7 @@ using System;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace TotallyNormalCalculator.MVVM.ViewModels;
-public partial class SecretViewViewModel : BaseViewModel
+internal partial class SecretViewViewModel : BaseViewModel
 {
     [ObservableProperty]
     private bool _isLightTheme = true;
