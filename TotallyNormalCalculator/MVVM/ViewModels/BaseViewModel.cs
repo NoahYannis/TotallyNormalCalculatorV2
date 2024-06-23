@@ -1,8 +1,8 @@
-﻿using System;
-using System.Windows;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Windows;
 
 namespace TotallyNormalCalculator.MVVM.ViewModels;
 internal partial class BaseViewModel : ObservableObject

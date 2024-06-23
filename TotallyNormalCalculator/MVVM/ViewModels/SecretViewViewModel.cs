@@ -1,8 +1,8 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
-using System.Windows;
 using System;
-using CommunityToolkit.Mvvm.ComponentModel;
+using System.Windows;
 
 namespace TotallyNormalCalculator.MVVM.ViewModels;
 internal partial class SecretViewViewModel : BaseViewModel
@@ -12,7 +12,7 @@ internal partial class SecretViewViewModel : BaseViewModel
 
     public SecretViewViewModel()
     {
-       SelectedViewModel = App.AppHost.Services.GetRequiredService<DiaryViewModel>();
+        SelectedViewModel = App.AppHost.Services.GetRequiredService<DiaryViewModel>();
     }
 
 

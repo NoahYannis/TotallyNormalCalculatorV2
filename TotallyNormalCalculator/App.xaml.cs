@@ -1,12 +1,12 @@
-﻿using System;
-using System.Windows;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
+using System.Windows;
 using TotallyNormalCalculator.Core;
 using TotallyNormalCalculator.Logging;
 using TotallyNormalCalculator.MVVM.ViewModels;
-using TotallyNormalCalculator.Repository;
 using TotallyNormalCalculator.MVVM.Views;
+using TotallyNormalCalculator.Repository;
 using TotallyNormalCalculator.Repository.BlobStorage;
 
 namespace TotallyNormalCalculator;
