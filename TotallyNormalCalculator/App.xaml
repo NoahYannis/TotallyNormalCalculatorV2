@@ -12,7 +12,7 @@
                 <ResourceDictionary x:Name="LightTheme" Source="./Themes/LightTheme.xaml" />
                 <ResourceDictionary x:Name="CalculatorButton" Source="./Themes/CalculatorButtons.xaml" />
                 <ResourceDictionary x:Name="DiaryEntry" Source="./Themes/DiaryEntries.xaml" />
-                <ResourceDictionary x:Name="DiaryButtons" Source="./Themes/DiaryButtons.xaml" />
+                <ResourceDictionary x:Name="Buttons" Source="./Themes/Buttons.xaml" />
                 <ResourceDictionary x:Name="WindowControlButtons" Source="./Themes/WindowControlButtons.xaml" />
                 <ResourceDictionary x:Name="SwitchThemeToggleButton" Source="./Themes/SwitchThemeToggleButton.xaml" />
                 <ResourceDictionary x:Name="ActivityRadioButton" Source="./Themes/ActivityRadioButton.xaml" />

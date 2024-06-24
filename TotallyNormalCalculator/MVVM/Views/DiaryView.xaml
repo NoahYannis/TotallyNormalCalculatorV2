@@ -156,29 +156,25 @@
                 VerticalAlignment="Center"
                 Orientation="Horizontal">
 
-                <Button Command="{Binding DeleteEntryCommand}" FontSize="13">
-                    <StackPanel Orientation="Horizontal">
-                        <fa:IconBlock Foreground="Red" Icon="Trash" />
-                        <TextBlock Text="Delete" />
-                    </StackPanel>
-                </Button>
+                <Button
+                    behavior:IconColor.IconColor="Red"
+                    Command="{Binding DeleteEntryCommand}"
+                    Content="Delete"
+                    Tag="Trash" />
 
-                <Button Command="{Binding AddEntryCommand}" FontSize="13">
-                    <StackPanel Orientation="Horizontal">
-                        <fa:IconBlock
-                            FontSize="16"
-                            Foreground="Green"
-                            Icon="Add" />
-                        <TextBlock Text="Add" />
-                    </StackPanel>
-                </Button>
 
-                <Button Command="{Binding UpdateEntryCommand}" FontSize="13">
-                    <StackPanel Orientation="Horizontal">
-                        <fa:IconBlock Foreground="Blue" Icon="Save" />
-                        <TextBlock Text="Update" />
-                    </StackPanel>
-                </Button>
+                <Button
+                    behavior:IconColor.IconColor="Green"
+                    Command="{Binding AddEntryCommand}"
+                    Content="Add"
+                    Tag="Add" />
+
+                <Button
+                    behavior:IconColor.IconColor="Blue"
+                    Command="{Binding UpdateEntryCommand}"
+                    Content="Update"
+                    Tag="Save" />
+
             </StackPanel>
         </Grid>
     </Grid>
