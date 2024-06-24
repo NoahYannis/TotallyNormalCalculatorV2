@@ -4,7 +4,7 @@
     xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp">
 
     <Style TargetType="fa:IconBlock">
-        <Setter Property="Margin" Value="0,0,5,0" />
+        <Setter Property="Margin" Value="0,0,10,0" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
@@ -15,8 +15,6 @@
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Margin" Value="10,10,10,10" />
         <Setter Property="FontSize" Value="20" />
-        <Setter Property="FontSize" Value="20" />
-
 
         <Setter Property="Template">
             <Setter.Value>
@@ -41,8 +39,11 @@
                                 Background="{DynamicResource BorderIndicator}"
                                 CornerRadius="2"
                                 Visibility="Collapsed" />
+                            <StackPanel Margin="15,0,0,0" Orientation="Horizontal">
+                                <fa:IconBlock Foreground="{DynamicResource ForegroundColor}" Icon="{Binding Tag, RelativeSource={RelativeSource TemplatedParent}}" />
+                                <TextBlock VerticalAlignment="Center" Text="{Binding Content, RelativeSource={RelativeSource TemplatedParent}, TargetNullValue='None'}" />
+                            </StackPanel>
 
-                            <ContentPresenter Margin="15,0,0,0" VerticalAlignment="Center" />
                         </Grid>
                     </Border>
 
@@ -50,8 +51,6 @@
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="Indicator" Property="Visibility" Value="Visible" />
                         </Trigger>
-
-
 
                         <Trigger Property="IsChecked" Value="True">
                             <Setter TargetName="Indicator" Property="Visibility" Value="Visible" />
