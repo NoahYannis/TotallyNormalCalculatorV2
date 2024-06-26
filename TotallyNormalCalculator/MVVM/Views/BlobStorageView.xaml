@@ -7,6 +7,8 @@
     xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
     xmlns:local="clr-namespace:TotallyNormalCalculator.MVVM.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodel="clr-namespace:TotallyNormalCalculator.MVVM.ViewModels"
+    d:DataContext="{x:Type viewmodel:BlobStorageViewModel}"
     d:DesignHeight="450"
     d:DesignWidth="800"
     Background="{DynamicResource BackgroundColor}"
@@ -18,6 +20,17 @@
             <RowDefinition Height="70" />
         </Grid.RowDefinitions>
 
+        <ListBox ItemsSource="{Binding Blobs, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedBlob, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="5" Text="{Binding Name}" />
+                        <Image Source="{Binding Image}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
         <StackPanel
             Grid.Row="1"
             HorizontalAlignment="Center"
@@ -26,12 +39,14 @@
 
             <Button
                 behavior:IconColor.IconColor="Blue"
+                Command="{Binding UploadBlobCommand}"
                 Content="Upload"
                 Style="{StaticResource BaseButton}"
                 Tag="CloudUpload" />
 
             <Button
                 behavior:IconColor.IconColor="Red"
+                Command="{Binding DeleteBlobCommand}"
                 Content="Delete"
                 Style="{StaticResource BaseButton}"
                 Tag="Trash" />

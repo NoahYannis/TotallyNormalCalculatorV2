@@ -4,6 +4,7 @@ using System;
 using System.Windows;
 using TotallyNormalCalculator.Core;
 using TotallyNormalCalculator.Logging;
+using TotallyNormalCalculator.MVVM.Model;
 using TotallyNormalCalculator.MVVM.ViewModels;
 using TotallyNormalCalculator.MVVM.Views;
 using TotallyNormalCalculator.Repository;
@@ -33,7 +34,7 @@ public partial class App : Application
 
              services.AddSingleton<ITotallyNormalCalculatorLogger, TotallyNormalCalculatorLogger>();
              services.AddScoped<IDiaryRepository, DiaryRepositoryDapper>();
-             services.AddScoped<IBlobStorageRepository, AzureBlobStorageRepository>();
+             services.AddScoped<IBlobStorageRepository<BlobModel>, AzureBlobStorageRepository>();
          })
          .Build();
     }

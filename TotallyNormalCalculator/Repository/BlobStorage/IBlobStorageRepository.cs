@@ -3,10 +3,10 @@ using System.Threading.Tasks;
 
 namespace TotallyNormalCalculator.Repository.BlobStorage;
 
-interface IBlobStorageRepository
+interface IBlobStorageRepository<T> where T : class
 {
-    IAsyncEnumerable<byte[]> GetAllBlobsAsync();
+    Task<IEnumerable<T>> GetAllBlobs();
     Task<byte[]> GetBlob(string blobName);
     Task DeleteBlob(string blobName);
-    Task UploadBlob(string blobName, byte[] blobData);
+    Task UploadBlob(string filePath, string blobName);
 }

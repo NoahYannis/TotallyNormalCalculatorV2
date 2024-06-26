@@ -15,7 +15,7 @@ using TotallyNormalCalculator.Repository;
 
 namespace TotallyNormalCalculator.MVVM.ViewModels;
 
-internal partial class DiaryViewModel : BaseViewModel
+public partial class DiaryViewModel : BaseViewModel
 {
 
     private ObservableCollection<DiaryEntryModel> _entries = [];

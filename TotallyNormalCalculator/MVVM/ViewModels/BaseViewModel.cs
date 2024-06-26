@@ -5,7 +5,7 @@ using System;
 using System.Windows;
 
 namespace TotallyNormalCalculator.MVVM.ViewModels;
-internal partial class BaseViewModel : ObservableObject
+public partial class BaseViewModel : ObservableObject
 {
     private ObservableObject _selectedViewModel;
     public ObservableObject SelectedViewModel
