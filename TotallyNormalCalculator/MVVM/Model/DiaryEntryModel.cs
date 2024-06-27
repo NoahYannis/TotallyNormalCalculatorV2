@@ -2,7 +2,7 @@
 
 namespace TotallyNormalCalculator.MVVM.Model;
 
-public class DiaryEntryModel : ObservableObject
+public class DiaryEntryModel : ObservableObject, IModel
 {
     public int Id { get; private set; }
     public string Title { get; set; }

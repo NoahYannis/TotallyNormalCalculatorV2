@@ -9,7 +9,7 @@ public class SelectionToEnabledConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return value is DiaryEntryModel;
+        return value is IModel;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
