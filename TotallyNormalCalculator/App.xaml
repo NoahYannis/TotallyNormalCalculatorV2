@@ -16,6 +16,7 @@
                 <ResourceDictionary x:Name="WindowControlButtons" Source="./Themes/WindowControlButtons.xaml" />
                 <ResourceDictionary x:Name="SwitchThemeToggleButton" Source="./Themes/SwitchThemeToggleButton.xaml" />
                 <ResourceDictionary x:Name="ActivityRadioButton" Source="./Themes/ActivityRadioButton.xaml" />
+                <ResourceDictionary x:Name="BlobFile" Source="./Themes/Blobs.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewmodels:DiaryViewModel}">

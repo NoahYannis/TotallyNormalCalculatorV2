@@ -42,7 +42,7 @@ internal partial class BlobStorageViewModel : BaseViewModel
     [RelayCommand]
     public async Task UploadBlob()
     {
-        var openFileDialog = new OpenFileDialog()
+         var openFileDialog = new OpenFileDialog()
         {
             Title = "Select a file to upload",
         };

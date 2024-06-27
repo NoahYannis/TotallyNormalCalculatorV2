@@ -1,0 +1,161 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <sys:Double x:Key="BlobHeight">175</sys:Double>
+    <sys:Double x:Key="BlobWidth">150</sys:Double>
+
+    <sys:Double x:Key="BlobAnimationHeight">200</sys:Double>
+    <sys:Double x:Key="BlobAnimationWidth">175</sys:Double>
+
+    <Style x:Key="BlobListViewStyle" TargetType="ListView">
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <WrapPanel
+                        Margin="10"
+                        ItemHeight="{Binding (ListView.View).ItemHeight, RelativeSource={RelativeSource AncestorType=ListView}}"
+                        ItemWidth="{Binding (ListView.View).ItemWidth, RelativeSource={RelativeSource AncestorType=ListView}}" />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="BlobFile" TargetType="ListViewItem">
+        <Setter Property="Height" Value="{StaticResource BlobHeight}" />
+        <Setter Property="Width" Value="{StaticResource BlobWidth}" />
+        <Setter Property="Margin" Value="5" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListViewItem">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="3*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Border
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{DynamicResource BorderBrush}"
+                            BorderThickness="2">
+                            <Image Source="{Binding Image}" Stretch="Fill" />
+                        </Border>
+
+                        <TextBlock
+                            Grid.Row="1"
+                            Margin="3,5,3,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="10"
+                            Text="{Binding Name}"
+                            TextWrapping="Wrap" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="Width"
+                                To="{StaticResource BlobAnimationWidth}"
+                                Duration="0:0:0.3">
+                                <DoubleAnimation.EasingFunction>
+                                    <CircleEase />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="Height"
+                                To="{StaticResource BlobAnimationHeight}"
+                                Duration="0:0:0.3">
+                                <DoubleAnimation.EasingFunction>
+                                    <CircleEase />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="Width"
+                                To="{StaticResource BlobWidth}"
+                                Duration="0:0:0.3">
+                                <DoubleAnimation.EasingFunction>
+                                    <CircleEase />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="Height"
+                                To="{StaticResource BlobHeight}"
+                                Duration="0:0:0.3">
+                                <DoubleAnimation.EasingFunction>
+                                    <CircleEase />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+
+            <Trigger Property="IsSelected" Value="True">
+
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="Width"
+                                To="{StaticResource BlobAnimationWidth}"
+                                Duration="0:0:0.3">
+                                <DoubleAnimation.EasingFunction>
+                                    <CircleEase />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="Height"
+                                To="{StaticResource BlobAnimationHeight}"
+                                Duration="0:0:0.3">
+                                <DoubleAnimation.EasingFunction>
+                                    <CircleEase />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="Width"
+                                To="{StaticResource BlobWidth}"
+                                Duration="0:0:0.3">
+                                <DoubleAnimation.EasingFunction>
+                                    <CircleEase />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                            <DoubleAnimation
+                                Storyboard.TargetProperty="Height"
+                                To="{StaticResource BlobHeight}"
+                                Duration="0:0:0.3">
+                                <DoubleAnimation.EasingFunction>
+                                    <CircleEase />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>
+

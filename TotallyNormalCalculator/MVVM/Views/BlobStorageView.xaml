@@ -20,16 +20,11 @@
             <RowDefinition Height="70" />
         </Grid.RowDefinitions>
 
-        <ListBox ItemsSource="{Binding Blobs, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedBlob, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Margin="5" Text="{Binding Name}" />
-                        <Image Source="{Binding Image}" />
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+        <ListView Style="{StaticResource BlobListViewStyle}"
+            ItemContainerStyle="{StaticResource BlobFile}"
+            ItemsSource="{Binding Blobs, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            SelectedItem="{Binding SelectedBlob, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+        </ListView>
 
         <StackPanel
             Grid.Row="1"
