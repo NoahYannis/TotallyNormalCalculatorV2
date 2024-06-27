@@ -13,13 +13,11 @@ using TotallyNormalCalculator.MVVM.Model;
 namespace TotallyNormalCalculator.Repository.BlobStorage;
 internal class AzureBlobStorageRepository : IBlobStorageRepository<BlobModel>
 {
-    private BlobContainerClient _blobContainerClient;
+
     private ITotallyNormalCalculatorLogger _logger;
 
-    public AzureBlobStorageRepository(ITotallyNormalCalculatorLogger logger)
-    {
-        _logger = logger;
-    }
+    private BlobContainerClient _blobContainerClient;
+
 
     public AzureBlobStorageRepository()
     {
