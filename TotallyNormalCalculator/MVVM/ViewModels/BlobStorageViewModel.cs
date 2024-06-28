@@ -82,6 +82,7 @@ internal partial class BlobStorageViewModel : BaseViewModel
         if (delete is MessageBoxResult.Yes)
         {
             await _blobStorageRepository.DeleteBlob(SelectedElement.Name);
+            Blobs.Remove(SelectedElement);
         }
     }
 
