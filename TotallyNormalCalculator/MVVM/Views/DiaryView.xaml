@@ -29,7 +29,7 @@
     </i:Interaction.Triggers>
 
     <i:Interaction.Behaviors>
-        <behavior:DeselectCurrentListViewEntry />
+        <behavior:DeselectCurrentListViewElement />
     </i:Interaction.Behaviors>
 
     <Grid>
@@ -73,7 +73,7 @@
                 Background="{DynamicResource BackgroundColor}"
                 ItemContainerStyle="{StaticResource DiaryEntries}"
                 ItemsSource="{Binding Entries, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                SelectedItem="{Binding SelectedEntry, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                SelectedItem="{Binding SelectedElement, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 SelectionMode="Single" />
         </Grid>
 
@@ -160,6 +160,7 @@
                     behavior:IconColor.IconColor="Red"
                     Command="{Binding DeleteEntryCommand}"
                     Content="Delete"
+                    IsEnabled="{Binding SelectedElement, Converter={StaticResource SelectionToEnabled}, ConverterParameter=SelectedElement}"
                     Tag="Trash" />
 
 

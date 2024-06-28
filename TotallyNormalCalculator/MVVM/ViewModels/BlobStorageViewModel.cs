@@ -21,7 +21,7 @@ internal partial class BlobStorageViewModel : BaseViewModel
     private ObservableCollection<BlobModel> _blobs = [];
 
     [ObservableProperty]
-    private BlobModel _selectedBlob;
+    private BlobModel _selectedElement;
 
     public BlobStorageViewModel(ITotallyNormalCalculatorLogger logger,
         IBlobStorageRepository<BlobModel> blobStorageRepository)
@@ -68,7 +68,7 @@ internal partial class BlobStorageViewModel : BaseViewModel
             return;
         }
 
-        if (SelectedBlob is null)
+        if (SelectedElement is null)
         {
             MessageBox.Show("Please select a file to delete.", "TotallyNormalCalculator",
                 MessageBoxButton.OK, MessageBoxImage.Information);
@@ -80,7 +80,12 @@ internal partial class BlobStorageViewModel : BaseViewModel
 
         if (delete is MessageBoxResult.Yes)
         {
-            await _blobStorageRepository.DeleteBlob(SelectedBlob.Name);
+            await _blobStorageRepository.DeleteBlob(SelectedElement.Name);
         }
+    }
+
+    public void HandleDeselection()
+    {
+        SelectedElement = null;
     }
 }

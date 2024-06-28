@@ -27,13 +27,13 @@ public partial class DiaryViewModel : BaseViewModel
     }
 
     [ObservableProperty]
+    public DiaryEntryModel _selectedElement;
+
+    [ObservableProperty]
     private ObservableCollection<DiaryEntryModel> _filteredEntries = [];
 
     [ObservableProperty]
     private string _propertyFilter;
-
-    [ObservableProperty]
-    private DiaryEntryModel _selectedEntry;
 
     [ObservableProperty]
     private string _message;
@@ -107,14 +107,14 @@ public partial class DiaryViewModel : BaseViewModel
     [RelayCommand]
     public async Task UpdateEntry()
     {
-        if (SelectedEntry is null)
+        if (SelectedElement is null)
             return;
 
-        SelectedEntry.Title = Title;
-        SelectedEntry.Message = Message;
-        SelectedEntry.Date = Date;
+        SelectedElement.Title = Title;
+        SelectedElement.Message = Message;
+        SelectedElement.Date = Date;
 
-        await _diaryRepository.UpdateDiaryEntry(SelectedEntry);
+        await _diaryRepository.UpdateDiaryEntry(SelectedElement);
         CollectionViewSource.GetDefaultView(Entries).Refresh();
     }
 
@@ -152,7 +152,7 @@ public partial class DiaryViewModel : BaseViewModel
             return;
         }
 
-        if (SelectedEntry is null)
+        if (SelectedElement is null)
         {
             MessageBox.Show("Please select an entry to delete.", "TotallyNormalCalculator",
                 MessageBoxButton.OK, MessageBoxImage.Information);
@@ -202,13 +202,13 @@ public partial class DiaryViewModel : BaseViewModel
 
     private async Task ExecuteDeleteEntryAsync()
     {
-        await _diaryRepository.DeleteDiaryEntry(SelectedEntry.Id);
-        Entries.Remove(SelectedEntry);
+        await _diaryRepository.DeleteDiaryEntry(SelectedElement.Id);
+        Entries.Remove(SelectedElement);
         ClearInputFields();
     }
 
 
-    partial void OnSelectedEntryChanged(DiaryEntryModel value)
+    partial void OnSelectedElementChanged(DiaryEntryModel value)
     {
         if (value is not null)
         {
@@ -234,5 +234,11 @@ public partial class DiaryViewModel : BaseViewModel
     public bool ControlKeyIsPressed()
     {
         return (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control;
+    }
+
+    public void HandleDeselection()
+    {
+        ClearInputFields();
+        SelectedElement = null;
     }
 }

@@ -6,6 +6,7 @@
     xmlns:converter="clr-namespace:TotallyNormalCalculator.Converter"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:local="clr-namespace:TotallyNormalCalculator.MVVM.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewmodel="clr-namespace:TotallyNormalCalculator.MVVM.ViewModels"
@@ -19,6 +20,10 @@
         <converter:SelectionToEnabledConverter x:Key="SelectionToEnabledConverter" />
     </UserControl.Resources>
 
+    <i:Interaction.Behaviors>
+        <behavior:DeselectCurrentListViewElement />
+    </i:Interaction.Behaviors>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -28,7 +33,7 @@
         <ListView
             ItemContainerStyle="{StaticResource BlobFile}"
             ItemsSource="{Binding Blobs, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            SelectedItem="{Binding SelectedBlob, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            SelectedItem="{Binding SelectedElement, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             Style="{StaticResource BlobListViewStyle}" />
 
         <StackPanel
@@ -48,7 +53,7 @@
                 behavior:IconColor.IconColor="Red"
                 Command="{Binding DeleteBlobCommand}"
                 Content="Delete"
-                IsEnabled="{Binding SelectedBlob, Converter={StaticResource SelectionToEnabledConverter}, ConverterParameter=SelectedBlob}"
+                IsEnabled="{Binding SelectedElement, Converter={StaticResource SelectionToEnabledConverter}, ConverterParameter=SelectedElement}"
                 Style="{StaticResource BaseButton}"
                 Tag="Trash" />
 

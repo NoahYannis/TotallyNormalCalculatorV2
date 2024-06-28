@@ -1,16 +1,18 @@
-﻿using Microsoft.Xaml.Behaviors;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Xaml.Behaviors;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using TotallyNormalCalculator.MVVM.ViewModels;
+using TotallyNormalCalculator.Logging;
 
 namespace TotallyNormalCalculator.Behavior;
 
 /// <summary>
 /// A behavior to deselect the current item in a ListView when clicking outside of the items.
 /// </summary>
-public class DeselectCurrentListViewEntry : Behavior<UserControl>
+public class DeselectCurrentListViewElement : Behavior<UserControl>
 {
     protected override void OnAttached()
     {
@@ -50,12 +52,19 @@ public class DeselectCurrentListViewEntry : Behavior<UserControl>
         if (clickedListViewItem != null)
             return;
 
-        var viewModel = userControl.DataContext as DiaryViewModel;
+        dynamic viewModel = userControl.DataContext;
 
-        if (viewModel?.SelectedEntry != null)
+        try
         {
-            viewModel.ClearInputFields();
-            viewModel.SelectedEntry = null;
+            if (viewModel.SelectedElement != null)
+            {
+                viewModel.HandleDeselection();
+            }
+        }
+        catch (Exception exc)
+        {
+            var logger = App.AppHost.Services.GetRequiredService<ITotallyNormalCalculatorLogger>();
+            logger.LogExceptionToTempFile(exc);
         }
     }
 
