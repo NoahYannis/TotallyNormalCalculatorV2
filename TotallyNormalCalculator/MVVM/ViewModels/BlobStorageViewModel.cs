@@ -55,7 +55,8 @@ internal partial class BlobStorageViewModel : BaseViewModel
         string filePath = openFileDialog.FileName;
         string blobName = Path.GetFileName(filePath);
 
-        await _blobStorageRepository.UploadBlob(filePath, blobName);
+        var uploadedBlob = await _blobStorageRepository.UploadBlob(filePath, blobName);
+        Blobs.Add(uploadedBlob);
     }
 
     [RelayCommand]

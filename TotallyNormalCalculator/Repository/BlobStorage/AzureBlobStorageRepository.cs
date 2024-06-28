@@ -26,7 +26,7 @@ internal class AzureBlobStorageRepository : IBlobStorageRepository<BlobModel>
         try
         {
             string storageConnectionString = ConfigurationManager.ConnectionStrings["AzureBlobStorage"].ConnectionString;
-            string containerName = ConfigurationManager.AppSettings["ContainerName"];   
+            string containerName = ConfigurationManager.AppSettings["ContainerName"];
 
             _blobContainerClient = new BlobContainerClient(storageConnectionString, containerName);
         }
@@ -49,16 +49,7 @@ internal class AzureBlobStorageRepository : IBlobStorageRepository<BlobModel>
 
                 using (var stream = new MemoryStream())
                 {
-                    await blobClient.DownloadToAsync(stream);
-                    stream.Position = 0;
-
-                    var bitmapImage = new BitmapImage();
-
-                    bitmapImage.BeginInit();
-                    bitmapImage.StreamSource = stream;
-                    bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                    bitmapImage.EndInit();
-                    bitmapImage.Freeze();
+                    BitmapImage bitmapImage = await CreateBlobBitmapImage(blobClient, stream);
 
                     blobs.Add(new BlobModel { Name = blobItem.Name, Image = bitmapImage });
                 }
@@ -70,6 +61,21 @@ internal class AzureBlobStorageRepository : IBlobStorageRepository<BlobModel>
         }
 
         return blobs;
+    }
+
+    private static async Task<BitmapImage> CreateBlobBitmapImage(BlobClient blobClient, Stream stream)
+    {
+        await blobClient.DownloadToAsync(stream);
+        stream.Position = 0;
+
+        var bitmapImage = new BitmapImage();
+        bitmapImage.BeginInit();
+        bitmapImage.StreamSource = stream;
+        bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+        bitmapImage.EndInit();
+        bitmapImage.Freeze();
+
+        return bitmapImage;
     }
 
     public async Task DeleteBlob(string blobName)
@@ -89,15 +95,18 @@ internal class AzureBlobStorageRepository : IBlobStorageRepository<BlobModel>
     }
 
 
-    public async Task UploadBlob(string filePath, string blobName)
+    public async Task<BlobModel> UploadBlob(string filePath, string blobName)
     {
+        var newBlob = new BlobModel() { Name = blobName };
+
         try
         {
             BlobClient blobClient = _blobContainerClient.GetBlobClient(blobName);
 
-            using (FileStream fileStream = File.OpenRead(filePath))
+            using (FileStream fileStream = File.Open(filePath, FileMode.Open, FileAccess.ReadWrite))
             {
                 await blobClient.UploadAsync(fileStream, true);
+                newBlob.Image = await CreateBlobBitmapImage(blobClient, fileStream);
             }
 
             _logger.LogMessageToTempFile($"{blobName} uploaded successfully");
@@ -106,6 +115,8 @@ internal class AzureBlobStorageRepository : IBlobStorageRepository<BlobModel>
         {
             _logger.LogExceptionToTempFile(e);
         }
+
+        return newBlob;
     }
 
     public async Task<byte[]> GetBlob(string blobName)
