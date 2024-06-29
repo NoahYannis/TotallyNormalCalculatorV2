@@ -19,6 +19,7 @@
     <UserControl.Resources>
         <converter:SelectionToEnabledConverter x:Key="SelectionToEnabledConverter" />
         <converter:NullToBoolConverter x:Key="BlobsToEnabled" />
+        <converter:NullToVisibilityConverter x:Key="BlobsToVisible" NullEqualsVisible="True" />
     </UserControl.Resources>
 
     <i:Interaction.Behaviors>
@@ -42,6 +43,24 @@
             ItemsSource="{Binding Blobs, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             SelectedItem="{Binding SelectedElement, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             Style="{StaticResource BlobListViewStyle}" />
+
+        <!--  Loading spinner  -->
+        <StackPanel
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Visibility="{Binding Blobs, Converter={StaticResource BlobsToVisible}, ConverterParameter=Blobs}">
+            <fa:IconImage
+                Height="90"
+                fa:Awesome.Spin="True"
+                fa:Awesome.SpinDuration="3"
+                Foreground="{DynamicResource ForegroundColor}"
+                Icon="Spinner" />
+            <TextBlock
+                Margin="0,10,0,0"
+                Foreground="{DynamicResource ForegroundColor}"
+                Text="Loading files..." />
+        </StackPanel>
+
 
         <StackPanel
             Grid.Row="1"
