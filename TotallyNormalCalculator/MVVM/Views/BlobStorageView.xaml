@@ -18,11 +18,18 @@
 
     <UserControl.Resources>
         <converter:SelectionToEnabledConverter x:Key="SelectionToEnabledConverter" />
+        <converter:NullToBoolConverter x:Key="BlobsToEnabled" />
     </UserControl.Resources>
 
     <i:Interaction.Behaviors>
         <behavior:DeselectCurrentListViewElement />
     </i:Interaction.Behaviors>
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadBlobsCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -46,6 +53,7 @@
                 behavior:IconColor.IconColor="Blue"
                 Command="{Binding UploadBlobCommand}"
                 Content="Upload"
+                IsEnabled="{Binding Blobs, Converter={StaticResource BlobsToEnabled}, ConverterParameter=Blobs}"
                 Style="{StaticResource BaseButton}"
                 Tag="CloudUpload" />
 

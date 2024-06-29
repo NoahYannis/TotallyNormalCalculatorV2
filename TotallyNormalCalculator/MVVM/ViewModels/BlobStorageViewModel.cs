@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Win32;
+using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
@@ -11,43 +12,44 @@ using TotallyNormalCalculator.MVVM.Model;
 using TotallyNormalCalculator.Repository.BlobStorage;
 
 namespace TotallyNormalCalculator.MVVM.ViewModels;
-internal partial class BlobStorageViewModel : BaseViewModel
+internal partial class BlobStorageViewModel(ITotallyNormalCalculatorLogger _blobLogger,
+    IBlobStorageRepository<BlobModel> _blobStorageRepository) : BaseViewModel
 {
-    private readonly ITotallyNormalCalculatorLogger _blobLogger;
-    private readonly IBlobStorageRepository<BlobModel> _blobStorageRepository;
-
 
     [ObservableProperty]
-    private ObservableCollection<BlobModel> _blobs = [];
+    private ObservableCollection<BlobModel> _blobs;
+
 
     [ObservableProperty]
     private BlobModel _selectedElement;
 
-    public BlobStorageViewModel(ITotallyNormalCalculatorLogger logger,
-        IBlobStorageRepository<BlobModel> blobStorageRepository)
-    {
-        (_blobLogger, _blobStorageRepository) = (logger, blobStorageRepository);
-        Blobs = Task.Run(() => this.GetAllBlobs()).GetAwaiter().GetResult();
-    }
-
 
     [RelayCommand]
-    public async Task<ObservableCollection<BlobModel>> GetAllBlobs()
+    public async Task LoadBlobs()
     {
-        var blobs = await _blobStorageRepository.GetAllBlobs();
-        return new ObservableCollection<BlobModel>(blobs);
+        try
+        {
+            var blobCollection = await _blobStorageRepository.GetAllBlobs();
+            Blobs = new ObservableCollection<BlobModel>(blobCollection);
+        }
+        catch (Exception exc)
+        {
+            _blobLogger.LogExceptionToTempFile(exc);
+            MessageBox.Show("An error occurred while loading the files.", "TotallyNormalCalculator",
+                MessageBoxButton.OK, MessageBoxImage.Error);
+        }
     }
 
 
     [RelayCommand]
     public async Task UploadBlob()
     {
-         var openFileDialog = new OpenFileDialog()
+        var openFileDialog = new OpenFileDialog()
         {
             Title = "Select a file to upload",
         };
 
-        if (openFileDialog.ShowDialog() !=  true)
+        if (openFileDialog.ShowDialog() != true)
         {
             return;
         }
@@ -55,8 +57,15 @@ internal partial class BlobStorageViewModel : BaseViewModel
         string filePath = openFileDialog.FileName;
         string blobName = Path.GetFileName(filePath);
 
-        var uploadedBlob = await _blobStorageRepository.UploadBlob(filePath, blobName);
-        Blobs.Add(uploadedBlob);
+        try
+        {
+            var uploadedBlob = await _blobStorageRepository.UploadBlob(filePath, blobName);
+            Blobs.Add(uploadedBlob);
+        }
+        catch (Exception exc)
+        {
+            _blobLogger.LogExceptionToTempFile(exc);
+        }
     }
 
     [RelayCommand]
@@ -81,8 +90,15 @@ internal partial class BlobStorageViewModel : BaseViewModel
 
         if (delete is MessageBoxResult.Yes)
         {
-            await _blobStorageRepository.DeleteBlob(SelectedElement.Name);
-            Blobs.Remove(SelectedElement);
+            try
+            {
+                await _blobStorageRepository.DeleteBlob(SelectedElement.Name);
+                Blobs.Remove(SelectedElement);
+            }
+            catch (Exception exc)
+            {
+                _blobLogger.LogExceptionToTempFile(exc);
+            }
         }
     }
 
