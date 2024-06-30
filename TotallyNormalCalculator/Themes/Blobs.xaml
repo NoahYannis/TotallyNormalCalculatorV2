@@ -50,28 +50,26 @@
             BorderBrush="Black"
             BorderThickness="2">
             <Grid>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="3*" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-                    <Border BorderBrush="{DynamicResource BorderBrush}" BorderThickness="2">
-                        <MediaElement
-                            LoadedBehavior="Play"
-                            Source="{Binding VideoUrl}"
-                            Stretch="Fill" />
-                    </Border>
+                <Border BorderBrush="{DynamicResource BorderBrush}" BorderThickness="2">
+                    <MediaElement 
+                        LoadedBehavior="Play"
+                        Source="{Binding VideoUrl}"
+                        Stretch="Fill" />
+                </Border>
 
-                    <TextBlock
-                        Grid.Row="1"
-                        Margin="3,0"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="10"
-                        Text="{Binding Name}"
-                        TextWrapping="Wrap" />
-                </Grid>
+                <TextBlock
+                    Grid.Row="1"
+                    Margin="3,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="10"
+                    Text="{Binding Name}"
+                    TextWrapping="Wrap" />
             </Grid>
         </Border>
         <DataTemplate.Triggers>

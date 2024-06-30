@@ -1,8 +1,12 @@
 ﻿using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
+using Azure.Storage.Blobs.Specialized;
 using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace TotallyNormalCalculator.MVVM.Model.Blobs;
@@ -65,10 +69,14 @@ public static class BlobFactory
 
     private static async Task<BlobModel> CreateVideoBlob(BlobClient blobClient, Stream stream)
     {
+        // To do: Find a way to do this without saving the file to disk
+        string localFilePath = Path.Combine(Path.GetTempPath(), blobClient.Name);
+        await blobClient.DownloadToAsync(localFilePath);
+
         return new VideoBlob
         {
             Name = blobClient.Name,
-            VideoUrl = blobClient.Uri.ToString(),
+            VideoUrl = localFilePath
         };
     }
 

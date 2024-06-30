@@ -1,7 +1,4 @@
-﻿using System.IO;
-using System.Linq;
-
-namespace TotallyNormalCalculator.MVVM.Model;
+﻿namespace TotallyNormalCalculator.MVVM.Model;
 
 public class BlobModel : IModel
 {

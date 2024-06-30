@@ -1,8 +1,10 @@
-﻿namespace TotallyNormalCalculator.MVVM.Model.Blobs;
+﻿using System;
+
+namespace TotallyNormalCalculator.MVVM.Model.Blobs;
 
 class VideoBlob : BlobModel
 {
-    public string VideoUrl   { get; set; }
+    public string VideoUrl { get; set; }
 
     public VideoBlob()
     {
