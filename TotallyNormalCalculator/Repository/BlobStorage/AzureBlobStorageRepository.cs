@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Threading.Tasks;
-using System.Windows.Media.Imaging;
 using TotallyNormalCalculator.Logging;
 using TotallyNormalCalculator.MVVM.Model;
+using TotallyNormalCalculator.MVVM.Model.Blobs;
 
 namespace TotallyNormalCalculator.Repository.BlobStorage;
 internal class AzureBlobStorageRepository : IBlobStorageRepository<BlobModel>
@@ -49,9 +49,9 @@ internal class AzureBlobStorageRepository : IBlobStorageRepository<BlobModel>
 
                 using (var stream = new MemoryStream())
                 {
-                    BitmapImage bitmapImage = await CreateBlobBitmapImage(blobClient, stream);
+                    var blob = await BlobFactory.CreateBlobModel(blobClient, stream);
 
-                    blobs.Add(new BlobModel { Name = blobItem.Name, Image = bitmapImage });
+                    blobs.Add(blob);
                 }
             }
         }
@@ -63,20 +63,6 @@ internal class AzureBlobStorageRepository : IBlobStorageRepository<BlobModel>
         return blobs;
     }
 
-    private static async Task<BitmapImage> CreateBlobBitmapImage(BlobClient blobClient, Stream stream)
-    {
-        await blobClient.DownloadToAsync(stream);
-        stream.Position = 0;
-
-        var bitmapImage = new BitmapImage();
-        bitmapImage.BeginInit();
-        bitmapImage.StreamSource = stream;
-        bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-        bitmapImage.EndInit();
-        bitmapImage.Freeze();
-
-        return bitmapImage;
-    }
 
     public async Task DeleteBlob(string blobName)
     {
@@ -97,7 +83,7 @@ internal class AzureBlobStorageRepository : IBlobStorageRepository<BlobModel>
 
     public async Task<BlobModel> UploadBlob(string filePath, string blobName)
     {
-        var newBlob = new BlobModel() { Name = blobName };
+        BlobModel newBlob = null;
 
         try
         {
@@ -106,7 +92,7 @@ internal class AzureBlobStorageRepository : IBlobStorageRepository<BlobModel>
             using (FileStream fileStream = File.Open(filePath, FileMode.Open, FileAccess.ReadWrite))
             {
                 await blobClient.UploadAsync(fileStream, true);
-                newBlob.Image = await CreateBlobBitmapImage(blobClient, fileStream);
+                newBlob = await BlobFactory.CreateBlobModel(blobClient, fileStream);
             }
 
             _logger.LogMessageToTempFile($"{blobName} uploaded successfully");
@@ -117,10 +103,5 @@ internal class AzureBlobStorageRepository : IBlobStorageRepository<BlobModel>
         }
 
         return newBlob;
-    }
-
-    public async Task<byte[]> GetBlob(string blobName)
-    {
-        throw new NotImplementedException();
     }
 }

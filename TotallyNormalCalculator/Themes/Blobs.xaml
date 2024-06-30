@@ -1,13 +1,95 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:blob="clr-namespace:TotallyNormalCalculator.MVVM.Model.Blobs"
+    xmlns:converter="clr-namespace:TotallyNormalCalculator.Converter"
     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
     <sys:Double x:Key="BlobHeight">180</sys:Double>
     <sys:Double x:Key="BlobWidth">160</sys:Double>
 
 
+    <!--  DataTemplate for ImageBlob  -->
+    <DataTemplate x:Key="ImageBlobTemplate" DataType="{x:Type blob:ImageBlob}">
+        <Border x:Name="Border">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Border BorderBrush="{DynamicResource BorderBrush}" BorderThickness="2">
+                    <Image Source="{Binding Image}" Stretch="Fill" />
+                </Border>
+
+                <TextBlock
+                    Grid.Row="1"
+                    Margin="3,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="10"
+                    Text="{Binding Name}"
+                    TextWrapping="Wrap" />
+            </Grid>
+        </Border>
+        <DataTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource MouseOver}" />
+                <Setter Property="Cursor" Value="Hand" />
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource MouseOver}" />
+            </Trigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+
+    <!--  DataTemplate for VideoBlob  -->
+    <DataTemplate x:Key="VideoBlobTemplate" DataType="{x:Type blob:VideoBlob}">
+        <Border
+            x:Name="Border"
+            Margin="5"
+            Background="{DynamicResource BackgroundColor}"
+            BorderBrush="Black"
+            BorderThickness="2">
+            <Grid>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="3*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Border BorderBrush="{DynamicResource BorderBrush}" BorderThickness="2">
+                        <MediaElement
+                            LoadedBehavior="Play"
+                            Source="{Binding VideoUrl}"
+                            Stretch="Fill" />
+                    </Border>
+
+                    <TextBlock
+                        Grid.Row="1"
+                        Margin="3,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="10"
+                        Text="{Binding Name}"
+                        TextWrapping="Wrap" />
+                </Grid>
+            </Grid>
+        </Border>
+        <DataTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource MouseOver}" />
+                <Setter Property="Cursor" Value="Hand" />
+                <Setter TargetName="Border" Property="Background" Value="{DynamicResource MouseOver}" />
+            </Trigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+
+    <converter:BlobTypeToDataTemplateConverter
+        x:Key="BlobTypeToDataTemplateConverter"
+        ImageBlobTemplate="{StaticResource ImageBlobTemplate}"
+        VideoBlobTemplate="{StaticResource VideoBlobTemplate}" />
+
     <Style x:Key="BlobListViewStyle" TargetType="ListView">
+        <Setter Property="ItemTemplateSelector" Value="{StaticResource BlobTypeToDataTemplateConverter}" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
         <Setter Property="Background" Value="{DynamicResource BackgroundColor}" />
         <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}" />
@@ -30,44 +112,16 @@
         <Setter Property="Height" Value="{StaticResource BlobHeight}" />
         <Setter Property="Width" Value="{StaticResource BlobWidth}" />
         <Setter Property="Margin" Value="5" />
-
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="ListViewItem">
-                    <Border x:Name="BlobBorder">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="3*" />
-                                <RowDefinition Height="*" />
-                            </Grid.RowDefinitions>
-
-                            <Border BorderBrush="{DynamicResource BorderBrush}" BorderThickness="2">
-                                <Image Source="{Binding Image}" Stretch="Fill" />
-                            </Border>
-
-                            <TextBlock
-                                Grid.Row="1"
-                                Margin="3,0"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                FontSize="10"
-                                Text="{Binding Name}"
-                                TextWrapping="Wrap" />
-                        </Grid>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="BlobBorder" Property="BorderBrush" Value="{DynamicResource MouseOver}" />
-                            <Setter Property="Cursor" Value="Hand" />
-                            <Setter TargetName="BlobBorder" Property="Background" Value="{DynamicResource MouseOver}" />
-                        </Trigger>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter TargetName="BlobBorder" Property="Background" Value="{DynamicResource Selected}" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="BorderBrush" Value="{DynamicResource MouseOver}" />
+                <Setter Property="Cursor" Value="Hand" />
+                <Setter Property="Background" Value="{DynamicResource MouseOver}" />
+            </Trigger>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="{DynamicResource Selected}" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
 </ResourceDictionary>
 
