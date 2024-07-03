@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using TotallyNormalCalculator.Logging;
 using TotallyNormalCalculator.MVVM.Model;
 using TotallyNormalCalculator.Repository.BlobStorage;
@@ -69,9 +70,20 @@ internal partial class BlobStorageViewModel(ITotallyNormalCalculatorLogger _blob
     }
 
     [RelayCommand]
-    public async Task ToggleVideo(object o)
+    public void ToggleVideo(object parameter)
     {
-        MessageBox.Show("Hi");
+        var mediaElement = parameter as MediaElement;
+        if (mediaElement != null)
+        {
+            if (mediaElement.CanPause && mediaElement.Position > TimeSpan.Zero && mediaElement.Clock == null)
+            {
+                mediaElement.Pause();
+            }
+            else
+            {
+                mediaElement.Play();
+            }
+        }
     }
 
     [RelayCommand]

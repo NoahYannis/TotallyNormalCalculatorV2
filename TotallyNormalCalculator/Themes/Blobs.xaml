@@ -3,7 +3,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:blob="clr-namespace:TotallyNormalCalculator.MVVM.Model.Blobs"
     xmlns:converter="clr-namespace:TotallyNormalCalculator.Converter"
-    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:vm="clr-namespace:TotallyNormalCalculator.MVVM.ViewModels">
 
@@ -61,24 +60,15 @@
                     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                         <MediaElement
                             x:Name="MediaElement"
-                            LoadedBehavior="Play"
+                            LoadedBehavior="Manual"
                             Source="{Binding VideoUrl}"
                             Stretch="Fill" />
                         <ToggleButton
                             Panel.ZIndex="1"
-                            Command="{Binding ToggleVideoCommand}"
-                            Style="{StaticResource RoundButton}"
-                            Tag="Play">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="Click">
-                                    <i:InvokeCommandAction
-                                        Command="{Binding ToggleVideoCommand}"
-                                        CommandParameter="{Binding ElementName=MediaElement}"
-                                        PassEventArgsToCommand="True" />
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                        </ToggleButton>
-
+                            Command="{Binding DataContext.ToggleVideoCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                            CommandParameter="{Binding ElementName=MediaElement}"
+                            Style="{StaticResource RoundToggleButton}"
+                            Tag="Play" />
                     </Grid>
                 </Border>
 
