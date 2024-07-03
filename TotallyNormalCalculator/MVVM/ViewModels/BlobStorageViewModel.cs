@@ -69,6 +69,12 @@ internal partial class BlobStorageViewModel(ITotallyNormalCalculatorLogger _blob
     }
 
     [RelayCommand]
+    public async Task ToggleVideo(object o)
+    {
+        MessageBox.Show("Hi");
+    }
+
+    [RelayCommand]
     public async Task DeleteBlob()
     {
         if (!Blobs.Any())
