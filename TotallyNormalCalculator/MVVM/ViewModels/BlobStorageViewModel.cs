@@ -5,6 +5,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -141,6 +142,14 @@ internal partial class BlobStorageViewModel(ITotallyNormalCalculatorLogger _blob
     [RelayCommand]
     public void VideoLoaded(object parameter)
     {
+        // The video has to be played for a short duration for the thumbnail to be displayed.
+        MediaElement medElem = parameter as MediaElement;
+        medElem.Volume = 0;
+        medElem.Play();
+        Thread.Sleep(300);
+        medElem.Pause();
+        medElem.Volume = 1;
+        medElem.Position = TimeSpan.Zero;
     }
 
     [RelayCommand]
