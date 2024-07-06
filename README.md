@@ -10,6 +10,7 @@ To Do:
 
 - Bugfix
 - More Unit Tests
-- Add Rich Text Editor To Diary
+- Add Auto update functionality
 - Azure Integration (Blob Storage, Serverless Functions etc)
 - Localization
+- Save user settings and preferences in database
