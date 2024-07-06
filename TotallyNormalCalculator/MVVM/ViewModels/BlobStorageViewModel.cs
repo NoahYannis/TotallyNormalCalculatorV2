@@ -118,48 +118,37 @@ internal partial class BlobStorageViewModel(ITotallyNormalCalculatorLogger _blob
     /// <summary>
     /// Determine whether the play button should be displayed.
     /// </summary>
-    public bool VideoNotPlaying
-    {
-        get => !VideoIsPlaying;
-    }
+    public bool VideoNotPlaying => !VideoIsPlaying;
+    
 
     [RelayCommand]
     public void ToggleVideo(object parameter)
     {
-        if (parameter is not MediaElement mediaElement)
-            return;
+        MediaElement medElem = parameter as MediaElement;
 
         if (VideoIsPlaying)
         {
-            mediaElement.Pause();
+            medElem.Pause();
         }
         else
         {
-            mediaElement.Play();
+            medElem.Play();
         }
 
         VideoIsPlaying = !VideoIsPlaying;
-
-        if (mediaElement.NaturalDuration.HasTimeSpan && 
-            mediaElement.Position == mediaElement.NaturalDuration.TimeSpan)
-        {
-            mediaElement.Position = TimeSpan.Zero; // Reset position to beginning.
-        }
     }
 
     [RelayCommand]
     public void VideoLoaded(object parameter)
     {
-        var mediaElement = parameter as MediaElement;
-        if (mediaElement != null)
-        {
-            mediaElement.Position = TimeSpan.Zero; // Setzt die Position auf den Anfang
-            mediaElement.Pause(); // Zeigt das erste Frame an
-        }
     }
 
     [RelayCommand]
-    public void VideoEnded() => VideoIsPlaying = false;
+    public void VideoEnded(object parameter)
+    {
+        (parameter as MediaElement).Stop();
+        VideoIsPlaying = false;
+    }
 
 
     #endregion

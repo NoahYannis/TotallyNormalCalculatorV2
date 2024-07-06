@@ -70,7 +70,7 @@
                                     <i:InvokeCommandAction Command="{Binding DataContext.VideoLoadedCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{x:Reference Name=MediaElement}" />
                                 </i:EventTrigger>
                                 <i:EventTrigger EventName="MediaEnded">
-                                    <i:InvokeCommandAction Command="{Binding DataContext.VideoEndedCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" />
+                                    <i:InvokeCommandAction Command="{Binding DataContext.VideoEndedCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding ElementName=MediaElement}" />
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </MediaElement>
