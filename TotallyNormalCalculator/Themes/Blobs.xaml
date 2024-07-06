@@ -3,11 +3,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:blob="clr-namespace:TotallyNormalCalculator.MVVM.Model.Blobs"
     xmlns:converter="clr-namespace:TotallyNormalCalculator.Converter"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:vm="clr-namespace:TotallyNormalCalculator.MVVM.ViewModels">
 
     <sys:Double x:Key="BlobHeight">180</sys:Double>
     <sys:Double x:Key="BlobWidth">160</sys:Double>
+    <BooleanToVisibilityConverter x:Key="boolvis" />
 
 
     <!--  DataTemplate for ImageBlob  -->
@@ -62,13 +64,23 @@
                             x:Name="MediaElement"
                             LoadedBehavior="Manual"
                             Source="{Binding VideoUrl}"
-                            Stretch="Fill" />
+                            Stretch="Fill">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MediaOpened">
+                                    <i:InvokeCommandAction Command="{Binding DataContext.VideoLoadedCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{x:Reference Name=MediaElement}" />
+                                </i:EventTrigger>
+                                <i:EventTrigger EventName="MediaEnded">
+                                    <i:InvokeCommandAction Command="{Binding DataContext.VideoEndedCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </MediaElement>
                         <ToggleButton
                             Panel.ZIndex="1"
                             Command="{Binding DataContext.ToggleVideoCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                             CommandParameter="{Binding ElementName=MediaElement}"
                             Style="{StaticResource RoundToggleButton}"
-                            Tag="Play" />
+                            Tag="Play"
+                            Visibility="{Binding DataContext.VideoNotPlaying, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource boolvis}}" />
                     </Grid>
                 </Border>
 

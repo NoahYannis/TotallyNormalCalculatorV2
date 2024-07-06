@@ -69,22 +69,6 @@ internal partial class BlobStorageViewModel(ITotallyNormalCalculatorLogger _blob
         }
     }
 
-    [RelayCommand]
-    public void ToggleVideo(object parameter)
-    {
-        var mediaElement = parameter as MediaElement;
-        if (mediaElement != null)
-        {
-            if (mediaElement.CanPause && mediaElement.Position > TimeSpan.Zero && mediaElement.Clock == null)
-            {
-                mediaElement.Pause();
-            }
-            else
-            {
-                mediaElement.Play();
-            }
-        }
-    }
 
     [RelayCommand]
     public async Task DeleteBlob()
@@ -120,8 +104,63 @@ internal partial class BlobStorageViewModel(ITotallyNormalCalculatorLogger _blob
         }
     }
 
-    public void HandleDeselection()
+
+    public void HandleDeselection() => SelectedElement = null;
+
+
+    #region Video Player
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(VideoNotPlaying))]
+    public bool _videoIsPlaying;
+
+
+    /// <summary>
+    /// Determine whether the play button should be displayed.
+    /// </summary>
+    public bool VideoNotPlaying
     {
-        SelectedElement = null;
+        get => !VideoIsPlaying;
     }
+
+    [RelayCommand]
+    public void ToggleVideo(object parameter)
+    {
+        if (parameter is not MediaElement mediaElement)
+            return;
+
+        if (VideoIsPlaying)
+        {
+            mediaElement.Pause();
+        }
+        else
+        {
+            mediaElement.Play();
+        }
+
+        VideoIsPlaying = !VideoIsPlaying;
+
+        if (mediaElement.NaturalDuration.HasTimeSpan && 
+            mediaElement.Position == mediaElement.NaturalDuration.TimeSpan)
+        {
+            mediaElement.Position = TimeSpan.Zero; // Reset position to beginning.
+        }
+    }
+
+    [RelayCommand]
+    public void VideoLoaded(object parameter)
+    {
+        var mediaElement = parameter as MediaElement;
+        if (mediaElement != null)
+        {
+            mediaElement.Position = TimeSpan.Zero; // Setzt die Position auf den Anfang
+            mediaElement.Pause(); // Zeigt das erste Frame an
+        }
+    }
+
+    [RelayCommand]
+    public void VideoEnded() => VideoIsPlaying = false;
+
+
+    #endregion
 }
