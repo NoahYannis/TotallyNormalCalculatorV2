@@ -145,6 +145,7 @@
         <Setter Property="Height" Value="30" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundColor}" />
         <Setter Property="Background" Value="{DynamicResource BackgroundColor}" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="BorderThickness" Value="1" />
@@ -159,7 +160,7 @@
                         <fa:IconBlock
                             HorizontalAlignment="Right"
                             FontSize="16"
-                            Foreground="{Binding Path=(behavior:IconColor.IconColor), RelativeSource={RelativeSource TemplatedParent}}"
+                            Foreground="{DynamicResource ForegroundColor}"
                             Icon="{Binding Tag, RelativeSource={RelativeSource TemplatedParent}, TargetNullValue=None}" />
                     </Border>
                 </ControlTemplate>

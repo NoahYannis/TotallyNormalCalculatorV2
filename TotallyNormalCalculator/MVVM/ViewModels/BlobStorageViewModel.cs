@@ -11,6 +11,7 @@ using System.Windows;
 using System.Windows.Controls;
 using TotallyNormalCalculator.Logging;
 using TotallyNormalCalculator.MVVM.Model;
+using TotallyNormalCalculator.MVVM.Model.Blobs;
 using TotallyNormalCalculator.Repository.BlobStorage;
 
 namespace TotallyNormalCalculator.MVVM.ViewModels;
@@ -126,6 +127,7 @@ internal partial class BlobStorageViewModel(ITotallyNormalCalculatorLogger _blob
     public void ToggleVideo(object parameter)
     {
         MediaElement medElem = parameter as MediaElement;
+        SelectedElement = medElem.DataContext as VideoBlob;
 
         if (VideoIsPlaying)
         {
@@ -157,6 +159,7 @@ internal partial class BlobStorageViewModel(ITotallyNormalCalculatorLogger _blob
     {
         (parameter as MediaElement).Stop();
         VideoIsPlaying = false;
+        SelectedElement = null;
     }
 
 

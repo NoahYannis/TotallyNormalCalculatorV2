@@ -9,7 +9,7 @@
 
     <sys:Double x:Key="BlobHeight">180</sys:Double>
     <sys:Double x:Key="BlobWidth">160</sys:Double>
-    <BooleanToVisibilityConverter x:Key="boolvis" />
+    <converter:VideoButtonVisibilityConverter x:Key="playButtonVis" />
 
 
     <!--  DataTemplate for ImageBlob  -->
@@ -79,8 +79,14 @@
                             Command="{Binding DataContext.ToggleVideoCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                             CommandParameter="{Binding ElementName=MediaElement}"
                             Style="{StaticResource RoundToggleButton}"
-                            Tag="Play"
-                            Visibility="{Binding DataContext.VideoNotPlaying, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource boolvis}}" />
+                            Tag="Play">
+                            <ToggleButton.Visibility>
+                                <MultiBinding Converter="{StaticResource playButtonVis}">
+                                    <Binding ElementName="MediaElement" />
+                                    <Binding Path="DataContext.SelectedElement" RelativeSource="{RelativeSource AncestorType=UserControl}" />
+                                </MultiBinding>
+                            </ToggleButton.Visibility>
+                        </ToggleButton>
                     </Grid>
                 </Border>
 
