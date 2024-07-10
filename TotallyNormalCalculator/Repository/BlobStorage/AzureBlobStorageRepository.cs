@@ -19,16 +19,17 @@ internal class AzureBlobStorageRepository : IBlobStorageRepository<BlobModel>
     private BlobContainerClient _blobContainerClient;
 
 
-    public AzureBlobStorageRepository()
+    public AzureBlobStorageRepository(ITotallyNormalCalculatorLogger logger)
     {
-        _logger = App.AppHost.Services.GetRequiredService<ITotallyNormalCalculatorLogger>();
+        _logger = logger;
 
         try
         {
             string storageConnectionString = ConfigurationManager.ConnectionStrings["AzureBlobStorage"].ConnectionString;
-            string containerName = ConfigurationManager.AppSettings["ContainerName"];
+            string containerName = App.UserGuid.ToString();
 
             _blobContainerClient = new BlobContainerClient(storageConnectionString, containerName);
+            _blobContainerClient.CreateIfNotExists();
         }
         catch (Exception e)
         {

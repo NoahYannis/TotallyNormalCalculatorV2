@@ -15,9 +15,9 @@ namespace TotallyNormalCalculator;
 
 public partial class App : Application
 {
-    internal static IHost AppHost { get; set; }
+    internal static IHost AppHost { get; private set; }
 
-    internal Guid UserGuid { get; private set; }
+    internal static Guid UserGuid { get; private set; }
 
     public App()
     {
