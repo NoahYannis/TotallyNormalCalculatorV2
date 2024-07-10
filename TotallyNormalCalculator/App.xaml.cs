@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.IO;
 using System.Windows;
 using TotallyNormalCalculator.Core;
 using TotallyNormalCalculator.Logging;
@@ -15,6 +16,8 @@ namespace TotallyNormalCalculator;
 public partial class App : Application
 {
     internal static IHost AppHost { get; set; }
+
+    internal Guid UserGuid { get; private set; }
 
     public App()
     {
@@ -41,6 +44,7 @@ public partial class App : Application
     protected override void OnStartup(StartupEventArgs e)
     {
         DBHelper.EnsureDatabaseExists();
+        UserGuid = GetUserGuid();
 
         var mainWindow = AppHost.Services.GetRequiredService<MainWindow>();
         mainWindow.Show();
@@ -53,5 +57,32 @@ public partial class App : Application
         await AppHost!.StopAsync();
         AppHost.Dispose();
         base.OnExit(e);
+    }
+
+    /// <summary>
+    /// Returns the GUID of the associated user or creates a new one if none exists.
+    /// </summary>
+    /// <returns></returns>
+    private static Guid GetUserGuid()
+    {
+        string userGuidPath = Path.Combine
+            (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+            "TotallyNormalCalculator", "tnc-user-guid.txt");
+
+        if (File.Exists(userGuidPath))
+        {
+            Guid userGuid = Guid.Parse(File.ReadAllText(userGuidPath));
+            return userGuid;
+        }
+
+        // New user, create a new GUID
+        string folderPath = Path.Combine
+            (Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+            "TotallyNormalCalculator");
+
+        Directory.CreateDirectory(folderPath);
+        Guid newGuid = Guid.NewGuid();
+        File.WriteAllText(userGuidPath, newGuid.ToString());
+        return newGuid;
     }
 }

@@ -32,7 +32,7 @@ public static class DBHelper
 
 
     /// <summary>
-    /// Checks if the application database exists and creates it if necessary.
+    /// Checks if the local application database exists and creates it if necessary.
     /// </summary>
     /// <param name="masterConnectionString">The connection string for the master database.</param>
     public static void EnsureDatabaseExists()
