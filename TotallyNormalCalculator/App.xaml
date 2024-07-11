@@ -31,6 +31,9 @@
             <DataTemplate DataType="{x:Type viewmodels:BlobStorageViewModel}">
                 <views:BlobStorageView />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:SettingsViewModel}">
+                <views:SettingsView />
+            </DataTemplate>
 
             <FontFamily x:Key="Baskerville">pack://application:,,,/Themes/Fonts/#Libre Baskerville</FontFamily>
 

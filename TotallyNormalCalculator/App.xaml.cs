@@ -16,7 +16,6 @@ namespace TotallyNormalCalculator;
 public partial class App : Application
 {
     internal static IHost AppHost { get; private set; }
-
     internal static Guid UserGuid { get; private set; }
 
     public App()
@@ -28,6 +27,7 @@ public partial class App : Application
              services.AddSingleton<CalculatorViewModel>();
              services.AddSingleton<DiaryViewModel>();
              services.AddSingleton<BlobStorageViewModel>();
+             services.AddSingleton<SettingsViewModel>();
              services.AddTransient<SecretViewViewModel>();
 
              services.AddSingleton(serviceProvider => new MainWindow
