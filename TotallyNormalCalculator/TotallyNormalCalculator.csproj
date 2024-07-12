@@ -23,6 +23,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="CalculatorIcon.ico" />
 	  <None Remove="Database\CreateDiaryEntryDB_Script.sql" />
 	  <None Remove="Themes\Fonts\LibreBaskerville.ttf" />
 	</ItemGroup>
@@ -46,6 +47,7 @@
 		<PackageReference Include="Dapper" Version="2.1.35" />
 		<PackageReference Include="FontAwesome.Sharp" Version="6.3.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
+		<PackageReference Include="Microsoft.Azure.Cosmos" Version="3.41.0" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.0" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
 		<PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
@@ -65,6 +67,10 @@
 
 	<ItemGroup>
 	  <Resource Include="Themes\Fonts\LibreBaskerville.ttf" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <SplashScreen Include="CalculatorIcon.ico" />
 	</ItemGroup>
 
 	<ItemGroup>
