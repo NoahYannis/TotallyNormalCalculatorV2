@@ -134,7 +134,7 @@
     <value>Calculateur</value>
   </data>
   <data name="diary_loadingFiles" xml:space="preserve">
-    <value>Charger des fichiers</value>
+    <value>Charger des fichiers...</value>
   </data>
   <data name="diary_placeholer_title" xml:space="preserve">
     <value>Titre</value>
@@ -152,7 +152,7 @@
     <value>Filtrer par: Titre</value>
   </data>
   <data name="diary_filterby_message" xml:space="preserve">
-    <value>Filtrer par: Message </value>
+    <value>Filtrer par: Message</value>
   </data>
   <data name="diary_filterby_date" xml:space="preserve">
     <value>Filtrer par: Date</value>
@@ -176,6 +176,6 @@
     <value>Espagnol</value>
   </data>
   <data name="languages_French" xml:space="preserve">
-    <value>Français </value>
+    <value>Français</value>
   </data>
 </root>

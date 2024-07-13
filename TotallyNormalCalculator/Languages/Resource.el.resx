@@ -175,10 +175,10 @@
     <value>Φιλτράρισμα κατά: Μήνυμα</value>
   </data>
   <data name="diary_filterby_date" xml:space="preserve">
-    <value>Φιλτράρισμα με βάση:</value>
+    <value>Φιλτράρισμα με βάση</value>
   </data>
   <data name="diary_filterby_none" xml:space="preserve">
-    <value>Φιλτράρισμα με βάση:</value>
+    <value>Χωρίς φίλτρο</value>
   </data>
   <data name="languages_Spanish" xml:space="preserve">
     <value>Ισπανικά</value>

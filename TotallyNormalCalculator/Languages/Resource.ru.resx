@@ -166,7 +166,7 @@
     <value>Выбрать фильтр</value>
   </data>
   <data name="diary_filterby_title" xml:space="preserve">
-    <value>Фильтровать по заголовку:</value>
+    <value>Фильтровать по заголовку</value>
   </data>
   <data name="diary_filterby_message" xml:space="preserve">
     <value>Фильтровать по: Сообщению</value>

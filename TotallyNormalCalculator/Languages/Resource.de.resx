@@ -154,7 +154,7 @@
     <value>Rechner</value>
   </data>
   <data name="diary_loadingFiles" xml:space="preserve">
-    <value>Lade Dateien</value>
+    <value>Lade Dateien...</value>
   </data>
   <data name="diary_placeholer_title" xml:space="preserve">
     <value>Titel</value>

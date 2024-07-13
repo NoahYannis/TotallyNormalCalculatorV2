@@ -134,7 +134,7 @@
     <value>Calculadora</value>
   </data>
   <data name="diary_loadingFiles" xml:space="preserve">
-    <value>Cargando archivos</value>
+    <value>Cargando archivos...</value>
   </data>
   <data name="diary_placeholer_title" xml:space="preserve">
     <value>Título</value>
