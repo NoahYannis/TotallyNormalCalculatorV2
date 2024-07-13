@@ -11,6 +11,4 @@ To Do:
 - Bugfix
 - More Unit Tests
 - Add Auto update functionality
-- Azure Integration (Blob Storage, Serverless Functions etc)
-- Localization
-- Save user settings and preferences in database
+- Web browsing inside the application
