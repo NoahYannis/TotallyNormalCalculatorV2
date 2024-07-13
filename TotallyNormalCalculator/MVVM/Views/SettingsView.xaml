@@ -38,22 +38,30 @@
                 Style="{StaticResource ToggleButtonSlider}" />
         </StackPanel>
 
-        <ComboBox
+        <StackPanel
             Grid.Row="1"
             Margin="0,0,0,20"
             HorizontalAlignment="Center"
-            IsEditable="True"
-            IsReadOnly="True"
-            SelectedValue="{Binding SelectedLanguage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-            SelectedValuePath="Tag"
-            Text="{x:Static res:Resource.settings_chooseLanguage}">
-            <ComboBoxItem Content="{x:Static res:Resource.languages_English}" Tag="en-US" />
-            <ComboBoxItem Content="{x:Static res:Resource.languages_German}" Tag="de-DE" />
-            <ComboBoxItem Content="{x:Static res:Resource.languages_French}" Tag="fr-FR" />
-            <ComboBoxItem Content="{x:Static res:Resource.languages_Spanish}" Tag="es-ES" />
-            <ComboBoxItem Content="{x:Static res:Resource.languages_Russian}" Tag="ru-RU" />
-            <ComboBoxItem Content="{x:Static res:Resource.languages_Greek}" Tag="el-GR" />
-        </ComboBox>
+            Orientation="Horizontal">
+            <Label
+                Margin="0,0,5,0"
+                VerticalAlignment="Center"
+                Content="{x:Static res:Resource.settings_chooseLanguage}"
+                Foreground="{DynamicResource ForegroundColor}" />
+            <ComboBox
+                IsEditable="True"
+                IsReadOnly="True"
+                SelectedValue="{Binding SelectedLanguage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                SelectedValuePath="Tag"
+                Text="{x:Static res:Resource.settings_chooseLanguage}">
+                <ComboBoxItem Content="{x:Static res:Resource.languages_English}" Tag="en-US" />
+                <ComboBoxItem Content="{x:Static res:Resource.languages_German}" Tag="de-DE" />
+                <ComboBoxItem Content="{x:Static res:Resource.languages_French}" Tag="fr-FR" />
+                <ComboBoxItem Content="{x:Static res:Resource.languages_Spanish}" Tag="es-ES" />
+                <ComboBoxItem Content="{x:Static res:Resource.languages_Russian}" Tag="ru-RU" />
+                <ComboBoxItem Content="{x:Static res:Resource.languages_Greek}" Tag="el-GR" />
+            </ComboBox>
+        </StackPanel>
 
         <Button
             Grid.Row="2"
