@@ -49,9 +49,9 @@ public partial class App : Application
         DBHelper.EnsureDatabaseExists();
         UserGuid = GetUserGuid();
 
-        var settingsService = AppHost.Services.GetRequiredService<SettingsService>();
         var settingsRepository = AppHost.Services.GetRequiredService<ISettingsRepository<SettingsModel>>();
-        var settings = settingsRepository.GetSettingAsync();
+        var settingsService = AppHost.Services.GetRequiredService<SettingsService>();
+        var settings = settingsRepository.GetUserSetting();
         settingsService.ApplySettings(settings);
 
         var mainWindow = AppHost.Services.GetRequiredService<MainWindow>();

@@ -23,7 +23,7 @@ internal partial class SettingsViewModel : BaseViewModel
         SettingsService settingsService)
     {
         (_settingsRepository, _logger, _settingsService) = (settingsRepository, logger, settingsService);
-        _userSetting = Task.Run(() => _settingsRepository.GetSettingAsync()).GetAwaiter().GetResult();
+        _userSetting = Task.Run(() => _settingsRepository.GetUserSetting()).GetAwaiter().GetResult();
         UseDarkMode = _userSetting.DarkModeActive;
         SelectedLanguage = _userSetting.Language;
         _settingsService = settingsService;
@@ -46,9 +46,7 @@ internal partial class SettingsViewModel : BaseViewModel
                 return; // No changes to save
 
             if (SelectedLanguage != _userSetting.Language)
-            {
                 MessageBox.Show(Resource.settings_restartApplication);
-            }
 
             _userSetting.Language = SelectedLanguage;
             _userSetting.DarkModeActive = UseDarkMode;

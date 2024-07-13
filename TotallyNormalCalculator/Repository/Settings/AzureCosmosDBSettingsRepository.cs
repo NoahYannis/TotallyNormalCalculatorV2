@@ -30,7 +30,7 @@ internal class AzureCosmosDBSettingsRepository : ISettingsRepository<SettingsMod
             Task.Delay(100);
     }
 
-    public SettingsModel GetSettingAsync() => _userSettings;
+    public SettingsModel GetUserSetting() => _userSettings;
 
     private async Task EnsureUserSettingsExist()
     {
