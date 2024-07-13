@@ -1,5 +1,9 @@
-﻿namespace TotallyNormalCalculator.Repository.Settings;
+﻿using System.Threading.Tasks;
 
-internal interface ISettingsRepository
-{
+namespace TotallyNormalCalculator.Repository.Settings;
+
+internal interface ISettingsRepository<T> where T : class
+{ 
+    T GetSettingAsync();
+    Task UpdateSettingAsync(T settingsModel);
 }

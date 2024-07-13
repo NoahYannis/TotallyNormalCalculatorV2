@@ -10,6 +10,7 @@ using TotallyNormalCalculator.MVVM.ViewModels;
 using TotallyNormalCalculator.MVVM.Views;
 using TotallyNormalCalculator.Repository;
 using TotallyNormalCalculator.Repository.BlobStorage;
+using TotallyNormalCalculator.Repository.Settings;
 
 namespace TotallyNormalCalculator;
 
@@ -38,6 +39,8 @@ public partial class App : Application
              services.AddSingleton<ITotallyNormalCalculatorLogger, TotallyNormalCalculatorLogger>();
              services.AddScoped<IDiaryRepository, DiaryRepositoryDapper>();
              services.AddScoped<IBlobStorageRepository<BlobModel>, AzureBlobStorageRepository>();
+             services.AddScoped<ISettingsRepository<SettingsModel>, AzureCosmosDBSettingsRepository>();
+
          })
          .Build();
     }
