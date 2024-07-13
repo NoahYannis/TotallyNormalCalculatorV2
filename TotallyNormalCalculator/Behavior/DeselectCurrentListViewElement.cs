@@ -32,7 +32,10 @@ public class DeselectCurrentListViewElement : Behavior<UserControl>
 
         var hitTestResult = VisualTreeHelper.HitTest(userControl, e.GetPosition(userControl));
 
-        DependencyObject visualHit = hitTestResult?.VisualHit;
+        if (hitTestResult is null)
+            return; 
+
+        DependencyObject visualHit = hitTestResult.VisualHit;
 
         while (visualHit != null)
         {

@@ -126,4 +126,76 @@
   <data name="settings_restartApplication" xml:space="preserve">
     <value>Επανεκκινήστε την εφαρμογή για να εφαρμόσετε τις αλλαγές!</value>
   </data>
+  <data name="button_delete" xml:space="preserve">
+    <value>Διαγραφή</value>
+  </data>
+  <data name="button_add" xml:space="preserve">
+    <value>Προσθήκη</value>
+  </data>
+  <data name="button_update" xml:space="preserve">
+    <value>Ενημέρωση</value>
+  </data>
+  <data name="button_upload" xml:space="preserve">
+    <value>Μεταφόρτωση</value>
+  </data>
+  <data name="tab_diary" xml:space="preserve">
+    <value>Ημερολόγιο</value>
+  </data>
+  <data name="tab_media" xml:space="preserve">
+    <value>Μέσα</value>
+  </data>
+  <data name="tab_web" xml:space="preserve">
+    <value>Ίντερνετ</value>
+  </data>
+  <data name="tab_settings" xml:space="preserve">
+    <value>Ρυθμίσεις</value>
+  </data>
+  <data name="tab_calculator" xml:space="preserve">
+    <value>Αριθμομηχανή</value>
+  </data>
+  <data name="diary_loadingFiles" xml:space="preserve">
+    <value>Φόρτωση αρχείων...</value>
+  </data>
+  <data name="diary_placeholer_title" xml:space="preserve">
+    <value>Τίτλος</value>
+  </data>
+  <data name="diary_placeholder_message" xml:space="preserve">
+    <value>Μήνυμα</value>
+  </data>
+  <data name="diary_placeholder_date" xml:space="preserve">
+    <value>ημερομηνία</value>
+  </data>
+  <data name="diary_selectFilter" xml:space="preserve">
+    <value>Επιλέξτε φίλτρο</value>
+  </data>
+  <data name="diary_filterby_title" xml:space="preserve">
+    <value>Φιλτράρισμα με βάση τον τίτλο</value>
+  </data>
+  <data name="diary_filterby_message" xml:space="preserve">
+    <value>Φιλτράρισμα κατά: Μήνυμα</value>
+  </data>
+  <data name="diary_filterby_date" xml:space="preserve">
+    <value>Φιλτράρισμα με βάση:</value>
+  </data>
+  <data name="diary_filterby_none" xml:space="preserve">
+    <value>Φιλτράρισμα με βάση:</value>
+  </data>
+  <data name="languages_Spanish" xml:space="preserve">
+    <value>Ισπανικά</value>
+  </data>
+  <data name="languages_English" xml:space="preserve">
+    <value>Αγγλικά</value>
+  </data>
+  <data name="languages_French" xml:space="preserve">
+    <value>Γαλλικά</value>
+  </data>
+  <data name="languages_German" xml:space="preserve">
+    <value>Γερμανικά</value>
+  </data>
+  <data name="languages_Greek" xml:space="preserve">
+    <value>Ελληνικά</value>
+  </data>
+  <data name="languages_Russian" xml:space="preserve">
+    <value>Ρωσικά</value>
+  </data>
 </root>

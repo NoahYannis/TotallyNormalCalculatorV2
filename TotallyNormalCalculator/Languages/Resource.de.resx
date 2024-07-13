@@ -121,9 +121,81 @@
     <value>Sprache wählen</value>
   </data>
   <data name="settings_useDarkMode" xml:space="preserve">
-    <value>Dark mode verwenden</value>
+    <value>Dark Mode verwenden</value>
   </data>
   <data name="settings_restartApplication" xml:space="preserve">
     <value>Bitte starten Sie die App neu, um die Änderungen zu übernehmen!</value>
+  </data>
+  <data name="button_delete" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="button_add" xml:space="preserve">
+    <value>Hinzufügen</value>
+  </data>
+  <data name="button_update" xml:space="preserve">
+    <value>Aktualisieren</value>
+  </data>
+  <data name="button_upload" xml:space="preserve">
+    <value>Hochladen</value>
+  </data>
+  <data name="tab_diary" xml:space="preserve">
+    <value>Tagebuch</value>
+  </data>
+  <data name="tab_media" xml:space="preserve">
+    <value>Medien</value>
+  </data>
+  <data name="tab_web" xml:space="preserve">
+    <value>Web</value>
+  </data>
+  <data name="tab_settings" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="tab_calculator" xml:space="preserve">
+    <value>Rechner</value>
+  </data>
+  <data name="diary_loadingFiles" xml:space="preserve">
+    <value>Lade Dateien</value>
+  </data>
+  <data name="diary_placeholer_title" xml:space="preserve">
+    <value>Titel</value>
+  </data>
+  <data name="diary_placeholder_message" xml:space="preserve">
+    <value>Nachricht</value>
+  </data>
+  <data name="diary_placeholder_date" xml:space="preserve">
+    <value>Datum</value>
+  </data>
+  <data name="diary_selectFilter" xml:space="preserve">
+    <value>Filter auswählen</value>
+  </data>
+  <data name="diary_filterby_title" xml:space="preserve">
+    <value>Filtern nach: Titel</value>
+  </data>
+  <data name="diary_filterby_message" xml:space="preserve">
+    <value>Filtern nach: Nachricht</value>
+  </data>
+  <data name="diary_filterby_date" xml:space="preserve">
+    <value>Filtern nach: Datum</value>
+  </data>
+  <data name="diary_filterby_none" xml:space="preserve">
+    <value>Filtern nach: Nichts</value>
+  </data>
+  <data name="languages_Russian" xml:space="preserve">
+    <value>Russisch</value>
+  </data>
+  <data name="languages_English" xml:space="preserve">
+    <value>Englisch</value>
+  </data>
+  <data name="languages_French" xml:space="preserve">
+    <value>Französisch</value>
+  </data>
+  <data name="languages_German" xml:space="preserve">
+    <value>Deutsch</value>
+  </data>
+  <data name="languages_Greek" xml:space="preserve">
+    <value>Griechisch</value>
+  </data>
+  <data name="languages_Spanish" xml:space="preserve">
+    <value>Spanisch</value>
   </data>
 </root>

@@ -61,6 +61,177 @@ namespace TotallyNormalCalculator.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        public static string button_add {
+            get {
+                return ResourceManager.GetString("button_add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string button_delete {
+            get {
+                return ResourceManager.GetString("button_delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update.
+        /// </summary>
+        public static string button_update {
+            get {
+                return ResourceManager.GetString("button_update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload.
+        /// </summary>
+        public static string button_upload {
+            get {
+                return ResourceManager.GetString("button_upload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter by: Data.
+        /// </summary>
+        public static string diary_filterby_date {
+            get {
+                return ResourceManager.GetString("diary_filterby_date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter by: Message.
+        /// </summary>
+        public static string diary_filterby_message {
+            get {
+                return ResourceManager.GetString("diary_filterby_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter by: None.
+        /// </summary>
+        public static string diary_filterby_none {
+            get {
+                return ResourceManager.GetString("diary_filterby_none", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter by: Title.
+        /// </summary>
+        public static string diary_filterby_title {
+            get {
+                return ResourceManager.GetString("diary_filterby_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading files....
+        /// </summary>
+        public static string diary_loadingFiles {
+            get {
+                return ResourceManager.GetString("diary_loadingFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        public static string diary_placeholder_date {
+            get {
+                return ResourceManager.GetString("diary_placeholder_date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Message.
+        /// </summary>
+        public static string diary_placeholder_message {
+            get {
+                return ResourceManager.GetString("diary_placeholder_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title.
+        /// </summary>
+        public static string diary_placeholer_title {
+            get {
+                return ResourceManager.GetString("diary_placeholer_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select filter.
+        /// </summary>
+        public static string diary_selectFilter {
+            get {
+                return ResourceManager.GetString("diary_selectFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to English.
+        /// </summary>
+        public static string languages_English {
+            get {
+                return ResourceManager.GetString("languages_English", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to French.
+        /// </summary>
+        public static string languages_French {
+            get {
+                return ResourceManager.GetString("languages_French", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to German.
+        /// </summary>
+        public static string languages_German {
+            get {
+                return ResourceManager.GetString("languages_German", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Greek.
+        /// </summary>
+        public static string languages_Greek {
+            get {
+                return ResourceManager.GetString("languages_Greek", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Russian.
+        /// </summary>
+        public static string languages_Russian {
+            get {
+                return ResourceManager.GetString("languages_Russian", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spanish.
+        /// </summary>
+        public static string languages_Spanish {
+            get {
+                return ResourceManager.GetString("languages_Spanish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select language.
         /// </summary>
         public static string settings_chooseLanguage {
@@ -70,7 +241,7 @@ namespace TotallyNormalCalculator.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please restart the app to apply the changes.
+        ///   Looks up a localized string similar to Please restart the app to apply the changes!.
         /// </summary>
         public static string settings_restartApplication {
             get {
@@ -84,6 +255,51 @@ namespace TotallyNormalCalculator.Languages {
         public static string settings_useDarkMode {
             get {
                 return ResourceManager.GetString("settings_useDarkMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Calculator.
+        /// </summary>
+        public static string tab_calculator {
+            get {
+                return ResourceManager.GetString("tab_calculator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Diary.
+        /// </summary>
+        public static string tab_diary {
+            get {
+                return ResourceManager.GetString("tab_diary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Media.
+        /// </summary>
+        public static string tab_media {
+            get {
+                return ResourceManager.GetString("tab_media", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string tab_settings {
+            get {
+                return ResourceManager.GetString("tab_settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Web.
+        /// </summary>
+        public static string tab_web {
+            get {
+                return ResourceManager.GetString("tab_web", resourceCulture);
             }
         }
     }

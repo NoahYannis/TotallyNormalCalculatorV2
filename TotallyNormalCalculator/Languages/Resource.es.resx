@@ -106,4 +106,76 @@
   <data name="settings_restartApplication" xml:space="preserve">
     <value>¡Reinicia la aplicación para aplicar los cambios!</value>
   </data>
+  <data name="button_delete" xml:space="preserve">
+    <value>Borrar</value>
+  </data>
+  <data name="button_add" xml:space="preserve">
+    <value>Añadir</value>
+  </data>
+  <data name="button_update" xml:space="preserve">
+    <value>Actualizar</value>
+  </data>
+  <data name="button_upload" xml:space="preserve">
+    <value>Subir</value>
+  </data>
+  <data name="tab_diary" xml:space="preserve">
+    <value>Diario</value>
+  </data>
+  <data name="tab_media" xml:space="preserve">
+    <value>Media</value>
+  </data>
+  <data name="tab_web" xml:space="preserve">
+    <value>Web</value>
+  </data>
+  <data name="tab_settings" xml:space="preserve">
+    <value>Configuración</value>
+  </data>
+  <data name="tab_calculator" xml:space="preserve">
+    <value>Calculadora</value>
+  </data>
+  <data name="diary_loadingFiles" xml:space="preserve">
+    <value>Cargando archivos</value>
+  </data>
+  <data name="diary_placeholer_title" xml:space="preserve">
+    <value>Título</value>
+  </data>
+  <data name="diary_placeholder_message" xml:space="preserve">
+    <value>Mensaje</value>
+  </data>
+  <data name="diary_placeholder_date" xml:space="preserve">
+    <value>Fecha</value>
+  </data>
+  <data name="diary_selectFilter" xml:space="preserve">
+    <value>Seleccionar filtro</value>
+  </data>
+  <data name="diary_filterby_title" xml:space="preserve">
+    <value>Filtrar por: Título</value>
+  </data>
+  <data name="diary_filterby_message" xml:space="preserve">
+    <value>Filtrar por: Mensaje</value>
+  </data>
+  <data name="diary_filterby_date" xml:space="preserve">
+    <value>Filtrar por: Fecha</value>
+  </data>
+  <data name="diary_filterby_none" xml:space="preserve">
+    <value>Filtrar por: Nada</value>
+  </data>
+  <data name="languages_English" xml:space="preserve">
+    <value>Inglés</value>
+  </data>
+  <data name="languages_French" xml:space="preserve">
+    <value>Francés</value>
+  </data>
+  <data name="languages_German" xml:space="preserve">
+    <value>Alemán</value>
+  </data>
+  <data name="languages_Greek" xml:space="preserve">
+    <value>Griego</value>
+  </data>
+  <data name="languages_Russian" xml:space="preserve">
+    <value>Ruso</value>
+  </data>
+  <data name="languages_Spanish" xml:space="preserve">
+    <value>Español</value>
+  </data>
 </root>

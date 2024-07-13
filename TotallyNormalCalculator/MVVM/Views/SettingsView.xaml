@@ -30,19 +30,19 @@
             SelectedValue="{Binding SelectedLanguage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             SelectedValuePath="Tag"
             Text="{x:Static res:Resource.settings_chooseLanguage}">
-            <ComboBoxItem Content="English" Tag="en-US" />
-            <ComboBoxItem Content="German" Tag="de-DE" />
-            <ComboBoxItem Content="French" Tag="fr-FR" />
-            <ComboBoxItem Content="Spanish" Tag="es-ES" />
-            <ComboBoxItem Content="Russian" Tag="ru-RU" />
-            <ComboBoxItem Content="Greek" Tag="el-GR" />
+            <ComboBoxItem Content="{x:Static res:Resource.languages_English}" Tag="en-US" />
+            <ComboBoxItem Content="{x:Static res:Resource.languages_German}" Tag="de-DE" />
+            <ComboBoxItem Content="{x:Static res:Resource.languages_French}" Tag="fr-FR" />
+            <ComboBoxItem Content="{x:Static res:Resource.languages_Spanish}" Tag="es-ES" />
+            <ComboBoxItem Content="{x:Static res:Resource.languages_Russian}" Tag="ru-RU" />
+            <ComboBoxItem Content="{x:Static res:Resource.languages_Greek}" Tag="el-GR" />
         </ComboBox>
 
         <Button
             Grid.Row="2"
             behavior:IconColor.IconColor="Blue"
             Command="{Binding SaveSettingsCommand}"
-            Content="Save"
+            Content="{x:Static res:Resource.button_update}"
             Style="{StaticResource BaseButton}"
             Tag="Save" />
     </Grid>

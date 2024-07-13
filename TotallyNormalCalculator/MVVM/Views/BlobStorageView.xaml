@@ -9,6 +9,7 @@
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:local="clr-namespace:TotallyNormalCalculator.MVVM.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:res="clr-namespace:TotallyNormalCalculator.Languages"
     xmlns:viewmodel="clr-namespace:TotallyNormalCalculator.MVVM.ViewModels"
     d:DataContext="{x:Type viewmodel:BlobStorageViewModel}"
     d:DesignHeight="450"
@@ -58,7 +59,7 @@
             <TextBlock
                 Margin="0,10,0,0"
                 Foreground="{DynamicResource ForegroundColor}"
-                Text="Loading files..." />
+                Text="{x:Static res:Resource.diary_loadingFiles}" />
         </StackPanel>
 
 
@@ -71,7 +72,7 @@
             <Button
                 behavior:IconColor.IconColor="Blue"
                 Command="{Binding UploadBlobCommand}"
-                Content="Upload"
+                Content="{x:Static res:Resource.button_upload}"
                 IsEnabled="{Binding Blobs, Converter={StaticResource BlobsToEnabled}, ConverterParameter=Blobs}"
                 Style="{StaticResource BaseButton}"
                 Tag="CloudUpload" />
@@ -79,7 +80,7 @@
             <Button
                 behavior:IconColor.IconColor="Red"
                 Command="{Binding DeleteBlobCommand}"
-                Content="Delete"
+                Content="{x:Static res:Resource.button_delete}"
                 IsEnabled="{Binding SelectedElement, Converter={StaticResource SelectionToEnabledConverter}, ConverterParameter=SelectedElement}"
                 Style="{StaticResource BaseButton}"
                 Tag="Trash" />

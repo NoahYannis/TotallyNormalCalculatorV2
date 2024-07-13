@@ -9,6 +9,7 @@
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:model="clr-namespace:TotallyNormalCalculator.MVVM.Model"
+    xmlns:res="clr-namespace:TotallyNormalCalculator.Languages"
     xmlns:viewmodels="clr-namespace:TotallyNormalCalculator.MVVM.ViewModels"
     d:DesignHeight="600"
     d:DesignWidth="650"
@@ -42,8 +43,6 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-
-
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -56,11 +55,11 @@
                 IsReadOnly="True"
                 SelectedValue="{Binding PropertyFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 SelectedValuePath="Tag"
-                Text="Select filter...">
-                <ComboBoxItem Content="Filter: Title" Tag="Title" />
-                <ComboBoxItem Content="Filter: Message" Tag="Message" />
-                <ComboBoxItem Content="Filter: Date" Tag="Date" />
-                <ComboBoxItem Content="Filter: None" Tag="None" />
+                Text="{x:Static res:Resource.diary_selectFilter}">
+                <ComboBoxItem Content="{x:Static res:Resource.diary_filterby_title}" Tag="Title" />
+                <ComboBoxItem Content="{x:Static res:Resource.diary_filterby_message}" Tag="Message" />
+                <ComboBoxItem Content="{x:Static res:Resource.diary_filterby_date}" Tag="Date" />
+                <ComboBoxItem Content="{x:Static res:Resource.diary_filterby_none}" Tag="None" />
             </ComboBox>
             <!--  IsEditable and IsReadonly both have to be true to display the placeholder text  -->
 
@@ -105,7 +104,7 @@
                     VerticalAlignment="Bottom"
                     Foreground="DarkGray"
                     IsHitTestVisible="False"
-                    Text="Title"
+                    Text="{x:Static res:Resource.diary_placeholer_title}"
                     Visibility="{Binding Text, ElementName=txtTitle, Converter={StaticResource StringToVisibility}}" />
 
                 <TextBox
@@ -126,7 +125,7 @@
                     Foreground="DarkGray"
                     IsHitTestVisible="False"
                     RenderTransformOrigin="0.732,0.569"
-                    Text="Date"
+                    Text="{x:Static res:Resource.diary_placeholder_date}"
                     Visibility="{Binding Text, ElementName=txtDate, Converter={StaticResource StringToVisibility}}" />
             </Grid>
 
@@ -146,7 +145,7 @@
                 VerticalAlignment="Top"
                 Foreground="DarkGray"
                 IsHitTestVisible="False"
-                Text="Message"
+                Text="{x:Static res:Resource.diary_placeholder_message}"
                 Visibility="{Binding Text, ElementName=txtMessage, Converter={StaticResource StringToVisibility}}" />
 
 
@@ -159,7 +158,7 @@
                 <Button
                     behavior:IconColor.IconColor="Red"
                     Command="{Binding DeleteEntryCommand}"
-                    Content="Delete"
+                    Content="{x:Static res:Resource.button_delete}"
                     IsEnabled="{Binding SelectedElement, Converter={StaticResource SelectionToEnabled}, ConverterParameter=SelectedElement}"
                     Tag="Trash" />
 
@@ -167,13 +166,13 @@
                 <Button
                     behavior:IconColor.IconColor="Green"
                     Command="{Binding AddEntryCommand}"
-                    Content="Add"
+                    Content="{x:Static res:Resource.button_add}"
                     Tag="Add" />
 
                 <Button
                     behavior:IconColor.IconColor="Blue"
                     Command="{Binding UpdateEntryCommand}"
-                    Content="Update"
+                    Content="{x:Static res:Resource.button_update}"
                     Tag="Save" />
 
             </StackPanel>
