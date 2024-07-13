@@ -25,6 +25,9 @@ internal class AzureCosmosDBSettingsRepository : ISettingsRepository<SettingsMod
         _cosmosClient = new CosmosClient(_connectionString);
         _cosmosContainer = _cosmosClient.GetContainer(_cosmosDBName, _cosmosContainerName);
         Task.Run(() => EnsureUserSettingsExist().GetAwaiter().GetResult());
+
+        while(_userSettings == null)
+            Task.Delay(100);
     }
 
     public SettingsModel GetSettingAsync() => _userSettings;

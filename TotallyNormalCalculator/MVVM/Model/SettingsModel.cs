@@ -6,7 +6,7 @@ namespace TotallyNormalCalculator.MVVM.Model;
 internal class SettingsModel : IModel
 {
     [JsonProperty("id")]
-    public Guid Id { get; set; }
+    public Guid Id { get; init; }
 
     [JsonProperty("darkmodeactive")]
     public bool DarkModeActive { get; set; }
