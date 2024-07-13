@@ -14,7 +14,7 @@ internal partial class SettingsViewModel : BaseViewModel
 {
     private readonly ISettingsRepository<SettingsModel> _settingsRepository;
     private readonly ITotallyNormalCalculatorLogger _logger;
-    private readonly SettingsModel _userSetting;
+    private readonly SettingsModel _userSettings;
     private readonly SettingsService _settingsService;
 
     public SettingsViewModel
@@ -23,10 +23,9 @@ internal partial class SettingsViewModel : BaseViewModel
         SettingsService settingsService)
     {
         (_settingsRepository, _logger, _settingsService) = (settingsRepository, logger, settingsService);
-        _userSetting = Task.Run(() => _settingsRepository.GetUserSetting()).GetAwaiter().GetResult();
-        UseDarkMode = _userSetting.DarkModeActive;
-        SelectedLanguage = _userSetting.Language;
-        _settingsService = settingsService;
+        _userSettings = _settingsRepository.GetUserSettings();
+        UseDarkMode = _userSettings.DarkModeActive;
+        SelectedLanguage = _userSettings.Language;
     }
 
 
@@ -42,17 +41,17 @@ internal partial class SettingsViewModel : BaseViewModel
     {
         try
         {
-            if (UseDarkMode == _userSetting.DarkModeActive && SelectedLanguage == _userSetting.Language)
+            if (UseDarkMode == _userSettings.DarkModeActive && SelectedLanguage == _userSettings.Language)
                 return; // No changes to save
 
-            if (SelectedLanguage != _userSetting.Language)
+            if (SelectedLanguage != _userSettings.Language)
                 MessageBox.Show(Resource.settings_restartApplication);
 
-            _userSetting.Language = SelectedLanguage;
-            _userSetting.DarkModeActive = UseDarkMode;
+            _userSettings.Language = SelectedLanguage;
+            _userSettings.DarkModeActive = UseDarkMode;
 
-            await _settingsRepository.UpdateSettingAsync(_userSetting);
-            _settingsService.ApplySettings(_userSetting);
+            await _settingsRepository.UpdateSettingsAsync(_userSettings);
+            _settingsService.ApplySettings(_userSettings);
         }
         catch (Exception exc)
         {

@@ -51,7 +51,7 @@ public partial class App : Application
 
         var settingsRepository = AppHost.Services.GetRequiredService<ISettingsRepository<SettingsModel>>();
         var settingsService = AppHost.Services.GetRequiredService<SettingsService>();
-        var settings = settingsRepository.GetUserSetting();
+        var settings = settingsRepository.GetUserSettings();
         settingsService.ApplySettings(settings);
 
         var mainWindow = AppHost.Services.GetRequiredService<MainWindow>();
