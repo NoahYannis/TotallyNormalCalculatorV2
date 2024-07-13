@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:TotallyNormalCalculator.MVVM.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:res="clr-namespace:TotallyNormalCalculator.Languages"
     xmlns:vm="clr-namespace:TotallyNormalCalculator.MVVM.ViewModels"
     d:DataContext="{x:Type vm:SettingsViewModel}"
     d:DesignHeight="450"
@@ -20,7 +21,7 @@
         </Grid.RowDefinitions>
         <CheckBox
             HorizontalAlignment="Center"
-            Content="Use dark mode"
+            Content="{x:Static res:Resource.settings_useDarkMode}"
             IsChecked="{Binding UseDarkMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         <ComboBox
             Grid.Row="1"
@@ -28,7 +29,7 @@
             IsReadOnly="True"
             SelectedValue="{Binding SelectedLanguage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             SelectedValuePath="Tag"
-            Text="Select language">
+            Text="{x:Static res:Resource.settings_chooseLanguage}">
             <ComboBoxItem Content="English" Tag="en-US" />
             <ComboBoxItem Content="German" Tag="de-DE" />
             <ComboBoxItem Content="French" Tag="fr-FR" />

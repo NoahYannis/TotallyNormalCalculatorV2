@@ -40,7 +40,7 @@ public partial class App : Application
              services.AddScoped<IDiaryRepository, DiaryRepositoryDapper>();
              services.AddScoped<IBlobStorageRepository<BlobModel>, AzureBlobStorageRepository>();
              services.AddScoped<ISettingsRepository<SettingsModel>, AzureCosmosDBSettingsRepository>();
-
+             services.AddSingleton<SettingsService>();
          })
          .Build();
     }
@@ -48,6 +48,11 @@ public partial class App : Application
     {
         DBHelper.EnsureDatabaseExists();
         UserGuid = GetUserGuid();
+
+        var settingsService = AppHost.Services.GetRequiredService<SettingsService>();
+        var settingsRepository = AppHost.Services.GetRequiredService<ISettingsRepository<SettingsModel>>();
+        var settings = settingsRepository.GetSettingAsync();
+        settingsService.ApplySettings(settings);
 
         var mainWindow = AppHost.Services.GetRequiredService<MainWindow>();
         mainWindow.Show();
