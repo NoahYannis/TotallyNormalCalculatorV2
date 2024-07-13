@@ -15,6 +15,7 @@
                 <ResourceDictionary x:Name="Buttons" Source="./Themes/Buttons.xaml" />
                 <ResourceDictionary x:Name="WindowControlButtons" Source="./Themes/WindowControlButtons.xaml" />
                 <ResourceDictionary x:Name="ActivityRadioButton" Source="./Themes/ActivityRadioButton.xaml" />
+                <ResourceDictionary x:Name="ToggleButtonSlider" Source="./Themes/ToggleButtonSlider.xaml" />
                 <ResourceDictionary x:Name="BlobFile" Source="./Themes/Blobs.xaml" />
             </ResourceDictionary.MergedDictionaries>
 

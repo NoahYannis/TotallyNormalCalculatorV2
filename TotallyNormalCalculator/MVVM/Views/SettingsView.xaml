@@ -19,12 +19,29 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <CheckBox
+
+        <StackPanel
+            Margin="0,50,0,20"
             HorizontalAlignment="Center"
-            Content="{x:Static res:Resource.settings_useDarkMode}"
-            IsChecked="{Binding UseDarkMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            VerticalAlignment="Center"
+            Orientation="Horizontal">
+            <Label
+                Margin="0,0,5,0"
+                VerticalAlignment="Center"
+                Content="{x:Static res:Resource.settings_useDarkMode}"
+                Foreground="{DynamicResource ForegroundColor}" />
+            <CheckBox
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Foreground="{DynamicResource ForegroundColor}"
+                IsChecked="{Binding UseDarkMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Style="{StaticResource ToggleButtonSlider}" />
+        </StackPanel>
+
         <ComboBox
             Grid.Row="1"
+            Margin="0,0,0,20"
+            HorizontalAlignment="Center"
             IsEditable="True"
             IsReadOnly="True"
             SelectedValue="{Binding SelectedLanguage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -40,6 +57,7 @@
 
         <Button
             Grid.Row="2"
+            HorizontalAlignment="Center"
             behavior:IconColor.IconColor="Blue"
             Command="{Binding SaveSettingsCommand}"
             Content="{x:Static res:Resource.button_update}"
