@@ -5,6 +5,7 @@ using System;
 
 namespace TotallyNormalCalculator.MVVM.Model;
 
+
 public class DiaryEntryModel : ObservableObject, IModel
 {
     [JsonProperty("id")]
