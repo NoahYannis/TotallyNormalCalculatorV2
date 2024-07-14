@@ -162,9 +162,9 @@ namespace TotallyNormalCalculator.Languages {
         /// <summary>
         ///   Looks up a localized string similar to Title.
         /// </summary>
-        public static string diary_placeholer_title {
+        public static string diary_placeholder_title {
             get {
-                return ResourceManager.GetString("diary_placeholer_title", resourceCulture);
+                return ResourceManager.GetString("diary_placeholder_title", resourceCulture);
             }
         }
         

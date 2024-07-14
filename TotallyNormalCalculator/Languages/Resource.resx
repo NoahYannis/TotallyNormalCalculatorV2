@@ -156,7 +156,7 @@
   <data name="diary_loadingFiles" xml:space="preserve">
     <value>Loading files...</value>
   </data>
-  <data name="diary_placeholer_title" xml:space="preserve">
+  <data name="diary_placeholder_title" xml:space="preserve">
     <value>Title</value>
   </data>
   <data name="diary_placeholder_message" xml:space="preserve">

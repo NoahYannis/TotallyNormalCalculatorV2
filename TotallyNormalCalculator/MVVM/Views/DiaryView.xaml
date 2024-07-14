@@ -104,7 +104,7 @@
                     VerticalAlignment="Bottom"
                     Foreground="DarkGray"
                     IsHitTestVisible="False"
-                    Text="{x:Static res:Resource.diary_placeholer_title}"
+                    Text="{x:Static res:Resource.diary_placeholder_title}"
                     Visibility="{Binding Text, ElementName=txtTitle, Converter={StaticResource StringToVisibility}}" />
 
                 <TextBox
