@@ -29,7 +29,7 @@ internal class DiaryRepositoryDapper(ITotallyNormalCalculatorLogger logger) : ID
         }
     }
 
-    public async Task DeleteDiaryEntry(int id)
+    public async Task DeleteDiaryEntry(Guid id)
     {
         using (IDbConnection connection = new SqlConnection(DBHelper.GetConnectionString("DiaryEntryDB")))
         {

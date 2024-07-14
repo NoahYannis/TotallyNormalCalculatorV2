@@ -8,7 +8,7 @@ using TotallyNormalCalculator.MVVM.Model;
 
 namespace TotallyNormalCalculator.Repository.Settings;
 
-internal class AzureCosmosDBSettingsRepository : ISettingsRepository<SettingsModel>
+internal class CosmosSettingsRepository : ISettingsRepository<SettingsModel>
 {
     private readonly string _connectionString;
     private readonly string _cosmosDBName = "Users";
@@ -18,7 +18,7 @@ internal class AzureCosmosDBSettingsRepository : ISettingsRepository<SettingsMod
     private SettingsModel _userSettings;
     private readonly ITotallyNormalCalculatorLogger _logger;
 
-    public AzureCosmosDBSettingsRepository(ITotallyNormalCalculatorLogger logger)
+    public CosmosSettingsRepository(ITotallyNormalCalculatorLogger logger)
     {
         _logger = logger;
         _connectionString = ConfigurationManager.ConnectionStrings["AzureCosmosDB"].ConnectionString;

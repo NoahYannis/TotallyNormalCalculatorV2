@@ -93,6 +93,7 @@ public partial class DiaryViewModel : BaseViewModel
     {
         var entry = new DiaryEntryModel
         {
+            Id = Guid.NewGuid(),
             Title = Title,
             Message = Message,
             Date = Date
