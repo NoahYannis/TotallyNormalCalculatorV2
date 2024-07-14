@@ -12,7 +12,7 @@ internal class CosmosSettingsRepository : ISettingsRepository<SettingsModel>
 {
     private readonly string _connectionString;
     private readonly string _cosmosDBName = "Users";
-    private readonly string _cosmosContainerName = "Users";
+    private readonly string _cosmosContainerName = "Settings";
     private readonly CosmosClient _cosmosClient;
     private readonly Container _cosmosContainer;
     private SettingsModel _userSettings;
