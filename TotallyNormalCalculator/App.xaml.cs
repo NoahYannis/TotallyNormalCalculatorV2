@@ -74,10 +74,7 @@ public partial class App : Application
         var logger = AppHost.Services.GetRequiredService<ITotallyNormalCalculatorLogger>();
         try
         {
-            foreach (DictionaryEntry pair in Environment.GetEnvironmentVariables())
-            {
-                logger.LogMessageToTempFile($"{pair.Key}: {pair.Value}");
-            }
+     
 
             //var cosmosCofig = ConfigurationManager.ConnectionStrings["AzureCosmosDB"];
             //var storageConfig = ConfigurationManager.ConnectionStrings["AzureBlobStorage"];

@@ -57,9 +57,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Resource Include=".env">
+	  <Content Include=".env">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </Resource>
+	  </Content>
 	  <Resource Include="Themes\Fonts\LibreBaskerville.ttf" />
 	</ItemGroup>
 
