@@ -48,6 +48,47 @@ jobs:
           echo "AZURE_BLOB_STORAGE_CONNECTION_STRING=${{ env.AZURE_BLOB_STORAGE_CONNECTION_STRING }}"
           echo "AZURE_COSMOS_DB_CONNECTION_STRING=${{ env.AZURE_COSMOS_DB_CONNECTION_STRING }}"
 
+
+      - name: Ensure app.config exists
+        run: |
+          if (-Not (Test-Path "TotallyNormalCalculator/App.config")) {
+            # Erstelle die app.config, falls sie nicht existiert
+            $configContent = @"
+            <configuration>
+              <connectionStrings>
+                <add name="BlobStorageConnectionString" connectionString=""/>
+                <add name="CosmosDbConnectionString" connectionString=""/>
+              </connectionStrings>
+            </configuration>
+            "@
+            $configContent | Out-File -FilePath "TotallyNormalCalculator/App.config" -Encoding UTF8
+          }
+
+      - name: Inject Connection Strings into app.config
+        run: |
+          [xml]$config = Get-Content "TotallyNormalCalculator/App.config"
+          $blobStorageConnectionStringNode = $config.configuration.connectionStrings.add | Where-Object { $_.name -eq "BlobStorageConnectionString" }
+          if ($blobStorageConnectionStringNode) {
+            $blobStorageConnectionStringNode.connectionString = "${{ secrets.AZURE_BLOB_STORAGE_CONNECTION_STRING }}"
+          } else {
+            $addBlobStorage = $config.CreateElement("add")
+            $addBlobStorage.SetAttribute("name", "BlobStorageConnectionString")
+            $addBlobStorage.SetAttribute("connectionString", "${{ secrets.AZURE_BLOB_STORAGE_CONNECTION_STRING }}")
+            $config.configuration.connectionStrings.AppendChild($addBlobStorage) | Out-Null
+          }
+
+          $cosmosDbConnectionStringNode = $config.configuration.connectionStrings.add | Where-Object { $_.name -eq "CosmosDbConnectionString" }
+          if ($cosmosDbConnectionStringNode) {
+            $cosmosDbConnectionStringNode.connectionString = "${{ secrets.AZURE_COSMOS_DB_CONNECTION_STRING }}"
+          } else {
+            $addCosmosDb = $config.CreateElement("add")
+            $addCosmosDb.SetAttribute("name", "CosmosDbConnectionString")
+            $addCosmosDb.SetAttribute("connectionString", "${{ secrets.AZURE_COSMOS_DB_CONNECTION_STRING }}")
+            $config.configuration.connectionStrings.AppendChild($addCosmosDb) | Out-Null
+          }
+
+          $config.Save("TotallyNormalCalculator/App.config")
+
       - name: Build
         run: dotnet build -c Release -p:PublishSingleFile=true
 
