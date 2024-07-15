@@ -10,10 +10,11 @@ public static class DotEnv
 {
     public static void Load(string filePath)
     {
-        if (!File.Exists("TotallyNormalCalculator/.env"))
-            return;
+        if (!File.Exists(filePath))
+            throw new FileNotFoundException($"The .env file at path '{filePath}' does not exist.");
 
-        foreach (var line in File.ReadAllLines("TotallyNormalCalculator/.env"))
+
+        foreach (var line in File.ReadAllLines(filePath))
         {
             var keyIndex = line.IndexOf("=");
             var s = line.IndexOf("#");

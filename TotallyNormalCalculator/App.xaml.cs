@@ -15,6 +15,7 @@ using TotallyNormalCalculator.Repository.Settings;
 using TotallyNormalCalculator.Helper;
 using Microsoft.Extensions.Configuration;
 using System.Reflection;
+using System.Collections;
 
 namespace TotallyNormalCalculator;
 
@@ -35,7 +36,16 @@ public partial class App : Application
               {
                   DotEnv.Load(dotenv);
               }
+              else
+              {
+                  throw new FileNotFoundException(dotenv + " not found");
+              }
               config.AddEnvironmentVariables();
+              
+              foreach (var pair in Environment.GetEnvironmentVariables())
+              {
+              
+              }
          }).ConfigureServices((context, services) =>
          {
              services.AddSingleton<BaseViewModel>();
@@ -64,6 +74,11 @@ public partial class App : Application
         var logger = AppHost.Services.GetRequiredService<ITotallyNormalCalculatorLogger>();
         try
         {
+            foreach (DictionaryEntry pair in Environment.GetEnvironmentVariables())
+            {
+                logger.LogMessageToTempFile($"{pair.Key}: {pair.Value}");
+            }
+
             //var cosmosCofig = ConfigurationManager.ConnectionStrings["AzureCosmosDB"];
             //var storageConfig = ConfigurationManager.ConnectionStrings["AzureBlobStorage"];
 
