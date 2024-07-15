@@ -50,21 +50,22 @@ jobs:
 
 
       - name: Ensure app.config exists
+        shell: pwsh
         run: |
           if (-Not (Test-Path "TotallyNormalCalculator/App.config")) {
-            # Erstelle die app.config, falls sie nicht existiert
-            $configContent = @"
-            <configuration>
-              <connectionStrings>
-                <add name="BlobStorageConnectionString" connectionString=""/>
-                <add name="CosmosDbConnectionString" connectionString=""/>
-              </connectionStrings>
-            </configuration>
-            "@
+                $configContent = @"
+              <configuration>
+                <connectionStrings>
+                  <add name="BlobStorageConnectionString" connectionString=""/>
+                  <add name="CosmosDbConnectionString" connectionString=""/>
+                </connectionStrings>
+              </configuration>
+              "@
             $configContent | Out-File -FilePath "TotallyNormalCalculator/App.config" -Encoding UTF8
           }
-
+          
       - name: Inject Connection Strings into app.config
+        shell: pwsh
         run: |
           [xml]$config = Get-Content "TotallyNormalCalculator/App.config"
           $blobStorageConnectionStringNode = $config.configuration.connectionStrings.add | Where-Object { $_.name -eq "BlobStorageConnectionString" }
