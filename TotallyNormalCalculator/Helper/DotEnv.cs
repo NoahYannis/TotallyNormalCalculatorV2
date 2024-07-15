@@ -36,9 +36,5 @@ public static class DotEnv
                 Environment.SetEnvironmentVariable(key, value);
             }
         }
-        else
-        {
-            throw new FileNotFoundException($"The .env file at path '{filePath}' does not exist.");
-        }
     }
 }

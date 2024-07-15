@@ -65,6 +65,16 @@ jobs:
       - name: Publish # Anwendung als einzelne ausführbare Datei veröffentlichen
         run: dotnet publish ${{ env.PROJECT_PATH }} -c Release -r win-x64 -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:UseAppHost=true --self-contained
 
+      - name: Verify .env file in publish directory
+        run: |
+          if (-Not (Test-Path TotallyNormalCalculator/bin/Release/net8.0-windows/win-x64/publish/.env)) {
+            Write-Host ".env file was not copied to the publish directory"
+            exit 1
+          } else {
+            Write-Host ".env file in publish directory contents:"
+            Get-Content TotallyNormalCalculator/bin/Release/net8.0-windows/win-x64/publish/.env
+          }
+
       - name: Create Release
         uses: actions/create-release@v1
         id: create_release

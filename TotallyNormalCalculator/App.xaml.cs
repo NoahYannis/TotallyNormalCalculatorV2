@@ -63,16 +63,16 @@ public partial class App : Application
         var logger = AppHost.Services.GetRequiredService<ITotallyNormalCalculatorLogger>();
         try
         {
-            var root = Directory.GetCurrentDirectory();
-            var dotenv = Path.Combine(root, ".env");
+            var dotenv = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ".env");
 
+            // Verifiziere, ob die .env-Datei existiert
             if (File.Exists(dotenv))
             {
                 DotEnv.Load(dotenv);
             }
             else
             {
-                throw new FileNotFoundException(dotenv + " not found");
+                throw new FileNotFoundException($"{dotenv} not found");
             }
 
             //var cosmosCofig = ConfigurationManager.ConnectionStrings["AzureCosmosDB"];
