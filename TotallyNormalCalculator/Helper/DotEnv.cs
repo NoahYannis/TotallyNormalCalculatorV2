@@ -13,7 +13,7 @@ public static class DotEnv
         if (!File.Exists("TotallyNormalCalculator/.env"))
             return;
 
-        foreach (var line in File.ReadAllLines(filePath))
+        foreach (var line in File.ReadAllLines("TotallyNormalCalculator/.env"))
         {
             var keyIndex = line.IndexOf("=");
             var s = line.IndexOf("#");
