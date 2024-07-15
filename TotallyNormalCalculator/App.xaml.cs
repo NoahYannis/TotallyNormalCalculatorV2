@@ -32,20 +32,9 @@ public partial class App : Application
               var root = Directory.GetCurrentDirectory();
               var dotenv = Path.Combine(root, ".env");
 
-              if (File.Exists(dotenv))
-              {
                   DotEnv.Load(dotenv);
-              }
-              else
-              {
-                  throw new FileNotFoundException(dotenv + " not found");
-              }
               config.AddEnvironmentVariables();
-              
-              foreach (var pair in Environment.GetEnvironmentVariables())
-              {
-              
-              }
+
          }).ConfigureServices((context, services) =>
          {
              services.AddSingleton<BaseViewModel>();
@@ -74,7 +63,17 @@ public partial class App : Application
         var logger = AppHost.Services.GetRequiredService<ITotallyNormalCalculatorLogger>();
         try
         {
-     
+            var root = Directory.GetCurrentDirectory();
+            var dotenv = Path.Combine(root, ".env");
+
+            if (File.Exists(dotenv))
+            {
+                DotEnv.Load(dotenv);
+            }
+            else
+            {
+                throw new FileNotFoundException(dotenv + " not found");
+            }
 
             //var cosmosCofig = ConfigurationManager.ConnectionStrings["AzureCosmosDB"];
             //var storageConfig = ConfigurationManager.ConnectionStrings["AzureBlobStorage"];

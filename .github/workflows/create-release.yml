@@ -52,6 +52,7 @@ jobs:
           Copy-Item .env -Destination "$publishDir/.env"
         # Kopiere die .env-Datei in das Veröffentlichungsverzeichnis
 
+
       - name: Restore dependencies
         run: dotnet restore ${{ env.PROJECT_PATH }}
 
