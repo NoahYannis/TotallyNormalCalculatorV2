@@ -38,6 +38,7 @@ jobs:
           dotnet user-secrets set "AZURE_BLOB_STORAGE_CONNECTION_STRING" "${{ secrets.AZURE_BLOB_STORAGE_CONNECTION_STRING }}" --project ${{ env.PROJECT_PATH }}
           dotnet user-secrets set "AZURE_COSMOS_DB_CONNECTION_STRING" "${{ secrets.AZURE_COSMOS_DB_CONNECTION_STRING }}" --project ${{ env.PROJECT_PATH }}
 
+
       - name: Print Environment Variables
         run: |
           echo "AZURE_BLOB_STORAGE_CONNECTION_STRING=$AZURE_BLOB_STORAGE_CONNECTION_STRING"
