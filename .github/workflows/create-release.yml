@@ -30,8 +30,29 @@ jobs:
           echo "AZURE_BLOB_STORAGE_CONNECTION_STRING=${{ secrets.AZURE_BLOB_STORAGE_CONNECTION_STRING }}" > .env
           echo "AZURE_COSMOS_DB_CONNECTION_STRING=${{ secrets.AZURE_COSMOS_DB_CONNECTION_STRING }}" >> .env
 
+
+      - name: Verify .env file
+        run: |
+          if [ ! -f .env ]; then
+            echo ".env file was not created"
+            exit 1
+          else
+            echo ".env file contents:"
+            cat .env
+          fi
+
       - name: Copy .env file to project
         run: cp .env TotallyNormalCalculator/.env
+
+      - name: Verify .env file in project directory
+        run: |
+          if [ ! -f ${{ env.ENV_PATH }} ]; then
+            echo ".env file was not copied to the project directory"
+            exit 1
+          else
+            echo ".env file in project directory contents:"
+            cat ${{ env.ENV_PATH }}
+          fi
 
       - name: Restore dependencies
         run: dotnet restore ${{ env.PROJECT_PATH }}
