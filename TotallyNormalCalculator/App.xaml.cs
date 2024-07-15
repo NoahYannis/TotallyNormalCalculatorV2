@@ -26,12 +26,18 @@ public partial class App : Application
     public App()
     {
         AppHost = Host.CreateDefaultBuilder()
-         .ConfigureAppConfiguration((context, config) =>
-         {
-             config.AddEnvironmentVariables();
+          .ConfigureAppConfiguration((context, config) =>
+          {
+              var root = Directory.GetCurrentDirectory();
+              var dotenv = Path.Combine(root, ".env");
+
+              if (File.Exists(dotenv))
+              {
+                  DotEnv.Load(dotenv);
+              }
+              config.AddEnvironmentVariables();
          }).ConfigureServices((context, services) =>
          {
-
              services.AddSingleton<BaseViewModel>();
              services.AddSingleton<CalculatorViewModel>();
              services.AddSingleton<DiaryViewModel>();
@@ -58,10 +64,6 @@ public partial class App : Application
         var logger = AppHost.Services.GetRequiredService<ITotallyNormalCalculatorLogger>();
         try
         {
-            var root = Directory.GetCurrentDirectory();
-            var dotenv = Path.Combine(root, ".env");
-            DotEnv.Load(dotenv);
-
             //var cosmosCofig = ConfigurationManager.ConnectionStrings["AzureCosmosDB"];
             //var storageConfig = ConfigurationManager.ConnectionStrings["AzureBlobStorage"];
 
