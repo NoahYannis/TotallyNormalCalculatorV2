@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
 using System.Windows;
@@ -47,16 +48,30 @@ public partial class App : Application
     }
     protected override void OnStartup(StartupEventArgs e)
     {
+            var logger = AppHost.Services.GetRequiredService<ITotallyNormalCalculatorLogger>();
+        try
+        {
+            var cosmosConnection = Environment.GetEnvironmentVariable("AZURE_COSMOS_DB_CONNECTION_STRING");
+            var storageConnection = Environment.GetEnvironmentVariable("AZURE_BLOB_STORAGE_CONNECTION_STRING");
+            logger.LogMessageToTempFile($"Cosmos Connection: {cosmosConnection}");
+            logger.LogMessageToTempFile($"Storage Connection: {storageConnection}");
+
+            UserGuid = GetUserGuid();
+
+            var settingsRepository = AppHost.Services.GetRequiredService<ISettingsRepository<SettingsModel>>();
+            var settingsService = AppHost.Services.GetRequiredService<SettingsService>();
+            var settings = settingsRepository.GetUserSettings();
+            settingsService.ApplySettings(settings);
+
+            var mainWindow = AppHost.Services.GetRequiredService<MainWindow>();
+            mainWindow.Show();
+
+        }
+        catch (Exception ee)
+        {
+            logger.LogMessageToTempFile("Failed to start the application." + ee);
+        }
         //DBHelper.EnsureDatabaseExists();
-        UserGuid = GetUserGuid();
-
-        var settingsRepository = AppHost.Services.GetRequiredService<ISettingsRepository<SettingsModel>>();
-        var settingsService = AppHost.Services.GetRequiredService<SettingsService>();
-        var settings = settingsRepository.GetUserSettings();
-        settingsService.ApplySettings(settings);
-
-        var mainWindow = AppHost.Services.GetRequiredService<MainWindow>();
-        mainWindow.Show();
 
         base.OnStartup(e);
     }
