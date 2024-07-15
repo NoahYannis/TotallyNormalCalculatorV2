@@ -24,6 +24,15 @@ jobs:
           dotnet-version: '8.x'
           include-prerelease: true
 
+
+      - name: Create .env file
+        run: |
+          echo "AZURE_BLOB_STORAGE_CONNECTION_STRING=${{ secrets.AZURE_BLOB_STORAGE_CONNECTION_STRING }}" > .env
+          echo "AZURE_COSMOS_DB_CONNECTION_STRING=${{ secrets.AZURE_COSMOS_DB_CONNECTION_STRING }}" >> .env
+
+      - name: Copy .env file to project
+        run: cp .env TotallyNormalCalculator/.env
+
       - name: Restore dependencies
         run: dotnet restore ${{ env.PROJECT_PATH }}
 
