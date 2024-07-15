@@ -23,7 +23,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove=".env" />
 	  <None Remove="CalculatorIcon.ico" />
 	  <None Remove="Themes\Fonts\LibreBaskerville.ttf" />
 	</ItemGroup>
@@ -57,9 +56,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Resource Include=".env">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </Resource>
 	  <Resource Include="Themes\Fonts\LibreBaskerville.ttf" />
 	</ItemGroup>
 
@@ -134,6 +130,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+   <!--<None Update=".env">
+     <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+   </None>-->
    <None Update="App.config">
      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
    </None>
