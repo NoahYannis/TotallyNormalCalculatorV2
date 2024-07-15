@@ -31,6 +31,10 @@ jobs:
         run: |
           echo "AZURE_BLOB_STORAGE_CONNECTION_STRING=${{ secrets.AZURE_BLOB_STORAGE_CONNECTION_STRING }}" >> $GITHUB_ENV
           echo "AZURE_COSMOS_DB_CONNECTION_STRING=${{ secrets.AZURE_COSMOS_DB_CONNECTION_STRING }}" >> $GITHUB_ENV
+          $env:AZURE_BLOB_STORAGE_CONNECTION_STRING = "${{ secrets.AZURE_BLOB_STORAGE_CONNECTION_STRING }}"
+          $env:AZURE_COSMOS_DB_CONNECTION_STRING = "${{ secrets.AZURE_COSMOS_DB_CONNECTION_STRING }}"
+          dotnet user-secrets set "AZURE_BLOB_STORAGE_CONNECTION_STRING" "${{ secrets.AZURE_BLOB_STORAGE_CONNECTION_STRING }}"
+          dotnet user-secrets set "AZURE_COSMOS_DB_CONNECTION_STRING" "${{ secrets.AZURE_COSMOS_DB_CONNECTION_STRING }}"
 
       - name: Build
         run: dotnet build -c Release -p:PublishSingleFile=true 
