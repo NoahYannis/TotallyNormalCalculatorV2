@@ -27,6 +27,7 @@ public partial class App : Application
         AppHost = Host.CreateDefaultBuilder()
          .ConfigureAppConfiguration((context, config) =>
          {
+             config.AddEnvironmentVariables();
              config.AddUserSecrets<App>();
          })
          .ConfigureServices((context, services) =>
