@@ -23,7 +23,8 @@ internal class CosmosDiaryRepository : IDiaryRepository
     public CosmosDiaryRepository(ITotallyNormalCalculatorLogger logger)
     {
         _logger = logger;
-        _connectionString = ConfigurationManager.ConnectionStrings["AzureCosmosDB"].ConnectionString;
+        _connectionString = Environment.GetEnvironmentVariable("AZURE_COSMOS_DB_CONNECTION_STRING");
+        //_connectionString = ConfigurationManager.ConnectionStrings["AzureCosmosDB"].ConnectionString;
         _cosmosClient = new CosmosClient(_connectionString);
         _cosmosContainer = _cosmosClient.GetContainer(_cosmosDBName, _cosmosContainerName);
         _userDiary = Task.Run(() => GetUserDiaryAsync(App.UserGuid)).GetAwaiter().GetResult();

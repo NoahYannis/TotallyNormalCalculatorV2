@@ -21,7 +21,8 @@ internal class CosmosSettingsRepository : ISettingsRepository<SettingsModel>
     public CosmosSettingsRepository(ITotallyNormalCalculatorLogger logger)
     {
         _logger = logger;
-        _connectionString = ConfigurationManager.ConnectionStrings["AzureCosmosDB"].ConnectionString;
+        //_connectionString = ConfigurationManager.ConnectionStrings["AzureCosmosDB"].ConnectionString;
+        _connectionString = Environment.GetEnvironmentVariable("AZURE_COSMOS_DB_CONNECTION_STRING");
         _cosmosClient = new CosmosClient(_connectionString);
         _cosmosContainer = _cosmosClient.GetContainer(_cosmosDBName, _cosmosContainerName);
         Task.Run(() => EnsureUserSettingsExist().GetAwaiter().GetResult());

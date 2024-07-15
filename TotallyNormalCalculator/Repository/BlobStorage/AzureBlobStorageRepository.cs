@@ -24,7 +24,8 @@ internal class AzureBlobStorageRepository : IBlobStorageRepository<BlobModel>
 
         try
         {
-            string storageConnectionString = ConfigurationManager.ConnectionStrings["AzureBlobStorage"].ConnectionString;
+            //string storageConnectionString = ConfigurationManager.ConnectionStrings["AzureBlobStorage"].ConnectionString;
+            string storageConnectionString = Environment.GetEnvironmentVariable("AZURE_BLOB_STORAGE_CONNECTION_STRING");
             string containerName = App.UserGuid.ToString();
 
             _blobContainerClient = new BlobContainerClient(storageConnectionString, containerName);
