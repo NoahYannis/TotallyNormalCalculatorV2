@@ -1,11 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using System.Configuration;
 using System;
 using System.IO;
 using System.Windows;
-using TotallyNormalCalculator.Core;
 using TotallyNormalCalculator.Logging;
 using TotallyNormalCalculator.MVVM.Model;
 using TotallyNormalCalculator.MVVM.ViewModels;
@@ -14,6 +12,9 @@ using TotallyNormalCalculator.Repository;
 using TotallyNormalCalculator.Repository.BlobStorage;
 using TotallyNormalCalculator.Repository.Diary;
 using TotallyNormalCalculator.Repository.Settings;
+using TotallyNormalCalculator.Helper;
+using Microsoft.Extensions.Configuration;
+using System.Reflection;
 
 namespace TotallyNormalCalculator;
 
@@ -25,8 +26,12 @@ public partial class App : Application
     public App()
     {
         AppHost = Host.CreateDefaultBuilder()
-         .ConfigureServices((context, services) =>
+         .ConfigureAppConfiguration((context, config) =>
          {
+             config.AddEnvironmentVariables();
+         }).ConfigureServices((context, services) =>
+         {
+
              services.AddSingleton<BaseViewModel>();
              services.AddSingleton<CalculatorViewModel>();
              services.AddSingleton<DiaryViewModel>();
@@ -53,8 +58,12 @@ public partial class App : Application
         var logger = AppHost.Services.GetRequiredService<ITotallyNormalCalculatorLogger>();
         try
         {
-            var cosmosCofig = ConfigurationManager.ConnectionStrings["AzureCosmosDB"];
-            var storageConfig = ConfigurationManager.ConnectionStrings["AzureBlobStorage"];
+            var root = Directory.GetCurrentDirectory();
+            var dotenv = Path.Combine(root, ".env");
+            DotEnv.Load(dotenv);
+
+            //var cosmosCofig = ConfigurationManager.ConnectionStrings["AzureCosmosDB"];
+            //var storageConfig = ConfigurationManager.ConnectionStrings["AzureBlobStorage"];
 
             var cosmosConnection = Environment.GetEnvironmentVariable("AZURE_COSMOS_DB_CONNECTION_STRING");
             var storageConnection = Environment.GetEnvironmentVariable("AZURE_BLOB_STORAGE_CONNECTION_STRING");

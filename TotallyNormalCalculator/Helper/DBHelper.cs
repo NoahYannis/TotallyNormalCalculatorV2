@@ -6,7 +6,7 @@ using System.IO;
 using System.Reflection;
 using TotallyNormalCalculator.Logging;
 
-namespace TotallyNormalCalculator.Core;
+namespace TotallyNormalCalculator.Helper;
 
 /// <summary>
 /// A helper class to retrieve the DB connection strings and to create the database if it doesn't exist.

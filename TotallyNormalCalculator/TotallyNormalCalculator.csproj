@@ -23,16 +23,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove=".env" />
 	  <None Remove="CalculatorIcon.ico" />
-	  <None Remove="Database\CreateDiaryEntryDB_Script.sql" />
 	  <None Remove="Themes\Fonts\LibreBaskerville.ttf" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Include="Database\CreateDiaryEntryDB_Script.sql">
+	  <EmbeddedResource Include="Helper\CreateDiaryEntryDB_Script.sql">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </EmbeddedResource>
-	  <EmbeddedResource Include="Database\CreateEntriesTable_Script.sql">
+	  <EmbeddedResource Include="Helper\CreateEntriesTable_Script.sql">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </EmbeddedResource>
 	</ItemGroup>
@@ -57,6 +57,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Content Include=".env">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
 	  <Resource Include="Themes\Fonts\LibreBaskerville.ttf" />
 	</ItemGroup>
 

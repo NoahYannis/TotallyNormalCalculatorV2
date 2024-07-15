@@ -364,3 +364,4 @@ MigrationBackup/
 FodyWeavers.xsd
 TotallyNormalCalculator/Tex.txt
 TotallyNormalCalculator/App.config
+/TotallyNormalCalculator/.env
