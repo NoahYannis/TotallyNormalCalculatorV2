@@ -33,6 +33,11 @@ jobs:
       - name: Execute Unit Tests
         run: dotnet test ${{ env.PROJECT_PATH_TESTS }}
 
+      - name: Set Environment Variables
+        run: |
+          echo "AZURE_BLOB_STORAGE_CONNECTION_STRING=${{ secrets.AZURE_BLOB_STORAGE_CONNECTION_STRING }}" >> $GITHUB_ENV
+          echo "AZURE_COSMOS_DB_CONNECTION_STRING=${{ secrets.AZURE_COSMOS_DB_CONNECTION_STRING }}" >> $GITHUB_ENV
+
       - name: Publish # Anwendung als einzelne ausführbare Datei veröffentlichen
         run: dotnet publish ${{env.PROJECT_PATH }} -r win-x64 -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:UseAppHost=true --self-contained
 
