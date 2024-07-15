@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
@@ -24,6 +25,10 @@ public partial class App : Application
     public App()
     {
         AppHost = Host.CreateDefaultBuilder()
+         .ConfigureAppConfiguration((context, config) =>
+         {
+             config.AddUserSecrets<App>();
+         })
          .ConfigureServices((context, services) =>
          {
              services.AddSingleton<BaseViewModel>();
@@ -48,13 +53,19 @@ public partial class App : Application
     }
     protected override void OnStartup(StartupEventArgs e)
     {
-            var logger = AppHost.Services.GetRequiredService<ITotallyNormalCalculatorLogger>();
+        AppHost.Start();
+        var logger = AppHost.Services.GetRequiredService<ITotallyNormalCalculatorLogger>();
         try
         {
             var cosmosConnection = Environment.GetEnvironmentVariable("AZURE_COSMOS_DB_CONNECTION_STRING");
             var storageConnection = Environment.GetEnvironmentVariable("AZURE_BLOB_STORAGE_CONNECTION_STRING");
             logger.LogMessageToTempFile($"Cosmos Connection: {cosmosConnection}");
             logger.LogMessageToTempFile($"Storage Connection: {storageConnection}");
+            var config = AppHost.Services.GetRequiredService<IConfiguration>();
+            var cosmosConnection2 = config["AZURE_COSMOS_DB_CONNECTION_STRING"];
+            var storageConnection2 = config["AZURE_BLOB_STORAGE_CONNECTION_STRING"];
+            logger.LogMessageToTempFile($"Cosmos Connection 1: {cosmosConnection}");
+            logger.LogMessageToTempFile($"Storage Connection 1: {storageConnection}");
 
             UserGuid = GetUserGuid();
 
