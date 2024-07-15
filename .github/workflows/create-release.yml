@@ -33,26 +33,26 @@ jobs:
 
       - name: Verify .env file
         run: |
-          if [ ! -f .env ]; then
-            echo ".env file was not created"
+          if (!(Test-Path .env)) {
+            Write-Host ".env file was not created"
             exit 1
-          else
-            echo ".env file contents:"
-            cat .env
-          fi
+          } else {
+            Write-Host ".env file contents:"
+            Get-Content .env
+          }
 
       - name: Copy .env file to project
         run: cp .env TotallyNormalCalculator/.env
 
       - name: Verify .env file in project directory
         run: |
-          if [ ! -f ${{ env.ENV_PATH }} ]; then
-            echo ".env file was not copied to the project directory"
+          if (!(Test-Path $env:ENV_PATH)) {
+            Write-Host ".env file was not copied to the project directory"
             exit 1
-          else
-            echo ".env file in project directory contents:"
-            cat ${{ env.ENV_PATH }}
-          fi
+          } else {
+            Write-Host ".env file in project directory contents:"
+            Get-Content $env:ENV_PATH
+          }
 
       - name: Restore dependencies
         run: dotnet restore ${{ env.PROJECT_PATH }}
