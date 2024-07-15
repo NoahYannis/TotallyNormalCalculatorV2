@@ -46,12 +46,12 @@ jobs:
 
       - name: Verify .env file in project directory
         run: |
-          if (!(Test-Path $env:ENV_PATH)) {
+          if (!(Test-Path TotallyNormalCalculator/.env)) {
             Write-Host ".env file was not copied to the project directory"
             exit 1
           } else {
             Write-Host ".env file in project directory contents:"
-            Get-Content $env:ENV_PATH
+            Get-Content TotallyNormalCalculator/.env
           }
 
       - name: Restore dependencies
