@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Configuration;
 using System;
 using System.IO;
 using System.Windows;
@@ -12,10 +11,6 @@ using TotallyNormalCalculator.Repository;
 using TotallyNormalCalculator.Repository.BlobStorage;
 using TotallyNormalCalculator.Repository.Diary;
 using TotallyNormalCalculator.Repository.Settings;
-using TotallyNormalCalculator.Helper;
-using Microsoft.Extensions.Configuration;
-using System.Reflection;
-using System.Collections;
 
 namespace TotallyNormalCalculator;
 
@@ -27,16 +22,7 @@ public partial class App : Application
     public App()
     {
         AppHost = Host.CreateDefaultBuilder()
-          .ConfigureAppConfiguration((context, config) =>
-          {
-              var s = DotNetEnv.Env.TraversePath().Load();
-              //var root = Directory.GetCurrentDirectory();
-              //var dotenv = Path.Combine(root, ".env");
-
-              //    DotEnv.Load(dotenv);
-              config.AddEnvironmentVariables();
-
-         }).ConfigureServices((context, services) =>
+         .ConfigureServices((context, services) =>
          {
              services.AddSingleton<BaseViewModel>();
              services.AddSingleton<CalculatorViewModel>();
@@ -44,6 +30,13 @@ public partial class App : Application
              services.AddSingleton<BlobStorageViewModel>();
              services.AddSingleton<SettingsViewModel>();
              services.AddTransient<SecretViewViewModel>();
+             services.AddHttpClient("tnc-http", client =>
+             {
+                 client.BaseAddress = new Uri("https://totallynormalcalculatorapi.azurewebsites.net");
+                 //client.BaseAddress = new Uri("https://localhost/");
+             });
+
+
 
              services.AddSingleton(serviceProvider => new MainWindow
              {
@@ -62,31 +55,9 @@ public partial class App : Application
     {
         AppHost.Start();
         var logger = AppHost.Services.GetRequiredService<ITotallyNormalCalculatorLogger>();
+
         try
         {
-            var dictionary = DotNetEnv.Env.TraversePath().Load();
-
-            logger.LogMessageToTempFile(".env variables: " + Environment.NewLine);
-            foreach (var key in dictionary)
-            {
-                logger.LogMessageToTempFile(key.Key + " " + key.Value);
-            }
-            // Verifiziere, ob die .env-Datei existiert
-      
-
-            //var cosmosCofig = ConfigurationManager.ConnectionStrings["AzureCosmosDB"];
-            //var storageConfig = ConfigurationManager.ConnectionStrings["AzureBlobStorage"];
-
-            var cosmosConnection = Environment.GetEnvironmentVariable("AZURE_COSMOS_DB_CONNECTION_STRING");
-            var storageConnection = Environment.GetEnvironmentVariable("AZURE_BLOB_STORAGE_CONNECTION_STRING");
-            logger.LogMessageToTempFile($"Cosmos Connection: {cosmosConnection}");
-            logger.LogMessageToTempFile($"Storage Connection: {storageConnection}");
-            //var config = AppHost.Services.GetRequiredService<IConfiguration>();
-            //var cosmosConnection2 = config["AZURE_COSMOS_DB_CONNECTION_STRING"];
-            //var storageConnection2 = config["AZURE_BLOB_STORAGE_CONNECTION_STRING"];
-            //logger.LogMessageToTempFile($"Cosmos Connection 1: {cosmosConnection}");
-            //logger.LogMessageToTempFile($"Storage Connection 1: {storageConnection}");
-
             UserGuid = GetUserGuid();
 
             var settingsRepository = AppHost.Services.GetRequiredService<ISettingsRepository<SettingsModel>>();
@@ -98,10 +69,11 @@ public partial class App : Application
             mainWindow.Show();
 
         }
-        catch (Exception ee)
+        catch (Exception ex)
         {
-            logger.LogMessageToTempFile("Failed to start the application." + ee);
+            logger.LogMessageToTempFile("Failed to start the application." + ex);
         }
+
         //DBHelper.EnsureDatabaseExists();
 
         base.OnStartup(e);

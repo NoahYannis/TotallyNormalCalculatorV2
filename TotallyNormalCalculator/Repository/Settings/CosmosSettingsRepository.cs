@@ -1,64 +1,43 @@
-﻿using Microsoft.Azure.Cosmos;
-using System;
-using System.Net;
+﻿using System;
+using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 using TotallyNormalCalculator.Logging;
-using System.Configuration;
 using TotallyNormalCalculator.MVVM.Model;
 
 namespace TotallyNormalCalculator.Repository.Settings;
 
 internal class CosmosSettingsRepository : ISettingsRepository<SettingsModel>
 {
-    private readonly string _connectionString;
-    private readonly string _cosmosDBName = "Users";
-    private readonly string _cosmosContainerName = "Settings";
-    private readonly CosmosClient _cosmosClient;
-    private readonly Container _cosmosContainer;
-    private SettingsModel _userSettings;
     private readonly ITotallyNormalCalculatorLogger _logger;
+    private readonly SettingsModel _userSettings;
+    private readonly HttpClient _http;
 
-    public CosmosSettingsRepository(ITotallyNormalCalculatorLogger logger)
+    public CosmosSettingsRepository(ITotallyNormalCalculatorLogger logger,
+        IHttpClientFactory httpClientFactory)
     {
         _logger = logger;
-        //_connectionString = ConfigurationManager.ConnectionStrings["AzureCosmosDB"].ConnectionString;
-        _connectionString = Environment.GetEnvironmentVariable("AZURE_COSMOS_DB_CONNECTION_STRING");
-        _cosmosClient = new CosmosClient(_connectionString);
-        _cosmosContainer = _cosmosClient.GetContainer(_cosmosDBName, _cosmosContainerName);
-        Task.Run(() => EnsureUserSettingsExist().GetAwaiter().GetResult());
+        _http = httpClientFactory.CreateClient("tnc-http");
 
-        while(_userSettings == null)
+
+        _userSettings = GetUserSettings().GetAwaiter().GetResult();
+
+        while (_userSettings == null)
             Task.Delay(100);
     }
 
-    public SettingsModel GetUserSettings() => _userSettings;
-
-    private async Task EnsureUserSettingsExist()
+    public async Task<SettingsModel> GetUserSettings()
     {
-        try
-        {
-            _userSettings = await _cosmosContainer.ReadItemAsync<SettingsModel>
-                (App.UserGuid.ToString(), new PartitionKey(App.UserGuid.ToString()));
-        }
-        catch (CosmosException c) when (c.StatusCode == HttpStatusCode.NotFound)
-        {
-            _logger.LogMessageToTempFile($"User settings for user '{App.UserGuid}' not found." +
-                $" Creating new settings.");
-
-            _userSettings = await _cosmosContainer.CreateItemAsync(new SettingsModel()
-            {
-                Id = App.UserGuid,
-                DarkModeActive = false,
-                Language = "en-US"
-            });
-        }
+        var userSettings = await _http.GetFromJsonAsync<SettingsModel>($"/settings/{App.UserGuid}");
+        return userSettings;
     }
+
 
     public async Task UpdateSettingsAsync(SettingsModel settingsModel)
     {
         try
         {
-            await _cosmosContainer.UpsertItemAsync(settingsModel, new PartitionKey(settingsModel.Id.ToString()));
+            await _http.PutAsJsonAsync($"/settings/update", settingsModel);
         }
         catch (Exception e)
         {

@@ -10,7 +10,6 @@ on:
 env:
   PROJECT_PATH: TotallyNormalCalculator/TotallyNormalCalculator.csproj
   PROJECT_PATH_TESTS: TotallyNormalCalculator.UnitTests/TotallyNormalCalculator.UnitTests.csproj
-  PUBLISH_DIR: TotallyNormalCalculator/bin/Release/net8.0-windows/win-x64/publish
 
 
 jobs:
@@ -26,45 +25,6 @@ jobs:
           dotnet-version: '8.x'
           include-prerelease: true
 
-      - name: Ensure Release directory exists
-        run: |
-          if (-Not (Test-Path ${{ env.PUBLISH_DIR }})) {
-            New-Item -ItemType Directory -Path ${{ env.PUBLISH_DIR }}
-          }
-
-
-      - name: Create .env file
-        run: |
-          echo "AZURE_COSMOS_DB_CONNECTION_STRING=${{ secrets.AZURE_COSMOS_DB_CONNECTION_STRING }}" > .env
-          echo "AZURE_BLOB_STORAGE_CONNECTION_STRING=${{ secrets.AZURE_BLOB_STORAGE_CONNECTION_STRING }}" >> .env
-        # Erstelle die .env-Datei im Root-Verzeichnis des Repositories
-
-      - name: Make envfile
-        uses: SpicyPizza/create-envfile@v2.0
-        with:
-         envkey_DEBUG: false
-         envkey_AZURE_COSMOS_DB_CONNECTION_STRING: ${{ secrets.AZURE_COSMOS_DB_CONNECTION_STRING }}
-         envkey_AZURE_BLOB_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_BLOB_STORAGE_CONNECTION_STRING }}
-         fail_on_empty: true
-         directory: ${{ env.PUBLISH_DIR }}
-
-
-      - name: Verify .env file
-        run: |
-          if (-Not (Test-Path .env)) {
-            Write-Host ".env file was not created"
-            exit 1
-          } else {
-            Write-Host ".env file contents:"
-            Get-Content .env
-          }
-        # Überprüfe, ob die .env-Datei erstellt wurde und zeige ihren Inhalt an
-
-      - name: Copy .env file to publish directory
-        run: |
-          Copy-Item .env -Destination "$env:PUBLISH_DIR\.env"
-
-
       - name: Restore dependencies
         run: dotnet restore ${{ env.PROJECT_PATH }}
 
@@ -76,16 +36,6 @@ jobs:
 
       - name: Publish # Anwendung als einzelne ausführbare Datei veröffentlichen
         run: dotnet publish ${{ env.PROJECT_PATH }} -c Release -r win-x64 -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:UseAppHost=true --self-contained
-
-      - name: Verify .env file in publish directory
-        run: |
-          if (-Not (Test-Path "$env:PUBLISH_DIR\.env")) {
-            Write-Host ".env file was not copied to the publish directory"
-            exit 1
-          } else {
-            Write-Host ".env file in publish directory contents:"
-            Get-Content "$env:PUBLISH_DIR\.env"
-          }
 
       - name: Create Release
         uses: actions/create-release@v1
