@@ -10,6 +10,8 @@ on:
 env:
   PROJECT_PATH: TotallyNormalCalculator/TotallyNormalCalculator.csproj
   PROJECT_PATH_TESTS: TotallyNormalCalculator.UnitTests/TotallyNormalCalculator.UnitTests.csproj
+  PUBLISH_DIR: TotallyNormalCalculator/bin/Release/net8.0-windows/win-x64/publish
+
 
 jobs:
   create-release:
@@ -26,7 +28,9 @@ jobs:
 
       - name: Ensure Release directory exists
         run: |
-            mkdir -p TotallyNormalCalculatorV2\TotallyNormalCalculator\TotallyNormalCalculator\bin\Release\net8.0-windows\win-x64
+          if (-Not (Test-Path ${{ env.PUBLISH_DIR }})) {
+            New-Item -ItemType Directory -Path ${{ env.PUBLISH_DIR }}
+          }
 
 
       - name: Create .env file
@@ -58,13 +62,7 @@ jobs:
 
       - name: Copy .env file to publish directory
         run: |
-          # Stelle sicher, dass das Verzeichnis existiert und kopiere die .env-Datei hinein
-          $publishDir = "TotallyNormalCalculator/bin/Release/net8.0-windows/win-x64/publish"
-          if (-Not (Test-Path $publishDir)) {
-            New-Item -ItemType Directory -Path $publishDir
-          }
-          Copy-Item .env -Destination "$publishDir/.env"
-        # Kopiere die .env-Datei in das Veröffentlichungsverzeichnis
+          Copy-Item .env -Destination "$env:PUBLISH_DIR\.env"
 
 
       - name: Restore dependencies
@@ -81,12 +79,12 @@ jobs:
 
       - name: Verify .env file in publish directory
         run: |
-          if (-Not (Test-Path TotallyNormalCalculator/bin/Release/net8.0-windows/win-x64/publish/.env)) {
+          if (-Not (Test-Path "$env:PUBLISH_DIR\.env")) {
             Write-Host ".env file was not copied to the publish directory"
             exit 1
           } else {
             Write-Host ".env file in publish directory contents:"
-            Get-Content TotallyNormalCalculator/bin/Release/net8.0-windows/win-x64/publish/.env
+            Get-Content "$env:PUBLISH_DIR\.env"
           }
 
       - name: Create Release
