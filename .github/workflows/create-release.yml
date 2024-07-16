@@ -31,6 +31,15 @@ jobs:
           echo "AZURE_BLOB_STORAGE_CONNECTION_STRING=${{ secrets.AZURE_BLOB_STORAGE_CONNECTION_STRING }}" >> .env
         # Erstelle die .env-Datei im Root-Verzeichnis des Repositories
 
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+         envkey_DEBUG: false
+         envkey_AZURE_COSMOS_DB_CONNECTION_STRING: ${{ secrets.AZURE_COSMOS_DB_CONNECTION_STRING }}
+         envkey_AZURE_BLOB_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_BLOB_STORAGE_CONNECTION_STRING }}
+         fail_on_empty: true
+
+
       - name: Verify .env file
         run: |
           if (-Not (Test-Path .env)) {
