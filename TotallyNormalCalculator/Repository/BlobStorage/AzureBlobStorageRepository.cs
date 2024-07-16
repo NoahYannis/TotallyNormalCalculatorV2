@@ -48,11 +48,7 @@ internal class AzureBlobStorageRepository : IBlobStorageRepository<BlobModel>
     {
         try
         {
-            var blob = _blobContainerClient.GetBlobClient(blobName);
-            bool deletionSuccessful = await blob.DeleteIfExistsAsync(DeleteSnapshotsOption.IncludeSnapshots);
-
-            string message = deletionSuccessful ? $"{blobName} deleted successfully" : $"{blobName} was not found";
-            _logger.LogMessageToTempFile(message);
+           await _http.DeleteAsync($"/blobs/delete/{blobName}");
         }
         catch (Exception e)
         {
