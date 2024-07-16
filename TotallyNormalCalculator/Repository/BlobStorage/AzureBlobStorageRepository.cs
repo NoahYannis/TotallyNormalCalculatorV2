@@ -3,6 +3,8 @@ using Azure.Storage.Blobs.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 using TotallyNormalCalculator.Logging;
 using TotallyNormalCalculator.MVVM.Model;
@@ -12,28 +14,16 @@ namespace TotallyNormalCalculator.Repository.BlobStorage;
 internal class AzureBlobStorageRepository : IBlobStorageRepository<BlobModel>
 {
 
-    private ITotallyNormalCalculatorLogger _logger;
+    private readonly ITotallyNormalCalculatorLogger _logger;
+    private readonly BlobContainerClient _blobContainerClient;
+    private readonly HttpClient _http;
 
-    private BlobContainerClient _blobContainerClient;
 
-
-    public AzureBlobStorageRepository(ITotallyNormalCalculatorLogger logger)
+    public AzureBlobStorageRepository(ITotallyNormalCalculatorLogger logger,
+        IHttpClientFactory httpClientFactory)
     {
         _logger = logger;
-
-        try
-        {
-            //string storageConnectionString = ConfigurationManager.ConnectionStrings["AzureBlobStorage"].ConnectionString;
-            string storageConnectionString = Environment.GetEnvironmentVariable("AZURE_BLOB_STORAGE_CONNECTION_STRING");
-            string containerName = App.UserGuid.ToString();
-
-            _blobContainerClient = new BlobContainerClient(storageConnectionString, containerName);
-            _blobContainerClient.CreateIfNotExists();
-        }
-        catch (Exception e)
-        {
-            _logger.LogExceptionToTempFile(e);
-        }
+        _http = httpClientFactory.CreateClient("tnc-http");
     }
 
 
@@ -43,17 +33,7 @@ internal class AzureBlobStorageRepository : IBlobStorageRepository<BlobModel>
 
         try
         {
-            await foreach (var blobItem in _blobContainerClient.GetBlobsAsync())
-            {
-                var blobClient = _blobContainerClient.GetBlobClient(blobItem.Name);
-
-                using (var stream = new MemoryStream())
-                {
-                    var blob = await BlobFactory.CreateBlobModel(blobClient, stream);
-
-                    blobs.Add(blob);
-                }
-            }
+            blobs = await _http.GetFromJsonAsync<List<BlobModel>>($"/blobs/{App.UserGuid}");
         }
         catch (Exception e)
         {

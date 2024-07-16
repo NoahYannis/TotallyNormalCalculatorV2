@@ -32,8 +32,8 @@ public partial class App : Application
              services.AddTransient<SecretViewViewModel>();
              services.AddHttpClient("tnc-http", client =>
              {
-                 //client.BaseAddress = new Uri("https://localhost:7203");
-                 client.BaseAddress = new Uri("https://totallynormalcalculatorapi.azurewebsites.net");
+                 client.BaseAddress = new Uri("https://localhost:7203");
+                 //client.BaseAddress = new Uri("https://totallynormalcalculatorapi.azurewebsites.net");
              });
 
 
