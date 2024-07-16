@@ -1,32 +1,27 @@
 ﻿using Microsoft.Azure.Cosmos;
-using System.Configuration;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TotallyNormalCalculator.Logging;
 using TotallyNormalCalculator.MVVM.Model;
 using System;
-using System.Net;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Json;
 
 namespace TotallyNormalCalculator.Repository.Diary;
 
 internal class CosmosDiaryRepository : IDiaryRepository
 {
-    private readonly string _connectionString;
-    private readonly string _cosmosDBName = "Users";
-    private readonly string _cosmosContainerName = "Diary";
-    private readonly CosmosClient _cosmosClient;
-    private readonly Container _cosmosContainer;
     private readonly ITotallyNormalCalculatorLogger _logger;
+    private readonly HttpClient _http;
     private readonly UserDiary _userDiary;
 
-    public CosmosDiaryRepository(ITotallyNormalCalculatorLogger logger)
+    public CosmosDiaryRepository(ITotallyNormalCalculatorLogger logger,
+        IHttpClientFactory httpClientFactory)
     {
         _logger = logger;
-        _connectionString = Environment.GetEnvironmentVariable("AZURE_COSMOS_DB_CONNECTION_STRING");
-        //_connectionString = ConfigurationManager.ConnectionStrings["AzureCosmosDB"].ConnectionString;
-        _cosmosClient = new CosmosClient(_connectionString);
-        _cosmosContainer = _cosmosClient.GetContainer(_cosmosDBName, _cosmosContainerName);
+        _http = httpClientFactory.CreateClient("tnc-http");
+
         _userDiary = Task.Run(() => GetUserDiaryAsync(App.UserGuid)).GetAwaiter().GetResult();
     }
 
@@ -36,12 +31,11 @@ internal class CosmosDiaryRepository : IDiaryRepository
 
         try
         {
-            await _cosmosContainer.ReplaceItemAsync
-                (_userDiary, _userDiary.Id.ToString(), new PartitionKey(_userDiary.Id.ToString()));
+            await _http.PostAsJsonAsync("/diary/add", diaryEntry);
         }
         catch (CosmosException ex)
         {
-            _logger.LogExceptionToTempFile(ex);
+            _logger.LogMessageToTempFile($"An error occurred while connecting to the server: {ex.Message}");
         }
     }
 
@@ -52,12 +46,11 @@ internal class CosmosDiaryRepository : IDiaryRepository
 
         try
         {
-            await _cosmosContainer.ReplaceItemAsync
-                (_userDiary, _userDiary.Id.ToString(), new PartitionKey(_userDiary.Id.ToString()));
+            await _http.DeleteAsync($"/diary/delete/{entryId}");
         }
         catch (CosmosException ex)
         {
-            _logger.LogExceptionToTempFile(ex);
+            _logger.LogMessageToTempFile($"An error occurred while connecting to the server: {ex.Message}");
         }
     }
 
@@ -79,13 +72,11 @@ internal class CosmosDiaryRepository : IDiaryRepository
 
         try
         {
-            ItemResponse<UserDiary> response =
-                await _cosmosContainer.ReplaceItemAsync
-                (_userDiary, _userDiary.Id.ToString(), new PartitionKey(_userDiary.Id.ToString()));
+            await _http.PutAsJsonAsync("/diary/update", diaryEntry);
         }
         catch (CosmosException ex)
         {
-            _logger.LogExceptionToTempFile(ex);
+            _logger.LogMessageToTempFile($"An error occurred while connecting to the server: {ex.Message}");
         }
     }
 
@@ -96,28 +87,16 @@ internal class CosmosDiaryRepository : IDiaryRepository
     /// <returns>The user's diary.</returns>
     private async Task<UserDiary> GetUserDiaryAsync(Guid userGuid)
     {
-        ItemResponse<UserDiary> userDiaryResponse;
-
         try
         {
-            userDiaryResponse = await _cosmosContainer.ReadItemAsync<UserDiary>
-                (userGuid.ToString(), new PartitionKey(userGuid.ToString()));
+            return await _http.GetFromJsonAsync<UserDiary>($"/diary/{userGuid}");
         }
-        catch (CosmosException ex) when (ex.StatusCode == HttpStatusCode.NotFound)
+        catch (Exception e)
         {
-            _logger.LogMessageToTempFile($"User diary for user '{userGuid}' not found. Creating new diary.");
-
-            var newUserDiary = new UserDiary
-            {
-                Id = userGuid,
-                DiaryEntries = [],
-            };
-
-            userDiaryResponse = await _cosmosContainer.CreateItemAsync
-                (newUserDiary, new PartitionKey(newUserDiary.Id.ToString()));
+            _logger.LogMessageToTempFile($"An error occurred while connecting to the server: {e.Message}");
         }
 
-        return userDiaryResponse.Resource;
+        return new UserDiary();
     }
 
 }
