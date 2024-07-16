@@ -29,10 +29,11 @@ public partial class App : Application
         AppHost = Host.CreateDefaultBuilder()
           .ConfigureAppConfiguration((context, config) =>
           {
-              var root = Directory.GetCurrentDirectory();
-              var dotenv = Path.Combine(root, ".env");
+              var s = DotNetEnv.Env.TraversePath().Load();
+              //var root = Directory.GetCurrentDirectory();
+              //var dotenv = Path.Combine(root, ".env");
 
-                  DotEnv.Load(dotenv);
+              //    DotEnv.Load(dotenv);
               config.AddEnvironmentVariables();
 
          }).ConfigureServices((context, services) =>
@@ -63,17 +64,15 @@ public partial class App : Application
         var logger = AppHost.Services.GetRequiredService<ITotallyNormalCalculatorLogger>();
         try
         {
-            var dotenv = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ".env");
+            var dictionary = DotNetEnv.Env.TraversePath().Load();
 
+            logger.LogMessageToTempFile(".env variables: " + Environment.NewLine);
+            foreach (var key in dictionary)
+            {
+                logger.LogMessageToTempFile(key.Key + " " + key.Value);
+            }
             // Verifiziere, ob die .env-Datei existiert
-            if (File.Exists(dotenv))
-            {
-                DotEnv.Load(dotenv);
-            }
-            else
-            {
-                throw new FileNotFoundException($"{dotenv} not found");
-            }
+      
 
             //var cosmosCofig = ConfigurationManager.ConnectionStrings["AzureCosmosDB"];
             //var storageConfig = ConfigurationManager.ConnectionStrings["AzureBlobStorage"];
