@@ -121,7 +121,7 @@ internal partial class BlobStorageViewModel(ITotallyNormalCalculatorLogger _blob
     /// Determine whether the play button should be displayed.
     /// </summary>
     public bool VideoNotPlaying => !VideoIsPlaying;
-    
+
 
     [RelayCommand]
     public void ToggleVideo(object parameter)

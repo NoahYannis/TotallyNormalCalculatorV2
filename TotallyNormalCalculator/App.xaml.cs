@@ -32,8 +32,8 @@ public partial class App : Application
              services.AddTransient<SecretViewViewModel>();
              services.AddHttpClient("tnc-http", client =>
              {
+                 //client.BaseAddress = new Uri("https://localhost:7203");
                  client.BaseAddress = new Uri("https://totallynormalcalculatorapi.azurewebsites.net");
-                 //client.BaseAddress = new Uri("https://localhost/");
              });
 
 
@@ -44,14 +44,14 @@ public partial class App : Application
              });
 
              services.AddSingleton<ITotallyNormalCalculatorLogger, TotallyNormalCalculatorLogger>();
-             services.AddScoped<IDiaryRepository, CosmosDiaryRepository /*DiaryRepositoryDapper*/>();
-             services.AddScoped<IBlobStorageRepository<BlobModel>, AzureBlobStorageRepository>();
-             services.AddScoped<ISettingsRepository<SettingsModel>, CosmosSettingsRepository>();
+             services.AddSingleton<IDiaryRepository, CosmosDiaryRepository /*DiaryRepositoryDapper*/>();
+             services.AddSingleton<IBlobStorageRepository<BlobModel>, AzureBlobStorageRepository>();
+             services.AddSingleton<ISettingsRepository<SettingsModel>, CosmosSettingsRepository>();
              services.AddSingleton<SettingsService>();
          })
          .Build();
     }
-    protected override void OnStartup(StartupEventArgs e)
+    protected override async void OnStartup(StartupEventArgs e)
     {
         AppHost.Start();
         var logger = AppHost.Services.GetRequiredService<ITotallyNormalCalculatorLogger>();
@@ -62,7 +62,7 @@ public partial class App : Application
 
             var settingsRepository = AppHost.Services.GetRequiredService<ISettingsRepository<SettingsModel>>();
             var settingsService = AppHost.Services.GetRequiredService<SettingsService>();
-            var settings = settingsRepository.GetUserSettings();
+            var settings = await settingsRepository.GetUserSettings();
             settingsService.ApplySettings(settings);
 
             var mainWindow = AppHost.Services.GetRequiredService<MainWindow>();

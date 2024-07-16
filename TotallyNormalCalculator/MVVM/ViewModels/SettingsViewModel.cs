@@ -23,7 +23,7 @@ internal partial class SettingsViewModel : BaseViewModel
         SettingsService settingsService)
     {
         (_settingsRepository, _logger, _settingsService) = (settingsRepository, logger, settingsService);
-        _userSettings = _settingsRepository.GetUserSettings();
+        _userSettings = Task.Run(() => _settingsRepository.GetUserSettings()).GetAwaiter().GetResult();
         UseDarkMode = _userSettings.DarkModeActive;
         SelectedLanguage = _userSettings.Language;
     }

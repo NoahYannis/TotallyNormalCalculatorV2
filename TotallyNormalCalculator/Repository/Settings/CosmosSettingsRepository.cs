@@ -10,8 +10,8 @@ namespace TotallyNormalCalculator.Repository.Settings;
 internal class CosmosSettingsRepository : ISettingsRepository<SettingsModel>
 {
     private readonly ITotallyNormalCalculatorLogger _logger;
-    private readonly SettingsModel _userSettings;
     private readonly HttpClient _http;
+    private readonly SettingsModel _userSettings;
 
     public CosmosSettingsRepository(ITotallyNormalCalculatorLogger logger,
         IHttpClientFactory httpClientFactory)
@@ -20,7 +20,7 @@ internal class CosmosSettingsRepository : ISettingsRepository<SettingsModel>
         _http = httpClientFactory.CreateClient("tnc-http");
 
 
-        _userSettings = GetUserSettings().GetAwaiter().GetResult();
+        _userSettings = Task.Run(() => GetUserSettings()).GetAwaiter().GetResult();
 
         while (_userSettings == null)
             Task.Delay(100);

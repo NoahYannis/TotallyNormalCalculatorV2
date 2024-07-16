@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Windows.Data;
-using System.Windows;
 using System.Globalization;
-using System.Windows.Controls;
-using TotallyNormalCalculator.MVVM.Model.Blobs;
 using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using TotallyNormalCalculator.MVVM.Model.Blobs;
 
 namespace TotallyNormalCalculator.Converter;
 internal class VideoButtonVisibilityConverter : IMultiValueConverter

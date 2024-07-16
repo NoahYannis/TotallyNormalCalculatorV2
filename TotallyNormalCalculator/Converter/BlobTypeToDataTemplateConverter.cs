@@ -1,5 +1,5 @@
-﻿using System.Windows.Controls;
-using System.Windows;
+﻿using System.Windows;
+using System.Windows.Controls;
 using TotallyNormalCalculator.MVVM.Model;
 
 namespace TotallyNormalCalculator.Converter;

@@ -1,12 +1,8 @@
 ﻿using Azure.Storage.Blobs;
-using Azure.Storage.Blobs.Models;
-using Azure.Storage.Blobs.Specialized;
 using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Controls;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace TotallyNormalCalculator.MVVM.Model.Blobs;
@@ -56,7 +52,7 @@ public static class BlobFactory
                 return new VideoBlob
                 {
                     Name = blobClient.Name,
-                  
+
                 };
             case BlobType.Text:
             case BlobType.Other:

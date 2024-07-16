@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TotallyNormalCalculator.MVVM.Model.Blobs;
+﻿namespace TotallyNormalCalculator.MVVM.Model.Blobs;
 
 class VideoBlob : BlobModel
 {

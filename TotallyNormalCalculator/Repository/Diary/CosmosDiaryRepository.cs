@@ -1,12 +1,12 @@
 ﻿using Microsoft.Azure.Cosmos;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using TotallyNormalCalculator.Logging;
-using TotallyNormalCalculator.MVVM.Model;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Threading.Tasks;
+using TotallyNormalCalculator.Logging;
+using TotallyNormalCalculator.MVVM.Model;
 
 namespace TotallyNormalCalculator.Repository.Diary;
 
