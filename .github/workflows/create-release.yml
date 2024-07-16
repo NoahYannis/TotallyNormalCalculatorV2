@@ -46,7 +46,7 @@ jobs:
          envkey_AZURE_COSMOS_DB_CONNECTION_STRING: ${{ secrets.AZURE_COSMOS_DB_CONNECTION_STRING }}
          envkey_AZURE_BLOB_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_BLOB_STORAGE_CONNECTION_STRING }}
          fail_on_empty: true
-         directory: TotallyNormalCalculatorV2\TotallyNormalCalculator\TotallyNormalCalculator\bin\Release\net8.0-windows\win-x64
+         directory: ${{ env.PUBLISH_DIR }}
 
 
       - name: Verify .env file
