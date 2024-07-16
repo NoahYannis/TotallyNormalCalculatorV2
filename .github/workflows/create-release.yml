@@ -26,7 +26,7 @@ jobs:
 
       - name: Ensure Release directory exists
         run: |
-            mkdir -p D:\a\TotallyNormalCalculatorV2\TotallyNormalCalculatorV2\TotallyNormalCalculator\bin\Release\net8.0-windows\win-x64
+            mkdir -p TotallyNormalCalculatorV2\TotallyNormalCalculator\TotallyNormalCalculator\bin\Release\net8.0-windows\win-x64
 
 
       - name: Create .env file
@@ -42,7 +42,7 @@ jobs:
          envkey_AZURE_COSMOS_DB_CONNECTION_STRING: ${{ secrets.AZURE_COSMOS_DB_CONNECTION_STRING }}
          envkey_AZURE_BLOB_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_BLOB_STORAGE_CONNECTION_STRING }}
          fail_on_empty: true
-         directory: D:\a\TotallyNormalCalculatorV2\TotallyNormalCalculatorV2\TotallyNormalCalculator\bin\Release\net8.0-windows\win-x64
+         directory: TotallyNormalCalculatorV2\TotallyNormalCalculator\TotallyNormalCalculator\bin\Release\net8.0-windows\win-x64
 
 
       - name: Verify .env file
