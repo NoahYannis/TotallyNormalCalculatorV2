@@ -52,7 +52,7 @@ public partial class App : Application
          })
          .Build();
     }
-    protected override async void OnStartup(StartupEventArgs e)
+    protected override void OnStartup(StartupEventArgs e)
     {
         AppHost.Start();
         var logger = AppHost.Services.GetRequiredService<ITotallyNormalCalculatorLogger>();
@@ -63,7 +63,7 @@ public partial class App : Application
 
             var settingsRepository = AppHost.Services.GetRequiredService<ISettingsRepository<SettingsModel>>();
             var settingsService = AppHost.Services.GetRequiredService<SettingsService>();
-            var settings = await settingsRepository.GetUserSettings();
+            var settings = settingsRepository.GetUserSettings().GetAwaiter().GetResult();
             settingsService.ApplySettings(settings);
 
             var mainWindow = AppHost.Services.GetRequiredService<MainWindow>();

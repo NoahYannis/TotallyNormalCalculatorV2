@@ -48,6 +48,7 @@ public static class BlobFactory
             {
                 Name = blobName,
 
+
             },
             BlobType.Text or BlobType.Other => null,
             _ => null,

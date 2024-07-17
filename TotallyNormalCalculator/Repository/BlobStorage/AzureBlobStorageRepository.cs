@@ -8,15 +8,14 @@ using System.Threading.Tasks;
 using TotallyNormalCalculator.Logging;
 using System.Net.Http.Headers;
 using TotallyNormalCalculator.MVVM.Model;
-using TotallyNormalCalculator.MVVM.Model.Blobs;
 
 namespace TotallyNormalCalculator.Repository.BlobStorage;
 internal class AzureBlobStorageRepository : IBlobStorageRepository<BlobModel>
 {
 
     private readonly ITotallyNormalCalculatorLogger _logger;
-    private readonly BlobContainerClient _blobContainerClient;
     private readonly HttpClient _http;
+    private List<BlobModel> _blobs;
 
 
     public AzureBlobStorageRepository(ITotallyNormalCalculatorLogger logger,
@@ -29,18 +28,19 @@ internal class AzureBlobStorageRepository : IBlobStorageRepository<BlobModel>
 
     public async Task<IEnumerable<BlobModel>> GetAllBlobs()
     {
-        List<BlobModel> blobs = [];
-
+        if (_blobs is not null)
+            return _blobs;
+        
         try
         {
-            blobs = await _http.GetFromJsonAsync<List<BlobModel>>($"/blobs/{App.UserGuid}");
+            _blobs = await _http.GetFromJsonAsync<List<BlobModel>>($"/blobs/{App.UserGuid}");
         }
         catch (Exception e)
         {
             _logger.LogExceptionToTempFile(e);
         }
 
-        return blobs;
+        return _blobs;
     }
 
 
@@ -74,9 +74,8 @@ internal class AzureBlobStorageRepository : IBlobStorageRepository<BlobModel>
 
                     var response = await _http.PostAsync("/blobs/upload", formData);
                     response.EnsureSuccessStatusCode();
-
-                    newBlob = await BlobFactory.CreateBlobModel(blobName, fileStream);
-                    //newBlob = await response.Content.ReadFromJsonAsync<BlobModel>();
+                    newBlob = await response.Content.ReadFromJsonAsync<BlobModel>();
+                    //newBlob = await BlobFactory.CreateBlobModel(blobName, fileStream);
                 }
             }
         }

@@ -11,7 +11,7 @@ internal class CosmosSettingsRepository : ISettingsRepository<SettingsModel>
 {
     private readonly ITotallyNormalCalculatorLogger _logger;
     private readonly HttpClient _http;
-    private readonly SettingsModel _userSettings;
+    private SettingsModel _userSettings;
 
     public CosmosSettingsRepository(ITotallyNormalCalculatorLogger logger,
         IHttpClientFactory httpClientFactory)
@@ -28,7 +28,11 @@ internal class CosmosSettingsRepository : ISettingsRepository<SettingsModel>
      
     public async Task<SettingsModel> GetUserSettings()
     {
-        return _userSettings ?? await _http.GetFromJsonAsync<SettingsModel>($"/settings/{App.UserGuid}");
+        if (_userSettings == null)
+        {
+            _userSettings = await _http.GetFromJsonAsync<SettingsModel>($"/settings/{App.UserGuid}");
+        }
+        return _userSettings;
     }
 
 

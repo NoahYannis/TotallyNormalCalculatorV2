@@ -12,5 +12,5 @@ internal class SettingsModel : IModel
     public bool DarkModeActive { get; set; }
 
     [JsonProperty("language")]
-    public string Language { get; set; } = "en-US";
+    public string Language { get; set; }
 }
