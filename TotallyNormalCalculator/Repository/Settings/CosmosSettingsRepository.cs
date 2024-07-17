@@ -25,11 +25,10 @@ internal class CosmosSettingsRepository : ISettingsRepository<SettingsModel>
         while (_userSettings == null)
             Task.Delay(100);
     }
-
+     
     public async Task<SettingsModel> GetUserSettings()
     {
-        var userSettings = await _http.GetFromJsonAsync<SettingsModel>($"/settings/{App.UserGuid}");
-        return userSettings;
+        return _userSettings ?? await _http.GetFromJsonAsync<SettingsModel>($"/settings/{App.UserGuid}");
     }
 
 
