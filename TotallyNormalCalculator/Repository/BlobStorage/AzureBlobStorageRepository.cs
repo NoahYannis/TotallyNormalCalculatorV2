@@ -1,5 +1,4 @@
 ﻿using Azure.Storage.Blobs;
-using Azure.Storage.Blobs.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,6 +6,7 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using TotallyNormalCalculator.Logging;
+using System.Net.Http.Headers;
 using TotallyNormalCalculator.MVVM.Model;
 using TotallyNormalCalculator.MVVM.Model.Blobs;
 
@@ -63,15 +63,22 @@ internal class AzureBlobStorageRepository : IBlobStorageRepository<BlobModel>
 
         try
         {
-            BlobClient blobClient = _blobContainerClient.GetBlobClient(blobName);
-
-            using (FileStream fileStream = File.Open(filePath, FileMode.Open, FileAccess.ReadWrite))
+            using (FileStream fileStream = File.Open(filePath, FileMode.Open, FileAccess.Read))
             {
-                await blobClient.UploadAsync(fileStream, true);
-                newBlob = await BlobFactory.CreateBlobModel(blobClient, fileStream);
-            }
+                var content = new StreamContent(fileStream);
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
 
-            _logger.LogMessageToTempFile($"{blobName} uploaded successfully");
+                using (var formData = new MultipartFormDataContent())
+                {
+                    formData.Add(content, "file", blobName);
+
+                    var response = await _http.PostAsync("/blobs/upload", formData);
+                    response.EnsureSuccessStatusCode();
+
+                    newBlob = await BlobFactory.CreateBlobModel(blobName, fileStream);
+                    //newBlob = await response.Content.ReadFromJsonAsync<BlobModel>();
+                }
+            }
         }
         catch (Exception e)
         {

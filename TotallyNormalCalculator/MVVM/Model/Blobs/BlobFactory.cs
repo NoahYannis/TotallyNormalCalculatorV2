@@ -9,7 +9,7 @@ namespace TotallyNormalCalculator.MVVM.Model.Blobs;
 
 public static class BlobFactory
 {
-    public static BlobType DetermineBlobType(string fileName)
+    private static BlobType DetermineBlobType(string fileName)
     {
         string extension = Path.GetExtension(fileName).ToLower();
 
@@ -33,53 +33,47 @@ public static class BlobFactory
     /// Creates a concrete blob model based on the blob's file extension.
     /// </summary>
     /// <param name="fileName"></param>
-    /// <param name="blobClient"></param>
+    /// <param name="blobName"></param>
     /// <param name="stream"></param>
     /// <returns></returns>
-    public static async Task<BlobModel> CreateBlobModel(BlobClient blobClient, Stream stream)
+    public static async Task<BlobModel> CreateBlobModel(string blobName, Stream stream)
     {
-        BlobType blobType = DetermineBlobType(blobClient.Name);
+        BlobType blobType = DetermineBlobType(blobName);
 
-        switch (blobType)
+        return blobType switch
         {
-            case BlobType.Image:
-                return await CreateImageBlob(blobClient, stream);
+            BlobType.Image => CreateImageBlob(blobName, stream),
+            BlobType.Video => await CreateVideoBlob(blobName, stream),
+            BlobType.Audio => new VideoBlob
+            {
+                Name = blobName,
 
-            case BlobType.Video:
-                return await CreateVideoBlob(blobClient, stream);
-
-            case BlobType.Audio:
-                return new VideoBlob
-                {
-                    Name = blobClient.Name,
-
-                };
-            case BlobType.Text:
-            case BlobType.Other:
-                return null;
-
-            default:
-                return null;
-        }
+            },
+            BlobType.Text or BlobType.Other => null,
+            _ => null,
+        };
     }
 
-    private static async Task<BlobModel> CreateVideoBlob(BlobClient blobClient, Stream stream)
+    private static async Task<BlobModel> CreateVideoBlob(string blobName, Stream stream)
     {
         // To do: Find a way to do this without saving the file to disk
-        string localFilePath = Path.Combine(Path.GetTempPath(), blobClient.Name);
-        await blobClient.DownloadToAsync(localFilePath);
+        string localFilePath = Path.Combine(Path.GetTempPath(), blobName);
+
+        using (FileStream fileStream = new FileStream(localFilePath, FileMode.OpenOrCreate))
+        {
+            await stream.CopyToAsync(fileStream);
+        }
 
         return new VideoBlob
         {
-            Name = blobClient.Name,
+            Name = blobName,
             VideoUrl = localFilePath
         };
     }
 
 
-    private static async Task<BlobModel> CreateImageBlob(BlobClient blobClient, Stream stream)
+    private static BlobModel CreateImageBlob(string imageName, Stream stream)
     {
-        await blobClient.DownloadToAsync(stream);
         stream.Position = 0;
 
         var bitmapImage = new BitmapImage();
@@ -91,7 +85,7 @@ public static class BlobFactory
 
         return new ImageBlob
         {
-            Name = blobClient.Name,
+            Name = imageName,
             Image = bitmapImage
         };
     }
