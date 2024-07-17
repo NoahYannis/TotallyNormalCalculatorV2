@@ -14,7 +14,7 @@ internal class VideoButtonVisibilityConverter : IMultiValueConverter
         if (values.Any(o => o is null))
             return Visibility.Visible;
 
-        var mediaElementUrl = ((values[0] as MediaElement).DataContext as VideoBlob).VideoUrl;
+        var mediaElementUrl = ((values[0] as MediaElement).DataContext as VideoBlob)?.VideoUrl;
         VideoBlob selectedVideo = values[1] as VideoBlob;
 
         if (mediaElementUrl == selectedVideo?.VideoUrl)

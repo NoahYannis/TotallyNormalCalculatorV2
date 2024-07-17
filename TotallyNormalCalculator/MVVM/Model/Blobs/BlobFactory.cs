@@ -1,5 +1,4 @@
-﻿using Azure.Storage.Blobs;
-using System;
+﻿using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -36,45 +35,51 @@ public static class BlobFactory
     /// <param name="blobName"></param>
     /// <param name="stream"></param>
     /// <returns></returns>
-    public static async Task<BlobModel> CreateBlobModel(string blobName, Stream stream)
+    public static async Task<BlobModel> CreateBlobModel(string blobName, string contentBase64)
     {
         BlobType blobType = DetermineBlobType(blobName);
 
         return blobType switch
         {
-            BlobType.Image => CreateImageBlob(blobName, stream),
-            BlobType.Video => await CreateVideoBlob(blobName, stream),
-            BlobType.Audio => new VideoBlob
-            {
-                Name = blobName,
-
-
-            },
-            BlobType.Text or BlobType.Other => null,
+            BlobType.Image => CreateImageBlob(blobName, contentBase64),
+            BlobType.Video => await CreateVideoBlob(blobName, contentBase64),
             _ => null,
         };
     }
 
-    private static async Task<BlobModel> CreateVideoBlob(string blobName, Stream stream)
+    private static async Task<BlobModel> CreateVideoBlob(string blobName, string contentBase64)
     {
-        // To do: Find a way to do this without saving the file to disk
         string localFilePath = Path.Combine(Path.GetTempPath(), blobName);
-
-        using (FileStream fileStream = new FileStream(localFilePath, FileMode.OpenOrCreate))
         {
-            await stream.CopyToAsync(fileStream);
+            byte[] bytes = Convert.FromBase64String(contentBase64);
+
+            if (FileIsEmpty(localFilePath))
+            {
+                await File.WriteAllBytesAsync(localFilePath, bytes);
+            }
+
+            return new VideoBlob
+            {
+                Name = blobName,
+                VideoUrl = localFilePath
+            };
         }
 
-        return new VideoBlob
-        {
-            Name = blobName,
-            VideoUrl = localFilePath
-        };
     }
 
 
-    private static BlobModel CreateImageBlob(string imageName, Stream stream)
+    /// <summary>
+    /// Creates the blob bitmap from its base64 content.
+    /// </summary>
+    /// <param name="imageName"></param>
+    /// <param name="contentBase64"></param>
+    /// <returns></returns>
+    private static BlobModel CreateImageBlob(string imageName, string contentBase64)
     {
+        byte[] bytes = Convert.FromBase64String(contentBase64);
+
+        using var stream = new MemoryStream(bytes);
+
         stream.Position = 0;
 
         var bitmapImage = new BitmapImage();
@@ -89,6 +94,11 @@ public static class BlobFactory
             Name = imageName,
             Image = bitmapImage
         };
+    }
+
+    private static bool FileIsEmpty(string filePath)
+    {
+        return new FileInfo(filePath).Length == 0;
     }
 }
 

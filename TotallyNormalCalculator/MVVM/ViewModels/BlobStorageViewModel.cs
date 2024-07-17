@@ -33,6 +33,10 @@ internal partial class BlobStorageViewModel(ITotallyNormalCalculatorLogger _blob
         try
         {
             var blobCollection = await _blobStorageRepository.GetAllBlobs();
+
+            blobCollection = await Task.WhenAll(blobCollection
+                .Select(async blob => await BlobFactory.CreateBlobModel(blob.Name, blob.ContentBase64)));
+
             Blobs = new ObservableCollection<BlobModel>(blobCollection);
         }
         catch (Exception exc)
@@ -63,6 +67,7 @@ internal partial class BlobStorageViewModel(ITotallyNormalCalculatorLogger _blob
         try
         {
             var uploadedBlob = await _blobStorageRepository.UploadBlob(filePath, blobName);
+            uploadedBlob = await BlobFactory.CreateBlobModel(uploadedBlob.Name, uploadedBlob.ContentBase64);
             Blobs.Add(uploadedBlob);
         }
         catch (Exception exc)
