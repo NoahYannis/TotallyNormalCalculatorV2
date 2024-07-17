@@ -25,7 +25,7 @@ internal class CosmosSettingsRepository : ISettingsRepository<SettingsModel>
         while (_userSettings == null)
             Task.Delay(100);
     }
-     
+
     public async Task<SettingsModel> GetUserSettings()
     {
         if (_userSettings == null)
