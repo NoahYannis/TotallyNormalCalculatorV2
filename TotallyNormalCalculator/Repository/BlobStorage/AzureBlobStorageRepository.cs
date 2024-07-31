@@ -47,7 +47,7 @@ internal class AzureBlobStorageRepository : IBlobStorageRepository<BlobModel>
     {
         try
         {
-            await _http.DeleteAsync($"/blobs/delete/{blobName}");
+            await _http.DeleteAsync($"/blobs/delete/{blobName}/{App.UserGuid}");
         }
         catch (Exception e)
         {
@@ -71,7 +71,7 @@ internal class AzureBlobStorageRepository : IBlobStorageRepository<BlobModel>
                 {
                     formData.Add(content, "file", blobName);
 
-                    var response = await _http.PostAsync("/blobs/upload", formData);
+                    var response = await _http.PostAsync($"/blobs/upload/{App.UserGuid}", formData);
                     response.EnsureSuccessStatusCode();
                     newBlob = await response.Content.ReadFromJsonAsync<BlobModel>();
                     //newBlob = await BlobFactory.CreateBlobModel(blobName, fileStream);

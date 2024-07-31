@@ -98,6 +98,9 @@ public static class BlobFactory
 
     private static bool FileIsEmpty(string filePath)
     {
+        if(!File.Exists(filePath))
+            return false;
+
         return new FileInfo(filePath).Length == 0;
     }
 }
