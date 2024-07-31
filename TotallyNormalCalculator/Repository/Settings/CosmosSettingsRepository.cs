@@ -40,7 +40,7 @@ internal class CosmosSettingsRepository : ISettingsRepository<SettingsModel>
     {
         try
         {
-            await _http.PutAsJsonAsync($"/settings/update", settingsModel);
+            await _http.PutAsJsonAsync($"/settings/update/{App.UserGuid}", settingsModel);
         }
         catch (Exception e)
         {
