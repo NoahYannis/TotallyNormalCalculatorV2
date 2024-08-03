@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.Win32;
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -19,7 +18,10 @@ namespace TotallyNormalCalculator.MVVM.ViewModels;
 public partial class BlobStorageViewModel
     (ITotallyNormalCalculatorLogger _blobLogger,
     IBlobStorageRepository<BlobModel> _blobStorageRepository,
-    IMessageBoxService _messageService, IBlobFactory _blobFactory) : BaseViewModel
+    IMessageBoxService _messageService,
+    IDialog _openFileDialog,
+    IBlobFactory _blobFactory
+    ) : BaseViewModel
 {
 
     [ObservableProperty]
@@ -53,18 +55,13 @@ public partial class BlobStorageViewModel
     [RelayCommand]
     public async Task UploadBlob()
     {
-        var openFileDialog = new OpenFileDialog()
-        {
-            Title = "Select a file to upload",
-        };
-
-        if (openFileDialog.ShowDialog() != true)
+        if (_openFileDialog.ShowDialog() != true)
         {
             return;
         }
 
-        string filePath = openFileDialog.FileName;
-        string blobName = Path.GetFileName(filePath);
+        string filePath = _openFileDialog.FileName;
+        string blobName = _blobFactory.GetBlobName(filePath);
 
         try
         {

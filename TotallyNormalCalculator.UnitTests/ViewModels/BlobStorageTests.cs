@@ -15,6 +15,7 @@ public class BlobStorageTests
 {
     private Mock<IBlobStorageRepository<BlobModel>> _blobStorageRepository;
     private Mock<IMessageBoxService> _messageService;
+    private Mock<IDialog> _openFileDialog;
     private Mock<IBlobFactory> _blobFactory;
     private BlobStorageViewModel _blobStorageViewModel;
 
@@ -23,12 +24,14 @@ public class BlobStorageTests
     {
         _blobStorageRepository = new Mock<IBlobStorageRepository<BlobModel>>();
         _messageService = new Mock<IMessageBoxService>();
+        _openFileDialog = new Mock<IDialog>();
         _blobFactory = new Mock<IBlobFactory>();
 
         _blobStorageViewModel = new BlobStorageViewModel
-            (null, 
-            _blobStorageRepository.Object, 
+            (null,
+            _blobStorageRepository.Object,
             _messageService.Object,
+            _openFileDialog.Object,
             _blobFactory.Object);
 
         _blobStorageViewModel.Blobs = [];
@@ -61,6 +64,35 @@ public class BlobStorageTests
             .ReturnsAsync(blob);
 
         await _blobStorageViewModel.LoadBlobs();
+        Assert.That(_blobStorageViewModel.Blobs.Count, Is.EqualTo(1));
+    }
+
+
+    [Test]
+    public async Task UploadBlob_ShowDialogFalse_DoesNotUpload()
+    {
+        _openFileDialog.Setup(ofd => ofd.ShowDialog()).Returns(false);
+        await _blobStorageViewModel.UploadBlob();
+        _blobStorageRepository.Verify(r => r.UploadBlob(It.IsAny<string>(), It.IsAny<string>()), Times.Never);
+    }
+
+
+    [Test]
+    public async Task UploadBlob_WithChosenBlob_DoesUpload()
+    {
+        _openFileDialog.Setup(ofd => ofd.ShowDialog()).Returns(true);
+        _openFileDialog.SetupProperty(ofd => ofd.FileName, "dragonquest.png");
+        _blobFactory.Setup(b => b.CreateBlobModel(It.IsAny<string>(), It.IsAny<string>()));
+        _blobFactory.Setup(b => b.GetBlobName(It.IsAny<string>())).Returns("dragonquest.png");
+        _blobStorageRepository.Setup(r => r.UploadBlob(It.IsAny<string>(), It.IsAny<string>())).Returns(Task.FromResult<BlobModel>(new ImageBlob
+        {
+            Name = _openFileDialog.Object.FileName,
+            ContentBase64 = "imageContent",
+        }));
+
+        await _blobStorageViewModel.UploadBlob();
+
+        _blobStorageRepository.Verify(r => r.UploadBlob(It.IsAny<string>(), It.IsAny<string>()), Times.Once);
         Assert.That(_blobStorageViewModel.Blobs.Count, Is.EqualTo(1));
     }
 

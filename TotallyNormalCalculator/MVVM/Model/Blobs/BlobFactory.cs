@@ -27,6 +27,7 @@ public class BlobFactory : IBlobFactory
         return BlobType.Other;
     }
 
+    public string GetBlobName(string path) => Path.GetFileName(path);
 
     /// <summary>
     /// Creates a concrete blob model based on the blob's file extension.
@@ -46,6 +47,7 @@ public class BlobFactory : IBlobFactory
             _ => null,
         };
     }
+
 
     private static async Task<BlobModel> CreateVideoBlob(string blobName, string contentBase64)
     {

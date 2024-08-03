@@ -55,6 +55,7 @@ public partial class App : Application
              services.AddSingleton<ISettingsRepository<SettingsModel>, CosmosSettingsRepository>();
              services.AddSingleton<ISettingsService, SettingsService>();
              services.AddSingleton<IMessageBoxService, MessageBoxService>();
+             services.AddSingleton<IDialog, TncOpenFileDialog>();
              services.AddSingleton<IBlobFactory, BlobFactory>();
          })
          .Build();
