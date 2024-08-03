@@ -16,8 +16,10 @@ using TotallyNormalCalculator.Repository.BlobStorage;
 
 namespace TotallyNormalCalculator.MVVM.ViewModels;
 
-public partial class BlobStorageViewModel(ITotallyNormalCalculatorLogger _blobLogger,
-    IBlobStorageRepository<BlobModel> _blobStorageRepository, IMessageBoxService _messageService) : BaseViewModel
+public partial class BlobStorageViewModel
+    (ITotallyNormalCalculatorLogger _blobLogger,
+    IBlobStorageRepository<BlobModel> _blobStorageRepository,
+    IMessageBoxService _messageService, IBlobFactory _blobFactory) : BaseViewModel
 {
 
     [ObservableProperty]
@@ -36,7 +38,7 @@ public partial class BlobStorageViewModel(ITotallyNormalCalculatorLogger _blobLo
             var blobCollection = await _blobStorageRepository.GetAllBlobs();
 
             blobCollection = await Task.WhenAll(blobCollection
-                .Select(async blob => await BlobFactory.CreateBlobModel(blob.Name, blob.ContentBase64)));
+                .Select(async blob => await _blobFactory.CreateBlobModel(blob.Name, blob.ContentBase64)));
 
             Blobs = new ObservableCollection<BlobModel>(blobCollection);
         }
@@ -67,7 +69,7 @@ public partial class BlobStorageViewModel(ITotallyNormalCalculatorLogger _blobLo
         try
         {
             var uploadedBlob = await _blobStorageRepository.UploadBlob(filePath, blobName);
-            uploadedBlob = await BlobFactory.CreateBlobModel(uploadedBlob.Name, uploadedBlob.ContentBase64);
+            uploadedBlob = await _blobFactory.CreateBlobModel(uploadedBlob.Name, uploadedBlob.ContentBase64);
             Blobs.Add(uploadedBlob);
         }
         catch (Exception exc)

@@ -6,7 +6,7 @@ using System.Windows.Media.Imaging;
 
 namespace TotallyNormalCalculator.MVVM.Model.Blobs;
 
-public static class BlobFactory
+public class BlobFactory : IBlobFactory
 {
     private static BlobType DetermineBlobType(string fileName)
     {
@@ -35,7 +35,7 @@ public static class BlobFactory
     /// <param name="blobName"></param>
     /// <param name="stream"></param>
     /// <returns></returns>
-    public static async Task<BlobModel> CreateBlobModel(string blobName, string contentBase64)
+    public async Task<BlobModel> CreateBlobModel(string blobName, string contentBase64)
     {
         BlobType blobType = DetermineBlobType(blobName);
 
@@ -74,7 +74,7 @@ public static class BlobFactory
     /// <param name="imageName"></param>
     /// <param name="contentBase64"></param>
     /// <returns></returns>
-    private static BlobModel CreateImageBlob(string imageName, string contentBase64)
+    private static ImageBlob CreateImageBlob(string imageName, string contentBase64)
     {
         byte[] bytes = Convert.FromBase64String(contentBase64);
 
@@ -98,7 +98,7 @@ public static class BlobFactory
 
     private static bool FileIsEmpty(string filePath)
     {
-        if(!File.Exists(filePath))
+        if (!File.Exists(filePath))
             return false;
 
         return new FileInfo(filePath).Length == 0;

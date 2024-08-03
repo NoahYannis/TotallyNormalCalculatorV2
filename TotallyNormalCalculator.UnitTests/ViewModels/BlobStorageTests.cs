@@ -15,6 +15,7 @@ public class BlobStorageTests
 {
     private Mock<IBlobStorageRepository<BlobModel>> _blobStorageRepository;
     private Mock<IMessageBoxService> _messageService;
+    private Mock<IBlobFactory> _blobFactory;
     private BlobStorageViewModel _blobStorageViewModel;
 
     [SetUp]
@@ -22,7 +23,14 @@ public class BlobStorageTests
     {
         _blobStorageRepository = new Mock<IBlobStorageRepository<BlobModel>>();
         _messageService = new Mock<IMessageBoxService>();
-        _blobStorageViewModel = new BlobStorageViewModel(null, _blobStorageRepository.Object, _messageService.Object);
+        _blobFactory = new Mock<IBlobFactory>();
+
+        _blobStorageViewModel = new BlobStorageViewModel
+            (null, 
+            _blobStorageRepository.Object, 
+            _messageService.Object,
+            _blobFactory.Object);
+
         _blobStorageViewModel.Blobs = [];
     }
 
@@ -41,15 +49,16 @@ public class BlobStorageTests
     [Test]
     public async Task LoadBlobs_WithImageBlob_LoadsImageBlobCorrectly()
     {
-        _blobStorageRepository.Setup(r => r.GetAllBlobs()).ReturnsAsync(
-        [
-            new ImageBlob
-            {
-                Name = "dragonquest.png",
-                ContentBase64 = "imageContent",
-                BlobType = BlobType.Image,
-            }
-        ]);
+        var blob = new ImageBlob
+        {
+            Name = "dragonquest.png",
+            ContentBase64 = "imageContent",
+        };
+
+        _blobStorageRepository.Setup(r => r.GetAllBlobs()).ReturnsAsync([blob]);
+
+        _blobFactory.Setup(f => f.CreateBlobModel(It.IsAny<string>(), It.IsAny<string>()))
+            .ReturnsAsync(blob);
 
         await _blobStorageViewModel.LoadBlobs();
         Assert.That(_blobStorageViewModel.Blobs.Count, Is.EqualTo(1));

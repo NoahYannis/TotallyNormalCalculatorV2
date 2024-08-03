@@ -5,6 +5,7 @@ using System.IO;
 using System.Windows;
 using TotallyNormalCalculator.Logging;
 using TotallyNormalCalculator.MVVM.Model;
+using TotallyNormalCalculator.MVVM.Model.Blobs;
 using TotallyNormalCalculator.MVVM.ViewModels;
 using TotallyNormalCalculator.MVVM.Views;
 using TotallyNormalCalculator.Repository;
@@ -32,8 +33,8 @@ public partial class App : Application
              services.AddTransient<SecretViewViewModel>();
              services.AddHttpClient("tnc-http", client =>
              {
-                 //client.BaseAddress = new Uri("https://totallynormalcalculatorapi.azurewebsites.net");
-                 client.BaseAddress = new Uri("https://localhost:7203");
+                 client.BaseAddress = new Uri("https://totallynormalcalculatorapi.azurewebsites.net");
+                 //client.BaseAddress = new Uri("https://localhost:7203");
                  client.Timeout = TimeSpan.FromMinutes(1);
 
                 #if DEBUG
@@ -54,6 +55,7 @@ public partial class App : Application
              services.AddSingleton<ISettingsRepository<SettingsModel>, CosmosSettingsRepository>();
              services.AddSingleton<ISettingsService, SettingsService>();
              services.AddSingleton<IMessageBoxService, MessageBoxService>();
+             services.AddSingleton<IBlobFactory, BlobFactory>();
          })
          .Build();
     }
@@ -79,8 +81,6 @@ public partial class App : Application
         {
             logger.LogMessageToTempFile("Failed to start the application." + ex);
         }
-
-        //DBHelper.EnsureDatabaseExists();
 
         base.OnStartup(e);
     }
