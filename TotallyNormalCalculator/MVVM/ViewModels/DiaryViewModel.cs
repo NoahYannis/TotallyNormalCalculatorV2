@@ -30,22 +30,22 @@ public partial class DiaryViewModel : BaseViewModel
     public DiaryEntryModel _selectedElement;
 
     [ObservableProperty]
-    private ObservableCollection<DiaryEntryModel> _filteredEntries = [];
+    public ObservableCollection<DiaryEntryModel> _filteredEntries = [];
 
     [ObservableProperty]
-    private string _propertyFilter;
+    public string _propertyFilter;
 
     [ObservableProperty]
-    private string _message;
+    public string _message;
 
     [ObservableProperty]
-    private string _title;
+    public string _title;
 
     [ObservableProperty]
-    private string _date;
+    public string _date;
 
     [ObservableProperty]
-    private string _filterText;
+    public string _filterText;
 
     private readonly ITotallyNormalCalculatorLogger _diaryLogger;
     private readonly IDiaryRepository _diaryRepository;
@@ -166,7 +166,7 @@ public partial class DiaryViewModel : BaseViewModel
     }
 
     [RelayCommand]
-    private void FilterEntries(string text)
+    public void FilterEntries(string text)
     {
         FilteredEntries = PropertyFilter switch
         {
@@ -210,6 +210,16 @@ public partial class DiaryViewModel : BaseViewModel
         if (value is not null)
         {
             ReadEntry(value);
+        }
+    }
+
+    partial void OnPropertyFilterChanged(string value)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            FilterText = null;
+            FilteredEntries = Entries;
+            return;
         }
     }
 
