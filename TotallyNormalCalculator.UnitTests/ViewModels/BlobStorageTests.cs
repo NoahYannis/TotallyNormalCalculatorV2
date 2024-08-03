@@ -90,4 +90,14 @@ public class BlobStorageTests
         await _blobStorageViewModel.DeleteBlob();
         Assert.That(_blobStorageViewModel.Blobs.Count, Is.EqualTo(1));
     }
+
+
+    [Test]
+    public async Task DeleteBlob_DialogResultNo_DoesNotDelete()
+    {
+        _messageService.Setup(m => m.ShowQuestion(It.IsAny<string>())).Returns(MessageBoxResult.No);
+        _blobStorageViewModel.Blobs.Add(new BlobModel());
+        await _blobStorageViewModel.DeleteBlob();
+        Assert.That(_blobStorageViewModel.Blobs.Count, Is.EqualTo(1));
+    }
 }
