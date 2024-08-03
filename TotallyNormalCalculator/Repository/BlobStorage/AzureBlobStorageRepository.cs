@@ -13,7 +13,7 @@ internal class AzureBlobStorageRepository : IBlobStorageRepository<BlobModel>
 {
 
     private readonly ITotallyNormalCalculatorLogger _logger;
-    private readonly HttpClient _http;
+    private HttpClient _http;
     private List<BlobModel> _blobs;
 
 
@@ -32,11 +32,16 @@ internal class AzureBlobStorageRepository : IBlobStorageRepository<BlobModel>
 
         try
         {
+            _http.Timeout = TimeSpan.FromMinutes(5);
             _blobs = await _http.GetFromJsonAsync<List<BlobModel>>($"/blobs/{App.UserGuid}");
         }
         catch (Exception e)
         {
             _logger.LogExceptionToTempFile(e);
+        }
+        finally    
+        {
+            _http.Timeout = TimeSpan.FromMinutes(1);
         }
 
         return _blobs;

@@ -2,7 +2,6 @@
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Threading.Tasks;
-using System.Windows;
 using TotallyNormalCalculator.Languages;
 using TotallyNormalCalculator.Logging;
 using TotallyNormalCalculator.MVVM.Model;

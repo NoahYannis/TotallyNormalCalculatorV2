@@ -157,7 +157,7 @@ public partial class DiaryViewModel : BaseViewModel
             return;
         }
 
-        var delete = _messageBox.Show("Do you want to permanently delete this entry?");
+        var delete = _messageBox.ShowQuestion("Do you want to permanently delete this entry?");
 
         if (delete is MessageBoxResult.Yes)
         {
