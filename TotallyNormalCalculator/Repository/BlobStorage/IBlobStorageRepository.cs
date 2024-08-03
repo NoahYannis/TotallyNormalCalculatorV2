@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace TotallyNormalCalculator.Repository.BlobStorage;
 
-interface IBlobStorageRepository<T> where T : class
+public interface IBlobStorageRepository<T> where T : class
 {
     Task<IEnumerable<T>> GetAllBlobs();
     Task DeleteBlob(string blobName);

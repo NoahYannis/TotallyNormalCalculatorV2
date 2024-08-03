@@ -15,8 +15,9 @@ using TotallyNormalCalculator.MVVM.Model.Blobs;
 using TotallyNormalCalculator.Repository.BlobStorage;
 
 namespace TotallyNormalCalculator.MVVM.ViewModels;
-internal partial class BlobStorageViewModel(ITotallyNormalCalculatorLogger _blobLogger,
-    IBlobStorageRepository<BlobModel> _blobStorageRepository) : BaseViewModel
+
+public partial class BlobStorageViewModel(ITotallyNormalCalculatorLogger _blobLogger,
+    IBlobStorageRepository<BlobModel> _blobStorageRepository, IMessageBoxService _messageService) : BaseViewModel
 {
 
     [ObservableProperty]
@@ -42,8 +43,7 @@ internal partial class BlobStorageViewModel(ITotallyNormalCalculatorLogger _blob
         catch (Exception exc)
         {
             _blobLogger.LogExceptionToTempFile(exc);
-            MessageBox.Show("An error occurred while loading the files.", "TotallyNormalCalculator",
-                MessageBoxButton.OK, MessageBoxImage.Error);
+            _messageService.Show("An error occurred while loading the files.");
         }
     }
 
@@ -82,20 +82,17 @@ internal partial class BlobStorageViewModel(ITotallyNormalCalculatorLogger _blob
     {
         if (!Blobs.Any())
         {
-            MessageBox.Show("There are no files to delete.", "TotallyNormalCalculator",
-                MessageBoxButton.OK, MessageBoxImage.Information);
+            _messageService.Show("There are no files to delete.");
             return;
         }
 
         if (SelectedElement is null)
         {
-            MessageBox.Show("Please select a file to delete.", "TotallyNormalCalculator",
-                MessageBoxButton.OK, MessageBoxImage.Information);
+            _messageService.Show("Please select a file to delete.");
             return;
         }
 
-        var delete = MessageBox.Show("Do you want to permanently delete this file?", "TotallyNormalCalculator",
-            MessageBoxButton.YesNo, MessageBoxImage.Question);
+        var delete = _messageService.ShowQuestion("Do you want to permanently delete this file?");
 
         if (delete is MessageBoxResult.Yes)
         {
