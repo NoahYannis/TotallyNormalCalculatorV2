@@ -2,7 +2,7 @@
 
 namespace TotallyNormalCalculator.MVVM.Model.Blobs;
 
-class ImageBlob : BlobModel
+public class ImageBlob : BlobModel
 {
     public BitmapImage Image { get; set; }
 

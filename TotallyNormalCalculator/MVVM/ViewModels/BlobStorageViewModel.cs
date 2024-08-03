@@ -21,11 +21,11 @@ public partial class BlobStorageViewModel(ITotallyNormalCalculatorLogger _blobLo
 {
 
     [ObservableProperty]
-    private ObservableCollection<BlobModel> _blobs;
+    public ObservableCollection<BlobModel> _blobs;
 
 
     [ObservableProperty]
-    private BlobModel _selectedElement;
+    public BlobModel _selectedElement;
 
 
     [RelayCommand]
