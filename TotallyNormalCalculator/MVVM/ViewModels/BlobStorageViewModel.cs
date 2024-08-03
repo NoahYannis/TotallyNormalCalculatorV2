@@ -94,17 +94,19 @@ public partial class BlobStorageViewModel(ITotallyNormalCalculatorLogger _blobLo
 
         var delete = _messageService.ShowQuestion("Do you want to permanently delete this file?");
 
-        if (delete is MessageBoxResult.Yes)
+        if (delete is MessageBoxResult.No)
         {
-            try
-            {
-                await _blobStorageRepository.DeleteBlob(SelectedElement.Name);
-                Blobs.Remove(SelectedElement);
-            }
-            catch (Exception exc)
-            {
-                _blobLogger.LogExceptionToTempFile(exc);
-            }
+            return;
+        }
+
+        try
+        {
+            await _blobStorageRepository.DeleteBlob(SelectedElement.Name);
+            Blobs.Remove(SelectedElement);
+        }
+        catch (Exception exc)
+        {
+            _blobLogger.LogExceptionToTempFile(exc);
         }
     }
 
