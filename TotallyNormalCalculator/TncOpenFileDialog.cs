@@ -3,7 +3,7 @@
 namespace TotallyNormalCalculator;
 public class TncOpenFileDialog : IDialog
 {
-    private readonly OpenFileDialog _openFileDialog;
+    private readonly OpenFileDialog _openFileDialog = new();
 
     public string FileName
     {
