@@ -1,6 +1,8 @@
-﻿namespace TotallyNormalCalculator;
+﻿using System.Windows;
+
+namespace TotallyNormalCalculator;
 
 public interface IMessageBoxService
 {
-    void Show(string message);
+    MessageBoxResult Show(string message);
 }

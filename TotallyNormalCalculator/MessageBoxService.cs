@@ -3,8 +3,8 @@
 namespace TotallyNormalCalculator;
 public class MessageBoxService : IMessageBoxService
 {
-    public void Show(string message)
+    public MessageBoxResult Show(string message)
     {
-        MessageBox.Show(message);
+        return MessageBox.Show(message);
     }
 }

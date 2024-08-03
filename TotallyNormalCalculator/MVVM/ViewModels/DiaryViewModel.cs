@@ -49,11 +49,12 @@ public partial class DiaryViewModel : BaseViewModel
 
     private readonly ITotallyNormalCalculatorLogger _diaryLogger;
     private readonly IDiaryRepository _diaryRepository;
+    private readonly IMessageBoxService _messageBox;
 
 
-    public DiaryViewModel(ITotallyNormalCalculatorLogger logger, IDiaryRepository diaryRepository)
+    public DiaryViewModel(ITotallyNormalCalculatorLogger logger, IDiaryRepository diaryRepository, IMessageBoxService messageBox)
     {
-        (_diaryLogger, _diaryRepository) = (logger, diaryRepository);
+        (_diaryLogger, _diaryRepository, _messageBox) = (logger, diaryRepository, messageBox);
         Entries = Task.Run(() => this.GetAllEntries()).GetAwaiter().GetResult();
     }
 
@@ -125,15 +126,13 @@ public partial class DiaryViewModel : BaseViewModel
     {
         if (!Entries.Any())
         {
-            MessageBox.Show("There are no entries to read. You should create one!",
-                "TotallyNormalCalculator", MessageBoxButton.YesNo, MessageBoxImage.Information);
+            _messageBox.Show("There are no entries to read. You should create one!");
             return;
         }
 
         if (diaryEntry is null)
         {
-            MessageBox.Show("Please select an entry to read.", "TotallyNormalCalculator",
-                MessageBoxButton.OK, MessageBoxImage.Information);
+            _messageBox.Show("Please select an entry to read.");
             return;
         }
 
@@ -148,20 +147,17 @@ public partial class DiaryViewModel : BaseViewModel
     {
         if (!Entries.Any())
         {
-            MessageBox.Show("There are no entries to delete.", "TotallyNormalCalculator",
-                MessageBoxButton.OK, MessageBoxImage.Information);
+            _messageBox.Show("There are no entries to delete.");
             return;
         }
 
         if (SelectedElement is null)
         {
-            MessageBox.Show("Please select an entry to delete.", "TotallyNormalCalculator",
-                MessageBoxButton.OK, MessageBoxImage.Information);
+            _messageBox.Show("Please select an entry to delete.");
             return;
         }
 
-        var delete = MessageBox.Show("Do you want to permanently delete this entry?", "TotallyNormalCalculator",
-            MessageBoxButton.YesNo, MessageBoxImage.Question);
+        var delete = _messageBox.Show("Do you want to permanently delete this entry?");
 
         if (delete is MessageBoxResult.Yes)
         {

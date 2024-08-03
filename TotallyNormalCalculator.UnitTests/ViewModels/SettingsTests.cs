@@ -1,7 +1,6 @@
 ﻿using Moq;
 using NUnit.Framework;
 using System.Threading.Tasks;
-using TotallyNormalCalculator.Logging;
 using TotallyNormalCalculator.MVVM.Model;
 using TotallyNormalCalculator.MVVM.ViewModels;
 using TotallyNormalCalculator.Repository.Settings;
@@ -32,7 +31,6 @@ public class SettingsTests
 
         _settingsRepository.Setup(r => r.GetUserSettings()).ReturnsAsync(userSettings);
         _settingsRepository.Setup(r => r.UpdateSettingsAsync(It.IsAny<SettingsModel>())).Returns(Task.CompletedTask);
-        _messageService.Setup(Setup => Setup.Show(It.IsAny<string>()));
     }
 
     [Test]
