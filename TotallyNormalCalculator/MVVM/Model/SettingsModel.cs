@@ -3,7 +3,7 @@ using System;
 
 namespace TotallyNormalCalculator.MVVM.Model;
 
-internal class SettingsModel : IModel
+public class SettingsModel : IModel
 {
     [JsonProperty("id")]
     public Guid Id { get; init; }

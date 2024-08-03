@@ -7,7 +7,7 @@ using TotallyNormalCalculator.MVVM.Model;
 
 namespace TotallyNormalCalculator.Repository.Settings;
 
-internal class CosmosSettingsRepository : ISettingsRepository<SettingsModel>
+public class CosmosSettingsRepository : ISettingsRepository<SettingsModel>
 {
     private readonly ITotallyNormalCalculatorLogger _logger;
     private readonly HttpClient _http;
@@ -18,7 +18,6 @@ internal class CosmosSettingsRepository : ISettingsRepository<SettingsModel>
     {
         _logger = logger;
         _http = httpClientFactory.CreateClient("tnc-http");
-
 
         _userSettings = Task.Run(() => GetUserSettings()).GetAwaiter().GetResult();
 
@@ -34,7 +33,6 @@ internal class CosmosSettingsRepository : ISettingsRepository<SettingsModel>
         }
         return _userSettings;
     }
-
 
     public async Task UpdateSettingsAsync(SettingsModel settingsModel)
     {

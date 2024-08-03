@@ -9,7 +9,7 @@ namespace TotallyNormalCalculator;
 /// <summary>
 /// Responsible for applying the user settings to the application.
 /// </summary>
-internal class SettingsService
+internal class SettingsService : ISettingsService
 {
     public void ApplySettings(SettingsModel settings)
     {

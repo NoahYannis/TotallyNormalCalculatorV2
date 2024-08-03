@@ -52,7 +52,8 @@ public partial class App : Application
              services.AddSingleton<IDiaryRepository, CosmosDiaryRepository /*DiaryRepositoryDapper*/>();
              services.AddSingleton<IBlobStorageRepository<BlobModel>, AzureBlobStorageRepository>();
              services.AddSingleton<ISettingsRepository<SettingsModel>, CosmosSettingsRepository>();
-             services.AddSingleton<SettingsService>();
+             services.AddSingleton<ISettingsService, SettingsService>();
+             services.AddSingleton<IMessageBoxService, MessageBoxService>();
          })
          .Build();
     }
@@ -66,7 +67,7 @@ public partial class App : Application
             UserGuid = GetUserGuid();
 
             var settingsRepository = AppHost.Services.GetRequiredService<ISettingsRepository<SettingsModel>>();
-            var settingsService = AppHost.Services.GetRequiredService<SettingsService>();
+            var settingsService = AppHost.Services.GetRequiredService<ISettingsService>();
             var settings = settingsRepository.GetUserSettings().GetAwaiter().GetResult();
             settingsService.ApplySettings(settings);
 

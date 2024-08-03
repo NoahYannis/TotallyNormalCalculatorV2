@@ -10,19 +10,21 @@ using TotallyNormalCalculator.Repository.Settings;
 
 namespace TotallyNormalCalculator.MVVM.ViewModels;
 
-internal partial class SettingsViewModel : BaseViewModel
+public partial class SettingsViewModel : BaseViewModel
 {
     private readonly ISettingsRepository<SettingsModel> _settingsRepository;
     private readonly ITotallyNormalCalculatorLogger _logger;
+    private readonly ISettingsService _settingsService;
+    private readonly IMessageBoxService _messageService;
     private readonly SettingsModel _userSettings;
-    private readonly SettingsService _settingsService;
 
     public SettingsViewModel
         (ISettingsRepository<SettingsModel> settingsRepository,
         ITotallyNormalCalculatorLogger logger,
-        SettingsService settingsService)
+        ISettingsService settingsService,
+        IMessageBoxService messageService)
     {
-        (_settingsRepository, _logger, _settingsService) = (settingsRepository, logger, settingsService);
+        (_settingsRepository, _logger, _settingsService, _messageService) = (settingsRepository, logger, settingsService, messageService);
         _userSettings = Task.Run(() => _settingsRepository.GetUserSettings()).GetAwaiter().GetResult();
         UseDarkMode = _userSettings.DarkModeActive;
         SelectedLanguage = _userSettings.Language;
@@ -30,14 +32,14 @@ internal partial class SettingsViewModel : BaseViewModel
 
 
     [ObservableProperty]
-    private string _selectedLanguage;
+    public string _selectedLanguage;
 
     [ObservableProperty]
-    private bool _useDarkMode;
+    public bool _useDarkMode;
 
 
     [RelayCommand]
-    private async Task SaveSettings()
+    public async Task SaveSettings()
     {
         try
         {
@@ -45,7 +47,7 @@ internal partial class SettingsViewModel : BaseViewModel
                 return; // No changes to save
 
             if (SelectedLanguage != _userSettings.Language)
-                MessageBox.Show(Resource.settings_restartApplication);
+                _messageService.Show(Resource.settings_restartApplication);
 
             _userSettings.Language = SelectedLanguage;
             _userSettings.DarkModeActive = UseDarkMode;

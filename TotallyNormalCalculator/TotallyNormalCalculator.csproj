@@ -41,13 +41,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Azure.Storage.Blobs" Version="12.20.0" />
+		<PackageReference Include="Azure.Storage.Blobs" Version="12.21.1" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
 		<PackageReference Include="Dapper" Version="2.1.35" />
-		<PackageReference Include="DotNetEnv" Version="3.0.0" />
-		<PackageReference Include="FontAwesome.Sharp" Version="6.3.0" />
+		<PackageReference Include="FontAwesome.Sharp" Version="6.6.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
-		<PackageReference Include="Microsoft.Azure.Cosmos" Version="3.41.0" />
+		<PackageReference Include="Microsoft.Azure.Cosmos" Version="3.42.0" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.0" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
 		<PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />

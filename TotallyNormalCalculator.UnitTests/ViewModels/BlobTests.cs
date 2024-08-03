@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TotallyNormalCalculator.UnitTests.API;
+namespace TotallyNormalCalculator.UnitTests.ViewModels;
 internal class BlobTests
 {
 }
