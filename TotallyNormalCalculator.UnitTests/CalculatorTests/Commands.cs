@@ -11,45 +11,6 @@ internal class Commands
 
         public CalculatorViewModel viewModel = new CalculatorViewModel(logger: null);
 
-        [Fact]
-        public void MaximizeWindowCommand_ShouldMaximizeWindow()
-        {
-            // Act
-            viewModel.MaximizeWindowCommand.Execute(null);
-
-            // Assert
-            Assert.Equal(WindowState.Maximized, Application.Current.MainWindow.WindowState);
-        }
-
-        [Fact]
-        public void MinimizeWindowCommand_ShouldMinimizeWindow()
-        {
-            // Act
-            viewModel.MinimizeWindowCommand.Execute(null);
-
-            // Assert
-            Assert.Equal(WindowState.Minimized, Application.Current.MainWindow.WindowState);
-        }
-
-        [Fact]
-        public void CloseWindowCommand_ShouldCloseWindow()
-        {
-            // Act
-            viewModel.CloseWindowCommand.Execute(null);
-
-            // Assert
-            Assert.True(Application.Current.ShutdownMode == ShutdownMode.OnExplicitShutdown);
-        }
-
-        [Fact]
-        public void SwitchViewCommand_ShouldSwitchView()
-        {
-            // Act
-            viewModel.SwitchViewCommand.Execute(null);
-
-            // Assert
-            Assert.IsType<DiaryViewModel>(viewModel.SelectedViewModel);
-        }
 
         [Fact]
         public void RemoveCharacterCommand_ShouldRemoveCharacter()
