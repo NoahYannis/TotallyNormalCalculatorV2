@@ -17,7 +17,7 @@ internal class SettingsService : ISettingsService
         ApplyLanguage(settings);
     }
 
-    public void ApplyColorTheme(SettingsModel settings)
+    private static void ApplyColorTheme(SettingsModel settings)
     {
         string newThemePath = settings.DarkModeActive ? "Themes/DarkTheme.xaml" : "Themes/LightTheme.xaml";
         string oldThemePath = settings.DarkModeActive ? "Themes/LightTheme.xaml" : "Themes/DarkTheme.xaml";
@@ -27,7 +27,7 @@ internal class SettingsService : ISettingsService
         Application.Current.Resources.MergedDictionaries.Add(newTheme);
     }
 
-    public void ApplyLanguage(SettingsModel settings)
+    private static void ApplyLanguage(SettingsModel settings)
     {
         var culture = new CultureInfo(settings.Language);
         Thread.CurrentThread.CurrentCulture = culture;
