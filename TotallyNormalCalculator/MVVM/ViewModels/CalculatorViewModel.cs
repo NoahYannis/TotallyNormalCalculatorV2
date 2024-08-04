@@ -2,7 +2,6 @@
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Globalization;
 using TotallyNormalCalculator.Logging;
 using TotallyNormalCalculator.MVVM.Model;
 
@@ -11,21 +10,21 @@ namespace TotallyNormalCalculator.MVVM.ViewModels;
 public partial class CalculatorViewModel(ITotallyNormalCalculatorLogger logger) : BaseViewModel
 {
     [ObservableProperty]
-    private string _calculatorText = string.Empty;
+    public string _calculatorText = string.Empty;
 
     [ObservableProperty]
-    private double _firstNumber;
+    public double _firstNumber;
 
     [ObservableProperty]
-    private double _secondNumber;
+    public double _secondNumber;
 
     [ObservableProperty]
-    private string _operation;
+    public string _operation;
 
     [ObservableProperty]
-    private double _result;
+    public double _result;
 
-    private int _switchViewCounter;
+    public int _switchViewCounter;
 
     #region Commands
 
@@ -56,11 +55,13 @@ public partial class CalculatorViewModel(ITotallyNormalCalculatorLogger logger) 
 
             if (Operation == null)
             {
-                FirstNumber = double.Parse(CalculatorText);
+                double.TryParse(CalculatorText, out double firstNumber);
+                FirstNumber = firstNumber;
             }
             else
             {
-                SecondNumber = double.Parse(CalculatorText);
+                double.TryParse(CalculatorText, out double secondNumber);
+                SecondNumber = secondNumber;
             }
         }
         catch (Exception exc)
@@ -151,17 +152,17 @@ public partial class CalculatorViewModel(ITotallyNormalCalculatorLogger logger) 
         CalculatorText = newValue.ToString();
     }
 
-    private void UpdateCalculationNumber()
+    public void UpdateCalculationNumber()
     {
         try
         {
             if (Operation == null)
             {
-                FirstNumber = Convert.ToDouble(CalculatorText, CultureInfo.InvariantCulture);
+                FirstNumber = Convert.ToDouble(CalculatorText);
             }
             else
             {
-                SecondNumber = Convert.ToDouble(CalculatorText, CultureInfo.InvariantCulture);
+                SecondNumber = Convert.ToDouble(CalculatorText);
             }
         }
         catch (Exception exc)
@@ -170,7 +171,7 @@ public partial class CalculatorViewModel(ITotallyNormalCalculatorLogger logger) 
         }
     }
 
-    private bool IsValidFirstCharacter(string newCharacter)
+    private static bool IsValidFirstCharacter(string newCharacter)
     {
         return double.TryParse(newCharacter, out double _) || newCharacter == "-";
     }

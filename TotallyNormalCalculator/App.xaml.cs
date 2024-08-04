@@ -37,9 +37,9 @@ public partial class App : Application
                  //client.BaseAddress = new Uri("https://localhost:7203");
                  client.Timeout = TimeSpan.FromMinutes(1);
 
-                #if DEBUG
+#if DEBUG
                  client.Timeout = TimeSpan.FromMinutes(5);
-                #endif
+#endif
              });
 
 

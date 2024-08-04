@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 
 namespace TotallyNormalCalculator.MVVM.ViewModels;
-internal partial class SecretViewViewModel : BaseViewModel
+public partial class SecretViewViewModel : BaseViewModel
 {
     public SecretViewViewModel()
     {
