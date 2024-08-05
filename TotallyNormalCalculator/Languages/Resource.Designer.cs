@@ -196,6 +196,24 @@ namespace TotallyNormalCalculator.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There are no entries to delete..
+        /// </summary>
+        public static string diary_noEntriesToDelete {
+            get {
+                return ResourceManager.GetString("diary_noEntriesToDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want to permanently delete this entry?.
+        /// </summary>
+        public static string diary_permanentlyDeleteEntryQuestion {
+            get {
+                return ResourceManager.GetString("diary_permanentlyDeleteEntryQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date.
         /// </summary>
         public static string diary_placeholder_date {
@@ -219,6 +237,15 @@ namespace TotallyNormalCalculator.Languages {
         public static string diary_placeholder_title {
             get {
                 return ResourceManager.GetString("diary_placeholder_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select an entry to delete..
+        /// </summary>
+        public static string diary_selectEntryToDelete {
+            get {
+                return ResourceManager.GetString("diary_selectEntryToDelete", resourceCulture);
             }
         }
         

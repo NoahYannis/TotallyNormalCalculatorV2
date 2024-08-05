@@ -15,20 +15,20 @@ public partial class BaseViewModel : ObservableObject
     }
 
     [RelayCommand]
-    public void MaximizeWindow()
+    public static void MaximizeWindow()
     {
         Application.Current.MainWindow.WindowState =
             Application.Current.MainWindow.WindowState != WindowState.Maximized ? WindowState.Maximized : WindowState.Normal;
     }
 
     [RelayCommand]
-    public void MinimizeWindow()
+    public static void MinimizeWindow()
     {
         Application.Current.MainWindow.WindowState = WindowState.Minimized;
     }
 
     [RelayCommand]
-    public void CloseWindow()
+    public static void CloseWindow()
     {
         Application.Current.Shutdown();
     }

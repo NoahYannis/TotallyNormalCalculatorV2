@@ -216,4 +216,13 @@
   <data name="blobs_deleteFileQuestion" xml:space="preserve">
     <value>Do you want to permanently delete this file?</value>
   </data>
+  <data name="diary_noEntriesToDelete" xml:space="preserve">
+    <value>There are no entries to delete.</value>
+  </data>
+  <data name="diary_selectEntryToDelete" xml:space="preserve">
+    <value>Please select an entry to delete.</value>
+  </data>
+  <data name="diary_permanentlyDeleteEntryQuestion" xml:space="preserve">
+    <value>Do you want to permanently delete this entry?</value>
+  </data>
 </root>

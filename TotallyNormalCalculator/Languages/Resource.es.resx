@@ -201,4 +201,28 @@
   <data name="blobs_uploadingFile" xml:space="preserve">
     <value>Subiendo archivo...</value>
   </data>
+  <data name="blobs_FileTypeNotSupported" xml:space="preserve">
+    <value>El tipo de archivo seleccionado no es compatible!</value>
+  </data>
+  <data name="blobs_errorOccuredDuringLoading" xml:space="preserve">
+    <value>Ha ocurrido un error al cargar los archivos</value>
+  </data>
+  <data name="blobs_noBlobsToDelete" xml:space="preserve">
+    <value>No hay archivos para eliminar.</value>
+  </data>
+  <data name="blobs_selectFileToDelete" xml:space="preserve">
+    <value>Seleccione una lectura para eliminar.</value>
+  </data>
+  <data name="blobs_deleteFileQuestion" xml:space="preserve">
+    <value>¿Desea eliminar este archivo?</value>
+  </data>
+  <data name="diary_noEntriesToDelete" xml:space="preserve">
+    <value>No hay archivos para eliminar.</value>
+  </data>
+  <data name="diary_selectEntryToDelete" xml:space="preserve">
+    <value>Seleccione un elemento para eliminar.</value>
+  </data>
+  <data name="diary_permanentlyDeleteEntryQuestion" xml:space="preserve">
+    <value>¿Desea eliminar esta entrada de forma permanente?</value>
+  </data>
 </root>
