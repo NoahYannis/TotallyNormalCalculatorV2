@@ -215,17 +215,19 @@ public partial class DiaryViewModel : BaseViewModel
 
     partial void OnPropertyFilterChanged(string value)
     {
-        if (string.IsNullOrWhiteSpace(value))
+        if (string.IsNullOrWhiteSpace(value) || value == "None")
         {
             FilterText = null;
             FilteredEntries = Entries;
             return;
         }
+
+        FilterEntries(FilterText);
     }
 
     partial void OnFilterTextChanged(string value)
     {
-        if (PropertyFilter is null)
+        if (PropertyFilter is null || PropertyFilter == "None")
         {
             return;
         }
