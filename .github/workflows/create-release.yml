@@ -9,6 +9,7 @@ on:
 
 env:
   PROJECT_PATH: TotallyNormalCalculator/TotallyNormalCalculator.csproj
+  PROJECT_PUBLISH_PATH: TotallyNormalCalculator/bin/Release/net8.0-windows/win-x64/publish
   PROJECT_PATH_TESTS: TotallyNormalCalculator.UnitTests/TotallyNormalCalculator.UnitTests.csproj
 
 jobs:
@@ -36,13 +37,13 @@ jobs:
         run: dotnet publish ${{ env.PROJECT_PATH }} -c Release -r win-x64 -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:UseAppHost=true --self-contained
 
       - name: Create ZIP file
-        run: powershell Compress-Archive -Path "TotallyNormalCalculator/bin/Release/net8.0-windows/win-x64/publish/*" -DestinationPath "TotallyNormalCalculator/bin/Release/net8.0-windows/win-x64/publish/TotallyNormalCalculator.zip"
+        run: powershell Compress-Archive -Path "${{ env.PROJECT_PUBLISH_PATH }}/*" -DestinationPath "${{ env.PROJECT_PUBLISH_PATH }}/TotallyNormalCalculator.zip"
 
       - name: Upload ZIP as Artifact
         uses: actions/upload-artifact@v2
         with:
           name: TotallyNormalCalculator-ZIP
-          path: TotallyNormalCalculator/bin/Release/net8.0-windows/win-x64/publish/TotallyNormalCalculator.zip
+          path: ${{ env.PROJECT_PUBLISH_PATH }}/TotallyNormalCalculator.zip
 
       - name: Create Release
         uses: actions/create-release@v1
@@ -57,12 +58,12 @@ jobs:
         uses: csexton/release-asset-action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          pattern: TotallyNormalCalculator/bin/Release/net8.0-windows/win-x64/publish/TotallyNormalCalculator.zip
+          pattern: ${{ env.PROJECT_PUBLISH_PATH }}/TotallyNormalCalculator.zip
           release-url: ${{ steps.create_release.outputs.upload_url }}
 
       - name: Add EXE To Release
         uses: csexton/release-asset-action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          pattern: TotallyNormalCalculator/bin/Release/net8.0-windows/win-x64/publish/*.exe 
+          pattern: ${{ env.PROJECT_PUBLISH_PATH }}/*.exe 
           release-url: ${{ steps.create_release.outputs.upload_url }}
