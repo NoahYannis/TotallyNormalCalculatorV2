@@ -238,12 +238,12 @@ public partial class DiaryViewModel : BaseViewModel
         Title = Message = Date = string.Empty;
     }
 
-    public bool ControlKeyIsPressed()
+    private static bool ControlKeyIsPressed()
     {
         return (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control;
     }
 
-    public void HandleDeselection()
+    internal void HandleDeselection()
     {
         ClearInputFields();
         SelectedElement = null;

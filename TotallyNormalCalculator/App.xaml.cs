@@ -35,7 +35,7 @@ public partial class App : Application
              {
                  client.BaseAddress = new Uri("https://totallynormalcalculatorapi.azurewebsites.net");
                  //client.BaseAddress = new Uri("https://localhost:7203");
-                 client.Timeout = TimeSpan.FromMinutes(1);
+                 client.Timeout = TimeSpan.FromMinutes(2);
 
 #if DEBUG
                  client.Timeout = TimeSpan.FromMinutes(5);
@@ -49,10 +49,11 @@ public partial class App : Application
                  DataContext = serviceProvider.GetRequiredService<BaseViewModel>()
              });
 
-             services.AddSingleton<ITotallyNormalCalculatorLogger, TotallyNormalCalculatorLogger>();
              services.AddSingleton<IDiaryRepository, CosmosDiaryRepository /*DiaryRepositoryDapper*/>();
              services.AddSingleton<IBlobStorageRepository<BlobModel>, AzureBlobStorageRepository>();
              services.AddSingleton<ISettingsRepository<SettingsModel>, CosmosSettingsRepository>();
+
+             services.AddSingleton<ITotallyNormalCalculatorLogger, TotallyNormalCalculatorLogger>();
              services.AddSingleton<ISettingsService, SettingsService>();
              services.AddSingleton<IMessageBoxService, MessageBoxService>();
              services.AddSingleton<IDialog, TncOpenFileDialog>();
