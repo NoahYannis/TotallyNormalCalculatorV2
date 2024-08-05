@@ -98,7 +98,7 @@ public class DiaryTests
     [Test]
     public async Task DeleteEntry_MessageResultNo_DoesNotDeleteEntry()
     {
-        _messageService.Setup(m => m.Show(It.IsAny<string>())).Returns(MessageBoxResult.No);
+        _messageService.Setup(m => m.ShowQuestion(It.IsAny<string>())).Returns(MessageBoxResult.No);
         _diaryViewModel.Entries.Add(_diaryViewModel.SelectedElement);
         await _diaryViewModel.DeleteEntry();
         Assert.That(_diaryViewModel.Entries.Any());
@@ -108,7 +108,7 @@ public class DiaryTests
     [Test]
     public async Task DeleteEntry_MessageResultYes_DeletesEntry()
     {
-        _messageService.Setup(m => m.Show(It.IsAny<string>())).Returns(MessageBoxResult.Yes);
+        _messageService.Setup(m => m.ShowQuestion(It.IsAny<string>())).Returns(MessageBoxResult.Yes);
         _diaryViewModel.Entries.Add(_diaryViewModel.SelectedElement);
         await _diaryViewModel.DeleteEntry();
         Assert.That(!_diaryViewModel.Entries.Any());
