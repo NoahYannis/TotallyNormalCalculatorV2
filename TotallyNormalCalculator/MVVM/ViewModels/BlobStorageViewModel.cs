@@ -26,6 +26,9 @@ public partial class BlobStorageViewModel
     [ObservableProperty]
     public ObservableCollection<BlobModel> _blobs;
 
+    [ObservableProperty]
+    public bool _isUploading;
+
 
     [ObservableProperty]
     public BlobModel _selectedElement;
@@ -59,6 +62,8 @@ public partial class BlobStorageViewModel
             return;
         }
 
+        IsUploading = true;
+
         string filePath = _openFileDialog.FileName;
         string blobName = _blobFactory.GetBlobName(filePath);
 
@@ -72,6 +77,8 @@ public partial class BlobStorageViewModel
         {
             _blobLogger.LogExceptionToTempFile(exc);
         }
+
+        IsUploading = false;
     }
 
 

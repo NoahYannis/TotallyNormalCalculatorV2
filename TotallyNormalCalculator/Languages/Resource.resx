@@ -153,7 +153,7 @@
   <data name="tab_calculator" xml:space="preserve">
     <value>Calculator</value>
   </data>
-  <data name="diary_loadingFiles" xml:space="preserve">
+  <data name="blobs_loadingFiles" xml:space="preserve">
     <value>Loading files...</value>
   </data>
   <data name="diary_placeholder_title" xml:space="preserve">
@@ -197,5 +197,8 @@
   </data>
   <data name="languages_Greek" xml:space="preserve">
     <value>Greek</value>
+  </data>
+  <data name="blobs_uploadingFile" xml:space="preserve">
+    <value>Uploading file...</value>
   </data>
 </root>

@@ -61,6 +61,24 @@ namespace TotallyNormalCalculator.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Loading files....
+        /// </summary>
+        public static string blobs_loadingFiles {
+            get {
+                return ResourceManager.GetString("blobs_loadingFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uploading file....
+        /// </summary>
+        public static string blobs_uploadingFile {
+            get {
+                return ResourceManager.GetString("blobs_uploadingFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add.
         /// </summary>
         public static string button_add {
@@ -129,15 +147,6 @@ namespace TotallyNormalCalculator.Languages {
         public static string diary_filterby_title {
             get {
                 return ResourceManager.GetString("diary_filterby_title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Loading files....
-        /// </summary>
-        public static string diary_loadingFiles {
-            get {
-                return ResourceManager.GetString("diary_loadingFiles", resourceCulture);
             }
         }
         

@@ -153,7 +153,7 @@
   <data name="tab_calculator" xml:space="preserve">
     <value>Rechner</value>
   </data>
-  <data name="diary_loadingFiles" xml:space="preserve">
+  <data name="blobs_loadingFiles" xml:space="preserve">
     <value>Lade Dateien...</value>
   </data>
   <data name="diary_placeholder_title" xml:space="preserve">
@@ -197,5 +197,8 @@
   </data>
   <data name="languages_Spanish" xml:space="preserve">
     <value>Spanisch</value>
+  </data>
+  <data name="blobs_uploadingFile" xml:space="preserve">
+    <value>Datei wird hochgeladen…</value>
   </data>
 </root>
