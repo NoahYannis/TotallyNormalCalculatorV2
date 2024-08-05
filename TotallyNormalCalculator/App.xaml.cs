@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using AutoUpdaterDotNET;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.IO;
@@ -74,6 +75,8 @@ public partial class App : Application
             var settings = settingsRepository.GetUserSettings().GetAwaiter().GetResult();
             settingsService.ApplySettings(settings);
 
+            AutoUpdater.InstalledVersion = new Version("1.5.5.3");
+            AutoUpdater.Start("https://github.com/NoahYannis/TotallyNormalCalculatorV2/auto-uodate.xml");
             var mainWindow = AppHost.Services.GetRequiredService<MainWindow>();
             mainWindow.Show();
 

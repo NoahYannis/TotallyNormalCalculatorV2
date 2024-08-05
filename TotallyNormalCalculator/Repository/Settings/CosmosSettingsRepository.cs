@@ -27,10 +27,7 @@ public class CosmosSettingsRepository : ISettingsRepository<SettingsModel>
 
     public async Task<SettingsModel> GetUserSettings()
     {
-        if (_userSettings == null)
-        {
-            _userSettings = await _http.GetFromJsonAsync<SettingsModel>($"/settings/{App.UserGuid}");
-        }
+        _userSettings ??= await _http.GetFromJsonAsync<SettingsModel>($"/settings/{App.UserGuid}");
         return _userSettings;
     }
 
