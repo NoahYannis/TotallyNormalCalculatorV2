@@ -201,4 +201,19 @@
   <data name="blobs_uploadingFile" xml:space="preserve">
     <value>Uploading file...</value>
   </data>
+  <data name="blobs_FileTypeNotSupported" xml:space="preserve">
+    <value>The selected file type is not supported.</value>
+  </data>
+  <data name="blobs_errorOccuredDuringLoading" xml:space="preserve">
+    <value>An error occurred while loading the files.</value>
+  </data>
+  <data name="blobs_noBlobsToDelete" xml:space="preserve">
+    <value>There are no files to delete.</value>
+  </data>
+  <data name="blobs_selectFileToDelete" xml:space="preserve">
+    <value>Please select a file to delete.</value>
+  </data>
+  <data name="blobs_deleteFileQuestion" xml:space="preserve">
+    <value>Do you want to permanently delete this file?</value>
+  </data>
 </root>

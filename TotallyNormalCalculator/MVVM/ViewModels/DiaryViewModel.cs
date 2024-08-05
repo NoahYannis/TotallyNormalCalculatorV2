@@ -124,11 +124,6 @@ public partial class DiaryViewModel : BaseViewModel
     [RelayCommand]
     public void ReadEntry(DiaryEntryModel diaryEntry)
     {
-        if (!Entries.Any())
-        {
-            _messageBox.Show("There are no entries to read. You should create one!");
-            return;
-        }
 
         if (diaryEntry is null)
         {
@@ -215,7 +210,7 @@ public partial class DiaryViewModel : BaseViewModel
 
     partial void OnPropertyFilterChanged(string value)
     {
-        if (string.IsNullOrWhiteSpace(value) || value == "None")
+        if (value == "None" || FilterText == null)
         {
             FilterText = null;
             FilteredEntries = Entries;

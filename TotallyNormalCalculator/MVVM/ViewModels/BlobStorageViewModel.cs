@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using TotallyNormalCalculator.Languages;
 using TotallyNormalCalculator.Logging;
 using TotallyNormalCalculator.MVVM.Model;
 using TotallyNormalCalculator.MVVM.Model.Blobs;
@@ -49,7 +50,7 @@ public partial class BlobStorageViewModel
         catch (Exception exc)
         {
             _blobLogger.LogExceptionToTempFile(exc);
-            _messageService.Show("An error occurred while loading the files.");
+            _messageService.Show(Resource.blobs_errorOccuredDuringLoading);
         }
     }
 
@@ -59,6 +60,12 @@ public partial class BlobStorageViewModel
     {
         if (_openFileDialog.ShowDialog() != true)
         {
+            return;
+        }
+
+        if(!_blobFactory.IsAllowedBlobType(_openFileDialog.FileName))
+        {
+            _messageService.Show(Resource.blobs_FileTypeNotSupported);
             return;
         }
 
@@ -87,17 +94,17 @@ public partial class BlobStorageViewModel
     {
         if (!Blobs.Any())
         {
-            _messageService.Show("There are no files to delete.");
+            _messageService.Show(Resource.blobs_noBlobsToDelete);
             return;
         }
 
         if (SelectedElement is null)
         {
-            _messageService.Show("Please select a file to delete.");
+            _messageService.Show(Resource.blobs_selectFileToDelete);
             return;
         }
 
-        var delete = _messageService.ShowQuestion("Do you want to permanently delete this file?");
+        var delete = _messageService.ShowQuestion(Resource.blobs_deleteFileQuestion);
 
         if (delete is MessageBoxResult.No)
         {

@@ -18,12 +18,6 @@ public class BlobFactory : IBlobFactory
         if (new[] { ".mp4", ".avi", ".mov", ".wmv", ".mkv", ".json" }.Contains(extension))
             return BlobType.Video;
 
-        if (new[] { ".mp3", ".wav", ".ogg", ".flac" }.Contains(extension))
-            return BlobType.Audio;
-
-        if (new[] { ".txt", ".md", ".csv", ".log", ".pdf" }.Contains(extension))
-            return BlobType.Text;
-
         return BlobType.Other;
     }
 
@@ -44,9 +38,13 @@ public class BlobFactory : IBlobFactory
         {
             BlobType.Image => CreateImageBlob(blobName, contentBase64),
             BlobType.Video => await CreateVideoBlob(blobName, contentBase64),
-            _ => null,
+            BlobType.Other => null,
+            _ => null
         };
     }
+
+    public bool IsAllowedBlobType(string fileName) => DetermineBlobType(fileName) != BlobType.Other;
+    
 
 
     private static async Task<BlobModel> CreateVideoBlob(string blobName, string contentBase64)

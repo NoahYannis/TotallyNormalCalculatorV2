@@ -82,8 +82,11 @@ public class BlobStorageTests
     {
         _openFileDialog.Setup(ofd => ofd.ShowDialog()).Returns(true);
         _openFileDialog.SetupProperty(ofd => ofd.FileName, "dragonquest.png");
+
         _blobFactory.Setup(b => b.CreateBlobModel(It.IsAny<string>(), It.IsAny<string>()));
         _blobFactory.Setup(b => b.GetBlobName(It.IsAny<string>())).Returns("dragonquest.png");
+        _blobFactory.Setup(b => b.IsAllowedBlobType(It.IsAny<string>())).Returns(true);
+
         _blobStorageRepository.Setup(r => r.UploadBlob(It.IsAny<string>(), It.IsAny<string>())).Returns(Task.FromResult<BlobModel>(new ImageBlob
         {
             Name = _openFileDialog.Object.FileName,

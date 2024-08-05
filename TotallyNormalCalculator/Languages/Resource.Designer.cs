@@ -61,11 +61,56 @@ namespace TotallyNormalCalculator.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do you want to permanently delete this file?.
+        /// </summary>
+        public static string blobs_deleteFileQuestion {
+            get {
+                return ResourceManager.GetString("blobs_deleteFileQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred while loading the files..
+        /// </summary>
+        public static string blobs_errorOccuredDuringLoading {
+            get {
+                return ResourceManager.GetString("blobs_errorOccuredDuringLoading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The selected file type is not supported..
+        /// </summary>
+        public static string blobs_FileTypeNotSupported {
+            get {
+                return ResourceManager.GetString("blobs_FileTypeNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loading files....
         /// </summary>
         public static string blobs_loadingFiles {
             get {
                 return ResourceManager.GetString("blobs_loadingFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are no files to delete..
+        /// </summary>
+        public static string blobs_noBlobsToDelete {
+            get {
+                return ResourceManager.GetString("blobs_noBlobsToDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select a file to delete..
+        /// </summary>
+        public static string blobs_selectFileToDelete {
+            get {
+                return ResourceManager.GetString("blobs_selectFileToDelete", resourceCulture);
             }
         }
         
