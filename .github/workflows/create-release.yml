@@ -54,9 +54,16 @@ jobs:
           tag_name: ${{ github.ref }}
           release_name: ${{ github.ref }}
 
-      - name: Add Assets To Release
+      - name: Add ZIP To Release
         uses: csexton/release-asset-action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          pattern: ${{ env.PROJECT_PUBLISH_PATH }}/TotallyNormalCalculator.zip,${{ env.PROJECT_PUBLISH_PATH }}/*.exe
+          pattern: ${{ env.PROJECT_PUBLISH_PATH }}/TotallyNormalCalculator.zip
+          release-url: ${{ steps.create_release.outputs.upload_url }}
+
+      - name: Add EXE To Release
+        uses: csexton/release-asset-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          pattern: ${{ env.PROJECT_PUBLISH_PATH }}/*.exe 
           release-url: ${{ steps.create_release.outputs.upload_url }}
