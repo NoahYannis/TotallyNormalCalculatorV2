@@ -35,10 +35,8 @@ jobs:
       - name: Publish # Anwendung als einzelne ausführbare Datei veröffentlichen
         run: dotnet publish ${{ env.PROJECT_PATH }} -c Release -r win-x64 -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:UseAppHost=true --self-contained
 
-      - name: Create ZIP Archive
-        run: |
-          cd TotallyNormalCalculator/bin/Release/net8.0-windows/win-x64/publish
-          zip -r TotallyNormalCalculator.zip *
+      - name: Create ZIP file
+        run: powershell Compress-Archive -Path "TotallyNormalCalculator/bin/Release/net8.0-windows/win-x64/publish/*" -DestinationPath "TotallyNormalCalculator/bin/Release/net8.0-windows/win-x64/publish/TotallyNormalCalculator.zip"
 
       - name: Upload ZIP as Artifact
         uses: actions/upload-artifact@v2

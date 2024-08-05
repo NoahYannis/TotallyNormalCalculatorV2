@@ -110,7 +110,7 @@ public class DiaryTests
     {
         _messageService.Setup(m => m.ShowQuestion(It.IsAny<string>())).Returns(MessageBoxResult.Yes);
         _diaryViewModel.Entries.Add(_diaryViewModel.SelectedElement);
-        await _diaryViewModel.DeleteEntry();
+        await _diaryViewModel.DeleteEntry();    
         Assert.That(!_diaryViewModel.Entries.Any());
     }
 
