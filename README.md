@@ -8,7 +8,6 @@ I initially developed this before my apprenticeship, this is the second iteratio
 
 To Do:
 
-- Bugfix
-- More Unit Tests
+- Bugfix & Refinement
 - Add Auto update functionality
 - Web browsing inside the application
