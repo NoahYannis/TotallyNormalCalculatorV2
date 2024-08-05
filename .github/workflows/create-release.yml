@@ -11,11 +11,9 @@ env:
   PROJECT_PATH: TotallyNormalCalculator/TotallyNormalCalculator.csproj
   PROJECT_PATH_TESTS: TotallyNormalCalculator.UnitTests/TotallyNormalCalculator.UnitTests.csproj
 
-
 jobs:
   create-release:
     runs-on: windows-latest
-
     steps:
       - uses: actions/checkout@v4
 
@@ -37,6 +35,17 @@ jobs:
       - name: Publish # Anwendung als einzelne ausführbare Datei veröffentlichen
         run: dotnet publish ${{ env.PROJECT_PATH }} -c Release -r win-x64 -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:UseAppHost=true --self-contained
 
+      - name: Create ZIP Archive
+        run: |
+          cd TotallyNormalCalculator/bin/Release/net8.0-windows/win-x64/publish
+          zip -r TotallyNormalCalculator.zip *
+
+      - name: Upload ZIP as Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: TotallyNormalCalculator-ZIP
+          path: TotallyNormalCalculator/bin/Release/net8.0-windows/win-x64/publish/TotallyNormalCalculator.zip
+
       - name: Create Release
         uses: actions/create-release@v1
         id: create_release
@@ -46,9 +55,16 @@ jobs:
           tag_name: ${{ github.ref }}
           release_name: ${{ github.ref }}
 
+      - name: Add ZIP To Release
+        uses: csexton/release-asset-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          pattern: TotallyNormalCalculator/bin/Release/net8.0-windows/win-x64/publish/TotallyNormalCalculator.zip
+          release-url: ${{ steps.create_release.outputs.upload_url }}
+
       - name: Add EXE To Release
         uses: csexton/release-asset-action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          pattern: TotallyNormalCalculator/bin/Release/net8.0-windows/win-x64/publish/*.exe # Exe-Datei dem Release hinzufügen
+          pattern: TotallyNormalCalculator/bin/Release/net8.0-windows/win-x64/publish/*.exe 
           release-url: ${{ steps.create_release.outputs.upload_url }}
