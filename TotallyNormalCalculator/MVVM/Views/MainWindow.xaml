@@ -6,7 +6,7 @@
     xmlns:viewmodels="clr-namespace:TotallyNormalCalculator.MVVM.ViewModels"
     xmlns:views="clr-namespace:TotallyNormalCalculator.MVVM.Views"
     Width="Auto"
-    MinWidth="850"
+    MinWidth="950"
     MinHeight="600"
     AllowsTransparency="False"
     Background="#36393F"

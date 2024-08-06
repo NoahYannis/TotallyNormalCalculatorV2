@@ -134,7 +134,7 @@ public partial class DiaryViewModel : BaseViewModel
     [RelayCommand]
     public async Task DeleteEntry()
     {
-        if (!Entries.Any())
+        if (!Entries.Any()) 
         {
             _messageBox.Show(Resource.diary_noEntriesToDelete);
             return;
