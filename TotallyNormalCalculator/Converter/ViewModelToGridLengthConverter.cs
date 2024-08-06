@@ -8,6 +8,7 @@ namespace TotallyNormalCalculator.Converter;
 
 public class ViewModelToGridLengthConverter : IValueConverter
 {
+    // Hide SecretViewViewModel when Calculator is selected
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
         return value is CalculatorViewModel ? new GridLength(0) : GridLength.Auto;

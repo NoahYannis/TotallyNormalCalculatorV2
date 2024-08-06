@@ -70,6 +70,7 @@
                 Width="250"
                 behavior:ListBoxScrollOnNewEntry.ScrollOnNewItem="True"
                 Background="{DynamicResource BackgroundColor}"
+                BorderThickness="0"
                 ItemContainerStyle="{StaticResource DiaryEntries}"
                 ItemsSource="{Binding Entries, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 SelectedItem="{Binding SelectedElement, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
