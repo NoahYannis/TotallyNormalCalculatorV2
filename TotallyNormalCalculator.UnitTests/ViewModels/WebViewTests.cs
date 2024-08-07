@@ -34,7 +34,7 @@ public class WebViewTests
     [Test]
     [TestCase("")]
     [TestCase("youtube")]
-    [Ignore("TODO: Initialize WebView correctly with CoreWebView2 property")]
+    [Ignore("TODO: Find out how to mock WebView correctly with readonly CoreWebView2 property")]
     public void Navigate_WithInvalidUrl_ThrowsErrorAndDisplaysMessage(string url)
     {
 
@@ -51,7 +51,7 @@ public class WebViewTests
 
 
     [Test]
-    [Ignore("TODO: Initialize WebView correctly with CoreWebView2 property")]
+    [Ignore("TODO: Find out how to mock WebView correctly with readonly CoreWebView2 property")]
     public void Navigate_WithValidUrl_DoesNotThrowOrDisplayMessage()
     {
         // Arrange
