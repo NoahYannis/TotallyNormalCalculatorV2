@@ -63,7 +63,7 @@ public partial class BlobStorageViewModel
             return;
         }
 
-        if(!_blobFactory.IsAllowedBlobType(_openFileDialog.FileName))
+        if (!_blobFactory.IsAllowedBlobType(_openFileDialog.FileName))
         {
             _messageService.Show(Resource.blobs_FileTypeNotSupported);
             return;

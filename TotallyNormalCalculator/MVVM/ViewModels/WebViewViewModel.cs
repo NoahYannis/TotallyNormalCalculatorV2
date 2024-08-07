@@ -12,7 +12,7 @@ public partial class WebViewViewModel(IMessageBoxService messageBox) : BaseViewM
     public string _url;
 
     [RelayCommand]
-    private void NavigateToUrl(WebView2 webView)
+    public void NavigateToUrl(IWebView2 webView)
     {
         try
         {

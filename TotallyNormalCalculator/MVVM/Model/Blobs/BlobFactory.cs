@@ -44,7 +44,7 @@ public class BlobFactory : IBlobFactory
     }
 
     public bool IsAllowedBlobType(string fileName) => DetermineBlobType(fileName) != BlobType.Other;
-    
+
 
 
     private static async Task<BlobModel> CreateVideoBlob(string blobName, string contentBase64)
