@@ -3,7 +3,6 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.IO;
 using System.Windows;
-using System.Windows.Controls;
 using TotallyNormalCalculator.Logging;
 using TotallyNormalCalculator.MVVM.Model;
 using TotallyNormalCalculator.MVVM.Model.Blobs;
