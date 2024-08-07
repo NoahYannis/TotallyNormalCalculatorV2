@@ -3,6 +3,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.IO;
 using System.Windows;
+using System.Windows.Controls;
 using TotallyNormalCalculator.Logging;
 using TotallyNormalCalculator.MVVM.Model;
 using TotallyNormalCalculator.MVVM.Model.Blobs;
@@ -26,11 +27,13 @@ public partial class App : Application
          .ConfigureServices((context, services) =>
          {
              services.AddSingleton<BaseViewModel>();
-             services.AddSingleton<CalculatorViewModel>();
+             services.AddTransient<SecretViewViewModel>();
              services.AddSingleton<DiaryViewModel>();
              services.AddSingleton<BlobStorageViewModel>();
+             services.AddTransient<WebViewViewModel>();
              services.AddSingleton<SettingsViewModel>();
-             services.AddTransient<SecretViewViewModel>();
+             services.AddSingleton<CalculatorViewModel>();
+
              services.AddHttpClient("tnc-http", client =>
              {
                  client.BaseAddress = new Uri("https://totallynormalcalculatorapi.azurewebsites.net");

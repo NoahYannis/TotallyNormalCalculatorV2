@@ -19,20 +19,23 @@
                 <ResourceDictionary x:Name="BlobFile" Source="./Themes/Blobs.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <DataTemplate DataType="{x:Type viewmodels:DiaryViewModel}">
-                <views:DiaryView />
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type viewmodels:CalculatorViewModel}">
-                <views:CalculatorView />
-            </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:SecretViewViewModel}">
                 <views:SecretView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:DiaryViewModel}">
+                <views:DiaryView />
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:BlobStorageViewModel}">
                 <views:BlobStorageView />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:WebViewViewModel}">
+                <views:WebView />
+            </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:SettingsViewModel}">
                 <views:SettingsView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:CalculatorViewModel}">
+                <views:CalculatorView />
             </DataTemplate>
 
             <FontFamily x:Key="Baskerville">pack://application:,,,/Themes/Fonts/#Libre Baskerville</FontFamily>
