@@ -225,4 +225,7 @@
   <data name="diary_permanentlyDeleteEntryQuestion" xml:space="preserve">
     <value>Вы хотите навсегда удалить эту запись?</value>
   </data>
+  <data name="webView_enterValidUrl" xml:space="preserve">
+    <value>Введите действительный URL-адрес. Пример: https://www.google.com или google.com!</value>
+  </data>
 </root>

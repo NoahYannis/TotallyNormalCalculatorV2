@@ -31,6 +31,7 @@
             HorizontalContentAlignment="Right"
             Command="{Binding NavigateToUrlCommand}"
             CommandParameter="{Binding ElementName=webView}"
+            Style="{StaticResource BaseButton}"
             Tag="MagnifyingGlass" />
         <wv2:WebView2
             x:Name="webView"

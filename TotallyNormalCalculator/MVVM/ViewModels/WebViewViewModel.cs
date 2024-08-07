@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Web.WebView2.Wpf;
 using System;
+using TotallyNormalCalculator.Languages;
 
 namespace TotallyNormalCalculator.MVVM.ViewModels;
 public partial class WebViewViewModel(IMessageBoxService messageBox) : BaseViewModel
@@ -26,7 +27,7 @@ public partial class WebViewViewModel(IMessageBoxService messageBox) : BaseViewM
             }
             catch (Exception)
             {
-                messageBox.Show("Please enter a valid URL. Example: https://www.google.com or google.com");
+                messageBox.Show(Resource.webView_enterValidUrl);
             }
         }
     }

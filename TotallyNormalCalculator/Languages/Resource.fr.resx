@@ -225,4 +225,7 @@
   <data name="diary_permanentlyDeleteEntryQuestion" xml:space="preserve">
     <value>Voulez-vous supprimer définitivement cette publication ?</value>
   </data>
+  <data name="webView_enterValidUrl" xml:space="preserve">
+    <value>Veuillez saisir une URL valide. Exemple : https://www.google.com ou google.com !</value>
+  </data>
 </root>

@@ -383,5 +383,14 @@ namespace TotallyNormalCalculator.Languages {
                 return ResourceManager.GetString("tab_web", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter a valid URL. Example: https://www.google.com or google.com.
+        /// </summary>
+        public static string webView_enterValidUrl {
+            get {
+                return ResourceManager.GetString("webView_enterValidUrl", resourceCulture);
+            }
+        }
     }
 }

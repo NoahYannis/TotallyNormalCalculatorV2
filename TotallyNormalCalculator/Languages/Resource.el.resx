@@ -225,4 +225,7 @@
   <data name="diary_permanentlyDeleteEntryQuestion" xml:space="preserve">
     <value>Είσαι σίγουρος ότι θέλετε να το διαγράψετε αυτό;</value>
   </data>
+  <data name="webView_enterValidUrl" xml:space="preserve">
+    <value>Εισαγάγετε μια έγκυρη διεύθυνση URL. Παράδειγμα: https://www.google.com ή google.com!</value>
+  </data>
 </root>
