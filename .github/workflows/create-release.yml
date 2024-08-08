@@ -24,11 +24,18 @@ jobs:
           dotnet-version: '8.x'
           include-prerelease: true
 
+      - name: Get Release Version From Tag
+        id: get_version
+        run: echo "##[set-output name=version;]${{ github.ref.split('/')[-1] }}"
+
+      - name: Set GitVersion Environment Variable
+        run: echo "GitVersion=${{ steps.get_version.outputs.version }}" >> $GITHUB_ENV
+
       - name: Restore dependencies
         run: dotnet restore ${{ env.PROJECT_PATH }}
 
       - name: Build
-        run: dotnet build -c Release -p:PublishSingleFile=true
+        run: dotnet build -c Release -p:PublishSingleFile=true /p:GitVersion=${{ steps.get_version.outputs.version }}
 
       - name: Execute Unit Tests
         run: dotnet test ${{ env.PROJECT_PATH_TESTS }}

@@ -68,7 +68,7 @@ public partial class App : Application
     {
         AppHost.Start();
         var logger = AppHost.Services.GetRequiredService<ITotallyNormalCalculatorLogger>();
-
+            
         try
         {
             UserGuid = GetUserGuid();
@@ -78,8 +78,8 @@ public partial class App : Application
             var settings = settingsRepository.GetUserSettings().GetAwaiter().GetResult();
             settingsService.ApplySettings(settings);
 
-            AutoUpdater.InstalledVersion = new Version("1.5.5.3");
-            AutoUpdater.Start("https://github.com/NoahYannis/TotallyNormalCalculatorV2/auto-uodate.xml");
+            //AutoUpdater.InstalledVersion = new Version("1.5");
+            AutoUpdater.Start("https://raw.githubusercontent.com/NoahYannis/TotallyNormalCalculatorV2/autoupdate/auto-update.xml");
             var mainWindow = AppHost.Services.GetRequiredService<MainWindow>();
             mainWindow.Show();
 
