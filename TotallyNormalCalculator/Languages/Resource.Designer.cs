@@ -61,6 +61,69 @@ namespace TotallyNormalCalculator.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do you want to permanently delete this file?.
+        /// </summary>
+        public static string blobs_deleteFileQuestion {
+            get {
+                return ResourceManager.GetString("blobs_deleteFileQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred while loading the files..
+        /// </summary>
+        public static string blobs_errorOccuredDuringLoading {
+            get {
+                return ResourceManager.GetString("blobs_errorOccuredDuringLoading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The selected file type is not supported..
+        /// </summary>
+        public static string blobs_FileTypeNotSupported {
+            get {
+                return ResourceManager.GetString("blobs_FileTypeNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading files....
+        /// </summary>
+        public static string blobs_loadingFiles {
+            get {
+                return ResourceManager.GetString("blobs_loadingFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are no files to delete..
+        /// </summary>
+        public static string blobs_noBlobsToDelete {
+            get {
+                return ResourceManager.GetString("blobs_noBlobsToDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select a file to delete..
+        /// </summary>
+        public static string blobs_selectFileToDelete {
+            get {
+                return ResourceManager.GetString("blobs_selectFileToDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uploading file....
+        /// </summary>
+        public static string blobs_uploadingFile {
+            get {
+                return ResourceManager.GetString("blobs_uploadingFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add.
         /// </summary>
         public static string button_add {
@@ -133,11 +196,20 @@ namespace TotallyNormalCalculator.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Loading files....
+        ///   Looks up a localized string similar to There are no entries to delete..
         /// </summary>
-        public static string diary_loadingFiles {
+        public static string diary_noEntriesToDelete {
             get {
-                return ResourceManager.GetString("diary_loadingFiles", resourceCulture);
+                return ResourceManager.GetString("diary_noEntriesToDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want to permanently delete this entry?.
+        /// </summary>
+        public static string diary_permanentlyDeleteEntryQuestion {
+            get {
+                return ResourceManager.GetString("diary_permanentlyDeleteEntryQuestion", resourceCulture);
             }
         }
         
@@ -165,6 +237,15 @@ namespace TotallyNormalCalculator.Languages {
         public static string diary_placeholder_title {
             get {
                 return ResourceManager.GetString("diary_placeholder_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select an entry to delete..
+        /// </summary>
+        public static string diary_selectEntryToDelete {
+            get {
+                return ResourceManager.GetString("diary_selectEntryToDelete", resourceCulture);
             }
         }
         
@@ -300,6 +381,15 @@ namespace TotallyNormalCalculator.Languages {
         public static string tab_web {
             get {
                 return ResourceManager.GetString("tab_web", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter a valid URL. Example: https://www.google.com or google.com.
+        /// </summary>
+        public static string webView_enterValidUrl {
+            get {
+                return ResourceManager.GetString("webView_enterValidUrl", resourceCulture);
             }
         }
     }

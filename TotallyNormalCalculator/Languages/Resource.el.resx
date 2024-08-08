@@ -153,7 +153,7 @@
   <data name="tab_calculator" xml:space="preserve">
     <value>Αριθμομηχανή</value>
   </data>
-  <data name="diary_loadingFiles" xml:space="preserve">
+  <data name="blobs_loadingFiles" xml:space="preserve">
     <value>Φόρτωση αρχείων...</value>
   </data>
   <data name="diary_placeholder_title" xml:space="preserve">
@@ -197,5 +197,35 @@
   </data>
   <data name="languages_Russian" xml:space="preserve">
     <value>Ρωσικά</value>
+  </data>
+  <data name="blobs_uploadingFile" xml:space="preserve">
+    <value>Αποστολή αρχείου...</value>
+  </data>
+  <data name="blobs_FileTypeNotSupported" xml:space="preserve">
+    <value>Ο επιλεγμένος τύπος αρχείου δεν υποστηρίζεται!</value>
+  </data>
+  <data name="blobs_errorOccuredDuringLoading" xml:space="preserve">
+    <value>Εμφανίστηκε σφάλμα κατά τη φόρτωση των αρχείων</value>
+  </data>
+  <data name="blobs_noBlobsToDelete" xml:space="preserve">
+    <value>Δεν υπάρχουν αρχεία προς διαγραφή</value>
+  </data>
+  <data name="blobs_selectFileToDelete" xml:space="preserve">
+    <value>Επιλέξτε ένα αρχείο για διαγραφή.</value>
+  </data>
+  <data name="blobs_deleteFileQuestion" xml:space="preserve">
+    <value>Θέλετε να διαγράψετε οριστικά αυτό το αρχείο;!</value>
+  </data>
+  <data name="diary_noEntriesToDelete" xml:space="preserve">
+    <value>Δεν υπάρχουν καταχωρήσεις για διαγραφή!</value>
+  </data>
+  <data name="diary_selectEntryToDelete" xml:space="preserve">
+    <value>Επιλέξτε μια καταχώρηση για διαγραφή.!</value>
+  </data>
+  <data name="diary_permanentlyDeleteEntryQuestion" xml:space="preserve">
+    <value>Είσαι σίγουρος ότι θέλετε να το διαγράψετε αυτό;</value>
+  </data>
+  <data name="webView_enterValidUrl" xml:space="preserve">
+    <value>Εισαγάγετε μια έγκυρη διεύθυνση URL. Παράδειγμα: https://www.google.com ή google.com!</value>
   </data>
 </root>

@@ -153,7 +153,7 @@
   <data name="tab_calculator" xml:space="preserve">
     <value>Калькулятор</value>
   </data>
-  <data name="diary_loadingFiles" xml:space="preserve">
+  <data name="blobs_loadingFiles" xml:space="preserve">
     <value>Загрузка файлов...</value>
   </data>
   <data name="diary_placeholder_title" xml:space="preserve">
@@ -197,5 +197,35 @@
   </data>
   <data name="languages_German" xml:space="preserve">
     <value>немецкий</value>
+  </data>
+  <data name="blobs_uploadingFile" xml:space="preserve">
+    <value>Загрузка файла...</value>
+  </data>
+  <data name="blobs_FileTypeNotSupported" xml:space="preserve">
+    <value>Выбранный тип медиа не поддерживается.</value>
+  </data>
+  <data name="blobs_errorOccuredDuringLoading" xml:space="preserve">
+    <value>Произошла ошибка во время загрузки данных</value>
+  </data>
+  <data name="blobs_noBlobsToDelete" xml:space="preserve">
+    <value>Нет файлов для удаления.!</value>
+  </data>
+  <data name="blobs_selectFileToDelete" xml:space="preserve">
+    <value>Выберите файл для удаления.</value>
+  </data>
+  <data name="blobs_deleteFileQuestion" xml:space="preserve">
+    <value>Вы хотите удалить этот файл?</value>
+  </data>
+  <data name="diary_noEntriesToDelete" xml:space="preserve">
+    <value>Нет записей для удаления.</value>
+  </data>
+  <data name="diary_selectEntryToDelete" xml:space="preserve">
+    <value>Выберите область для удаления.</value>
+  </data>
+  <data name="diary_permanentlyDeleteEntryQuestion" xml:space="preserve">
+    <value>Вы хотите навсегда удалить эту запись?</value>
+  </data>
+  <data name="webView_enterValidUrl" xml:space="preserve">
+    <value>Введите действительный URL-адрес. Пример: https://www.google.com или google.com!</value>
   </data>
 </root>

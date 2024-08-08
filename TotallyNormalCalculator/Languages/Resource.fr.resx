@@ -153,7 +153,7 @@
   <data name="tab_calculator" xml:space="preserve">
     <value>Calculateur</value>
   </data>
-  <data name="diary_loadingFiles" xml:space="preserve">
+  <data name="blobs_loadingFiles" xml:space="preserve">
     <value>Charger des fichiers...</value>
   </data>
   <data name="diary_placeholder_title" xml:space="preserve">
@@ -197,5 +197,35 @@
   </data>
   <data name="languages_French" xml:space="preserve">
     <value>Français</value>
+  </data>
+  <data name="blobs_uploadingFile" xml:space="preserve">
+    <value>Chargement du fichier…</value>
+  </data>
+  <data name="blobs_FileTypeNotSupported" xml:space="preserve">
+    <value>Le type de fichier sélectionné n'est pas pris en charge.</value>
+  </data>
+  <data name="blobs_errorOccuredDuringLoading" xml:space="preserve">
+    <value>Une erreur s'est produite durant le chargement des fichiers.</value>
+  </data>
+  <data name="blobs_noBlobsToDelete" xml:space="preserve">
+    <value>Il n'y a aucun fichier à supprimer.</value>
+  </data>
+  <data name="blobs_selectFileToDelete" xml:space="preserve">
+    <value>Veuillez sélectionner un fichier à supprimer.</value>
+  </data>
+  <data name="blobs_deleteFileQuestion" xml:space="preserve">
+    <value>Voulez-vous supprimer définitivement cette publication ?</value>
+  </data>
+  <data name="diary_noEntriesToDelete" xml:space="preserve">
+    <value>Il n'y a aucune entrée à supprimer!</value>
+  </data>
+  <data name="diary_selectEntryToDelete" xml:space="preserve">
+    <value>Sélectionner un fichier à supprimer.</value>
+  </data>
+  <data name="diary_permanentlyDeleteEntryQuestion" xml:space="preserve">
+    <value>Voulez-vous supprimer définitivement cette publication ?</value>
+  </data>
+  <data name="webView_enterValidUrl" xml:space="preserve">
+    <value>Veuillez saisir une URL valide. Exemple : https://www.google.com ou google.com !</value>
   </data>
 </root>

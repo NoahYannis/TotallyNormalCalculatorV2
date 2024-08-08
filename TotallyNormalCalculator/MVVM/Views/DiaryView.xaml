@@ -70,6 +70,7 @@
                 Width="250"
                 behavior:ListBoxScrollOnNewEntry.ScrollOnNewItem="True"
                 Background="{DynamicResource BackgroundColor}"
+                BorderThickness="0"
                 ItemContainerStyle="{StaticResource DiaryEntries}"
                 ItemsSource="{Binding Entries, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 SelectedItem="{Binding SelectedElement, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -86,12 +87,17 @@
                 <RowDefinition Height="20*" />
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
                 <TextBox
                     x:Name="txtTitle"
                     Height="30"
                     MinHeight="30"
-                    Margin="10,0,180,10"
+                    Margin="10"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Bottom"
                     VerticalContentAlignment="Center"
@@ -99,7 +105,7 @@
                     Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                 <TextBlock
-                    Margin="14,0,0,13"
+                    Margin="20,0,0,15"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Bottom"
                     Foreground="DarkGray"
@@ -109,22 +115,24 @@
 
                 <TextBox
                     x:Name="txtDate"
-                    Width="150"
+                    Grid.Row="1"
+                    Grid.Column="1"
                     MinHeight="30"
-                    Margin="0,0,10,10"
-                    HorizontalAlignment="Right"
+                    Margin="10"
+                    HorizontalAlignment="Stretch"
                     VerticalAlignment="Bottom"
                     VerticalContentAlignment="Center"
                     behavior:CornerRadiusSetter.CornerRadius="5"
                     Text="{Binding Date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                 <TextBlock
-                    Margin="0,0,117,14"
-                    HorizontalAlignment="Right"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="20,0,0,15"
+                    HorizontalAlignment="Left"
                     VerticalAlignment="Bottom"
                     Foreground="DarkGray"
                     IsHitTestVisible="False"
-                    RenderTransformOrigin="0.732,0.569"
                     Text="{x:Static res:Resource.diary_placeholder_date}"
                     Visibility="{Binding Text, ElementName=txtDate, Converter={StaticResource StringToVisibility}}" />
             </Grid>

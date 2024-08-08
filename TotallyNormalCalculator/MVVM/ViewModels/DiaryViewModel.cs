@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
+using TotallyNormalCalculator.Languages;
 using TotallyNormalCalculator.Logging;
 using TotallyNormalCalculator.MVVM.Model;
 using TotallyNormalCalculator.Repository;
@@ -47,14 +48,13 @@ public partial class DiaryViewModel : BaseViewModel
     [ObservableProperty]
     public string _filterText;
 
-    private readonly ITotallyNormalCalculatorLogger _diaryLogger;
     private readonly IDiaryRepository _diaryRepository;
     private readonly IMessageBoxService _messageBox;
 
 
-    public DiaryViewModel(ITotallyNormalCalculatorLogger logger, IDiaryRepository diaryRepository, IMessageBoxService messageBox)
+    public DiaryViewModel(IDiaryRepository diaryRepository, IMessageBoxService messageBox)
     {
-        (_diaryLogger, _diaryRepository, _messageBox) = (logger, diaryRepository, messageBox);
+        (_diaryRepository, _messageBox) = (diaryRepository, messageBox);
         Entries = Task.Run(() => this.GetAllEntries()).GetAwaiter().GetResult();
     }
 
@@ -124,18 +124,6 @@ public partial class DiaryViewModel : BaseViewModel
     [RelayCommand]
     public void ReadEntry(DiaryEntryModel diaryEntry)
     {
-        if (!Entries.Any())
-        {
-            _messageBox.Show("There are no entries to read. You should create one!");
-            return;
-        }
-
-        if (diaryEntry is null)
-        {
-            _messageBox.Show("Please select an entry to read.");
-            return;
-        }
-
         Title = diaryEntry.Title;
         Message = diaryEntry.Message;
         Date = diaryEntry.Date;
@@ -147,17 +135,17 @@ public partial class DiaryViewModel : BaseViewModel
     {
         if (!Entries.Any())
         {
-            _messageBox.Show("There are no entries to delete.");
+            _messageBox.Show(Resource.diary_noEntriesToDelete);
             return;
         }
 
         if (SelectedElement is null)
         {
-            _messageBox.Show("Please select an entry to delete.");
+            _messageBox.Show(Resource.diary_selectEntryToDelete);
             return;
         }
 
-        var delete = _messageBox.ShowQuestion("Do you want to permanently delete this entry?");
+        var delete = _messageBox.ShowQuestion(Resource.diary_permanentlyDeleteEntryQuestion);
 
         if (delete is MessageBoxResult.Yes)
         {
@@ -215,17 +203,19 @@ public partial class DiaryViewModel : BaseViewModel
 
     partial void OnPropertyFilterChanged(string value)
     {
-        if (string.IsNullOrWhiteSpace(value))
+        if (value == "None" || FilterText == null)
         {
             FilterText = null;
             FilteredEntries = Entries;
             return;
         }
+
+        FilterEntries(FilterText);
     }
 
     partial void OnFilterTextChanged(string value)
     {
-        if (PropertyFilter is null)
+        if (PropertyFilter is null || PropertyFilter == "None")
         {
             return;
         }
@@ -238,12 +228,12 @@ public partial class DiaryViewModel : BaseViewModel
         Title = Message = Date = string.Empty;
     }
 
-    public bool ControlKeyIsPressed()
+    private static bool ControlKeyIsPressed()
     {
         return (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control;
     }
 
-    public void HandleDeselection()
+    internal void HandleDeselection()
     {
         ClearInputFields();
         SelectedElement = null;

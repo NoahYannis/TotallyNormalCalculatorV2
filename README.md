@@ -10,4 +10,3 @@ To Do:
 
 - Bugfix & Refinement
 - Add Auto update functionality
-- Web browsing inside the application

@@ -1,146 +1,125 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-		<PropertyGroup>
-			<OutputType>WinExe</OutputType>
-			<TargetFramework>net8.0-windows</TargetFramework>
-			<UseWPF>true</UseWPF>
-			<ApplicationIcon>CalculatorIcon.ico</ApplicationIcon>
-			<Win32Resource />
-			<StartupObject></StartupObject>
-			<UserSecretsId>09a0ff11-cf90-4ca7-8fca-f11a6659a644</UserSecretsId>
-			<SelfContained>true</SelfContained>
-			<RuntimeIdentifier>win-x64</RuntimeIdentifier>
-			<IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
-			<IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
-			<IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
-			<PublishSingleFile>true</PublishSingleFile>
-			<UseAppHost>true</UseAppHost>
-			<Platforms>AnyCPU;x64</Platforms>
-		</PropertyGroup>
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<UseWPF>true</UseWPF>
+		<ApplicationIcon>CalculatorIcon.ico</ApplicationIcon>
+		<Win32Resource />
+		<UserSecretsId>09a0ff11-cf90-4ca7-8fca-f11a6659a644</UserSecretsId>
+		<SelfContained>true</SelfContained>
+		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
+		<IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
+		<IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+		<IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
+		<PublishSingleFile>true</PublishSingleFile>
+		<UseAppHost>true</UseAppHost>
+		<Platforms>AnyCPU;x64</Platforms>
+		<PlatformTarget>AnyCPU</PlatformTarget>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+	  <NoWarn>NU1701;1702; </NoWarn>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+	  <NoWarn>NU1701;1702; </NoWarn>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	  <NoWarn>NU1701;1702; </NoWarn>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+	  <NoWarn>NU1701;1702; </NoWarn>
+	</PropertyGroup>
 
 	<ItemGroup>
-		<Compile Remove="MVVM\Model\CalculationModel.cs" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <None Remove="CalculatorIcon.ico" />
-	  <None Remove="Themes\Fonts\LibreBaskerville.ttf" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <EmbeddedResource Include="Helper\CreateDiaryEntryDB_Script.sql">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Include="Helper\CreateEntriesTable_Script.sql">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	</ItemGroup>
-
-	<ItemGroup>
-		<None Include="..\.editorconfig" Link=".editorconfig" />
-	</ItemGroup>
-
-	<ItemGroup>
+		<PackageReference Include="Autoupdater.NET.Official" Version="1.9.2" />
 		<PackageReference Include="Azure.Storage.Blobs" Version="12.21.1" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
-		<PackageReference Include="Dapper" Version="2.1.35" />
 		<PackageReference Include="FontAwesome.Sharp" Version="6.6.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
 		<PackageReference Include="Microsoft.Azure.Cosmos" Version="3.42.0" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.0" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
 		<PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2592.51" />
 		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.122" />
-		<PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
 		<PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Resource Include="Themes\Fonts\LibreBaskerville.ttf" />
+		<Resource Include="Themes\Fonts\LibreBaskerville.ttf" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <SplashScreen Include="CalculatorIcon.ico" />
+		<SplashScreen Include="CalculatorIcon.ico" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Languages\Resource.Designer.cs">
-	    <DesignTime>True</DesignTime>
-	    <AutoGen>True</AutoGen>
-	    <DependentUpon>Resource.resx</DependentUpon>
-	  </Compile>
-	  <Compile Update="Languages\Resource.fr.Designer.cs">
-	    <DesignTime>True</DesignTime>
-	    <AutoGen>True</AutoGen>
-	    <DependentUpon>Resource.fr.resx</DependentUpon>
-	  </Compile>
-	  <Compile Update="Languages\Resource.de.Designer.cs">
-	    <DesignTime>True</DesignTime>
-	    <AutoGen>True</AutoGen>
-	    <DependentUpon>Resource.de.resx</DependentUpon>
-	  </Compile>
-	  <Compile Update="Languages\Resource.el.Designer.cs">
-	    <DesignTime>True</DesignTime>
-	    <AutoGen>True</AutoGen>
-	    <DependentUpon>Resource.el.resx</DependentUpon>
-	  </Compile>
-	  <Compile Update="Languages\Resource.ru.Designer.cs">
-	    <DesignTime>True</DesignTime>
-	    <AutoGen>True</AutoGen>
-	    <DependentUpon>Resource.ru.resx</DependentUpon>
-	  </Compile>
-	  <Compile Update="Languages\Resource.es.Designer.cs">
-	    <DesignTime>True</DesignTime>
-	    <AutoGen>True</AutoGen>
-	    <DependentUpon>Resource.es.resx</DependentUpon>
-	  </Compile>
-	  <Compile Update="Properties\Settings.Designer.cs">
-	    <DesignTimeSharedInput>True</DesignTimeSharedInput>
-	    <AutoGen>True</AutoGen>
-	    <DependentUpon>Settings.settings</DependentUpon>
-	  </Compile>
+		<Compile Update="Languages\Resource.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Resource.resx</DependentUpon>
+		</Compile>
+		<Compile Update="Languages\Resource.fr.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Resource.fr.resx</DependentUpon>
+		</Compile>
+		<Compile Update="Languages\Resource.de.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Resource.de.resx</DependentUpon>
+		</Compile>
+		<Compile Update="Languages\Resource.el.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Resource.el.resx</DependentUpon>
+		</Compile>
+		<Compile Update="Languages\Resource.ru.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Resource.ru.resx</DependentUpon>
+		</Compile>
+		<Compile Update="Languages\Resource.es.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Resource.es.resx</DependentUpon>
+		</Compile>
+		<Compile Update="Properties\Settings.Designer.cs">
+			<DesignTimeSharedInput>True</DesignTimeSharedInput>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Settings.settings</DependentUpon>
+		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Update="Languages\Resource.resx">
-	    <Generator>PublicResXFileCodeGenerator</Generator>
-	    <LastGenOutput>Resource.Designer.cs</LastGenOutput>
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </EmbeddedResource>
-	  <EmbeddedResource Update="Languages\Resource.fr.resx">
-	    <Generator>PublicResXFileCodeGenerator</Generator>
-	    <LastGenOutput>Resource.fr.Designer.cs</LastGenOutput>
-	  </EmbeddedResource>
-	  <EmbeddedResource Update="Languages\Resource.de.resx">
-	    <Generator>PublicResXFileCodeGenerator</Generator>
-	    <LastGenOutput>Resource.de.Designer.cs</LastGenOutput>
-	  </EmbeddedResource>
-	  <EmbeddedResource Update="Languages\Resource.el.resx">
-	    <Generator>PublicResXFileCodeGenerator</Generator>
-	    <LastGenOutput>Resource.el.Designer.cs</LastGenOutput>
-	  </EmbeddedResource>
-	  <EmbeddedResource Update="Languages\Resource.ru.resx">
-	    <Generator>PublicResXFileCodeGenerator</Generator>
-	    <LastGenOutput>Resource.ru.Designer.cs</LastGenOutput>
-	  </EmbeddedResource>
-	  <EmbeddedResource Update="Languages\Resource.es.resx">
-	    <Generator>PublicResXFileCodeGenerator</Generator>
-	    <LastGenOutput>Resource.es.Designer.cs</LastGenOutput>
-	  </EmbeddedResource>
-	</ItemGroup>
-
-	<ItemGroup>
-   <!--<None Update=".env">
-     <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-   </None>-->
-   <None Update="App.config">
-     <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-   </None>
-   <None Update="Properties\Settings.settings">
-     <Generator>SettingsSingleFileGenerator</Generator>
-     <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-   </None>
+		<EmbeddedResource Update="Languages\Resource.resx">
+			<Generator>PublicResXFileCodeGenerator</Generator>
+			<LastGenOutput>Resource.Designer.cs</LastGenOutput>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Languages\Resource.fr.resx">
+			<Generator>PublicResXFileCodeGenerator</Generator>
+			<LastGenOutput>Resource.fr.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Languages\Resource.de.resx">
+			<Generator>PublicResXFileCodeGenerator</Generator>
+			<LastGenOutput>Resource.de.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Languages\Resource.el.resx">
+			<Generator>PublicResXFileCodeGenerator</Generator>
+			<LastGenOutput>Resource.el.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Languages\Resource.ru.resx">
+			<Generator>PublicResXFileCodeGenerator</Generator>
+			<LastGenOutput>Resource.ru.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Languages\Resource.es.resx">
+			<Generator>PublicResXFileCodeGenerator</Generator>
+			<LastGenOutput>Resource.es.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
 	</ItemGroup>
 
 </Project>

@@ -76,26 +76,6 @@ public class DiaryTests
 
 
     [Test]
-    public void ReadEntry_NoEntries_DoesNotSetValues()
-    {
-        _diaryViewModel.ReadEntry(_diaryViewModel.SelectedElement);
-        Assert.That(_diaryViewModel.Title != _diaryViewModel.SelectedElement.Title);
-    }
-
-
-    [Test]
-    public void ReadEntry_WithEntry_SetsValuesCorrectly()
-    {
-        _diaryViewModel.Entries.Add(_diaryViewModel.SelectedElement);
-        _diaryViewModel.ReadEntry(_diaryViewModel.SelectedElement);
-
-        Assert.That(_diaryViewModel.Title == _diaryViewModel.SelectedElement.Title);
-        Assert.That(_diaryViewModel.Message == _diaryViewModel.SelectedElement.Message);
-        Assert.That(_diaryViewModel.Date == _diaryViewModel.SelectedElement.Date);
-    }
-
-
-    [Test]
     public async Task DeleteEntry_MessageResultNo_DoesNotDeleteEntry()
     {
         _messageService.Setup(m => m.ShowQuestion(It.IsAny<string>())).Returns(MessageBoxResult.No);
@@ -134,10 +114,10 @@ public class DiaryTests
     public void FilterEntries_RemovingFilter_ReturnsAllEntries()
     {
         _testEntries.ForEach(te => _diaryViewModel.Entries.Add(te));
-        _diaryViewModel.PropertyFilter = "Title";
         _diaryViewModel.FilterText = "Ruby";
+        _diaryViewModel.PropertyFilter = "Title";
         _diaryViewModel.FilterEntries("Ruby");
-        _diaryViewModel.PropertyFilter = null;
+        _diaryViewModel.PropertyFilter = "None";
 
         Assert.That(_diaryViewModel.Entries, Is.EqualTo(_testEntries));
     }

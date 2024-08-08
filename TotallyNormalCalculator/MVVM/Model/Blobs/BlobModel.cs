@@ -15,7 +15,5 @@ public enum BlobType
 {
     Image,
     Video,
-    Audio,
-    Text,
     Other
 }

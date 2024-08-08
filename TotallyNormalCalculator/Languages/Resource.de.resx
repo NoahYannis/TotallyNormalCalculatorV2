@@ -153,7 +153,7 @@
   <data name="tab_calculator" xml:space="preserve">
     <value>Rechner</value>
   </data>
-  <data name="diary_loadingFiles" xml:space="preserve">
+  <data name="blobs_loadingFiles" xml:space="preserve">
     <value>Lade Dateien...</value>
   </data>
   <data name="diary_placeholder_title" xml:space="preserve">
@@ -197,5 +197,35 @@
   </data>
   <data name="languages_Spanish" xml:space="preserve">
     <value>Spanisch</value>
+  </data>
+  <data name="blobs_uploadingFile" xml:space="preserve">
+    <value>Datei wird hochgeladen…</value>
+  </data>
+  <data name="blobs_FileTypeNotSupported" xml:space="preserve">
+    <value>Der ausgewählte Dateityp wird nicht unterstützt</value>
+  </data>
+  <data name="blobs_errorOccuredDuringLoading" xml:space="preserve">
+    <value>Beim Laden der Dateien ist ein Fehler aufgetreten.</value>
+  </data>
+  <data name="blobs_noBlobsToDelete" xml:space="preserve">
+    <value>Es gibt keine Dateien, die gelöscht werden können.</value>
+  </data>
+  <data name="blobs_selectFileToDelete" xml:space="preserve">
+    <value>Bitte Datei zum Löschen auswählen.</value>
+  </data>
+  <data name="blobs_deleteFileQuestion" xml:space="preserve">
+    <value>Möchten Sie diese Datei dauerhaft löschen?</value>
+  </data>
+  <data name="diary_noEntriesToDelete" xml:space="preserve">
+    <value>Es gibt keine Einträge zum Löschen!</value>
+  </data>
+  <data name="diary_selectEntryToDelete" xml:space="preserve">
+    <value>Bitte wähle einen Eintrag, der gelöscht werden soll.</value>
+  </data>
+  <data name="diary_permanentlyDeleteEntryQuestion" xml:space="preserve">
+    <value>Möchten Sie diesen Eintrag endgültig löschen?</value>
+  </data>
+  <data name="webView_enterValidUrl" xml:space="preserve">
+    <value>Bitte geben Sie eine gültige URL ein. Beispiel: https://www.google.com oder google.com!</value>
   </data>
 </root>
