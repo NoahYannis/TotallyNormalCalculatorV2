@@ -31,7 +31,7 @@ public class DiaryTests
         _diaryRepository = new Mock<IDiaryRepository>();
         _messageService = new Mock<IMessageBoxService>();
         _diaryRepository.Setup(r => r.GetAllDiaryEntries()).ReturnsAsync([]);
-        _diaryViewModel = new DiaryViewModel(null, _diaryRepository.Object, _messageService.Object);
+        _diaryViewModel = new DiaryViewModel(_diaryRepository.Object, _messageService.Object);
         _diaryViewModel.SelectedElement = new DiaryEntryModel() { Title = "Title", Message = "Message", Date = "Yesterday" };
     }
 

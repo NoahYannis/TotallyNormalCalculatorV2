@@ -29,13 +29,13 @@ jobs:
         run: echo "version=${GITHUB_REF##*/}" >> $GITHUB_ENV
 
       - name: Set GitVersion Environment Variable
-        run: echo "GitVersion=${{ steps.get_version.outputs.version }}" >> $GITHUB_ENV
+        run: echo "GitVersion=${version}" >> $GITHUB_ENV
 
       - name: Restore dependencies
         run: dotnet restore ${{ env.PROJECT_PATH }}
 
       - name: Build
-        run: dotnet build -c Release -p:PublishSingleFile=true /p:GitVersion=${{ steps.get_version.outputs.version }}
+        run: dotnet build -c Release -p:PublishSingleFile=true /p:GitVersion=${version}
 
       - name: Execute Unit Tests
         run: dotnet test ${{ env.PROJECT_PATH_TESTS }}
