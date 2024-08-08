@@ -9,4 +9,3 @@ I initially developed this before my apprenticeship, this is the second iteratio
 To Do:
 
 - Bugfix & Refinement
-- Add Auto update functionality
