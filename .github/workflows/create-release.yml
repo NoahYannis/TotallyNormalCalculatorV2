@@ -24,9 +24,9 @@ jobs:
           dotnet-version: '8.x'
           include-prerelease: true
 
-      - name: Get Release Version From Tag
+      - name: Extract version from tag
         id: get_version
-        run: echo "##[set-output name=version;]${{ github.ref.split('/')[-1] }}"
+        run: echo "version=${GITHUB_REF##*/}" >> $GITHUB_ENV
 
       - name: Set GitVersion Environment Variable
         run: echo "GitVersion=${{ steps.get_version.outputs.version }}" >> $GITHUB_ENV
