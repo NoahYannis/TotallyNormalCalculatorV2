@@ -1,8 +1,8 @@
 ﻿using Moq;
 using NUnit.Framework;
 using System.Collections.ObjectModel;
-using System.Windows;
 using System.Threading.Tasks;
+using System.Windows;
 using TotallyNormalCalculator.MVVM.Model;
 using TotallyNormalCalculator.MVVM.Model.Blobs;
 using TotallyNormalCalculator.MVVM.ViewModels;

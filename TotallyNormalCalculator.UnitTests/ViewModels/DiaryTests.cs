@@ -1,9 +1,9 @@
 ﻿using Moq;
 using NUnit.Framework;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Collections.Generic;
 using TotallyNormalCalculator.MVVM.Model;
 using TotallyNormalCalculator.MVVM.ViewModels;
 using TotallyNormalCalculator.Repository;
@@ -90,7 +90,7 @@ public class DiaryTests
     {
         _messageService.Setup(m => m.ShowQuestion(It.IsAny<string>())).Returns(MessageBoxResult.Yes);
         _diaryViewModel.Entries.Add(_diaryViewModel.SelectedElement);
-        await _diaryViewModel.DeleteEntry();    
+        await _diaryViewModel.DeleteEntry();
         Assert.That(!_diaryViewModel.Entries.Any());
     }
 

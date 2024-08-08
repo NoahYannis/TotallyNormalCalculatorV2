@@ -1,12 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestPlatform.ObjectModel;
+using Microsoft.Web.WebView2.Core;
+using Microsoft.Web.WebView2.Wpf;
 using Moq;
 using NUnit.Framework;
-using TotallyNormalCalculator.MVVM.ViewModels;
-using Microsoft.Web.WebView2.Wpf;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Web.WebView2.Core;
+using TotallyNormalCalculator.MVVM.ViewModels;
 
 namespace TotallyNormalCalculator.UnitTests.ViewModels;
 

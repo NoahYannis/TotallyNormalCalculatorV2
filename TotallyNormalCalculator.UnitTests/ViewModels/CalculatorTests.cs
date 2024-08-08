@@ -11,7 +11,7 @@ public class CalculatorTests
     [SetUp]
     public void SetUp()
     {
-        _calculatorViewModel = new CalculatorViewModel(logger: null) { SelectedViewModel = new CalculatorViewModel(null)};
+        _calculatorViewModel = new CalculatorViewModel(logger: null) { SelectedViewModel = new CalculatorViewModel(null) };
     }
 
 
@@ -62,7 +62,7 @@ public class CalculatorTests
     public void SetOperation_EmptiesCalculatorText()
     {
         _calculatorViewModel.SetOperation("+");
-        Assert.That(_calculatorViewModel.CalculatorText, Is.Empty);       
+        Assert.That(_calculatorViewModel.CalculatorText, Is.Empty);
     }
 
 
