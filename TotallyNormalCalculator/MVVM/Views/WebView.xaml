@@ -9,7 +9,7 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-    <Grid>
+    <Grid Background="{DynamicResource BackgroundColor}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="350*" />
             <ColumnDefinition Width="60*" />
@@ -19,7 +19,7 @@
             <RowDefinition Height="40*" />
         </Grid.RowDefinitions>
 
-        <TextBox
+        <TextBox 
             MaxHeight="30"
             Margin="10"
             FontSize="20"

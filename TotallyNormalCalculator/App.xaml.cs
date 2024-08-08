@@ -28,7 +28,7 @@ public partial class App : Application
              services.AddSingleton<BaseViewModel>();
              services.AddTransient<SecretViewViewModel>();
              services.AddSingleton<DiaryViewModel>();
-             services.AddSingleton<BlobStorageViewModel>();
+             services.AddSingleton<BlobStorageViewModel>(); 
              services.AddTransient<WebViewViewModel>();
              services.AddSingleton<SettingsViewModel>();
              services.AddSingleton<CalculatorViewModel>();
