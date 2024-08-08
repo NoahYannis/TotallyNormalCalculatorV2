@@ -31,7 +31,7 @@ internal class CosmosDiaryRepository : IDiaryRepository
 
         try
         {
-            await _http.PostAsJsonAsync("/diary/add", diaryEntry);
+            await _http.PostAsJsonAsync($"/diary/add/{App.UserGuid}", diaryEntry);
         }
         catch (CosmosException ex)
         {
@@ -46,7 +46,7 @@ internal class CosmosDiaryRepository : IDiaryRepository
 
         try
         {
-            await _http.DeleteAsync($"/diary/delete/{entryId}");
+            await _http.DeleteAsync($"/diary/delete/{App.UserGuid}/{entryId}");
         }
         catch (CosmosException ex)
         {
@@ -72,7 +72,7 @@ internal class CosmosDiaryRepository : IDiaryRepository
 
         try
         {
-            await _http.PutAsJsonAsync("/diary/update", diaryEntry);
+            await _http.PutAsJsonAsync($"/diary/update/{App.UserGuid}", diaryEntry);
         }
         catch (CosmosException ex)
         {
