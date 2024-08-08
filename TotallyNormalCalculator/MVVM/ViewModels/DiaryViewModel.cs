@@ -48,14 +48,13 @@ public partial class DiaryViewModel : BaseViewModel
     [ObservableProperty]
     public string _filterText;
 
-    private readonly ITotallyNormalCalculatorLogger _diaryLogger;
     private readonly IDiaryRepository _diaryRepository;
     private readonly IMessageBoxService _messageBox;
 
 
-    public DiaryViewModel(ITotallyNormalCalculatorLogger logger, IDiaryRepository diaryRepository, IMessageBoxService messageBox)
+    public DiaryViewModel(IDiaryRepository diaryRepository, IMessageBoxService messageBox)
     {
-        (_diaryLogger, _diaryRepository, _messageBox) = (logger, diaryRepository, messageBox);
+        (_diaryRepository, _messageBox) = (diaryRepository, messageBox);
         Entries = Task.Run(() => this.GetAllEntries()).GetAwaiter().GetResult();
     }
 

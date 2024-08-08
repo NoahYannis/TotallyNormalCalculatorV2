@@ -208,10 +208,10 @@
     <value>Une erreur s'est produite durant le chargement des fichiers.</value>
   </data>
   <data name="blobs_noBlobsToDelete" xml:space="preserve">
-    <value>Il n'y a aucun fichier à supprimer,</value>
+    <value>Il n'y a aucun fichier à supprimer.</value>
   </data>
   <data name="blobs_selectFileToDelete" xml:space="preserve">
-    <value>Veuillez sélectionner un fichier à supprimer.!</value>
+    <value>Veuillez sélectionner un fichier à supprimer.</value>
   </data>
   <data name="blobs_deleteFileQuestion" xml:space="preserve">
     <value>Voulez-vous supprimer définitivement cette publication ?</value>
