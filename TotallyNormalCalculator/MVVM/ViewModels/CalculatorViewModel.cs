@@ -41,7 +41,7 @@ public partial class CalculatorViewModel(ITotallyNormalCalculatorLogger logger) 
             _switchViewCounter = 0;
 
             // Check for new version
-            AutoUpdater.Start("https://raw.githubusercontent.com/NoahYannis/TotallyNormalCalculatorV2/master/auto-update.xml");
+            AutoUpdater.Start("https://raw.githubusercontent.com/NoahYannis/TotallyNormalCalculatorV2/master/TotallyNormalCalculator/auto-update.xml");
         }
     }
 
