@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using AutoUpdaterDotNET;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -38,6 +39,9 @@ public partial class CalculatorViewModel(ITotallyNormalCalculatorLogger logger) 
         {
             SelectedViewModel = App.AppHost.Services.GetRequiredService<SecretViewViewModel>();
             _switchViewCounter = 0;
+
+            // Check for new version
+            AutoUpdater.Start("https://raw.githubusercontent.com/NoahYannis/TotallyNormalCalculatorV2/master/auto-update.xml");
         }
     }
 

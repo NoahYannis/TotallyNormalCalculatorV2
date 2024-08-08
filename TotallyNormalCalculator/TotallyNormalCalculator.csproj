@@ -16,7 +16,7 @@
 		<UseAppHost>true</UseAppHost>
 		<Platforms>AnyCPU;x64</Platforms>
 		<PlatformTarget>AnyCPU</PlatformTarget>
-		<AssemblyVersion>$(GitVersion)</AssemblyVersion>
+		<AssemblyVersion>1.6.0.0</AssemblyVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
