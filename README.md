@@ -17,8 +17,25 @@ TotallyNormalCalculator appears to be just a simple calculator at first glance. 
 - ⚙️ **Settings**: Select your preferred language and activate dark mode if you like to.
 
 <br><br>
+![image](https://github.com/user-attachments/assets/eb4f266a-a82a-444f-882f-e850dc05cf0f)
+<br><br>
+
+<br><br>
 ![image](https://github.com/user-attachments/assets/08626320-d310-48dd-9698-74080efc34d5)
 <br><br>
+
+<br><br>
+![image](https://github.com/user-attachments/assets/1d71f874-0b42-4349-915f-3023249a6b0b)
+<br><br>
+
+<br><br>
+![image](https://github.com/user-attachments/assets/418f4c5f-5077-4dd9-9531-942a79480421)
+<br><br>
+
+<br><br>
+![image](https://github.com/user-attachments/assets/f232cb1c-64f9-42b4-8fc6-40fc587cf677)
+<br><br>
+
 
 
 ## 🛠️ How to Install
