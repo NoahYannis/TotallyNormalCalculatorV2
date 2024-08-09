@@ -47,6 +47,24 @@ Download the latest release version from the [releases page](https://github.com/
 
 If you encounter any bugs, please check the log files located in your temp directory (e.g., `C:\Users\[YourUsername]\AppData\Local\Temp\_TotallyNormalCalculator_Logs\tnc.txt` on Windows). After reviewing the logs, feel free to [create an issue](https://github.com/NoahYannis/TotallyNormalCalculatorV2/issues).
 
+## 🎉 Fun Fact
+
+
+I initially developed this app two years ago, before starting my apprenticeship. This is the second iteration of the project, now featuring a host of new features and improvements, reflecting all the things I've learned along the way!
+
+### 🚀 New Features
+
+- **☁️ Azure Integration**: Includes Blob Storage, Cosmos DB, and Key Vault.
+- **🔐 Secure Secret Storage**: All data is securely stored and retrieved via the TotallyNormalCalculator .NET 8 Web API, hosted on Azure.
+- **🔧 GitHub Actions CI/CD Pipeline**: Automated testing and deployment with GitHub Actions.
+- **🧪 Unit Tests**: Unit test coverage including mocks.
+- **🌍 Localization**: Support for multiple languages.
+- **🎨 Modern UI**: Featuring Font Awesome icons, smooth animations, and a contemporary design.
+
+
+Check out the [original repository](https://github.com/NoahYannis/TotallyNormalCalculator) to see the first version of the app!
+
+
 
 
 
