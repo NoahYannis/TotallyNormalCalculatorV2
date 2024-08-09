@@ -1,8 +1,18 @@
 <h1 align="center">TotallyNormalCalculator</h1>
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/06744ff9-fdb7-4c3b-a49b-0ada672c70c7" alt="CalculatorIcon" width="200">
+  <img src="https://img.shields.io/badge/Built%20with-.NET%208%20%7C%20WPF%20%7C%20C%23-blue" alt="Built with .NET 8 | WPF | C#">
+  <img src="https://img.shields.io/github/v/release/NoahYannis/TotallyNormalCalculatorV2" alt="Version">
+  <img src="https://img.shields.io/github/actions/workflow/status/NoahYannis/TotallyNormalCalculatorV2/create-release.yml" alt="GitHub Actions Workflow Status">
+  <img src="https://img.shields.io/github/last-commit/NoahYannis/TotallyNormalCalculatorV2" alt="Last Commit">
+  <img src="https://img.shields.io/badge/Project%20Status-Completed-brightgreen" alt="Project Status">
 </p>
+
+<br><br>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/06744ff9-fdb7-4c3b-a49b-0ada672c70c7" alt="CalculatorIcon" width="200">
+
 
 ## 🚀 About
 
