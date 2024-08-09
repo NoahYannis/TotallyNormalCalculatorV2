@@ -41,6 +41,7 @@
         </Grid.RowDefinitions>
 
         <ListView
+            BorderThickness="0"
             ItemContainerStyle="{StaticResource BlobFile}"
             ItemsSource="{Binding Blobs, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             SelectedItem="{Binding SelectedElement, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
