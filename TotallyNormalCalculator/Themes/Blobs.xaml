@@ -14,32 +14,44 @@
 
     <!--  DataTemplate for ImageBlob  -->
     <DataTemplate x:Key="ImageBlobTemplate" DataType="{x:Type blob:ImageBlob}">
-        <Border x:Name="Border">
+        <Border
+            x:Name="Border"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="3*" />
-                    <RowDefinition Height="*" />
+                    <RowDefinition Height="125" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <Border BorderBrush="{DynamicResource BorderBrush}" BorderThickness="2">
-                    <Image Source="{Binding Image}" Stretch="Fill" />
+                <Border
+                    Width="125"
+                    Height="125"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    BorderBrush="{DynamicResource BorderBrush}"
+                    BorderThickness="2"
+                    CornerRadius="10">
+                    <Border.Background>
+                        <ImageBrush ImageSource="{Binding Image}" Stretch="Fill" />
+                    </Border.Background>
                 </Border>
 
                 <TextBlock
                     Grid.Row="1"
-                    Margin="3,0"
+                    Margin="8,8,8,2"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     FontSize="10"
                     Text="{Binding Name}"
-                    TextWrapping="Wrap" />
+                    TextTrimming="CharacterEllipsis"
+                    TextWrapping="NoWrap" />
             </Grid>
         </Border>
         <DataTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource MouseOver}" />
                 <Setter Property="Cursor" Value="Hand" />
-                <Setter TargetName="Border" Property="Background" Value="{DynamicResource MouseOver}" />
+                <Setter Property="ToolTip" Value="{Binding Name}" />
             </Trigger>
         </DataTemplate.Triggers>
     </DataTemplate>
@@ -92,12 +104,13 @@
 
                 <TextBlock
                     Grid.Row="1"
-                    Margin="3,0"
+                    Margin="8"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     FontSize="10"
                     Text="{Binding Name}"
-                    TextWrapping="Wrap" />
+                    TextTrimming="CharacterEllipsis"
+                    TextWrapping="NoWrap" />
             </Grid>
         </Border>
         <DataTemplate.Triggers>
@@ -105,6 +118,7 @@
                 <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource MouseOver}" />
                 <Setter Property="Cursor" Value="Hand" />
                 <Setter TargetName="Border" Property="Background" Value="{DynamicResource MouseOver}" />
+                <Setter Property="ToolTip" Value="{Binding Name}" />
             </Trigger>
         </DataTemplate.Triggers>
     </DataTemplate>
@@ -137,12 +151,11 @@
     <Style x:Key="BlobFile" TargetType="ListViewItem">
         <Setter Property="Height" Value="{StaticResource BlobHeight}" />
         <Setter Property="Width" Value="{StaticResource BlobWidth}" />
-        <Setter Property="Margin" Value="5" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="BorderBrush" Value="{DynamicResource MouseOver}" />
                 <Setter Property="Cursor" Value="Hand" />
-                <Setter Property="Background" Value="{DynamicResource MouseOver}" />
             </Trigger>
             <Trigger Property="IsSelected" Value="True">
                 <Setter Property="Background" Value="{DynamicResource Selected}" />
