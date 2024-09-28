@@ -52,6 +52,8 @@ TotallyNormalCalculator appears to be just a simple calculator at first glance. 
 
 Download the latest release version from the [releases page](https://github.com/NoahYannis/TotallyNormalCalculatorV2/releases). An internet connection and Windows is required to launch the application.
 
+Disclaimer: The API is hosted on Azure using the free hosting tier. After a prolonged period of inactivity, the API will go idle, which results in longer load times during the initial start-up as it needs to be reactivated.
+
 
 ## 🐞 Bugs
 
