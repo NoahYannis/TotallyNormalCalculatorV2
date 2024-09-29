@@ -13,58 +13,68 @@
     d:DesignWidth="800"
     Background="{DynamicResource BackgroundColor}"
     mc:Ignorable="d">
-    <Grid>
+    <Grid VerticalAlignment="Center">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
 
-        <StackPanel
-            Margin="0,50,0,20"
-            HorizontalAlignment="Center"
+        <Label
+            Margin="25"
+            HorizontalAlignment="Right"
             VerticalAlignment="Center"
-            Orientation="Horizontal">
-            <Label
-                Margin="0,0,5,0"
-                VerticalAlignment="Center"
-                Content="{x:Static res:Resource.settings_useDarkMode}"
-                Foreground="{DynamicResource ForegroundColor}" />
-            <CheckBox
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Foreground="{DynamicResource ForegroundColor}"
-                IsChecked="{Binding UseDarkMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                Style="{StaticResource ToggleButtonSlider}" />
-        </StackPanel>
+            Content="{x:Static res:Resource.settings_useDarkMode}"
+            FontSize="20"
+            Foreground="{DynamicResource ForegroundColor}" />
+        <CheckBox
+            Grid.Column="1"
+            Margin="25"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Foreground="{DynamicResource ForegroundColor}"
+            IsChecked="{Binding UseDarkMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Style="{StaticResource ToggleButtonSlider}" />
 
-        <StackPanel
+
+        <Label
             Grid.Row="1"
-            Margin="0,0,0,20"
-            HorizontalAlignment="Center"
-            Orientation="Horizontal">
-            <Label
-                Margin="0,0,5,0"
-                VerticalAlignment="Center"
-                Content="{x:Static res:Resource.settings_chooseLanguage}"
-                Foreground="{DynamicResource ForegroundColor}" />
-            <ComboBox
-                IsEditable="True"
-                IsReadOnly="True"
-                SelectedValue="{Binding SelectedLanguage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                SelectedValuePath="Tag"
-                Text="{x:Static res:Resource.settings_chooseLanguage}">
-                <ComboBoxItem Content="{x:Static res:Resource.languages_English}" Tag="en-US" />
-                <ComboBoxItem Content="{x:Static res:Resource.languages_German}" Tag="de-DE" />
-                <ComboBoxItem Content="{x:Static res:Resource.languages_French}" Tag="fr-FR" />
-                <ComboBoxItem Content="{x:Static res:Resource.languages_Spanish}" Tag="es-ES" />
-                <ComboBoxItem Content="{x:Static res:Resource.languages_Russian}" Tag="ru-RU" />
-                <ComboBoxItem Content="{x:Static res:Resource.languages_Greek}" Tag="el-GR" />
-            </ComboBox>
-        </StackPanel>
+            Margin="25"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center"
+            Content="{x:Static res:Resource.settings_chooseLanguage}"
+            FontSize="20"
+            Foreground="{DynamicResource ForegroundColor}" />
+        <ComboBox
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="25"
+            Padding="8"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            VerticalContentAlignment="Center"
+            FontSize="20"
+            IsEditable="True"
+            IsReadOnly="True"
+            SelectedValue="{Binding SelectedLanguage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            SelectedValuePath="Tag"
+            Text="{x:Static res:Resource.settings_chooseLanguage}">
+            <ComboBoxItem Content="{x:Static res:Resource.languages_English}" Tag="en-US" />
+            <ComboBoxItem Content="{x:Static res:Resource.languages_German}" Tag="de-DE" />
+            <ComboBoxItem Content="{x:Static res:Resource.languages_French}" Tag="fr-FR" />
+            <ComboBoxItem Content="{x:Static res:Resource.languages_Spanish}" Tag="es-ES" />
+            <ComboBoxItem Content="{x:Static res:Resource.languages_Russian}" Tag="ru-RU" />
+            <ComboBoxItem Content="{x:Static res:Resource.languages_Greek}" Tag="el-GR" />
+        </ComboBox>
 
         <Button
             Grid.Row="2"
+            Grid.ColumnSpan="2"
+            Margin="25"
             HorizontalAlignment="Center"
             behavior:IconColor.IconColor="Blue"
             Command="{Binding SaveSettingsCommand}"
